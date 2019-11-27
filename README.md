@@ -2,16 +2,23 @@
 
 > 画室官网
 
-## Build Setup By npm
+#### 开发模式
+
+```
+- 1.npm install
+- 2.npm run dev
+```
+
+#### Build Setup By npm
 
 ```
 npm install
 npm run dev
-````
+```
 
-## Build Setup By yarn
+#### Build Setup By yarn
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 

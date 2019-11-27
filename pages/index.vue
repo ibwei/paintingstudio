@@ -1,10 +1,12 @@
 <template>
-  <div class="app-container">nuxt路由</div>
+  <div class="app-container">
+    <span>nuxt路由</span>
+  </div>
 </template>
 
 <script>
 export default {
-  components: {},
+  components: {}
 };
 </script>
 
