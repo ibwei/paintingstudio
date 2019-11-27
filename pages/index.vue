@@ -1,12 +1,17 @@
 <template>
   <div class="app-container">
-    <span>nuxtè·¯ç”±</span>
+    <span>nuxt路由</span>
+    <carousel></carousel>
   </div>
 </template>
 
 <script>
+import carousel from '../components/index/carousel';
 export default {
-  components: {}
+  components: {
+    carousel
+  },
+  created() {}
 };
 </script>
 

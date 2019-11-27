@@ -3,7 +3,8 @@ export const state = () => ({
   roleIndex: 0,
   categoryName: '',
   labelArr: [],
-  labelList: []
+  labelList: [],
+  userName: 'ibwei'
 })
 
 export const mutations = {

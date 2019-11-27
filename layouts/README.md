@@ -2,7 +2,7 @@
 
 **This directory is not required, you can delete it if you don't want to use it.**
 
-## 全局layout部分
+## å…¨å±€layoutéƒ¨åˆ†
 
 This directory contains your Application Layouts.
 

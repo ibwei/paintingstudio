@@ -2,7 +2,7 @@
   <div class="app">
     <div>顶部</div>
     <!-- <Affix/> -->
-    <nuxt class="nuxt-content" />
+    <nuxt class="nuxt-content"/>
     <div>footer部分</div>
   </div>
 </template>
@@ -11,10 +11,10 @@
 export default {
   name: 'Default',
   components: {},
-  data () {
+  data() {
     return {};
   },
-  created () { }
+  created() {}
 };
 </script>
 
