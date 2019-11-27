@@ -15,6 +15,6 @@ module.exports = {
         "space-before-function-paren": 0,
         'no-console': 'off',
         'vue/max-attributes-per-line': 'off',
-        'prettier/prettier': ['error', { 'semi': false }]
+        "trailingComma": "all",
     }
 };
