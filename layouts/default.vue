@@ -11,10 +11,10 @@
 export default {
   name: 'Default',
   components: {},
-  data() {
+  data () {
     return {};
   },
-  created() {}
+  created () { }
 };
 </script>
 
