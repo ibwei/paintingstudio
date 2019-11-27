@@ -1,10 +1,10 @@
 module.exports = {
   mode: 'universal',
   /*
-     ** Headers of the page
-     */
+   ** Headers of the page
+   */
   head: {
-    title: '重庆交通大学服务大厅',
+    title: '田奇画室官网',
     meta: [{
       charset: 'utf-8'
     },
@@ -25,20 +25,20 @@ module.exports = {
     }]
   },
   /*
-     ** Customize the progress-bar color
-     */
+   ** Customize the progress-bar color
+   */
   loading: {
     color: '#fff'
   },
   /*
-     ** Global CSS
-     */
+   ** Global CSS
+   */
   css: [
     'assets/css/index.less'
   ],
   /*
-     ** Plugins to load before mounting the App
-     */
+   ** Plugins to load before mounting the App
+   */
   plugins: [{
     src: '~plugins/apexcharts',
     ssr: false
@@ -49,23 +49,23 @@ module.exports = {
   '~/plugins/axios'
   ],
   /*
-     ** Nuxt.js dev-modules
-     */
+   ** Nuxt.js dev-modules
+   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     // '@nuxtjs/eslint-module'
   ],
   /*
-     ** Nuxt.js modules
-     */
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
   /*
-     ** Axios module configuration
-     ** See https://axios.nuxtjs.org/options
-     */
+   ** Axios module configuration
+   ** See https://axios.nuxtjs.org/options
+   */
   axios: {
     proxy: true
   },
@@ -83,12 +83,12 @@ module.exports = {
     localIdentName: '[local]_[hash:base64:8]'
   },
   /*
-     ** Build configuration
-     */
+   ** Build configuration
+   */
   build: {
     /*
-         ** You can extend webpack config here
-         */
+     ** You can extend webpack config here
+     */
     vendor: ['vue-apexchart'],
     extend(config, ctx) {
       const vueLoader = config.module.rules.find(

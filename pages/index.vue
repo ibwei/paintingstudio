@@ -1,12 +1,19 @@
 <template>
   <div class="app-container">
     <span>nuxt路由</span>
+    <carousel />
   </div>
 </template>
 
 <script>
+import carousel from '../components/index/carousel'
 export default {
-  components: {}
+  components: {
+    carousel
+  },
+  created () {
+    console.log(this.$router.push({ name: 'works' }));
+  }
 };
 </script>
 
