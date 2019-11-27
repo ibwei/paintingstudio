@@ -2,22 +2,20 @@
   <div class="app">
     <div>顶部</div>
     <!-- <Affix/> -->
-    <nuxt class="nuxt-content"/>
+    <nuxt class="nuxt-content" />
     <div>footer部分</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Default",
+  name: 'Default',
   components: {},
-  data() {
+  data () {
     return {};
   },
-  created() {},
-  methods: {}
+  created () { }
 };
 </script>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>

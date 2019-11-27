@@ -1,11 +1,16 @@
-function axios ({ $axios, redirect }) {
+function axios({
+  $axios,
+  redirect
+}) {
   $axios.onResponse((res) => {
-    const { status, data } = res
-    const url = res.request.res?res.request.res.responseUrl:""
+    const {
+      status,
+      data
+    } = res
+    const url = res.request.res ? res.request.res.responseUrl : ''
     if (status === 200 && data && typeof data === 'string') {
       redirect(url)
-    } else {
-    }
+    } else {}
   })
 
   $axios.onError((error) => {
