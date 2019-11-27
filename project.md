@@ -14,7 +14,7 @@
 - 2.1.5 最好准备markdown的插件,方便查看文档.
 - 2.1.6 git commit 必须要有说明.在自己的分支上开发，不要在develop上开发，开发之后在develop合并自己的分支，然后推到远程develop分支。
 - 2.1.7 所有的vue方法必须采用 JSDoc 的方法来添加注释。(不会就百度)
-- 2.1.8 参考网站  要的功能点参照（http://www.cqcghs.com/index.asp），要的样式参照：
+- 2.1.8 参考网站  要的功能点参照（http://www.cqcghs.com/index.asp），要的样式参照：(http://www.jumingart.cn/)
 - 2.1.9 写的组件必须是响应式的。
 - 2.1.10 所有的文件下都有README.md文档,最好先看一下,再开发。
 ###### 2.2 首页说明

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <span>nuxt路由</span>
+    <span>nuxtè·¯ç”±</span>
   </div>
 </template>
 
