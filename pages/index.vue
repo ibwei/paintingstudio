@@ -2,6 +2,7 @@
   <div class="app-container">
     <span>nuxt路由</span>
     <carousel></carousel>
+    <van-button type="primary" @click="hello">nihao</van-button>
   </div>
 </template>
 
@@ -11,7 +12,12 @@ export default {
   components: {
     carousel
   },
-  created() {}
+  methods: {
+    hello () {
+      console.log('uk-icon-handshake-o')
+      Toast('你好')
+    }
+  }
 };
 </script>
 
