@@ -4,13 +4,13 @@
       <div v-for="(item, index) of carasels" :key="index" class="img">
         <transition name="fade">
           <a v-show="index === currentIndex - 1">
-            <img :src="item.imgUrl" width="100%" />
+            <img :src="item.imgUrl" width="100%">
           </a>
         </transition>
       </div>
       <div class="hide1">
         <a>
-          <img :src="carasel.imgUrl" width="100%" />
+          <img :src="carasel.imgUrl" width="100%">
         </a>
       </div>
     </div>
@@ -89,8 +89,6 @@ export default {
 .img img {
   display: block;
   position: absolute;
-}
-.hide {
 }
 .img a {
   display: block;

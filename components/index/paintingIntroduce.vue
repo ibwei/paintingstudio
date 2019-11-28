@@ -28,27 +28,39 @@
         </div>
         <ul class="affaris-list">
           <li>
-            <a href=""><span>田奇画室开业啦1！！</span></a>
+            <a href>
+              <span>田奇画室开业啦1！！</span>
+            </a>
             <span class="list-date">[2019/11/22]</span>
           </li>
           <li>
-            <a href=""><span>田奇画室开业啦12！！</span></a>
+            <a href>
+              <span>田奇画室开业啦12！！</span>
+            </a>
             <span class="list-date">[2019/11/22]</span>
           </li>
           <li>
-            <a href=""><span>田奇画室开业啦123！！</span></a>
+            <a href>
+              <span>田奇画室开业啦123！！</span>
+            </a>
             <span class="list-date">[2019/11/22]</span>
           </li>
           <li>
-            <a href=""><span>田奇画室开业啦1234！！</span></a>
+            <a href>
+              <span>田奇画室开业啦1234！！</span>
+            </a>
             <span class="list-date">[2019/11/22]</span>
           </li>
           <li>
-            <a href=""><span>田奇画室开业啦12345！！</span></a>
+            <a href>
+              <span>田奇画室开业啦12345！！</span>
+            </a>
             <span class="list-date">[2019/11/22]</span>
           </li>
           <li>
-            <a href=""><span>田奇画室开业啦123456！！</span></a>
+            <a href>
+              <span>田奇画室开业啦123456！！</span>
+            </a>
             <span class="list-date">[2019/11/22]</span>
           </li>
         </ul>
@@ -64,9 +76,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="less" scoped>
@@ -83,7 +93,8 @@ export default {
       &::after {
         content: '—';
       }
-      &::before, &::after {
+      &::before,
+      &::after {
         margin: 0px 5px;
       }
     }
@@ -91,13 +102,14 @@ export default {
   .introduce-text {
     font-size: 19px;
     font-weight: 700;
-    line-height: .8em;
+    line-height: 0.8em;
     padding-bottom: 5px;
   }
 }
 .affaris {
   display: -webkit-flex; /* Safari */
   display: flex;
+  flex-flow: row nowrap;
   justify-content: space-around;
   padding: 40px 0 10px 0px;
   margin: 0 auto;
@@ -110,9 +122,10 @@ export default {
     }
   }
   .affaris-right {
-    display: inline-block;
-    width: 35%;
-    .right-head { 
+    display: flex;
+    width: 100%;
+    flex-flow: row nowrap;
+    .right-head {
       color: @affarisRed;
       .head-index {
         font-family: 'Bahnschrift Condensed';
@@ -154,7 +167,7 @@ export default {
       .btn {
         background: @affarisRed;
         color: #ffffff;
-        border: none
+        border: none;
       }
     }
   }
@@ -162,6 +175,17 @@ export default {
 .student-works {
   img {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .affaris {
+    flex-flow: column wrap;
+  }
+  .affaris-right {
+    display: flex;
+    width: 100%;
+    flex-flow: column wrap;
   }
 }
 </style>

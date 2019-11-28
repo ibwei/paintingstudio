@@ -3,21 +3,20 @@
     <span>nuxt路由</span>
     <carousel></carousel>
     <van-button type="primary" @click="hello">nihao</van-button>
+    <paintingIntroduce></paintingIntroduce>
   </div>
 </template>
 
 <script>
 import carousel from '../components/works/carousel';
+import paintingIntroduce from '../components/index/paintingIntroduce';
+import { hello } from '../utils/message';
 export default {
   components: {
-    carousel
+    carousel,
+    paintingIntroduce
   },
-  methods: {
-    hello () {
-      console.log('uk-icon-handshake-o')
-      Toast('你好')
-    }
-  }
+  methods: {}
 };
 </script>
 
