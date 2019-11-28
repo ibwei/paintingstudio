@@ -25,8 +25,4 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import url('../../assets/css/index.less');
-.works-wrap {
-  color: @color-brand;
-}
 </style>
