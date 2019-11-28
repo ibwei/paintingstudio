@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import carousel from '../components/index/carousel';
+import carousel from '../components/works/carousel';
 export default {
   components: {
     carousel
