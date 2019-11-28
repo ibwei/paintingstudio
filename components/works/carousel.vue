@@ -4,11 +4,11 @@
       <div v-for="(item, index) of carasels" :key="index" class="img">
         <transition name="fade">
           <a v-show="index === currentIndex - 1">
-            <img :src="item.imgUrl" alt width="100%" />
+            <img :src="item.imgUrl" width="100%" />
           </a>
         </transition>
       </div>
-      <div class="hide">
+      <div class="hide1">
         <a>
           <img :src="carasel.imgUrl" width="100%" />
         </a>
@@ -29,29 +29,32 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       titmer: '',
       titmer2: '',
       currentIndex: 1, // 当前的index
       carasels: [
-        { index: 1, imgUrl: require('../../assets/img/carasel/1.jpg') },
-        { index: 2, imgUrl: require('../../assets/img/carasel/2.jpg') },
-        { index: 3, imgUrl: require('../../assets/img/carasel/3.jpg') },
-        { index: 4, imgUrl: require('../../assets/img/carasel/4.jpg') },
-        { index: 5, imgUrl: require('../../assets/img/carasel/5.jpg') }
+        { index: 1, imgUrl: require('../../assets/images/carasel/1.jpg') },
+        { index: 2, imgUrl: require('../../assets/images/carasel/2.jpg') },
+        { index: 3, imgUrl: require('../../assets/images/carasel/3.jpg') },
+        { index: 4, imgUrl: require('../../assets/images/carasel/4.jpg') },
+        { index: 5, imgUrl: require('../../assets/images/carasel/5.jpg') }
       ],
-      carasel: { index: 1, imgUrl: require('../../assets/img/carasel/1.jpg') }
+      carasel: {
+        index: 1,
+        imgUrl: require('../../assets/images/carasel/2.jpg')
+      }
     };
   },
-  mounted () {
+  mounted() {
     this.titmer = setInterval(this.get, 3000);
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.titmer);
   },
   methods: {
-    handlerCheckBtn (index) {
+    handlerCheckBtn(index) {
       this.currentIndex = index;
       clearInterval(this.titmer);
       clearInterval(this.titmer2);
@@ -60,7 +63,7 @@ export default {
         this.titmer = setInterval(this.get, 1500);
       }, 5000);
     },
-    get () {
+    get() {
       if (this.currentIndex === this.carasels.length) {
         this.currentIndex = 1;
       } else {
@@ -88,7 +91,6 @@ export default {
   position: absolute;
 }
 .hide {
-  visibility: hidden;
 }
 .img a {
   display: block;
