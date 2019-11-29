@@ -14,5 +14,4 @@ export default {
   mounted() {}
 };
 </script>
-<style scoped lang="">
-</style>
+<style scoped lang=""></style>
