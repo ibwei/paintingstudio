@@ -30,7 +30,7 @@
           @click="goDetail(item.id)"
           :title='item.title' 
           :desc='item.desc' 
-          :status='item.data'
+          :status='item.date'
         >
         </van-panel>
         <div class="more">
