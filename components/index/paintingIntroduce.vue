@@ -2,12 +2,10 @@
   <div>
     <div class="introduce">
       <div class="introduce-title">
-        <span>田奇画室</span>
+        <span>品贤画室</span>
       </div>
       <div class="sign">
-        <a href="/">
           <img src="../../assets/images/index/sign.png">
-        </a>
       </div>
       <div class="introduce-text">
         <p>06年创办于北京798艺术工厂，两兄弟所办</p>
@@ -18,54 +16,25 @@
       </div>
     </div>
     <div class="affaris">
-      <div class="affaris-left">
+      <div class="affaris-left" v-show="!isPhone">
         <img src="../../assets/images/index/2017330105615377.jpg">
       </div>
       <div class="affaris-right">
-        <div class="right-head">
+        <div class="right-head" @click="goAffaris">
           <span class="head-index">02</span>
-          <span class="head-text">校 务</span>
+          <span class="head-text">画室动态</span>
         </div>
-        <ul class="affaris-list">
-          <li>
-            <a href>
-              <span>田奇画室开业啦1！！</span>
-            </a>
-            <span class="list-date">[2019/11/22]</span>
-          </li>
-          <li>
-            <a href>
-              <span>田奇画室开业啦12！！</span>
-            </a>
-            <span class="list-date">[2019/11/22]</span>
-          </li>
-          <li>
-            <a href>
-              <span>田奇画室开业啦123！！</span>
-            </a>
-            <span class="list-date">[2019/11/22]</span>
-          </li>
-          <li>
-            <a href>
-              <span>田奇画室开业啦1234！！</span>
-            </a>
-            <span class="list-date">[2019/11/22]</span>
-          </li>
-          <li>
-            <a href>
-              <span>田奇画室开业啦12345！！</span>
-            </a>
-            <span class="list-date">[2019/11/22]</span>
-          </li>
-          <li>
-            <a href>
-              <span>田奇画室开业啦123456！！</span>
-            </a>
-            <span class="list-date">[2019/11/22]</span>
-          </li>
-        </ul>
+        <van-panel 
+          v-for="item of list" 
+          :key="item.id"
+          @click="goDetail(item.id)"
+          :title='item.title' 
+          :desc='item.desc' 
+          :status='item.date'
+        >
+        </van-panel>
         <div class="more">
-          <a-button class="btn" type="danger">More...</a-button>
+          <a-button class="btn" type="danger" @click="goAffaris">More...</a-button>
         </div>
       </div>
     </div>
@@ -76,7 +45,73 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from 'vuex';
+export default {
+  data() {
+    return {
+      list: [{
+        id:1,
+        title: '品贤画室开业了',
+        desc: '开业desc',
+        date: '2019/11/11'
+      },{
+        id:2,
+        title: '品贤画室开业了1',
+        desc: '开业desc',
+        date: '2019/11/11'
+      },{
+        id:3,
+        title: '品贤画室开业了12',
+        desc: '开业desc',
+        date: '2019/11/11'
+      },{
+        id:4,
+        title: '品贤画室开业了123',
+        desc: '开业desc',
+        date: '2019/11/11'
+      },{
+        id:5,
+        title: '品贤画室开业了1234',
+        desc: '开业desc',
+        date: '2019/11/11'
+      },{
+        id:6,
+        title: '品贤画室开业了12345',
+        desc: '开业desc',
+        date: '2019/11/11'
+      },{
+        id:7,
+        title: '品贤画室开业了123456',
+        desc: '开业desc',
+        date: '2019/11/11'
+      },
+      ]
+    }
+  },
+  methods: {
+    /**
+     * @methed 跳转到校务详情页
+     * @params {index} 校务对应id
+     * @return void 
+     */
+    goDetail(index) {
+      this.$router.push({path: `detail?id=${index}`});
+    },
+    /**
+     * @method 跳转学校事务新闻页
+     * @params {null}
+     * @return voic
+     */
+    goAffaris() {
+      console.log('affaris :');
+      this.$router.push({path: 'news'});
+    }
+  }
+  ,
+  computed: {
+    ...mapState(['isPhone']) //加载设备类型
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -100,10 +135,10 @@ export default {};
     }
   }
   .introduce-text {
-    font-size: 19px;
+    font-size: 16px;
     font-weight: 700;
-    line-height: 0.8em;
     padding-bottom: 5px;
+    line-height: 1.5em;
   }
 }
 .affaris {
@@ -124,7 +159,7 @@ export default {};
   .affaris-right {
     display: flex;
     width: 100%;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     .right-head {
       color: @affarisRed;
       .head-index {
@@ -181,11 +216,24 @@ export default {};
 @media screen and (max-width: 720px) {
   .affaris {
     flex-flow: column wrap;
+    .affaris-right {
+      display: flex;
+      width: 100%;
+      flex-flow: column wrap;
+      padding: 0 10px;
+      ul {
+        padding: 5px 20px;
+      }
+      .more {
+        text-align: right;
+        margin: 5px 10px 0 0;
+      }
+    }
   }
-  .affaris-right {
-    display: flex;
-    width: 100%;
-    flex-flow: column wrap;
+  .introduce {
+    .introduce-text {
+      font-size: 14px;
+    }
   }
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <carousel></carousel>
+    <recruitment />
     <paintingIntroduce></paintingIntroduce>
   </div>
 </template>
@@ -8,32 +9,37 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
+import recruitment from '../components/works/recruitment';
 import paintingIntroduce from '../components/index/paintingIntroduce';
 import { isPhone } from '../utils/index';
 export default {
   components: {
     carousel,
-    paintingIntroduce
+    paintingIntroduce,
+    recruitment
   },
-  data () {
+  data() {
     return {
       value: 'na'
     };
   },
-
-  created () {
-    if (process.client) {
-      // 只要在客户端,并且拖动浏览器,就会触发检查设备,以达到响应式
-      window.addEventListener('resize', this.checkDevice);
-      // 开始手动调用一次
-      this.checkDevice();
-    }
-  },
-  destroyed () {
-    window.removeEventListener('resize', this.checkDevice);
-  },
   computed: {
     ...mapState(['isPhone']) // 利用vuex的辅助函数把isPhone代理到当前组件,用this.isPhone访问
+  },
+  created() {
+    if (process.client) {
+      this.$nextTick(() => {
+        // 只要在客户端,并且拖动浏览器,就会触发检查设备,以达到响应式
+        // 开始手动调用一次
+        this.checkDevice();
+      });
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.checkDevice);
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.checkDevice);
   },
   methods: {
     ...mapMutations(['changeIsPhone']), // 利用vuex的辅助函数把changeIsPhone代理到当前组件,用this.changeIsPhone访问
@@ -41,15 +47,12 @@ export default {
     /**
      * @method 检查是什么设备
      */
-    checkDevice () {
+    checkDevice() {
       // 在客户端才能获取到dom,才能判断是否是移动设备
       if (process.client) {
         const result = isPhone();
         this.changeIsPhone(result); // 将结果写入到vuex仓库里
       }
-    },
-    hello () {
-      console.log('hello')
     }
   }
 };

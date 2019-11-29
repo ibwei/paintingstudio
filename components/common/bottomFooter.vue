@@ -1,15 +1,17 @@
 <template>
   <div class="footer-wrap">
     <div class="logo">
-      <img class="logo-image" src="../../assets/images/logo/logo.jpg" alt>
+      <img class="logo-image" src="../../assets/images/logo/logo.jpg" alt />
     </div>
     <div class="contact">
       <div class="c-one">
         <div class="phone">
-          <van-icon size="20px" name="phone-circle-o"/>18883923917
+          <van-icon size="20px" name="phone-circle-o" />
+          <a class="tel" href="tel:18688888888">18883923917</a>
         </div>
         <div class="address">
-          <van-icon size="20px" name="location-o"/>重庆·沙坪坝区·大学城 品贤画室
+          <van-icon size="20px" name="location-o" />重庆·沙坪坝区·大学城
+          品贤画室
         </div>
       </div>
       <div class="c-two">
@@ -21,15 +23,15 @@
 </template>
 <script>
 export default {
-  props: {},
   components: {},
+  props: {},
   data() {
     return {};
   },
   computed: {},
-  methods: {},
   created() {},
-  mounted() {}
+  mounted() {},
+  methods: {}
 };
 </script>
 <style scoped lang="less">
@@ -77,6 +79,9 @@ export default {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+}
+.tel {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 720px) {
