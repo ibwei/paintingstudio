@@ -10,20 +10,24 @@
       @click-left="onClickLeft"
       @click-right="onClickRight"
     >
-      <div class="left" slot="left">
+      <div slot="left" class="left">
         <div class="logo">
-          <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt>
+          <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
         </div>
       </div>
-      <div class="title" slot="title">
+      <div slot="title" class="title">
         <div>
-          <van-icon size="30px" @click="changeHeartColor" :color="heartColor" name="like"/>
+          <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
         </div>
       </div>
-      <div class="right" slot="right">
+      <div slot="right" class="right">
         <div class="menu">
-          <span v-show="!isOpen" class="icon iconfont">&#xeb71;</span>
-          <van-icon v-show="isOpen" name="cross" size="25px" color="rgba(0,0,0,0.4)"/>
+          <transition name="fade">
+            <span v-show="!isOpen" class="icon iconfont">&#xeb71;</span>
+          </transition>
+          <transition name="show">
+            <van-icon v-show="isOpen" :key="2" name="cross" size="25px" color="rgba(0,0,0,0.4)" />
+          </transition>
         </div>
       </div>
     </van-nav-bar>
@@ -33,28 +37,26 @@
       position="right"
       :style="{ height:'100%',marginTop:'45px',width:'40%' }"
     >
-      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <van-list :v-model="true" finished-text="没有更多了">
         <van-cell
           v-for="(item,index) in list"
           :key="index"
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon size="20px" color="rgba(0,0,0,0.8)" :name="item.icon"/>
+          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
         </van-cell>
       </van-list>
     </van-popup>
   </div>
 </template>
 <script>
-import logo from '../Logo';
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 export default {
-  props: {},
   components: {
-    logo
   },
-  data() {
+  props: {},
+  data () {
     return {
       isOpen: false,
       heartColor: 'rgba(0,0,0,0.4)',
@@ -100,8 +102,16 @@ export default {
     };
   },
   computed: {
-    ...mapState(['isPhone']) //加载设备类型
+    ...mapState(['isPhone']) // 加载设备类型
   },
+  created () {
+    if (process.client) {
+      this.heartColor = localStorage.getItem('heartColor')
+        ? localStorage.getItem('heartColor')
+        : 'rgba(0,0,0,0.4)';
+    }
+  },
+  mounted () { },
 
   methods: {
     /**
@@ -109,23 +119,23 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage(item) {
+    navToPage (item) {
       this.$router.push({ path: item.path });
       this.isOpen = false;
     },
-    onLoad() {
+    onLoad () {
       // 异步更新数据
       // 加载状态结束
-      this.loading = false;
+      this.loading = true;
       // 数据全部加载完成
     },
-    onClickLeft() {
+    onClickLeft () {
       this.$toast('返回');
     },
-    onClickRight() {
+    onClickRight () {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor() {
+    changeHeartColor () {
       if (this.heartColor === 'red') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
@@ -134,18 +144,26 @@ export default {
         this.heartColor = 'red';
       }
     }
-  },
-  created() {
-    if (process.client) {
-      this.heartColor = localStorage.getItem('heartColor')
-        ? localStorage.getItem('heartColor')
-        : 'rgba(0,0,0,0.4)';
-    }
-  },
-  mounted() {}
+  }
 };
 </script>
 <style scoped lang="less">
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s;
+  display: none;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.show-enter-active,
+.show-leave-active {
+  transition: all 0.2s;
+  display: none;
+}
+.show-enter, .show-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 1;
+}
 .left {
   display: flex;
   flex-flow: row nowrap;
