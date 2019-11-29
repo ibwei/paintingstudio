@@ -1,38 +1,47 @@
 <template>
-  <div class="carasel-wrap">
-    <div class="carasel-img">
-      <div v-for="(item, index) of carasels" :key="index" class="img">
-        <transition name="fade">
-          <a v-show="index === currentIndex - 1">
-            <img :src="item.imgUrl" width="100%">
+  <div class="lunbo">
+    <div class="carasel-wrap">
+      <div class="carasel-img">
+        <div v-for="(item, index) of carasels" :key="index" class="img">
+          <transition name="fade">
+            <a v-show="index === currentIndex - 1">
+              <img :src="item.imgUrl" width="100%" />
+            </a>
+          </transition>
+        </div>
+        <div class="hide1">
+          <a>
+            <img :src="carasel.imgUrl" width="100%" />
           </a>
-        </transition>
+        </div>
       </div>
-      <div class="hide1">
-        <a>
-          <img :src="carasel.imgUrl" width="100%">
-        </a>
+
+      <div class="carasel-button">
+        <span
+          v-for="(item, index) of carasels"
+          :key="index"
+          class="btn"
+          :class="{ active: index === currentIndex - 1 }"
+          @click="handlerCheckBtn(item.index)"
+        ></span>
       </div>
     </div>
-
-    <div class="carasel-button">
-      <span
-        v-for="(item, index) of carasels"
-        :key="index"
-        class="btn"
-        :class="{ active: index === currentIndex - 1 }"
-        @click="handlerCheckBtn(item.index)"
-      ></span>
+    <div class="swiper">
+      <van-swipe :autoplay="3000">
+        <van-swipe-item v-for="(item, index) in carasels" :key="index">
+          <img :src="item.imgUrl" width="100%" />
+        </van-swipe-item>
+      </van-swipe>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      titmer: '',
-      titmer2: '',
+      titmer1: '',
+      titmer2: null,
       currentIndex: 1, // 当前的index
       carasels: [
         { index: 1, imgUrl: require('../../assets/images/carasel/1.jpg') },
@@ -47,23 +56,26 @@ export default {
       }
     };
   },
-  mounted() {
-    this.titmer = setInterval(this.get, 3000);
+  mounted () {
+    this.titmer1 = setInterval(this.get, 3000);
   },
-  beforeDestroy() {
-    clearInterval(this.titmer);
+  beforeDestroy () {
+    clearInterval(this.titmer1);
   },
   methods: {
-    handlerCheckBtn(index) {
+    handlerCheckBtn (index) {
       this.currentIndex = index;
-      clearInterval(this.titmer);
-      clearInterval(this.titmer2);
-      this.titmer2 = setInterval(() => {
-        clearInterval(this.titmer2);
-        this.titmer = setInterval(this.get, 1500);
+      clearInterval(this.titmer1);
+      if (this.titmer2) {
+        clearTimeout(this.titmer2);
+        this.titmer2 = null;
+      }
+      this.titmer2 = setTimeout(() => {
+        this.titmer1 = setInterval(this.get, 3000);
+        this.titmer2 = null;
       }, 5000);
     },
-    get() {
+    get () {
       if (this.currentIndex === this.carasels.length) {
         this.currentIndex = 1;
       } else {
@@ -76,6 +88,7 @@ export default {
 
 <style scoped>
 .carasel-wrap {
+  display: block;
   max-height: 760px;
   width: 100%;
   position: relative;
@@ -128,5 +141,17 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.swiper {
+  display: none;
+  width: 100%;
+}
+@media screen and (max-width: 720px) {
+  .carasel-wrap {
+    display: none;
+  }
+  .swiper {
+    display: block;
+  }
 }
 </style>

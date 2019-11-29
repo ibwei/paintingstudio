@@ -1,4 +1,8 @@
 import Vue from 'vue'
+import {
+  Swipe,
+  SwipeItem
+} from 'vant';
 import Breadcrumb from 'ant-design-vue/lib/breadcrumb'
 import Button from 'ant-design-vue/lib/button'
 import Input from 'ant-design-vue/lib/input'
@@ -65,3 +69,4 @@ Vue.use(Modal)
 Vue.use(Rate)
 Vue.use(Message)
 Vue.use(BackTop)
+Vue.use(Swipe).use(SwipeItem)

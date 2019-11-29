@@ -6,7 +6,7 @@
       class="rec-demo"
       :style="{'background':item.color}"
     >
-      <a href>
+      <a href="item.src">
         <div class="title">{{ item.title }}{{ item.isHover }}</div>
         <div class="icon iconfont" v-html="item.icon"></div>
         <div class="word" :style="{'font-size':item.fontSize}" v-html="item.word"></div>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       recruitments: [
         {
@@ -59,6 +59,7 @@ a {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 .recruitment .rec-demo {
   text-align: center;
@@ -160,9 +161,10 @@ a {
   .recruitment {
     padding-top: 10px;
     justify-content: space-around;
+    padding-bottom: 10px;
   }
   .recruitment .rec-demo {
-    height: 150px;
+    height: 130px;
     width: 150px;
     margin: 0px 5px;
     border-radius: 2px;
@@ -174,9 +176,12 @@ a {
     display: none;
   }
   .rec-demo .icon {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .rec-demo .word {
+    font-size: 14px;
+  }
+  .rec-demo:nth-child(2) .word {
     font-size: 16px;
   }
 }

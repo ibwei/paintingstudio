@@ -1,59 +1,82 @@
 <template>
   <div class="top-menu">
-    <van-nav-bar
-      v-if="isPhone"
-      title="标题"
-      left-text="logo"
-      right-text="按钮"
-      :fixed="true"
-      :z-index="999999"
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-    >
-      <div class="left" slot="left">
-        <div class="logo">
-          <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt>
+    <div class="phone-nav">
+      <van-nav-bar
+        title="标题"
+        left-text="logo"
+        right-text="按钮"
+        :fixed="true"
+        :z-index="999999"
+        @click-left="onClickLeft"
+        @click-right="onClickRight"
+      >
+        <div slot="left" class="left">
+          <div class="logo">
+            <img
+              src="../../assets/images/logo/logo.jpg"
+              width="100%"
+              height="100%"
+              alt
+            />
+          </div>
         </div>
-      </div>
-      <div class="title" slot="title">
-        <div>
-          <van-icon size="30px" @click="changeHeartColor" :color="heartColor" name="like"/>
+        <div slot="title" class="title">
+          <div>
+            <van-icon
+              size="30px"
+              :color="heartColor"
+              name="like"
+              @click="changeHeartColor"
+            />
+          </div>
         </div>
-      </div>
-      <div class="right" slot="right">
-        <div class="menu">
-          <span v-show="!isOpen" class="icon iconfont">&#xeb71;</span>
-          <van-icon v-show="isOpen" name="cross" size="25px" color="rgba(0,0,0,0.4)"/>
+        <div slot="right" class="right">
+          <div class="menu">
+            <transition name="fade">
+              <span v-show="!isOpen" class="icon iconfont">&#xeb71;</span>
+            </transition>
+            <transition name="show">
+              <van-icon
+                v-show="isOpen"
+                :key="2"
+                name="cross"
+                size="20px"
+                color="rgba(0,0,0,0.6)"
+              />
+            </transition>
+          </div>
         </div>
-      </div>
-    </van-nav-bar>
-    <div v-else>暂无电脑端导航栏</div>
+      </van-nav-bar>
+    </div>
+    <div class="pc-nav">暂无电脑端导航栏</div>
     <van-popup
       v-model="isOpen"
       position="right"
-      :style="{ height:'100%',marginTop:'45px',width:'40%' }"
+      :style="{ height: '100%', marginTop: '45px', width: '40%' }"
     >
-      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <van-list :v-model="false" :finished="true">
         <van-cell
-          v-for="(item,index) in list"
+          v-for="(item, index) in list"
           :key="index"
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon size="20px" color="rgba(0,0,0,0.8)" :name="item.icon"/>
+          <van-icon
+            size="20px"
+            color="rgba(0,0,0,0.8)"
+            :finished="true"
+            :name="item.icon"
+          />
         </van-cell>
       </van-list>
     </van-popup>
   </div>
 </template>
 <script>
-import logo from '../Logo';
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 export default {
+  components: {},
   props: {},
-  components: {
-    logo
-  },
   data() {
     return {
       isOpen: false,
@@ -96,12 +119,20 @@ export default {
         }
       ],
       loading: false,
-      finished: false
+      finished: true
     };
   },
   computed: {
-    ...mapState(['isPhone']) //加载设备类型
+    ...mapState(['isPhone']) // 加载设备类型
   },
+  created() {
+    if (process.client) {
+      this.heartColor = localStorage.getItem('heartColor')
+        ? localStorage.getItem('heartColor')
+        : 'rgba(0,0,0,0.4)';
+    }
+  },
+  mounted() {},
 
   methods: {
     /**
@@ -116,7 +147,8 @@ export default {
     onLoad() {
       // 异步更新数据
       // 加载状态结束
-      this.loading = false;
+      this.loading = true;
+      this.finished = true;
       // 数据全部加载完成
     },
     onClickLeft() {
@@ -134,18 +166,26 @@ export default {
         this.heartColor = 'red';
       }
     }
-  },
-  created() {
-    if (process.client) {
-      this.heartColor = localStorage.getItem('heartColor')
-        ? localStorage.getItem('heartColor')
-        : 'rgba(0,0,0,0.4)';
-    }
-  },
-  mounted() {}
+  }
 };
 </script>
 <style scoped lang="less">
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s;
+  display: none;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.show-enter-active,
+.show-leave-active {
+  transition: all 0.2s;
+  display: none;
+}
+.show-enter, .show-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 1;
+}
 .left {
   display: flex;
   flex-flow: row nowrap;
@@ -159,6 +199,24 @@ export default {
 }
 .menu,
 .icon {
-  font-size: 25px;
+  font-size: 26px;
+}
+.phone-nav {
+  display: none;
+}
+.pc-nav {
+  display: block;
+  z-index: 9999;
+}
+
+@media screen and(max-width: 720px) {
+  .pc-nav {
+    display: none;
+  }
+  .phone-nav {
+    display: block;
+    position: relative;
+    z-index: 999999999;
+  }
 }
 </style>
