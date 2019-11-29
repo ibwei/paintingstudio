@@ -4,13 +4,13 @@
       <div v-for="(item, index) of carasels" :key="index" class="img">
         <transition name="fade">
           <a v-show="index === currentIndex - 1">
-            <img :src="item.imgUrl" width="100%">
+            <img :src="item.imgUrl" width="100%" />
           </a>
         </transition>
       </div>
       <div class="hide1">
         <a>
-          <img :src="carasel.imgUrl" width="100%">
+          <img :src="carasel.imgUrl" width="100%" />
         </a>
       </div>
     </div>
@@ -29,10 +29,10 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       titmer: '',
-      titmer2: '',
+      titmer2: null,
       currentIndex: 1, // 当前的index
       carasels: [
         { index: 1, imgUrl: require('../../assets/images/carasel/1.jpg') },
@@ -47,23 +47,26 @@ export default {
       }
     };
   },
-  mounted() {
+  mounted () {
     this.titmer = setInterval(this.get, 3000);
   },
-  beforeDestroy() {
+  beforeDestroy () {
     clearInterval(this.titmer);
   },
   methods: {
-    handlerCheckBtn(index) {
+    handlerCheckBtn (index) {
       this.currentIndex = index;
       clearInterval(this.titmer);
-      clearInterval(this.titmer2);
-      this.titmer2 = setInterval(() => {
-        clearInterval(this.titmer2);
-        this.titmer = setInterval(this.get, 1500);
+      if (this.titmer2) {
+        clearTimeout(this.titmer2);
+        this.titmer2 = null;
+      }
+      this.titmer2 = setTimeout(() => {
+        this.titmer = setInterval(this.get, 3000);
+        this.titmer2 = null;
       }, 5000);
     },
-    get() {
+    get () {
       if (this.currentIndex === this.carasels.length) {
         this.currentIndex = 1;
       } else {
