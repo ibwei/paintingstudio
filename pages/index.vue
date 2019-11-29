@@ -3,7 +3,7 @@
     <!-- 顶部通知栏 -->
     <van-notice-bar
       color="#1989fa"
-      speed="50"
+      :speed="50"
       background="#ecf9ff"
       left-icon="volume-o"
       :scrollable="true"
@@ -16,6 +16,7 @@
     <paintingIntroduce />
     <!-- 优势 -->
     <advantage />
+    <!-- 底部菜单栏 -->
   </div>
 </template>
 
@@ -35,12 +36,13 @@ export default {
   },
   data () {
     return {
-      value: 'na'
+
     };
   },
   computed: {
     ...mapState(['isPhone']) // 利用vuex的辅助函数把isPhone代理到当前组件,用this.isPhone访问
   },
+
   created () {
     if (process.client) {
       this.$nextTick(() => {
