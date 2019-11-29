@@ -21,7 +21,7 @@ export default {
     recruitment,
     advantage
   },
-  data() {
+  data () {
     return {
       value: 'na'
     };
@@ -29,7 +29,7 @@ export default {
   computed: {
     ...mapState(['isPhone']) // 利用vuex的辅助函数把isPhone代理到当前组件,用this.isPhone访问
   },
-  created() {
+  created () {
     if (process.client) {
       this.$nextTick(() => {
         // 只要在客户端,并且拖动浏览器,就会触发检查设备,以达到响应式
@@ -38,10 +38,10 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     window.addEventListener('resize', this.checkDevice);
   },
-  destroyed() {
+  destroyed () {
     window.removeEventListener('resize', this.checkDevice);
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
     /**
      * @method 检查是什么设备
      */
-    checkDevice() {
+    checkDevice () {
       // 在客户端才能获取到dom,才能判断是否是移动设备
       if (process.client) {
         const result = isPhone();
