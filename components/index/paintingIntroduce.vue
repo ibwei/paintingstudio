@@ -2,43 +2,61 @@
   <div>
     <div class="introduce">
       <div class="introduce-title">
-        <span>品贤画室</span>
+        <van-divider
+          :style="{ fontSize:'18px', color:'#cf2729',fontWeight:'300', padding: '0 16px' }"
+        >关于品贤画室</van-divider>
       </div>
       <div class="sign">
-          <img src="../../assets/images/index/sign.png">
+        <img src="../../assets/images/index/sign.png" />
       </div>
       <div class="introduce-text">
-        <p>06年创办于北京798艺术工厂，两兄弟所办</p>
-        <p>优势一：全年开课，随到随学，自由选择学习时间，分开辅导．</p>
-        <p>优势二：任何分点报名均可在其他分点学习，课时不作废．</p>
-        <p>优势三：主教老师均为固定全职老师，科班出身，专业扎实．</p>
-        <p>...</p>
+        <van-steps :active="active" direction="vertical">
+          <van-step>2019年创办于重庆大学城，两兄弟所办,朝气蓬勃</van-step>
+          <van-step>全年开课，随到随学，自由选择学习时间，分开辅导．</van-step>
+          <van-step>任何分点报名均可在其他分点学习，课时不作废</van-step>
+          <van-step>主教老师均为固定全职老师，科班出身，专业扎实．</van-step>
+        </van-steps>
       </div>
     </div>
     <div class="affaris">
       <div class="affaris-left" v-show="!isPhone">
-        <img src="../../assets/images/index/2017330105615377.jpg">
+        <img src="../../assets/images/index/2017330105615377.jpg" />
       </div>
       <div class="affaris-right">
         <div class="right-head" @click="goAffaris">
-          <span class="head-text">画室动态</span>
+          <van-divider
+            :style="{ fontSize:'18px', color:'#cf2729',fontWeight:'300', padding: '0 16px' }"
+          >画室动态</van-divider>
         </div>
-        <van-cell-group>
+        <van-list>
           <van-cell
-            v-for="item of list" 
+            v-for="item of list"
             :key="item.id"
             @click="goDetail(item.id)"
-            :title='item.title' 
-            :label='item.desc' 
-            :value='item.date'/>
-        </van-cell-group>
+            :value="item.date"
+          >
+            <!-- 这里开始循环写文章列表,想怎么写就怎写 -->
+            <div class="article">
+              <div class="one">
+                <div>
+                  <span class="title">{{item.title}}</span>
+                  <van-tag :type="item.color">{{item.type}}</van-tag>
+                </div>
+                <div class="date">{{item.date}}</div>
+              </div>
+              <div class="two">
+                <span>{{item.desc}}</span>
+              </div>
+            </div>
+          </van-cell>
+        </van-list>
         <div class="more">
-          <van-button plain type="danger" size="small" @click="goAffaris">More...</van-button>
+          <van-button plain type="danger" size="small" @click="goAffaris">查看更多</van-button>
         </div>
       </div>
     </div>
     <div class="student-works" v-show="!isPhone">
-      <img src="../../assets/images/index/a42.jpg">
+      <img src="../../assets/images/index/a42.jpg" />
     </div>
   </div>
 </template>
@@ -46,28 +64,37 @@
 <script>
 import { mapState } from 'vuex';
 export default {
-  data() {
+  data () {
     return {
+      active: 1,
       list: [{
-        id:1,
+        id: 1,
         title: '重庆品贤画室正在筹备中',
         desc: '预选地点定为莲花购物广场附近，预计12月下旬开业',
-        date: '2019/11/22'
-      },{
-        id:2,
+        date: '2019/11/22',
+        type: '热门',
+        color: 'danger',
+      }, {
+        id: 2,
         title: '零基础学画画也没有那么难',
         desc: '如果你问我：“从毫无基础的绘画小白,到能画出绚丽的油画或插画，要经历多久？',
-        date: '2019/11/11'
-      },{
-        id:3,
+        date: '2019/11/11',
+        type: '教程',
+        color: 'primary',
+      }, {
+        id: 3,
         title: '宁波品贤画室已开',
         desc: '地点定为莲花购物广场附近，现已开业',
-        date: '2019/11/01'
-      },{
-        id:3,
+        date: '2019/11/01',
+        type: '推送',
+        color: 'success',
+      }, {
+        id: 3,
         title: '重庆品贤画室已开',
         desc: '地点定为重庆大学城',
-        date: '2019/11/01'
+        date: '2019/11/01',
+        type: '推送',
+        color: 'success',
       }]
     }
   },
@@ -77,17 +104,17 @@ export default {
      * @params {index} 校务对应id
      * @return void 
      */
-    goDetail(index) {
-      this.$router.push({path: `detail?id=${index}`});
+    goDetail (index) {
+      this.$router.push({ path: `detail?id=${index}` });
     },
     /**
      * @method 跳转学校事务新闻页
      * @params {null}
      * @return voic
      */
-    goAffaris() {
+    goAffaris () {
       console.log('affaris :');
-      this.$router.push({path: 'news'});
+      this.$router.push({ path: 'news' });
     }
   }
   ,
@@ -98,9 +125,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url('../../assets/css/color');
 @affarisRed: #c70b0c;
 .introduce {
-  background: #efefef;
+  background: @color-bg-base;
   text-align: center;
   .introduce-title {
     padding: 40px 0 10px 0px;
@@ -196,17 +224,39 @@ export default {
       }
       .more {
         text-align: center;
-        margin: 5px 10px 0 0;
+        cursor: pointer;
+        margin: 20px;
       }
     }
   }
   .introduce {
-    .introduce-title{
+    .introduce-title {
       font-size: 20px;
     }
     .introduce-text {
       font-size: 14px;
     }
   }
+}
+
+/* 新增 */
+.sign {
+  margin-bottom: 20px;
+}
+.article .title {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #000;
+}
+.one {
+  display: flex;
+  width: 100%;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.two {
+  width: 70%;
+  margin-top: 10px;
 }
 </style>

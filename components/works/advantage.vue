@@ -1,7 +1,11 @@
 <template>
   <div class="advantage">
     <div id="title">
-      <div class="title">{{ title }}</div>
+      <div class="title">
+        <van-divider
+          :style="{ fontSize:'24px', color:'#cf2729',fontWeight:'300', padding: '0 16px' }"
+        >{{ title }}</van-divider>
+      </div>
       <div class="title-en">{{ title_en }}</div>
       <div class="title-word">{{ title_word }}</div>
     </div>
@@ -22,9 +26,11 @@
       </div>
     </div>
     <div id="button">
-      <van-button type="info" class="button2" size="large">
-        {{ button.title }}
-      </van-button>
+      <van-button
+        :style="{backgroundColor:button.color,color:'#fff'}"
+        class="button2"
+        size="large"
+      >{{ button.title }}</van-button>
       <div class="button1">{{ button.title }}</div>
     </div>
   </div>
@@ -32,7 +38,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       title: '为什么选择品贤画室',
       title_en: 'Why Choose Us',
@@ -42,43 +48,43 @@ export default {
           title: '私人定制',
           icon: '&#xe63b;',
           word: '与高三文化课同步教学，优质的文化课师资。',
-          color: '#1FD6FE'
+          color: ''
         },
         {
           title: '文化课同步 双重保障',
           icon: '&#xe663;',
           word: '与高三文化课同步教学，优质的文化课师资。',
-          color: '#1FD6FE'
+          color: ''
         },
         {
           title: '安全完善的食宿',
           icon: '&#xe697;',
           word: '军事化食宿管理，饮食中每一道工序都有据可查。',
-          color: '#1FD6FE'
+          color: ''
         },
         {
           title: '24小时全方位服务',
           icon: '&#xe66f;',
           word: '全方位，高品质的服务体系，24小时响应，时刻服务好每一位同学。',
-          color: '#1FD6FE'
+          color: ''
         },
         {
           title: '多样化的教学',
           icon: '&#xe627;',
           word: '下乡写生、名校参观、校庆活动。',
-          color: '#1FD6FE'
+          color: ''
         },
         {
           title: '无忧的考试服务',
           icon: '&#xe65e;',
           word: '爱心送考、志愿填报指导会等一系列的后续服务。',
-          color: '#1FD6FE'
+          color: ''
         }
       ],
       button: {
-        title: '查看详情 >>>',
+        title: '查看详情',
         link: '',
-        color: '#1FD6FE'
+        color: '#cf2729'
       }
     };
   },
@@ -89,7 +95,7 @@ export default {
      * @author 程序员阿森
      * @returns void
      * */
-    clickBtn(link) {
+    clickBtn (link) {
       console.log(link);
     }
   }

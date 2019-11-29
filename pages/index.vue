@@ -17,6 +17,7 @@
     <!-- 优势 -->
     <advantage />
     <!-- 底部菜单栏 -->
+    <MessageBoard />
   </div>
 </template>
 
@@ -27,12 +28,14 @@ import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
 import paintingIntroduce from '../components/index/paintingIntroduce';
 import { isPhone } from '../utils/index';
+import MessageBoard from '../components/common/messageBoard'
 export default {
   components: {
     carousel,
     paintingIntroduce,
     recruitment,
-    advantage
+    advantage,
+    MessageBoard
   },
   data () {
     return {
