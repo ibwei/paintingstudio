@@ -21,24 +21,23 @@
       </div>
       <div class="affaris-right">
         <div class="right-head" @click="goAffaris">
-          <span class="head-index">02</span>
           <span class="head-text">画室动态</span>
         </div>
-        <van-panel 
-          v-for="item of list" 
-          :key="item.id"
-          @click="goDetail(item.id)"
-          :title='item.title' 
-          :desc='item.desc' 
-          :status='item.date'
-        >
-        </van-panel>
+        <van-cell-group>
+          <van-cell
+            v-for="item of list" 
+            :key="item.id"
+            @click="goDetail(item.id)"
+            :title='item.title' 
+            :label='item.desc' 
+            :value='item.date'/>
+        </van-cell-group>
         <div class="more">
-          <a-button class="btn" type="danger" @click="goAffaris">More...</a-button>
+          <van-button plain type="danger" size="small" @click="goAffaris">More...</van-button>
         </div>
       </div>
     </div>
-    <div class="student-works">
+    <div class="student-works" v-show="!isPhone">
       <img src="../../assets/images/index/a42.jpg">
     </div>
   </div>
@@ -51,41 +50,25 @@ export default {
     return {
       list: [{
         id:1,
-        title: '品贤画室开业了',
-        desc: '开业desc',
-        date: '2019/11/11'
+        title: '重庆品贤画室正在筹备中',
+        desc: '预选地点定为莲花购物广场附近，预计12月下旬开业',
+        date: '2019/11/22'
       },{
         id:2,
-        title: '品贤画室开业了1',
-        desc: '开业desc',
+        title: '零基础学画画也没有那么难',
+        desc: '如果你问我：“从毫无基础的绘画小白,到能画出绚丽的油画或插画，要经历多久？',
         date: '2019/11/11'
       },{
         id:3,
-        title: '品贤画室开业了12',
-        desc: '开业desc',
-        date: '2019/11/11'
+        title: '宁波品贤画室已开',
+        desc: '地点定为莲花购物广场附近，现已开业',
+        date: '2019/11/01'
       },{
-        id:4,
-        title: '品贤画室开业了123',
-        desc: '开业desc',
-        date: '2019/11/11'
-      },{
-        id:5,
-        title: '品贤画室开业了1234',
-        desc: '开业desc',
-        date: '2019/11/11'
-      },{
-        id:6,
-        title: '品贤画室开业了12345',
-        desc: '开业desc',
-        date: '2019/11/11'
-      },{
-        id:7,
-        title: '品贤画室开业了123456',
-        desc: '开业desc',
-        date: '2019/11/11'
-      },
-      ]
+        id:3,
+        title: '重庆品贤画室已开',
+        desc: '地点定为重庆大学城',
+        date: '2019/11/01'
+      }]
     }
   },
   methods: {
@@ -162,12 +145,6 @@ export default {
     flex-flow: column nowrap;
     .right-head {
       color: @affarisRed;
-      .head-index {
-        font-family: 'Bahnschrift Condensed';
-        font-weight: 700;
-        font-size: 6em;
-        line-height: 1em;
-      }
       .head-text {
         display: inline-block;
         font-weight: 700;
@@ -198,16 +175,10 @@ export default {
         }
       }
     }
-    .more {
-      .btn {
-        background: @affarisRed;
-        color: #ffffff;
-        border: none;
-      }
-    }
   }
 }
 .student-works {
+  margin-top: 20px;
   img {
     width: 100%;
   }
@@ -220,17 +191,19 @@ export default {
       display: flex;
       width: 100%;
       flex-flow: column wrap;
-      padding: 0 10px;
       ul {
         padding: 5px 20px;
       }
       .more {
-        text-align: right;
+        text-align: center;
         margin: 5px 10px 0 0;
       }
     }
   }
   .introduce {
+    .introduce-title{
+      font-size: 20px;
+    }
     .introduce-text {
       font-size: 14px;
     }
