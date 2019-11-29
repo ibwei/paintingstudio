@@ -2,20 +2,23 @@
   <div class="app-container">
     <span>nuxt路由</span>
     <carousel></carousel>
-    <van-button type="primary" @click="hello">nihao</van-button>
+    <van-button type="warning" @click="hello">nihao</van-button>
+    <apply></apply>
   </div>
 </template>
 
 <script>
 import carousel from '../components/index/carousel';
+import apply from '@/components/aboutUs/apply'
 export default {
   components: {
-    carousel
+    carousel,
+    apply
   },
   methods: {
     hello () {
       console.log('uk-icon-handshake-o')
-      Toast('你好')
+      this.$toast('你好')
     }
   }
 };
