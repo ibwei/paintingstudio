@@ -59,6 +59,7 @@ a {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 .recruitment .rec-demo {
   text-align: center;
@@ -160,6 +161,7 @@ a {
   .recruitment {
     padding-top: 10px;
     justify-content: space-around;
+    padding-bottom: 10px;
   }
   .recruitment .rec-demo {
     height: 130px;
