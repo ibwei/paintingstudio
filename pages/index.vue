@@ -1,8 +1,9 @@
 <template>
   <div class="app-container">
-    <carousel></carousel>
+    <carousel />
     <recruitment />
-    <paintingIntroduce></paintingIntroduce>
+    <paintingIntroduce />
+    <advantage />
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import { mapState, mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
+import advantage from '../components/works/advantage';
 import paintingIntroduce from '../components/index/paintingIntroduce';
 import { isPhone } from '../utils/index';
 export default {
   components: {
     carousel,
     paintingIntroduce,
-    recruitment
+    recruitment,
+    advantage
   },
   data() {
     return {
