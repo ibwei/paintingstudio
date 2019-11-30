@@ -202,10 +202,12 @@ export default {
   justify-content: space-around;
   padding: 40px 0 10px 0px;
   margin: 0 auto;
-  max-width: 1080px;
+  max-width: 1200px;
   .affaris-left {
-    display: inline-block;
-    width: 50%;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    width: 100%;
     img {
       width: 100%;
     }
@@ -214,7 +216,7 @@ export default {
     display: flex;
     width: 100%;
     flex-flow: column nowrap;
-
+    padding: 20px;
     ul {
       display: block;
       list-style-type: none;
@@ -237,6 +239,9 @@ export default {
       }
     }
   }
+}
+.more {
+  text-align: right;
 }
 .works {
   margin-top: 20px;
@@ -266,6 +271,7 @@ export default {
       display: flex;
       width: 100%;
       flex-flow: column wrap;
+      padding: 8px;
       ul {
         padding: 5px 20px;
       }
