@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-swipe :autoplay="3000" @change="onChange">
+    <van-swipe :autoplay="5000" @change="onChange">
       <van-swipe-item v-for="(item, index) of worksImg" :key="index">
         <img :src="item.imgUrl" class="carouselImg" />
       </van-swipe-item>

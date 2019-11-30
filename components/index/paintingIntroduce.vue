@@ -10,8 +10,8 @@
             padding: '0 16px'
           }"
         >
-关于品贤画室
-</van-divider>
+          关于品贤画室
+        </van-divider>
       </div>
       <div class="sign">
         <img src="../../assets/images/index/sign.png" />
@@ -39,16 +39,15 @@
               padding: '0 16px'
             }"
           >
-画室动态
-</van-divider>
+            画室动态
+          </van-divider>
         </div>
         <van-list>
-          <van-cell
+          <div
             v-for="item of list"
             :key="item.id"
             :title="item.title"
             :label="item.desc"
-            :value="item.date"
             :value="item.date"
             @click="goDetail(item.id)"
           >
@@ -65,17 +64,32 @@
                 <span>{{ item.desc }}</span>
               </div>
             </div>
-          </van-cell>
+          </div>
         </van-list>
         <div class="more">
           <van-button plain type="danger" size="small" @click="goAffaris">
-查看更多
-</van-button>
+            查看更多
+          </van-button>
         </div>
       </div>
     </div>
-    <div v-show="!isPhone" class="student-works">
-      <img src="../../assets/images/index/a42.jpg" />
+    <van-divider
+      :style="{
+        fontSize: '18px',
+        color: '#cf2729',
+        fontWeight: '300',
+        padding: '0 16px'
+      }"
+    >
+      学生作品
+    </van-divider>
+    <div class="works">
+      <div v-if="!isPhone" class="student-works">
+        <img src="../../assets/images/index/a42.jpg" />
+      </div>
+      <div v-else>
+        <worksCarousel />
+      </div>
     </div>
   </div>
 </template>
@@ -84,6 +98,9 @@
 import { mapState } from 'vuex';
 import worksCarousel from './worksCarousel';
 export default {
+  components: {
+    worksCarousel
+  },
   data() {
     return {
       active: 1,
@@ -114,7 +131,7 @@ export default {
           color: 'success'
         },
         {
-          id: 3,
+          id: 4,
           title: '重庆品贤画室已开',
           desc: '地点定为重庆大学城',
           date: '2019/11/01',
@@ -222,7 +239,7 @@ export default {
   }
 }
 .works {
-  margin-bottom: 10px;
+  margin-top: 20px;
 }
 .right-head {
   color: @affarisRed;
@@ -278,6 +295,11 @@ export default {
 /* 新增 */
 .sign {
   margin-bottom: 20px;
+}
+
+.article {
+  padding: 16px 10px;
+  border-bottom: 1px solid @color-grey-4;
 }
 .article .title {
   margin-top: 10px;
