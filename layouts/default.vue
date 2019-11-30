@@ -9,7 +9,12 @@
       <bottom-footer></bottom-footer>
     </div>
     <!-- 底部标题栏 -->
-    <van-tabbar v-model="menuIndex">
+    <van-tabbar
+      v-model="menuIndex"
+      :z-index="9999"
+      :active-color="Color.colorbrand"
+      inactive-color="#000"
+    >
       <van-tabbar-item icon="wap-home-o">品贤画室</van-tabbar-item>
       <van-tabbar-item icon="hot-o">课程介绍</van-tabbar-item>
       <van-tabbar-item icon="photo-o">作品</van-tabbar-item>
@@ -26,6 +31,7 @@
 </template>
 
 <script>
+import { Color } from '../config/color'
 import topMenu from '../components/common/topMenu';
 import bottomFooter from '../components/common/bottomFooter';
 import sticky from '../components/common/sticky';
@@ -39,6 +45,7 @@ export default {
   data () {
     return {
       menuIndex: 0,
+      Color,
       wechatQRCodeshow: false
     };
   },

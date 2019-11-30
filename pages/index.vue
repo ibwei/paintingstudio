@@ -2,14 +2,12 @@
   <div class="app-container">
     <!-- 顶部通知栏 -->
     <van-notice-bar
-      color="#1989fa"
+      :color="Color.colorbrand"
       :speed="50"
-      background="#ecf9ff"
+      background="rgba(244,205,205,1)"
       left-icon="volume-o"
       :scrollable="true"
-    >
-品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
-</van-notice-bar>
+    >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
     <!-- 轮播图 -->
     <carousel />
     <!-- 招生 -->
@@ -31,6 +29,7 @@ import advantage from '../components/works/advantage';
 import paintingIntroduce from '../components/index/paintingIntroduce';
 import { isPhone } from '../utils/index';
 import MessageBoard from '../components/common/messageBoard';
+import { Color } from '../config/color';
 export default {
   components: {
     carousel,
@@ -39,14 +38,16 @@ export default {
     advantage,
     MessageBoard
   },
-  data() {
-    return {};
+  data () {
+    return {
+      Color,
+    };
   },
   computed: {
     ...mapState(['isPhone']) // 利用vuex的辅助函数把isPhone代理到当前组件,用this.isPhone访问
   },
 
-  created() {
+  created () {
     if (process.client) {
       this.$nextTick(() => {
         // 只要在客户端,并且拖动浏览器,就会触发检查设备,以达到响应式
@@ -55,10 +56,10 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     window.addEventListener('resize', this.checkDevice);
   },
-  destroyed() {
+  destroyed () {
     window.removeEventListener('resize', this.checkDevice);
   },
   methods: {
@@ -67,7 +68,7 @@ export default {
     /**
      * @method 检查是什么设备
      */
-    checkDevice() {
+    checkDevice () {
       // 在客户端才能获取到dom,才能判断是否是移动设备
       if (process.client) {
         const result = isPhone();
