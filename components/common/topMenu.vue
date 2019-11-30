@@ -12,22 +12,12 @@
       >
         <div slot="left" class="left">
           <div class="logo">
-            <img
-              src="../../assets/images/logo/logo.jpg"
-              width="100%"
-              height="100%"
-              alt
-            />
+            <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
           </div>
         </div>
         <div slot="title" class="title">
           <div>
-            <van-icon
-              size="30px"
-              :color="heartColor"
-              name="like"
-              @click="changeHeartColor"
-            />
+            <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
           </div>
         </div>
         <div slot="right" class="right">
@@ -36,13 +26,7 @@
               <span v-show="!isOpen" class="icon iconfont">&#xeb71;</span>
             </transition>
             <transition name="show">
-              <van-icon
-                v-show="isOpen"
-                :key="2"
-                name="cross"
-                size="20px"
-                color="rgba(0,0,0,0.6)"
-              />
+              <van-icon v-show="isOpen" :key="2" name="cross" size="20px" color="rgba(0,0,0,0.6)" />
             </transition>
           </div>
         </div>
@@ -61,12 +45,7 @@
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon
-            size="20px"
-            color="rgba(0,0,0,0.8)"
-            :finished="true"
-            :name="item.icon"
-          />
+          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
         </van-cell>
       </van-list>
     </van-popup>
@@ -77,7 +56,7 @@ import { mapState } from 'vuex';
 export default {
   components: {},
   props: {},
-  data() {
+  data () {
     return {
       isOpen: false,
       heartColor: 'rgba(0,0,0,0.4)',
@@ -125,14 +104,14 @@ export default {
   computed: {
     ...mapState(['isPhone']) // 加载设备类型
   },
-  created() {
+  created () {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
         : 'rgba(0,0,0,0.4)';
     }
   },
-  mounted() {},
+  mounted () { },
 
   methods: {
     /**
@@ -140,30 +119,30 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage(item) {
+    navToPage (item) {
       this.$router.push({ path: item.path });
       this.isOpen = false;
     },
-    onLoad() {
+    onLoad () {
       // 异步更新数据
       // 加载状态结束
       this.loading = true;
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft() {
+    onClickLeft () {
       this.$toast('返回');
     },
-    onClickRight() {
+    onClickRight () {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor() {
+    changeHeartColor () {
       if (this.heartColor === 'red') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
         this.$toast('谢谢你喜欢我!');
-        localStorage.setItem('heartColor', 'red');
-        this.heartColor = 'red';
+        localStorage.setItem('heartColor', '#cf2729');
+        this.heartColor = '#cf2729';
       }
     }
   }

@@ -1,9 +1,25 @@
 <template>
   <div class="app-container">
+    <!-- 顶部通知栏 -->
+    <van-notice-bar
+      color="#1989fa"
+      :speed="50"
+      background="#ecf9ff"
+      left-icon="volume-o"
+      :scrollable="true"
+    >
+品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
+</van-notice-bar>
+    <!-- 轮播图 -->
     <carousel />
+    <!-- 招生 -->
     <recruitment />
+    <!-- 介绍 -->
     <paintingIntroduce />
+    <!-- 优势 -->
     <advantage />
+    <!-- 底部菜单栏 -->
+    <MessageBoard />
   </div>
 </template>
 
@@ -14,21 +30,22 @@ import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
 import paintingIntroduce from '../components/index/paintingIntroduce';
 import { isPhone } from '../utils/index';
+import MessageBoard from '../components/common/messageBoard';
 export default {
   components: {
     carousel,
     paintingIntroduce,
     recruitment,
-    advantage
+    advantage,
+    MessageBoard
   },
   data() {
-    return {
-      value: 'na'
-    };
+    return {};
   },
   computed: {
     ...mapState(['isPhone']) // 利用vuex的辅助函数把isPhone代理到当前组件,用this.isPhone访问
   },
+
   created() {
     if (process.client) {
       this.$nextTick(() => {
