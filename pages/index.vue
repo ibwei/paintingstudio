@@ -7,13 +7,19 @@
       background="rgba(244,205,205,1)"
       left-icon="volume-o"
       :scrollable="true"
-    >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
+    >
+品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
+</van-notice-bar>
     <!-- 轮播图 -->
     <carousel />
     <!-- 招生 -->
     <recruitment />
     <!-- 介绍 -->
-    <paintingIntroduce />
+    <paintIntroduce />
+    <!-- 动态 -->
+    <paintAffaris />
+    <!-- 学生作品 -->
+    <worksCarous />
     <!-- 优势 -->
     <advantage />
     <!-- 底部菜单栏 -->
@@ -26,21 +32,25 @@ import { mapState, mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
-import paintingIntroduce from '../components/index/paintingIntroduce';
+import paintIntroduce from '../components/index/paintIntroduce';
+import paintAffaris from '../components/index/paintAffaris';
+import worksCarous from '../components/index/worksCarousel';
 import { isPhone } from '../utils/index';
 import MessageBoard from '../components/common/messageBoard';
 import { Color } from '../config/color';
 export default {
   components: {
     carousel,
-    paintingIntroduce,
+    paintIntroduce,
+    paintAffaris,
+    worksCarous,
     recruitment,
     advantage,
     MessageBoard
   },
   data () {
     return {
-      Color,
+      Color
     };
   },
   computed: {
