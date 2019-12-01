@@ -86,7 +86,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
+@import url('../../assets/css/color');
 .carasel-wrap {
   display: block;
   max-height: 760px;

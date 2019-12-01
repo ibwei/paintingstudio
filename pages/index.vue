@@ -14,8 +14,15 @@
     <recruitment />
     <!-- 作品介绍 -->
     <paintingIntroduce />
+    <!-- 介绍 -->
+    <paintIntroduce />
     <!-- 画室环境 -->
     <paintingEnvironment />
+    <!-- 动态 -->
+    <paintAffaris />
+    <!-- 学生作品 -->
+
+    <worksCarous />
     <!-- 优势 -->
     <advantage />
     <!-- 底部菜单栏 -->
@@ -28,7 +35,9 @@ import { mapState, mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
-import paintingIntroduce from '../components/index/paintingIntroduce';
+import paintIntroduce from '../components/index/paintIntroduce';
+import paintAffaris from '../components/index/paintAffaris';
+import worksCarous from '../components/index/worksCarousel';
 import { isPhone } from '../utils/index';
 import MessageBoard from '../components/common/messageBoard';
 import paintingEnvironment from '../components/index/paintingEnvironment'
@@ -36,7 +45,9 @@ import { Color } from '../config/color';
 export default {
   components: {
     carousel,
-    paintingIntroduce,
+    paintIntroduce,
+    paintAffaris,
+    worksCarous,
     recruitment,
     advantage,
     MessageBoard,
@@ -44,7 +55,7 @@ export default {
   },
   data () {
     return {
-      Color,
+      Color
     };
   },
   computed: {

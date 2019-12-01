@@ -50,6 +50,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url('../../assets/css/color');
 a {
   text-decoration: none;
 }
@@ -58,15 +59,16 @@ a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: #fff;
+  border-bottom: 1px solid #dcdee2;
 }
 .recruitment .rec-demo {
   text-align: center;
   width: 350px;
   height: 450px;
   color: black;
-  margin-left: 2rem;
   cursor: pointer;
 }
 .rec-demo .title {
@@ -159,15 +161,16 @@ a {
 }
 @media screen and (max-width: 540px) {
   .recruitment {
-    padding-top: 10px;
+    padding: 5px;
     justify-content: space-around;
-    padding-bottom: 10px;
   }
   .recruitment .rec-demo {
     height: 130px;
     width: 150px;
-    margin: 0px 5px;
     border-radius: 2px;
+  }
+  .rec-demo + .rec-demo {
+    margin-left: 5px;
   }
   .rec-demo .title {
     display: none;

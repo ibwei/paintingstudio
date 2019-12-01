@@ -1,6 +1,6 @@
 <template>
   <div class="teacher-wrap">
-    <v-title></v-title>
+    <v-title v-bind:initTitle="initTtile"></v-title>
     <div class="content">
       <div class="grid">
         <div v-for="(item,index) of environmentList" class="grid-item" :key="index">
@@ -34,6 +34,12 @@ export default {
   },
   data () {
     return {
+      initTtile: {
+        cnTitle: '画室环境',
+        enTitle: 'Painting Studio Environment',
+        mode: 'black',
+        icon: '&#xe66c;'
+      },
       index: 1,
       show: false,
       environmentList: [
@@ -60,7 +66,7 @@ export default {
   box-sizing: border-box;
   z-index: 99999;
   margin: 0 auto;
-  margin: 10px 0;
+  margin: 10px;
   padding: 20px 0px;
   background: @color-bg-base;
   background-image: linear-gradient(30deg, @color-bg-base, @color-bg-grey);

@@ -1,9 +1,7 @@
 <template>
   <div class="msg-board">
     <!-- 头部文字 -->
-    <van-divider
-      :style="{ fontSize:'20px', color:'#cf2729',fontWeight:'300', padding: '0 16px' }"
-    >在线报名</van-divider>
+    <v-title v-bind:initTitle="initTtile"></v-title>
     <div class="title">
       <span>请留下您的邮箱和联系方式，我们客服专员会把资料发送至您的QQ邮箱并第一时间联系您。</span>
     </div>
@@ -39,16 +37,27 @@
         placeholder="请输入留言"
         show-word-limit
       />
-      <van-button class="submit" @click="submit">提交</van-button>
     </van-cell-group>
+    <van-button class="submit" @click="submit">提交</van-button>
     <div class="contact-us"></div>
   </div>
 </template>
 
 <script>
+import vTitle from '../../components/common/vTitle'
 export default {
+  components: {
+    vTitle,
+  },
   data () {
     return {
+      /* 标题初始化 */
+      initTtile: {
+        cnTitle: '在线报名',
+        enTitle: 'Contact Us Online',
+        mode: 'black',
+        icon: '&#xe616;'
+      },
       // 表单绑定值
       name: '',
       phone: '',
@@ -90,10 +99,8 @@ export default {
 <style lang="less" scoped>
 @import url('../../assets/css/color.less');
 .msg-board {
-  margin: 0 20px;
-  margin-bottom: 20px;
-
-  background: #fff;
+  padding: 40px 10px 10px 10px;
+  background: @color-bg-base;
   .title {
     display: flex;
     flex-flow: column nowrap;
@@ -129,6 +136,7 @@ export default {
   .msg-board {
     width: 50vw;
     margin: 0 auto;
+    background: @color-bg-base;
     .form {
       .select {
         display: none;
@@ -147,5 +155,6 @@ export default {
 .submit {
   text-align: center;
   width: 100%;
+  margin-top: 10px;
 }
 </style>

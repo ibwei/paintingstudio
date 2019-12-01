@@ -2,11 +2,8 @@
   <div class="advantage">
     <div id="title">
       <div class="title">
-        <van-divider
-          :style="{ fontSize:'24px', color:'#cf2729',fontWeight:'300', padding: '0 16px' }"
-        >{{ title }}</van-divider>
+        <v-title v-bind:initTitle="initTtile"></v-title>
       </div>
-      <div class="title-en">{{ title_en }}</div>
       <div class="title-word">{{ title_word }}</div>
     </div>
     <div id="content">
@@ -37,9 +34,19 @@
 </template>
 
 <script>
+import vTitle from '../../components/common/vTitle'
 export default {
+  components: {
+    vTitle,
+  },
   data () {
     return {
+      initTtile: {
+        cnTitle: '为什么选择品贤画室',
+        enTitle: 'WHY CHOOSE US',
+        mode: 'red',
+        icon: '&#xe65b;'
+      },
       title: '为什么选择品贤画室',
       title_en: 'Why Choose Us',
       title_word: '优秀的师资+完善的服务+严格的管理+个性化教学',
@@ -109,7 +116,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  background: #fafbfc;
+  background: #fff;
   padding: 30px 0px;
 }
 #title {
@@ -211,13 +218,13 @@ export default {
 .button1 {
   display: block;
   width: 200px;
-  height: 50px;
+  height: 60px;
   border: 2px solid #cc0000;
   font-size: 18px;
   color: #cc0000;
   line-height: 2em;
   margin: 0px auto;
-  line-height: 50px;
+  line-height: 60px;
   border-radius: 5px;
   cursor: pointer;
 }
