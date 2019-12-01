@@ -12,12 +12,12 @@
     <carousel />
     <!-- 招生 -->
     <recruitment />
-    <!-- 介绍 -->
-    <paintingIntroduce />
+    <!-- 介绍 -->i
+    <painting-introduce />
     <!-- 优势 -->
     <advantage />
     <!-- 底部菜单栏 -->
-    <MessageBoard />
+    <message-board />
   </div>
 </template>
 
