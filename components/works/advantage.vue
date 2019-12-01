@@ -11,8 +11,7 @@
         <div
           class="icon iconfont"
           :style="{
-            'background-color': item.color,
-            border: '2px solid ' + item.color
+            'background-color': '#fff',
           }"
           v-html="item.icon"
         />
@@ -109,7 +108,8 @@ export default {
 };
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
+@import url('../../assets/css/color');
 .advantage {
   border: 1px soldi black;
   display: flex;
@@ -118,6 +118,8 @@ export default {
   text-align: center;
   background: #fff;
   padding: 30px 0px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 #title {
   display: flex;
@@ -151,7 +153,7 @@ export default {
   margin: 10px 15px;
 }
 #title .title-en {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 150%;
   padding: 0 20px;
   margin-top: 5px;
@@ -184,13 +186,19 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: flex-start;
-  margin: 10px 15px;
+  align-items: center;
+  margin: 30px 15px;
 }
 .word .iconfont {
-  font-size: 60px;
-  padding: 15px;
-  border-radius: 5px;
+  color: @color-brand;
+  border: 2px solid @color-brand;
+  font-weight: 100 !important;
+  font-size: 48px;
+  padding: 10px;
+  border-radius: 2px;
+}
+.icon {
+  font-weight: 100 !important;
 }
 .word .word-word {
   flex: 1;
@@ -201,6 +209,7 @@ export default {
 }
 .word-title {
   color: #333;
+  font-weight: bold;
   margin: 0 0 10px 0;
   font-size: 18px;
   margin-top: 5px;
@@ -208,6 +217,7 @@ export default {
 .word-cont {
   margin-bottom: 0;
   max-height: 50px;
+  color: #999;
 }
 #button {
   margin-top: 30px;
@@ -253,10 +263,18 @@ export default {
   #title .title::after {
     display: none;
   }
+
+  #content .word {
+    width: 85%;
+    margin: 0px auto;
+    padding: 10px;
+  }
   .word .iconfont {
-    font-size: 40px;
+    font-size: 38px;
   }
   .word-title {
+    margin: 0px;
+    margin-bottom: 8px;
     font-size: 16px;
   }
   .word-cont {

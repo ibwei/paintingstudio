@@ -64,15 +64,20 @@ export default {
 .teacher-wrap {
   position: relative;
   box-sizing: border-box;
-  z-index: 99999;
+  z-index: 999;
   margin: 0 auto;
   margin: 10px;
   padding: 20px 0px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
   background: @color-bg-base;
   background-image: linear-gradient(30deg, @color-bg-base, @color-bg-grey);
 }
 .content {
   margin: 20px 10px;
+  max-width: 1200px;
 }
 .grid {
   display: grid;

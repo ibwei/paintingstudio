@@ -65,6 +65,8 @@ export default {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .main-title1 {
   color: #000;
@@ -72,6 +74,8 @@ export default {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .mid {
   position: relative;

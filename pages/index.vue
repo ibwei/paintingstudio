@@ -21,12 +21,12 @@
     <!-- 动态 -->
     <paintAffaris />
     <!-- 学生作品 -->
-
     <worksCarous />
     <!-- 优势 -->
     <advantage />
+    <!-- 师资力量 -->
     <!-- 底部菜单栏 -->
-    <MessageBoard />
+    <message-board />
   </div>
 </template>
 
@@ -35,23 +35,25 @@ import { mapState, mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
-import paintIntroduce from '../components/index/paintIntroduce';
-import paintAffaris from '../components/index/paintAffaris';
-import worksCarous from '../components/index/worksCarousel';
+import teachers from '../components/works/teachers'
+import paintingIntroduce from '../components/index/paintIntroduce';
 import { isPhone } from '../utils/index';
+import worksCarous from '../components/index/worksCarousel';
+import paintAffaris from '../components/index/paintAffaris';
 import MessageBoard from '../components/common/messageBoard';
 import paintingEnvironment from '../components/index/paintingEnvironment'
 import { Color } from '../config/color';
 export default {
   components: {
     carousel,
-    paintIntroduce,
-    paintAffaris,
-    worksCarous,
+    paintingIntroduce,
     recruitment,
     advantage,
+    paintAffaris,
+    worksCarous,
     MessageBoard,
     paintingEnvironment,
+    teachers
   },
   data () {
     return {

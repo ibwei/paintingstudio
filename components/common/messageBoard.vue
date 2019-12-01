@@ -99,8 +99,8 @@ export default {
 <style lang="less" scoped>
 @import url('../../assets/css/color.less');
 .msg-board {
-  padding: 40px 10px 10px 10px;
-  background: @color-bg-base;
+  padding: 40px 10px 20px 10px;
+  background: #fff;
   .title {
     display: flex;
     flex-flow: column nowrap;
@@ -108,7 +108,8 @@ export default {
     align-items: center;
     color: #000;
     text-align: center;
-    padding: 0 5px;
+    margin: 10px;
+    padding: 10px 5px;
     .title-desc1 {
       font-weight: bolder;
       margin-bottom: 15px;
@@ -136,7 +137,7 @@ export default {
   .msg-board {
     width: 50vw;
     margin: 0 auto;
-    background: @color-bg-base;
+    background: #fff;
     .form {
       .select {
         display: none;
