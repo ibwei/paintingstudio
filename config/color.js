@@ -1,7 +1,7 @@
 export const Color = {
     /* The color of O2Team Brand */
-    colorbrand: '#4889f7',
-    colorbrandlight: '#b6d1ff',
+    colorbrand: '#cf2729',
+    colorbrandlight: '#dd7071',
     colorbranddark: '#346FC2',
     /* color */
     colorsuccess: '#13CE66',
