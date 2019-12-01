@@ -102,7 +102,7 @@ export default {
 };
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 .advantage {
   border: 1px soldi black;
   display: flex;
@@ -144,7 +144,7 @@ export default {
   margin: 10px 15px;
 }
 #title .title-en {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 150%;
   padding: 0 20px;
   margin-top: 5px;
@@ -159,7 +159,7 @@ export default {
   margin-bottom: 15px;
   text-transform: uppercase;
   color: #999;
-  font-size: 14px;
+  font-size: 16px;
 }
 #content {
   margin: 0px auto;
@@ -177,11 +177,11 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: flex-start;
-  margin: 10px 15px;
+  align-items: center;
+  margin: 30px 15px;
 }
 .word .iconfont {
-  font-size: 60px;
+  font-size: 56px;
   padding: 15px;
   border-radius: 5px;
 }
@@ -246,10 +246,18 @@ export default {
   #title .title::after {
     display: none;
   }
+
+  #content .word{
+    width: 85%;
+    margin: 10px auto;
+    padding: 15px;
+  }
   .word .iconfont {
     font-size: 40px;
   }
   .word-title {
+    margin: 0px;
+    margin-bottom: 8px;
     font-size: 16px;
   }
   .word-cont {

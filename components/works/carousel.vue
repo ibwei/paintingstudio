@@ -126,8 +126,8 @@ export default {
 }
 .carasel-button .active {
   height: 8px;
-  background: black;
-  border: 2px solid white;
+  background: #cc0000;
+  border: 2px solid #cc0000;
   border-left: none;
   border-right: none;
 }
