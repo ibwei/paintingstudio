@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 画室介绍 -->
     <div class="introduce">
       <div class="introduce-title">
         <van-divider
@@ -13,6 +14,7 @@
           关于品贤画室
         </van-divider>
       </div>
+      <!-- 介绍中间图片 -->
       <div class="sign">
         <img src="../../assets/images/index/sign.png" />
       </div>
@@ -25,10 +27,13 @@
         </van-steps>
       </div>
     </div>
+    <!-- 画室动态 -->
     <div class="affaris">
+      <!-- pc端画室动态左边图片 -->
       <div v-show="!isPhone" class="affaris-left">
         <img src="../../assets/images/index/2017330105615377.jpg" />
       </div>
+      <!-- 画室动态 -->
       <div class="affaris-right">
         <div class="right-head" @click="goAffaris">
           <van-divider
@@ -42,16 +47,9 @@
             画室动态
           </van-divider>
         </div>
+        <!-- 画室动态列表 -->
         <van-list>
-          <div
-            v-for="item of list"
-            :key="item.id"
-            :title="item.title"
-            :label="item.desc"
-            :value="item.date"
-            @click="goDetail(item.id)"
-          >
-            <!-- 这里开始循环写文章列表,想怎么写就怎写 -->
+          <div v-for="item of list" :key="item.id" @click="goDetail(item.id)">
             <div class="article">
               <div class="one">
                 <div>
@@ -73,6 +71,7 @@
         </div>
       </div>
     </div>
+    <!-- 学生作品 -->
     <van-divider
       :style="{
         fontSize: '18px',
@@ -83,10 +82,12 @@
     >
       学生作品
     </van-divider>
+    <!-- pc端 -->
     <div class="works">
       <div v-if="!isPhone" class="student-works">
         <img src="../../assets/images/index/a42.jpg" />
       </div>
+      <!-- 手机端 -->
       <div v-else>
         <worksCarousel />
       </div>
@@ -99,11 +100,13 @@ import { mapState } from 'vuex';
 import worksCarousel from './worksCarousel';
 export default {
   components: {
-    worksCarousel
+    worksCarousel // 学生作品手机端组件
   },
   data() {
     return {
+      /** 画室介绍当前进度 */
       active: 1,
+      /** 画室动态列表 */
       list: [
         {
           id: 1,
@@ -141,6 +144,9 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapState(['isPhone']) // 加载设备类型
+  },
   methods: {
     /**
      * @methed 跳转到校务详情页
@@ -159,9 +165,6 @@ export default {
       console.log('affaris :');
       this.$router.push({ path: 'news' });
     }
-  },
-  computed: {
-    ...mapState(['isPhone']) // 加载设备类型
   }
 };
 </script>

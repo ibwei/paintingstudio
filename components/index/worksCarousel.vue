@@ -1,4 +1,5 @@
 <template>
+  <!-- 手机端学生作品 -->
   <div>
     <van-swipe :autoplay="5000" @change="onChange">
       <van-swipe-item v-for="(item, index) of worksImg" :key="index">
@@ -15,7 +16,9 @@
 export default {
   data() {
     return {
+      /** 当前图片索引 */
       currentIndex: 1,
+      /** 学生作品图片-图片比例需统一，16:9效果较佳 */
       worksImg: [
         {
           index: 1,
@@ -37,11 +40,15 @@ export default {
     };
   },
   computed: {
+    /** 图片数量 */
     imgLength() {
       return this.worksImg.length;
     }
   },
   methods: {
+    /**
+     * @method 滑动图片改变时
+     */
     onChange(index) {
       this.currentIndex = index + 1;
     }
