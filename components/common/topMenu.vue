@@ -6,7 +6,7 @@
         left-text="logo"
         right-text="按钮"
         :fixed="true"
-        :z-index="999999"
+        :z-index="99"
         @click-left="onClickLeft"
         @click-right="onClickRight"
       >
@@ -23,10 +23,17 @@
         <div slot="right" class="right">
           <div class="menu">
             <transition name="fade">
-              <span v-show="!isOpen" class="icon iconfont">&#xeb71;</span>
+              <span v-show="!isOpen" @click="hideSticky" class="icon iconfont">&#xeb71;</span>
             </transition>
             <transition name="show">
-              <van-icon v-show="isOpen" :key="2" name="cross" size="20px" color="rgba(0,0,0,0.6)" />
+              <van-icon
+                v-show="isOpen"
+                @click="showSticky"
+                :key="2"
+                name="cross"
+                size="20px"
+                color="rgba(0,0,0,0.6)"
+              />
             </transition>
           </div>
         </div>
@@ -36,7 +43,7 @@
     <van-popup
       v-model="isOpen"
       position="right"
-      :style="{ height: '100%', marginTop: '45px', width: '40%' }"
+      :style="{ height: '100%', marginTop: '45px', width: '40%',zIndex:'9999999'}"
     >
       <van-list :v-model="false" :finished="true">
         <van-cell
@@ -144,6 +151,12 @@ export default {
         localStorage.setItem('heartColor', '#cf2729');
         this.heartColor = '#cf2729';
       }
+    },
+    hideSticky () {
+      this.$emit('menu-open')
+    },
+    showSticky () {
+      this.$emit('menu-close')
     }
   }
 };
@@ -174,7 +187,7 @@ export default {
 .logo {
   width: 100px;
   height: auto;
-  z-index: 9999;
+  z-index: 999;
 }
 .menu,
 .icon {
@@ -185,7 +198,7 @@ export default {
 }
 .pc-nav {
   display: block;
-  z-index: 9999;
+  z-index: 999;
 }
 
 @media screen and(max-width: 720px) {
@@ -195,7 +208,7 @@ export default {
   .phone-nav {
     display: block;
     position: relative;
-    z-index: 999999999;
+    z-index: 9999;
   }
 }
 </style>

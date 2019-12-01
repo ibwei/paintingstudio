@@ -1,7 +1,7 @@
 <template>
   <div class="app" ref="app">
     <div>
-      <top-menu></top-menu>
+      <top-menu v-on:menu-open="hideSticky" v-on:menu-close="showSticky"></top-menu>
     </div>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
@@ -21,11 +21,11 @@
       <van-tabbar-item icon="comment-circle-o">联系我们</van-tabbar-item>
     </van-tabbar>
     <!-- 右侧悬浮快捷入口 -->
-    <sticky v-on:wechat-click="showQRCode"></sticky>
+    <div v-if="stickyShow">
+      <sticky v-on:wechat-click="showQRCode"></sticky>
+    </div>
     <van-popup v-model="wechatQRCodeshow">
-      <lazy-component>
-        <img src="../assets/images/weixin.png" class="qr-code" width="120" height="120" alt />
-      </lazy-component>
+      <img src="../assets/images/weixin.png" class="qr-code" width="150" height="150" alt />
     </van-popup>
   </div>
 </template>
@@ -44,6 +44,7 @@ export default {
   },
   data () {
     return {
+      stickyShow: true,
       menuIndex: 0,
       Color,
       wechatQRCodeshow: false
@@ -76,6 +77,12 @@ export default {
 
   },
   methods: {
+    hideSticky () {
+      this.stickyShow = false;
+    },
+    showSticky () {
+      this.stickyShow = true;
+    },
     showQRCode () {
       if (this.wechatQRCodeshow === true) {
         this.wechatQRCodeshow = false;
@@ -94,6 +101,6 @@ export default {
   background: #fff;
 }
 .qr-code {
-  padding: 10px;
+  padding: 1px;
 }
 </style>

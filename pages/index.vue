@@ -10,10 +10,12 @@
     >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
     <!-- 轮播图 -->
     <carousel />
-    <!-- 招生 -->
+    <!-- 招生详情 -->
     <recruitment />
-    <!-- 介绍 -->
+    <!-- 作品介绍 -->
     <paintingIntroduce />
+    <!-- 画室环境 -->
+    <paintingEnvironment />
     <!-- 优势 -->
     <advantage />
     <!-- 底部菜单栏 -->
@@ -29,6 +31,7 @@ import advantage from '../components/works/advantage';
 import paintingIntroduce from '../components/index/paintingIntroduce';
 import { isPhone } from '../utils/index';
 import MessageBoard from '../components/common/messageBoard';
+import paintingEnvironment from '../components/index/paintingEnvironment'
 import { Color } from '../config/color';
 export default {
   components: {
@@ -36,7 +39,8 @@ export default {
     paintingIntroduce,
     recruitment,
     advantage,
-    MessageBoard
+    MessageBoard,
+    paintingEnvironment,
   },
   data () {
     return {
