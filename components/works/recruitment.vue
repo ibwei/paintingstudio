@@ -25,21 +25,21 @@ export default {
           index: 1,
           title: '招生简章',
           icon: '&#xe672;',
-          word: '艺考及艺考&#10预备班通道',
+          word: '兴趣生通道',
           color: '#fa4c33'
         },
         {
           index: 2,
           title: '招生简章',
           icon: '&#xe60c;',
-          word: '兴趣生通道',
+          word: '国华书法班',
           color: '#ffb900'
         },
         {
           index: 3,
           title: '招生简章',
           icon: '&#xe624;',
-          word: '留学及考验\n小升初&nbsp;书法国画',
+          word: '留学&nbsp;&nbsp;艺考通道',
           color: '#00ACEC'
         }
       ],
@@ -109,12 +109,6 @@ a {
 .rec-demo .title {
   margin-top: 40px;
 }
-.rec-demo:nth-child(2) span {
-  margin-top: 40px;
-}
-.rec-demo:nth-child(2) .word {
-  margin-top: 15px;
-}
 @media screen and (max-width: 991px) {
   .rec-demo .iconfont {
     font-size: 100px;
@@ -131,13 +125,6 @@ a {
   .rec-demo .word {
     font-size: 18px;
   }
-  .rec-demo:nth-child(2) .word {
-    font-size: 24px;
-    margin-top: 12px;
-  }
-  .rec-demo:nth-child(2) span {
-    margin-top: 30px;
-  }
 }
 @media screen and (max-width: 768px) {
   .recruitment .rec-demo {
@@ -152,9 +139,6 @@ a {
   }
   .rec-demo .word {
     font-size: 16px;
-  }
-  .rec-demo:nth-child(2) .word {
-    font-size: 18px;
   }
 }
 @media screen and (max-width: 540px) {
@@ -180,9 +164,6 @@ a {
   }
   .rec-demo .word {
     font-size: 14px;
-  }
-  .rec-demo:nth-child(2) .word {
-    font-size: 16px;
   }
 }
 </style>

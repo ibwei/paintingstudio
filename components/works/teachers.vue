@@ -25,6 +25,21 @@
       </div>
       <div class="icon right" @click="handlerRightBtn">&#xe646;</div>
     </div>
+    <div id="phone-cont">
+      <van-swipe :autoplay="3000" indicator-color="white">
+        <van-swipe-item v-for="(item,index) of teachers" :key="index">
+          <div class="phone-word">
+            <div class="teacher-name">{{ item.name }}</div>
+            <div id="teacher-info">
+              <span class="info-title">标签：</span>
+              <tag :infos="item.info" />
+            </div>
+            <div class="teacher-intr">{{ item.introduce }}</div>
+            <van-button plain color="#e00">{{ button }}</van-button>
+          </div>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
   </div>
 </template>
 <script>
@@ -197,5 +212,16 @@ export default {
 /* .slide-fade-leave-active for below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+#phone-cont {
+  display: none;
+}
+@media screen and (max-width: 720px) {
+  #content {
+    display: none;
+  }
+  #phone-cont {
+    display: block;
+  }
 }
 </style>

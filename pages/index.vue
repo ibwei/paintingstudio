@@ -15,10 +15,13 @@
     <!-- 招生 -->
     <recruitment />
     <!-- 介绍 -->
-    <painting-introduce />
+    <paint-introduce />
+    <!-- 画室动态 -->
+    <paintAffaris />
+    <!-- 学生作品 -->
+    <worksCarousel />
     <!-- 优势 -->
     <advantage />
-
     <!-- 师资力量 -->
     <teachers />
     <!-- 底部菜单栏 -->
@@ -32,18 +35,22 @@ import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
 import teachers from '../components/works/teachers'
-import paintingIntroduce from '../components/index/paintingIntroduce';
+import paintIntroduce from '../components/index/paintIntroduce';
+import paintAffaris from '../components/index/paintAffaris';
+import worksCarousel from '../components/index/worksCarousel';
 import { isPhone } from '../utils/index';
 import MessageBoard from '../components/common/messageBoard';
 import { Color } from '../config/color';
 export default {
   components: {
     carousel,
-    paintingIntroduce,
+    paintIntroduce,
     recruitment,
     advantage,
     MessageBoard,
-    teachers
+    teachers,
+    paintAffaris,
+    worksCarousel
   },
   data () {
     return {
