@@ -4,7 +4,7 @@
     <van-notice-bar
       :color="Color.colorbrand"
       :speed="50"
-      background="rgba(244,205,205,1)"ZR
+      background="rgba(244,205,205,1)"
       left-icon="volume-o"
       :scrollable="true"
     >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
