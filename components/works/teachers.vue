@@ -154,7 +154,11 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+<<<<<<< HEAD
   min-height: 395px;
+=======
+  height: 395px;
+>>>>>>> 12/2
 }
 .teacher:nth-child(2n + 0) {
   flex-direction: row-reverse;
@@ -200,12 +204,24 @@ export default {
 .word-style {
   font-size: 12px;
   margin-top: 10px;
+<<<<<<< HEAD
 }
 .teach_style {
   color: #666;
 }
 .img > img {
   width: 400px;
+=======
+}
+.teach_style {
+  color: #666;
+}
+.img {
+  height: 100%;
+}
+.img > img {
+  height: 100%;
+>>>>>>> 12/2
   display: block;
   transform: translateX(30px);
   z-index: -1;
