@@ -1,58 +1,119 @@
 <template>
   <div id="teachers">
-    <div class="title">{{ title }}</div>
-    <div id="content">
-      <div class="icon left" @click="handlerLeftBtn">&#xe645;</div>
+    <div class="teachers">
+      <div class="title">
+        <v-title :init-title="initTtile"></v-title>
+      </div>
       <div class="content">
-        <div v-for="(item,index) of teachers" :key="index" class="teacher">
-          <div v-show="item.index1 == currIndex" class="tea-teaher">
-            <transition name="fade">
-              <div class="word">
-                <div class="teacher-name">{{ item.name }}</div>
-                <div id="teacher-info">
-                  <span class="info-title">标签：</span>
-                  <tag :infos="item.info" />
-                </div>
-                <div class="teacher-intr">{{ item.introduce }}</div>
-                <div class="button">{{ button }}</div>
+        <div class="left">
+          <van-icon
+            name="arrow-left"
+            size="40px"
+            color="#e00"
+            @click="handlerLeftBtn()"
+          />
+        </div>
+        <div class="mid-content">
+          <div
+            v-for="(item, index) of teachers"
+            v-show="index + 1 === currIndex"
+            :key="index"
+            class="teacher"
+          >
+            <div class="word">
+              <div class="word-name">
+                <span class="name">昵称：</span>
+                {{ item.name }}
               </div>
-            </transition>
+              <div class="word-infos">
+                <span class="info">个人标签：</span>
+                <tag :infos="item.infos" />
+              </div>
+              <div class="word-intrduce">{{ item.intrduce }}</div>
+              <div class="word-reta">
+                <span class="rate">学员评分：</span>
+                <van-rate
+                  v-model="item.rate"
+                  icon="like"
+                  void-icon="like-o"
+                  color="#e00"
+                  allow-half
+                />
+              </div>
+              <div class="word-style">
+                <span class="teach_style">教学风格：</span>
+                {{ item.teach_style }}
+              </div>
+            </div>
             <div class="img">
-              <img :src="item.imgUrl" height="100%" />
+              <img :src="item.imgUrl" width="100%" />
             </div>
           </div>
         </div>
+        <div class="right">
+          <van-icon
+            name="arrow"
+            size="40px"
+            color="#e00"
+            @click="handlerRightBtn()"
+          />
+        </div>
       </div>
-      <div class="icon right" @click="handlerRightBtn">&#xe646;</div>
+      <div class="button">查看更多</div>
     </div>
   </div>
 </template>
+
 <script>
-import tag from './components/tagrandtype.vue'
+import vTitle from '../common/vTitle';
+import tag from './components/tagrandtype.vue';
 export default {
   components: {
+    vTitle,
     tag
   },
-  data () {
+  data() {
     return {
-      currIndex: 1,
-      title: '教资力量',
-      button: '查看详情',
+      currIndex: 2,
+      initTtile: {
+        cnTitle: '师资力量',
+        enTitle: 'Painting Studio News',
+        mode: 'black',
+        icon: '&#xe6d9;'
+      },
       teachers: [
-        { index1: 1, info: ['帅气', '受学员喜欢', '有耐心', '绘画水平高'], name: '田齐1', imgUrl: require('../../assets/images/carasel/1.jpg'), introduce: '王爽1982年出生于吉林省梅河口市现居住、工作于北京2002年毕业于中央美院附中2007年毕业于中央美术学院雕塑系，获学士学位2010年毕业于中央美术学院雕塑系，获硕士学位2008年任教于李靖美术培训中心至今。从事艺考培训已有15年。展览：2009年作品“...爽1982年出生于吉林省梅河口市现居住、工作于北京2002年毕业于中央美院附中2007年毕业' },
-        { index1: 2, info: ['不帅气', '不受学员喜欢', '没有耐心', '绘画水平不高'], name: '田齐2', imgUrl: require('../../assets/images/carasel/1.jpg'), introduce: '王爽1982年出生于吉林省梅河口市现居住、工作于北京2002年毕业于中央美院附中2007年毕业于中央美术学院雕塑系，获学士学位2010年毕业于中央美术学院雕塑系，获硕士学位2008年任教于李靖美术培训中心至今。从事艺考培训已有15年。展览：2009年作品“...爽1982年出生于吉林省梅河口市现居住、工作于北京2002年毕业于中央美院附中2007年' }
+        {
+          name: '田奇',
+          intrduce:
+            '资深项目经理、技术讲师、SUN SCJP、SCWCD、原工信部移动云计算教育培训中心教学总监。 十年软件开发经验：参与完成辽宁某高校远程教学管理系统、慧文信息门户系统、日本麦卡尔超市管理系统、崎玉市外来人口登记系统、深海视频会议管理系统、仙台市宫城县日常事务系统等项目的设计和开发。',
+          rate: 5,
+          lable: 1,
+          infos: ['名校毕业', '女学员多', '好评如潮'],
+          teach_style: '循序渐进，旁征博引,风趣幽默，大师风范',
+          imgUrl: require('../../assets/images/index/user1.png')
+        },
+        {
+          name: '小奇2号',
+          intrduce:
+            '行业老兵，IT教育风云人物。清华毕业，拥有九年大型项目开发和管理经验，曾任新浪网软件项目经理，使用PHP与JavaEE技术开发新浪网系统，北京点击科技公司高级软件工程师，用友软件股份有限公司U8事业部软件工程师。主持或参与《新浪邮件系统》、《橙红sns网站》、《点击科技协同软件群组服务器端(Linux/solaris平台)》、《总参语音监控系统》、《英语学习机系统》、《用友erp(u8产品)系统》等项目。',
+          rate: 4.5,
+          lable: 2,
+          infos: ['名校毕业', '帅气', '好评如潮'],
+          teach_style: '教法凶悍，厚积薄发，激发式教学，让你睡觉都觉得奢侈',
+          imgUrl: require('../../assets/images/index/user2.png')
+        }
       ]
-    }
+    };
   },
   methods: {
-    handlerRightBtn () {
+    handlerRightBtn() {
       if (this.currIndex === this.teachers.length) {
         this.currIndex = 1;
       } else {
-        this.currIndex++
+        this.currIndex++;
       }
     },
-    handlerLeftBtn () {
+    handlerLeftBtn() {
       if (this.currIndex === 1) {
         this.currIndex = this.teachers.length;
       } else {
@@ -60,142 +121,112 @@ export default {
       }
     }
   }
-}
+};
 </script>
-<style lang="less" scoped>
+
+<style style="less" scoped>
 #teachers {
-  padding: 0px 10px;
-  max-width: 1200px;
   width: 100%;
-  margin: 0px auto;
+  background: #f8f8f9;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+.teachers {
+  width: 1200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 30px;
-  text-align: center;
-  position: relative;
-}
-#teacher-info {
-  margin-top: 15px;
-}
-.info-title {
-  font-size: 16px;
-  font-weight: 600;
-}
-.van-tag {
-  font-size: 16px;
-  margin: 10px 5px;
-  padding: 4px 8px;
-}
-.title {
-  font-size: 24px;
-  color: rgb(207, 39, 41);
-  font-weight: 300;
-  line-height: 150%;
-  margin: 0;
-  padding: 0 20px;
-}
-.title:before {
-  display: inline-block;
-  height: 1px;
-  background-color: #ddd;
-  padding: 0;
-  content: '';
-  width: 100px;
-  margin: 10px 15px;
-}
-
-.title::after {
-  display: inline-block;
-  height: 1px;
-  background-color: #ddd;
-  padding: 0;
-  content: '';
-  width: 100px;
-  margin: 10px 15px;
-}
-#content {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-around;
   align-items: center;
 }
 .content {
-  flex: 1;
-  justify-content: space-around;
-}
-.left {
-  font-size: 40px;
-  color: #eee;
-  cursor: pointer;
-}
-.left:hover {
-  color: #e00;
-}
-.right {
-  font-size: 40px;
-  color: #eee;
-  cursor: pointer;
-}
-.right:hover {
-  color: #e00;
-}
-.tea-teaher {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  margin-top: 50px;
+  justify-content: space-around;
   align-items: center;
+  margin: 30px auto;
+}
+.teacher {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 395px;
+}
+.teacher:nth-child(2n + 0) {
+  flex-direction: row-reverse;
 }
 .word {
+  box-shadow: 1px 1px 3px #c8c7c7;
+  background: #fff;
+  border-radius: 4px;
+  margin: 15px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  width: 60%;
-  margin: 0px auto;
+  justify-content: center;
+  padding: 15px 20px 30px;
 }
-.teacher-name {
-  font-size: 20px;
-  letter-spacing: 0.3em;
+.word-name {
+  font-size: 18px;
+  color: #e00;
+  align-self: flex-start;
+  letter-spacing: 0.1em;
 }
-.button {
-  cursor: pointer;
-  margin-top: 30px;
+.name {
+  font-size: 14px;
+  color: #666;
 }
-.teacher-intr {
-  max-width: 450px;
-  margin: 30px auto;
+.word-intrduce {
   line-height: 1.8em;
-  font-size: 16px;
-  text-indent: 2em;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.07em;
+  width: 100%;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.word-infos {
+  margin-top: 10px;
+}
+.word-reta {
+  margin-top: 10px;
+}
+.rate {
+  color: #666;
+  font-size: 12px;
+}
+.word-style {
+  font-size: 12px;
+  margin-top: 10px;
+}
+.teach_style {
+  color: #666;
 }
 .img {
-  height: 389px;
-  width: 300px;
-  overflow: hidden;
-  margin-right: 50px;
+  height: 100%;
+}
+.img > img {
+  height: 100%;
+  display: block;
+  transform: translateX(30px);
+  z-index: -1;
+}
+.teacher:nth-child(2n + 1) img {
+  display: block;
+  transform: translateX(-30px);
+  z-index: -1;
 }
 .button {
-  border: 1px solid #e00;
   color: #e00;
-  padding: 8px 15px;
-  align-self: center;
+  border: 1px solid #e00;
+  padding: 6px 12px;
+  cursor: pointer;
 }
-.teacher-info {
-  display: inline-block;
-}
-//过度动画
-.fade-enter-active {
-  transition: all 0.3s ease;
-}
-.fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.fade-enter, .fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
+@media screen and (max-width: 900px) {
+  #teachers {
+    display: none;
+  }
 }
 </style>

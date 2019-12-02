@@ -12,18 +12,30 @@
       >
         <div slot="left" class="left">
           <div class="logo">
-            <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
+            <img
+              src="../../assets/images/logo/logo.jpg"
+              width="100%"
+              height="100%"
+              alt
+            />
           </div>
         </div>
         <div slot="title" class="title">
           <div>
-            <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
+            <van-icon
+              size="30px"
+              :color="heartColor"
+              name="like"
+              @click="changeHeartColor"
+            />
           </div>
         </div>
         <div slot="right" class="right">
           <div class="menu">
             <transition name="fade">
-              <span v-show="!isOpen" @click="hideSticky" class="icon iconfont">&#xeb71;</span>
+              <span v-show="!isOpen" @click="hideSticky" class="icon iconfont"
+                >&#xeb71;</span
+              >
             </transition>
             <transition name="show">
               <van-icon
@@ -40,7 +52,7 @@
       </van-nav-bar>
     </div>
     <div class="pc-nav">
-      <div class="pc-nav-bar">
+      <div class="pc-nav-bar" id="main-navbar">
         <vue-navigation-bar :options="navbarOptions" />
         <div class="heart-cover">
           <van-icon
@@ -56,7 +68,12 @@
     <van-popup
       v-model="isOpen"
       position="right"
-      :style="{ height: '100%', marginTop: '45px', width: '40%',zIndex:'9999999'}"
+      :style="{
+        height: '100%',
+        marginTop: '45px',
+        width: '40%',
+        zIndex: '9999999'
+      }"
     >
       <van-list :v-model="false" :finished="true">
         <van-cell
@@ -65,7 +82,12 @@
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
+          <van-icon
+            size="20px"
+            color="rgba(0,0,0,0.8)"
+            :finished="true"
+            :name="item.icon"
+          />
         </van-cell>
       </van-list>
     </van-popup>
@@ -73,10 +95,10 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import { Color } from '../../config/color'
+import { Color } from '../../config/color';
 export default {
   props: {},
-  data () {
+  data() {
     return {
       Color,
       isOpen: false,
@@ -141,24 +163,24 @@ export default {
             subMenuOptions: [
               {
                 isLinkAction: true,
-                type: "link",
-                text: "热门课程",
-                subText: "各种丰富的绘画课程，还能为你定制。艺术，与生俱来。",
-                path: "/about",
+                type: 'link',
+                text: '热门课程',
+                subText: '各种丰富的绘画课程，还能为你定制。艺术，与生俱来。',
+                path: '/about',
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
-                type: 'hr',
+                type: 'hr'
               },
               {
                 type: 'link',
                 text: '画室环境',
-                subText: "好的艺术陶冶，需要好的环境支撑，我们一致在这里等你。",
+                subText: '好的艺术陶冶，需要好的环境支撑，我们一致在这里等你。',
                 path: './locations',
                 iconLeft: '<span class="icon iconfont">&#xe66c;</span>'
               },
               {
-                type: 'hr',
+                type: 'hr'
               },
               {
                 type: 'link',
@@ -168,7 +190,7 @@ export default {
                 iconLeft: '<span class="icon iconfont">&#xe6d9;</span>'
               },
               {
-                type: 'hr',
+                type: 'hr'
               },
               {
                 type: 'link',
@@ -178,7 +200,7 @@ export default {
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
-                type: 'hr',
+                type: 'hr'
               },
               {
                 type: 'link',
@@ -188,7 +210,7 @@ export default {
                 iconLeft: '<span class="icon iconfont">&#xe65b;</span>'
               },
               {
-                type: 'hr',
+                type: 'hr'
               },
               {
                 type: 'link',
@@ -196,48 +218,48 @@ export default {
                 subText: '为兴趣，就现在。',
                 path: './blog',
                 iconLeft: '<span class="icon iconfont">&#xe616;</span>'
-              },
+              }
             ]
           },
           {
             type: 'link',
             text: '热门课程',
             path: './course',
-            iconRight: '<span class="icon iconfont">&#xe60d;</span>',
+            iconRight: '<span class="icon iconfont">&#xe60d;</span>'
           },
           {
             type: 'link',
             text: '学生作品',
             path: './pricing',
-            iconRight: '<span class="icon iconfont">&#xe618;</span>',
+            iconRight: '<span class="icon iconfont">&#xe618;</span>'
           },
           {
             type: 'link',
             text: '关于我们',
             path: './pricing',
-            iconRight: '<span class="icon iconfont">&#xe672;</span>',
+            iconRight: '<span class="icon iconfont">&#xe672;</span>'
           },
           {
             type: 'link',
             text: '联系我们',
             path: './contact',
-            iconRight: '<span class="icon iconfont">&#xe616;</span>',
-          },
-        ],
+            iconRight: '<span class="icon iconfont">&#xe616;</span>'
+          }
+        ]
       }
     };
   },
   computed: {
     ...mapState(['isPhone']) // 加载设备类型
   },
-  created () {
+  created() {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
         : 'rgba(0,0,0,0.4)';
     }
   },
-  mounted () { },
+  mounted() {},
 
   methods: {
     /**
@@ -245,24 +267,24 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage (item) {
+    navToPage(item) {
       this.$router.push({ path: item.path });
       this.isOpen = false;
     },
-    onLoad () {
+    onLoad() {
       // 异步更新数据
       // 加载状态结束
       this.loading = true;
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft () {
+    onClickLeft() {
       this.$toast('返回');
     },
-    onClickRight () {
+    onClickRight() {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor () {
+    changeHeartColor() {
       if (this.heartColor === 'red') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
@@ -271,25 +293,16 @@ export default {
         this.heartColor = '#cf2729';
       }
     },
-    hideSticky () {
-      this.$emit('menu-open')
+    hideSticky() {
+      this.$emit('menu-open');
     },
-    showSticky () {
-      this.$emit('menu-close')
+    showSticky() {
+      this.$emit('menu-close');
     }
   }
 };
 </script>
 <style scoped lang="less">
-.vnb {
-  .button-red {
-    background: #ff3b30;
-    &:hover {
-      background: darken(#ff3b30, 10%);
-    }
-  }
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.2s;
@@ -332,6 +345,7 @@ export default {
 .iconfont {
   font-size: 30px;
 }
+
 .pc-nav-bar {
   max-width: 1200px;
   margin: 0 auto;
@@ -339,6 +353,7 @@ export default {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  padding: 0 60px;
 }
 .heart-cover {
   cursor: pointer;

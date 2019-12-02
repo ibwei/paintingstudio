@@ -3,7 +3,7 @@
     <!-- 画室介绍 -->
     <div class="introduce">
       <div class="introduce-title">
-        <v-title v-bind:initTitle="initTtile"></v-title>
+        <v-title :init-title="initTtile"></v-title>
       </div>
       <!-- 介绍中间图片 -->
       <div class="sign">
@@ -11,13 +11,24 @@
       </div>
       <div class="introduce-text">
         <div class="phone-steps">
-          <van-steps :active="active" :active-color="Color.colorbrand" direction="vertical">
-            <van-step v-for="item of introduce" :key="item.index">{{item.desc}}</van-step>
+          <van-steps
+            :active="active"
+            :active-color="Color.colorbrand"
+            direction="vertical"
+          >
+            <van-step v-for="item of introduce" :key="item.index">
+              {{ item.desc }}
+            </van-step>
           </van-steps>
         </div>
         <div class="steps">
           <a-steps :current="-1">
-            <a-step v-for="item of introduce" :key="item.index" :title="item.title" :description="item.desc" />
+            <a-step
+              v-for="item of introduce"
+              :key="item.index"
+              :title="item.title"
+              :description="item.desc"
+            />
           </a-steps>
         </div>
       </div>
@@ -27,14 +38,14 @@
 </template>
 
 <script>
-import vTitle from '../common/vTitle'
 import { mapState } from 'vuex';
-import { Color } from '../../config/color'
+import vTitle from '../common/vTitle';
+import { Color } from '../../config/color';
 export default {
   components: {
-    vTitle,
+    vTitle
   },
-  data () {
+  data() {
     return {
       Color,
       initTtile: {
@@ -80,7 +91,7 @@ export default {
      * @params {index} 校务对应id
      * @return void
      */
-    goDetail (index) {
+    goDetail(index) {
       this.$router.push({ path: `detail?id=${index}` });
     }
   }
@@ -124,8 +135,8 @@ export default {
   display: none;
 }
 @media screen and (max-width: 720px) {
-  .steps{
-    display: block;
+  .steps {
+    display: none;
   }
   .phone-steps {
     display: block;
