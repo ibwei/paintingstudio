@@ -2,11 +2,11 @@
   <!-- 学生作品 -->
   <div class="works-wrap">
     <!-- 学生作品 -->
-    <v-title v-bind:initTitle="initTtile"></v-title>
+    <v-title :init-title="initTtile"></v-title>
     <!-- pc端 -->
     <div class="works">
       <div class="student-works">
-        <img src="../../assets/images/index/a42.jpg" />
+        <img src="../../assets/images/index/a42.png" />
       </div>
       <!-- 手机端 -->
       <div class="student-works-phone">
@@ -14,24 +14,26 @@
           <van-swipe-item v-for="(item, index) of worksImg" :key="index">
             <img :src="item.imgUrl" class="carouselImg" />
           </van-swipe-item>
-          <div slot="indicator" class="custom-indicator">{{ currentIndex }}/ {{ imgLength }}</div>
+          <div slot="indicator" class="custom-indicator">
+            {{ currentIndex }}/ {{ imgLength }}
+          </div>
         </van-swipe>
       </div>
     </div>
   </div>
 </template>
 <script>
-import vTitle from '../../components/common/vTitle'
+import vTitle from '../../components/common/vTitle';
 export default {
   components: {
-    vTitle,
+    vTitle
   },
-  data () {
+  data() {
     return {
       // 学生作品标题
       initTtile: {
         cnTitle: '学生作品',
-        enTitle: "Student Painting Works",
+        enTitle: 'Student Painting Works',
         mode: 'black',
         icon: '&#xe618;'
       },
@@ -41,26 +43,26 @@ export default {
       worksImg: [
         {
           index: 1,
-          imgUrl: require('../../assets/images/index/worksImg01.jpg')
+          imgUrl: require('../../assets/images/index/worksImg01.png')
         },
         {
           index: 2,
-          imgUrl: require('../../assets/images/index/worksImg02.jpg')
+          imgUrl: require('../../assets/images/index/worksImg02.png')
         },
         {
           index: 3,
-          imgUrl: require('../../assets/images/index/worksImg03.jpg')
+          imgUrl: require('../../assets/images/index/worksImg03.png')
         },
         {
           index: 4,
-          imgUrl: require('../../assets/images/index/worksImg04.jpg')
+          imgUrl: require('../../assets/images/index/worksImg04.png')
         }
       ]
     };
   },
   computed: {
     /** 图片数量 */
-    imgLength () {
+    imgLength() {
       return this.worksImg.length;
     }
   },
@@ -68,7 +70,7 @@ export default {
     /**
      * @method 滑动图片改变时
      */
-    onChange (index) {
+    onChange(index) {
       this.currentIndex = index + 1;
     }
   }
