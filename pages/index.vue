@@ -25,6 +25,7 @@
     <!-- 优势 -->
     <advantage />
     <!-- 师资力量 -->
+    <teachers />
     <!-- 底部菜单栏 -->
     <message-board />
   </div>

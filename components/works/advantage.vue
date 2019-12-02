@@ -2,7 +2,7 @@
   <div class="advantage">
     <div id="title">
       <div class="title">
-        <v-title v-bind:initTitle="initTtile"></v-title>
+        <v-title :initTitle="initTtile"></v-title>
       </div>
       <div class="title-word">{{ title_word }}</div>
     </div>
@@ -26,7 +26,9 @@
         :style="{backgroundColor:button.color,color:'#fff'}"
         class="button2"
         size="large"
-      >{{ button.title }}</van-button>
+      >
+{{ button.title }}
+</van-button>
       <div class="button1">{{ button.title }}</div>
     </div>
   </div>
@@ -36,7 +38,7 @@
 import vTitle from '../../components/common/vTitle'
 export default {
   components: {
-    vTitle,
+    vTitle
   },
   data () {
     return {

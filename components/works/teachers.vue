@@ -154,7 +154,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  min-height: 395px;
+  height: 395px;
 }
 .teacher:nth-child(2n + 0) {
   flex-direction: row-reverse;
@@ -204,8 +204,11 @@ export default {
 .teach_style {
   color: #666;
 }
+.img {
+  height: 100%;
+}
 .img > img {
-  width: 400px;
+  height: 100%;
   display: block;
   transform: translateX(30px);
   z-index: -1;
@@ -222,8 +225,8 @@ export default {
   cursor: pointer;
 }
 @media screen and (max-width: 900px) {
-  .img {
-    width: 350px;
+  #teachers {
+    display: none;
   }
 }
 </style>
