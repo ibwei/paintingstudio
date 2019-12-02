@@ -10,12 +10,16 @@
         <img src="../../assets/images/index/sign.png" />
       </div>
       <div class="introduce-text">
-        <van-steps :active="active" :active-color="Color.colorbrand" direction="vertical">
-          <van-step>2019年创办于重庆大学城，两兄弟所办,朝气蓬勃</van-step>
-          <van-step>全年开课，随到随学，自由选择学习时间</van-step>
-          <van-step>任何分点报名均可在其他分点学习，课时不作废</van-step>
-          <van-step>主教老师均为固定全职老师，科班出身，专业扎实</van-step>
-        </van-steps>
+        <div class="phone-steps">
+          <van-steps :active="active" :active-color="Color.colorbrand" direction="vertical">
+            <van-step v-for="item of introduce" :key="item.index">{{item.desc}}</van-step>
+          </van-steps>
+        </div>
+        <div class="steps">
+          <a-steps :current="-1">
+            <a-step v-for="item of introduce" :key="item.index" :title="item.title" :description="item.desc" />
+          </a-steps>
+        </div>
       </div>
     </div>
     <!-- 画室动态 -->
@@ -40,7 +44,31 @@ export default {
         icon: '&#xe672;'
       },
       /** 画室介绍当前进度 */
-      active: 2
+      active: 2,
+      status: 'finish',
+      title: '创办时间',
+      introduce: [
+        {
+          index: 0,
+          title: '创办时间',
+          desc: '2019年创办于重庆大学城，两兄弟所办,朝气蓬勃'
+        },
+        {
+          index: 1,
+          title: '随到随学',
+          desc: '全年开课，随到随学，自由选择学习时间'
+        },
+        {
+          index: 2,
+          title: '学习自由',
+          desc: '任何分点报名均可在其他分点学习，课时不作废'
+        },
+        {
+          index: 3,
+          title: '专业师资',
+          desc: '主教老师均为固定全职老师，科班出身，专业扎实'
+        }
+      ]
     };
   },
   computed: {
@@ -87,7 +115,21 @@ export default {
   line-height: 1.5em;
 }
 
+.steps {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.phone-steps {
+  display: none;
+}
 @media screen and (max-width: 720px) {
+  .steps{
+    display: block;
+  }
+  .phone-steps {
+    display: block;
+  }
   .introduce {
     .introduce-title {
       font-size: 20px;
@@ -103,9 +145,11 @@ export default {
     min-width: 90px;
   }
 }
-
 /* 新增 */
 .sign {
   margin-bottom: 20px;
+}
+.ant-steps-item-wait .ant-steps-item-icon {
+  border-color: @color-brand;
 }
 </style>

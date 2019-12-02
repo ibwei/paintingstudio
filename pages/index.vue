@@ -12,8 +12,6 @@
     <carousel />
     <!-- 招生详情 -->
     <recruitment />
-    <!-- 作品介绍 -->
-    <paintingIntroduce />
     <!-- 介绍 -->
     <paintIntroduce />
     <!-- 画室环境 -->
@@ -36,7 +34,7 @@ import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
 import teachers from '../components/works/teachers'
-import paintingIntroduce from '../components/index/paintIntroduce';
+import paintIntroduce from '../components/index/paintIntroduce';
 import { isPhone } from '../utils/index';
 import worksCarous from '../components/index/worksCarousel';
 import paintAffaris from '../components/index/paintAffaris';
@@ -46,7 +44,7 @@ import { Color } from '../config/color';
 export default {
   components: {
     carousel,
-    paintingIntroduce,
+    paintIntroduce,
     recruitment,
     advantage,
     paintAffaris,

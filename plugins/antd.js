@@ -25,6 +25,7 @@ import Modal from 'ant-design-vue/lib/modal'
 import Rate from 'ant-design-vue/lib/rate'
 import Message from 'ant-design-vue/lib/message'
 import BackTop from 'ant-design-vue/lib/back-top'
+import Steps from 'ant-design-vue/lib/steps'
 
 import 'ant-design-vue/lib/breadcrumb/style/index.css'
 import 'ant-design-vue/lib/button/style/index.css'
@@ -47,6 +48,7 @@ import 'ant-design-vue/lib/modal/style/index.css'
 import 'ant-design-vue/lib/rate/style/index.css'
 import 'ant-design-vue/lib/message/style/index.css'
 import 'ant-design-vue/lib/back-top/style/index.css'
+import 'ant-design-vue/lib/steps/style/index.css'
 Vue.use(Breadcrumb)
 Vue.use(Button)
 Vue.use(Input)
@@ -69,4 +71,5 @@ Vue.use(Modal)
 Vue.use(Rate)
 Vue.use(Message)
 Vue.use(BackTop)
+Vue.use(Steps)
 Vue.use(Swipe).use(SwipeItem)
