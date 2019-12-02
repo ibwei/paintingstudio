@@ -9,7 +9,7 @@
     <!-- 画室动态 -->
     <div class="affaris-right">
       <div class="right-head" @click="goAffaris">
-        <v-title v-bind:initTitle="initTtile"></v-title>
+        <v-title :initTitle="initTtile"></v-title>
       </div>
       <!-- 画室动态列表 -->
       <van-list>
@@ -39,7 +39,7 @@
 import vTitle from '../common/vTitle'
 export default {
   components: {
-    vTitle,
+    vTitle
   },
   data () {
     return {
