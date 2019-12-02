@@ -39,7 +39,20 @@
         </div>
       </van-nav-bar>
     </div>
-    <div class="pc-nav">暂无电脑端导航栏</div>
+    <div class="pc-nav">
+      <div class="pc-nav-bar">
+        <vue-navigation-bar :options="navbarOptions" />
+        <div class="heart-cover">
+          <van-icon
+            size="30px"
+            @click="changeHeartColor"
+            :color="heartColor"
+            :finished="true"
+            name="like"
+          />
+        </div>
+      </div>
+    </div>
     <van-popup
       v-model="isOpen"
       position="right"
@@ -60,11 +73,12 @@
 </template>
 <script>
 import { mapState } from 'vuex';
+import { Color } from '../../config/color'
 export default {
-  components: {},
   props: {},
   data () {
     return {
+      Color,
       isOpen: false,
       heartColor: 'rgba(0,0,0,0.4)',
       list: [
@@ -105,7 +119,112 @@ export default {
         }
       ],
       loading: false,
-      finished: true
+      finished: true,
+      /* 电脑端导航栏 */
+      navbarOptions: {
+        elementId: 'main-navbar',
+        isUsingVueRouter: true,
+        mobileBreakpoint: 992,
+        brandImagePath: './',
+        brandImage: require('../../assets/images/logo/logo.jpg'),
+        brandImageAltText: 'brand-image',
+        /* collapseButtonImageOpen: require(''),
+        collapseButtonImageClose: require(''), */
+        showBrandImageInMobilePopup: true,
+        ariaLabelMainNav: 'Main Navigation',
+        tooltipAnimationType: 'shift-away',
+        menuOptionsLeft: [
+          {
+            type: 'link',
+            text: '主页',
+            path: '/',
+            subMenuOptions: [
+              {
+                isLinkAction: true,
+                type: "link",
+                text: "热门课程",
+                subText: "各种丰富的绘画课程，还能为你定制。艺术，与生俱来。",
+                path: "/about",
+                iconLeft: '<span class="icon iconfont">&#xe618;</span>'
+              },
+              {
+                type: 'hr',
+              },
+              {
+                type: 'link',
+                text: '画室环境',
+                subText: "好的艺术陶冶，需要好的环境支撑，我们一致在这里等你。",
+                path: './locations',
+                iconLeft: '<span class="icon iconfont">&#xe66c;</span>'
+              },
+              {
+                type: 'hr',
+              },
+              {
+                type: 'link',
+                text: '画室动态',
+                subText: '看看品贤画室最近都发生了什么？',
+                path: './blog',
+                iconLeft: '<span class="icon iconfont">&#xe6d9;</span>'
+              },
+              {
+                type: 'hr',
+              },
+              {
+                type: 'link',
+                text: '学生作品',
+                subText: '看看曾经如你一般的小白最近画得怎么样了?',
+                path: './blog',
+                iconLeft: '<span class="icon iconfont">&#xe618;</span>'
+              },
+              {
+                type: 'hr',
+              },
+              {
+                type: 'link',
+                text: '为什么选择我们',
+                subText: '为什么选择我们，看看我们的优势所在吧',
+                path: './blog',
+                iconLeft: '<span class="icon iconfont">&#xe65b;</span>'
+              },
+              {
+                type: 'hr',
+              },
+              {
+                type: 'link',
+                text: '在线报名',
+                subText: '为兴趣，就现在。',
+                path: './blog',
+                iconLeft: '<span class="icon iconfont">&#xe616;</span>'
+              },
+            ]
+          },
+          {
+            type: 'link',
+            text: '热门课程',
+            path: './course',
+            iconRight: '<span class="icon iconfont">&#xe60d;</span>',
+          },
+          {
+            type: 'link',
+            text: '学生作品',
+            path: './pricing',
+            iconRight: '<span class="icon iconfont">&#xe618;</span>',
+          },
+          {
+            type: 'link',
+            text: '关于我们',
+            path: './pricing',
+            iconRight: '<span class="icon iconfont">&#xe672;</span>',
+          },
+          {
+            type: 'link',
+            text: '联系我们',
+            path: './contact',
+            iconRight: '<span class="icon iconfont">&#xe616;</span>',
+          },
+        ],
+      }
     };
   },
   computed: {
@@ -162,6 +281,15 @@ export default {
 };
 </script>
 <style scoped lang="less">
+.vnb {
+  .button-red {
+    background: #ff3b30;
+    &:hover {
+      background: darken(#ff3b30, 10%);
+    }
+  }
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.2s;
@@ -201,6 +329,20 @@ export default {
   z-index: 999;
 }
 
+.iconfont {
+  font-size: 30px;
+}
+.pc-nav-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.heart-cover {
+  cursor: pointer;
+}
 @media screen and(max-width: 720px) {
   .pc-nav {
     display: none;

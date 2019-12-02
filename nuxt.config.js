@@ -49,6 +49,10 @@ module.exports = {
         ssr: false
     },
     {
+        src: '~plugins/navbar.js',
+        ssr: false
+    },
+    {
         src: '~plugins/vant'
     },
     {

@@ -1,13 +1,15 @@
 <template>
   <div class="app-container">
     <!-- 顶部通知栏 -->
-    <van-notice-bar
-      :color="Color.colorbrand"
-      :speed="50"
-      background="rgba(244,205,205,1)"
-      left-icon="volume-o"
-      :scrollable="true"
-    >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
+    <div class="phone-notice">
+      <van-notice-bar
+        :color="Color.colorbrand"
+        :speed="50"
+        background="rgba(244,205,205,1)"
+        left-icon="volume-o"
+        :scrollable="true"
+      >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
+    </div>
     <!-- 轮播图 -->
     <carousel />
     <!-- 招生详情 -->
@@ -119,5 +121,11 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+@media screen and(min-width: 720px) {
+  .phone-notice {
+    display: none;
+  }
 }
 </style>
