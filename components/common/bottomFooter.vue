@@ -1,13 +1,10 @@
 <template>
   <div class="footer-wrap">
-    <div class="logo">
-      <img class="logo-image" src="../../assets/images/logo/logo.jpg" alt />
-    </div>
     <div class="contact">
       <div class="c-one">
         <div class="phone">
           <van-icon size="20px" name="phone-circle-o" />
-          <a class="tel" href="tel:18688888888">18883923917</a>
+          <a class="tel" href="tel:18883923917">18883923917</a>
         </div>
         <div class="address">
           <van-icon size="20px" name="location-o" />重庆·沙坪坝区·大学城
@@ -25,12 +22,12 @@
 export default {
   components: {},
   props: {},
-  data() {
+  data () {
     return {};
   },
   computed: {},
-  created() {},
-  mounted() {},
+  created () { },
+  mounted () { },
   methods: {}
 };
 </script>
@@ -43,6 +40,7 @@ export default {
   align-items: center;
   width: 100%;
   background: #fff;
+  margin-bottom: 40px;
 }
 .logo {
   display: flex;

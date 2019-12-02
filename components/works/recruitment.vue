@@ -25,21 +25,21 @@ export default {
           index: 1,
           title: '招生简章',
           icon: '&#xe672;',
-          word: '艺考及艺考&#10预备班通道',
+          word: '油画定制课\n专属于你的艺术',
           color: '#fa4c33'
         },
         {
           index: 2,
           title: '招生简章',
           icon: '&#xe60c;',
-          word: '兴趣生通道',
+          word: '体验课进行时\n素描、水彩任你选',
           color: '#ffb900'
         },
         {
           index: 3,
           title: '招生简章',
           icon: '&#xe624;',
-          word: '留学及考验\n小升初&nbsp;书法国画',
+          word: '短期综合班\n为兴趣而生',
           color: '#00ACEC'
         }
       ],
@@ -50,6 +50,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url('../../assets/css/color');
 a {
   text-decoration: none;
 }
@@ -58,15 +59,16 @@ a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: #fff;
+  border-bottom: 1px solid #dcdee2;
 }
 .recruitment .rec-demo {
   text-align: center;
   width: 350px;
   height: 450px;
   color: black;
-  margin-left: 2rem;
   cursor: pointer;
 }
 .rec-demo .title {
@@ -76,7 +78,7 @@ a {
   font-size: 26px;
 }
 .rec-demo a {
-  color: black;
+  color: #17233d;
   height: 100%;
   width: 100%;
   display: flex;
@@ -133,7 +135,7 @@ a {
   }
   .rec-demo:nth-child(2) .word {
     font-size: 24px;
-    margin-top: 12px;
+    margin-top: 0px;
   }
   .rec-demo:nth-child(2) span {
     margin-top: 30px;
@@ -154,20 +156,21 @@ a {
     font-size: 16px;
   }
   .rec-demo:nth-child(2) .word {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 @media screen and (max-width: 540px) {
   .recruitment {
-    padding-top: 10px;
+    padding: 5px;
     justify-content: space-around;
-    padding-bottom: 10px;
   }
   .recruitment .rec-demo {
     height: 130px;
     width: 150px;
-    margin: 0px 5px;
     border-radius: 2px;
+  }
+  .rec-demo + .rec-demo {
+    margin-left: 5px;
   }
   .rec-demo .title {
     display: none;
@@ -182,7 +185,7 @@ a {
     font-size: 14px;
   }
   .rec-demo:nth-child(2) .word {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 </style>
