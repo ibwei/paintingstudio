@@ -26,6 +26,8 @@
     <advantage />
     <!-- 师资力量 -->
     <teachers />
+    <!-- 联系我们 -->
+    <contactUs />
     <!-- 底部菜单栏 -->
     <message-board />
   </div>
@@ -42,6 +44,7 @@ import { isPhone } from '../utils/index';
 import worksCarous from '../components/index/worksCarousel';
 import paintAffaris from '../components/index/paintAffaris';
 import MessageBoard from '../components/common/messageBoard';
+import contactUs from '../components/contactUs/contactUs'
 import paintingEnvironment from '../components/index/paintingEnvironment';
 import { Color } from '../config/color';
 export default {
@@ -53,7 +56,8 @@ export default {
     paintAffaris,
     worksCarous,
     MessageBoard,
-    paintingEnvironment
+    paintingEnvironment,
+    contactUs
     // teachers
   },
   data() {
