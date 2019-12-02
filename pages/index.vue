@@ -54,8 +54,8 @@ export default {
     paintAffaris,
     worksCarous,
     MessageBoard,
-    paintingEnvironment,
-    teachers
+    paintingEnvironment
+    // teachers
   },
   data() {
     return {

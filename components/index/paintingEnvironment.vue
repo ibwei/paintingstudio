@@ -1,6 +1,8 @@
 <template>
   <div class="teacher-wrap">
-    <v-title v-bind:initTitle="initTtile"></v-title>
+    <div class="title">
+      <v-title v-bind:initTitle="initTtile"></v-title>
+    </div>
     <div class="content">
       <div class="grid">
         <div
@@ -96,6 +98,9 @@ export default {
   align-items: center;
   background: @color-bg-base;
   background-image: linear-gradient(30deg, @color-bg-base, @color-bg-grey);
+}
+.title {
+  width: 100%;
 }
 .content {
   margin: 20px 10px;

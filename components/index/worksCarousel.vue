@@ -6,15 +6,23 @@
     <!-- pc端 -->
     <div class="works">
       <div class="student-works">
-        <img src="../../assets/images/index/a42.png" />
+        <van-image :src="pcImgUrl">
+          <template v-slot:loading>
+            <van-loading type="spinner" size="20" />
+          </template>
+        </van-image>
       </div>
       <!-- 手机端 -->
       <div class="student-works-phone">
         <van-swipe :autoplay="5000" @change="onChange">
           <van-swipe-item v-for="(item, index) of worksImg" :key="index">
-            <img :src="item.imgUrl" class="carouselImg" />
+            <van-image :src="item.imgUrl" class="carouselImg" @load="onLoad()">
+              <template v-slot:loading>
+                <van-loading type="spinner" size="20" />
+              </template>
+            </van-image>
           </van-swipe-item>
-          <div slot="indicator" class="custom-indicator">
+          <div v-show="showImages" slot="indicator" class="custom-indicator">
             {{ currentIndex }}/ {{ imgLength }}
           </div>
         </van-swipe>
@@ -40,6 +48,10 @@ export default {
       /** 当前图片索引 */
       currentIndex: 1,
       /** 学生作品图片-图片比例需统一，16:9效果较佳 */
+      /** 电脑端 */
+      pcImgUrl: require('../../assets/images/index/a42.png'),
+      /** 手机端 */
+      showImages: false,
       worksImg: [
         {
           index: 1,
@@ -72,6 +84,9 @@ export default {
      */
     onChange(index) {
       this.currentIndex = index + 1;
+    },
+    onLoad() {
+      this.showImages = true;
     }
   }
 };

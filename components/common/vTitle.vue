@@ -6,10 +6,10 @@
       </div>
       <div class="mid">
         <div class="cn-title">
-          {{initTitle.cnTitle}}
+          {{ initTitle.cnTitle }}
           <span class="iconfont icon" v-html="initTitle.icon"></span>
         </div>
-        <div class="en-title">{{initTitle.enTitle}}</div>
+        <div class="en-title">{{ initTitle.enTitle }}</div>
       </div>
       <div class="right">
         <div :class="dividerClass"></div>
@@ -22,23 +22,23 @@ export default {
   props: {
     initTitle: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
-          mode: 'black',  //两种颜色  [red | black ]
+          mode: 'black', //两种颜色  [red | black ]
           cnTitle: '品贤画室', //标题
           enTitle: 'PinXian Painting Studio', //英文标题
-          icon: '&#xe672;', //iconfont
-        }
+          icon: '&#xe672;' //iconfont
+        };
       }
     }
   },
-  data () {
+  data() {
     return {
       dividerClass: 'divider',
       mainClass: 'main-title'
-    }
+    };
   },
-  created () {
+  created() {
     if (this.initTitle.mode === 'red') {
       this.dividerClass = 'divider';
       this.mainClass = 'main-title';
@@ -47,9 +47,8 @@ export default {
       this.mainClass = 'main-title1';
     }
   }
-}
+};
 </script>
-
 
 <style scoped lang="less">
 @import url('../../assets/css/color');
@@ -113,5 +112,27 @@ export default {
 }
 .left {
   transform: rotate(180deg);
+}
+
+@media screen and(min-width: 720px) {
+  .mid {
+    position: relative;
+    width: auto;
+    text-align: center;
+    .cn-title {
+      font-size: 26px;
+      font-weight: bold;
+    }
+    .en-title {
+      font-size: 16px;
+      line-height: 2;
+    }
+  }
+  .iconfont {
+    font-size: 30px;
+    position: relative;
+    right: 0px;
+    top: 2px;
+  }
 }
 </style>
