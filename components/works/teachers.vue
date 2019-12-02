@@ -6,12 +6,17 @@
       </div>
       <div class="content">
         <div class="left">
-          <van-icon name="arrow-left" size="40px" color="#e00" @click="handlerLeftBtn()" />
+          <van-icon
+            name="arrow-left"
+            size="40px"
+            color="#e00"
+            @click="handlerLeftBtn()"
+          />
         </div>
         <div class="mid-content">
           <div
-            v-for="(item,index) of teachers"
-            v-show="index+1 === currIndex"
+            v-for="(item, index) of teachers"
+            v-show="index + 1 === currIndex"
             :key="index"
             class="teacher"
           >
@@ -41,12 +46,17 @@
               </div>
             </div>
             <div class="img">
-              <img :src="item.imgUrl" width="100%" />
+              <img :src="item.imgUrl" height="100%" />
             </div>
           </div>
         </div>
         <div class="right">
-          <van-icon name="arrow" size="40px" color="#e00" @click="handlerRightBtn()" />
+          <van-icon
+            name="arrow"
+            size="40px"
+            color="#e00"
+            @click="handlerRightBtn()"
+          />
         </div>
       </div>
       <div class="button">查看更多</div>
@@ -55,14 +65,14 @@
 </template>
 
 <script>
-import vTitle from '../common/vTitle'
-import tag from './components/tagrandtype.vue'
+import vTitle from '../common/vTitle';
+import tag from './components/tagrandtype.vue';
 export default {
   components: {
     vTitle,
     tag
   },
-  data () {
+  data() {
     return {
       currIndex: 2,
       initTtile: {
@@ -71,18 +81,39 @@ export default {
         mode: 'black',
         icon: '&#xe6d9;'
       },
-      teachers: [{ name: '田奇', intrduce: '资深项目经理、技术讲师、SUN SCJP、SCWCD、原工信部移动云计算教育培训中心教学总监。 十年软件开发经验：参与完成辽宁某高校远程教学管理系统、慧文信息门户系统、日本麦卡尔超市管理系统、崎玉市外来人口登记系统、深海视频会议管理系统、仙台市宫城县日常事务系统等项目的设计和开发。', rate: 5, lable: 1, infos: ['名校毕业', '女学员多', '好评如潮'], teach_style: '循序渐进，旁征博引,风趣幽默，大师风范', imgUrl: require('../../assets/images/index/user1.png') }, { name: '小奇2号', intrduce: '行业老兵，IT教育风云人物。清华毕业，拥有九年大型项目开发和管理经验，曾任新浪网软件项目经理，使用PHP与JavaEE技术开发新浪网系统，北京点击科技公司高级软件工程师，用友软件股份有限公司U8事业部软件工程师。主持或参与《新浪邮件系统》、《橙红sns网站》、《点击科技协同软件群组服务器端(Linux/solaris平台)》、《总参语音监控系统》、《英语学习机系统》、《用友erp(u8产品)系统》等项目。', rate: 4.5, lable: 2, infos: ['名校毕业', '帅气', '好评如潮'], teach_style: '教法凶悍，厚积薄发，激发式教学，让你睡觉都觉得奢侈', imgUrl: require('../../assets/images/index/user2.png') }]
-    }
+      teachers: [
+        {
+          name: '田奇',
+          intrduce:
+            '资深项目经理、技术讲师、SUN SCJP、SCWCD、原工信部移动云计算教育培训中心教学总监。 十年软件开发经验：参与完成辽宁某高校远程教学管理系统、慧文信息门户系统、日本麦卡尔超市管理系统、崎玉市外来人口登记系统、深海视频会议管理系统、仙台市宫城县日常事务系统等项目的设计和开发。',
+          rate: 5,
+          lable: 1,
+          infos: ['名校毕业', '女学员多', '好评如潮'],
+          teach_style: '循序渐进，旁征博引,风趣幽默，大师风范',
+          imgUrl: require('../../assets/images/index/user1.png')
+        },
+        {
+          name: '小奇2号',
+          intrduce:
+            '行业老兵，IT教育风云人物。清华毕业，拥有九年大型项目开发和管理经验，曾任新浪网软件项目经理，使用PHP与JavaEE技术开发新浪网系统，北京点击科技公司高级软件工程师，用友软件股份有限公司U8事业部软件工程师。主持或参与《新浪邮件系统》、《橙红sns网站》、《点击科技协同软件群组服务器端(Linux/solaris平台)》、《总参语音监控系统》、《英语学习机系统》、《用友erp(u8产品)系统》等项目。',
+          rate: 4.5,
+          lable: 2,
+          infos: ['名校毕业', '帅气', '好评如潮'],
+          teach_style: '教法凶悍，厚积薄发，激发式教学，让你睡觉都觉得奢侈',
+          imgUrl: require('../../assets/images/index/user2.png')
+        }
+      ]
+    };
   },
   methods: {
-    handlerRightBtn () {
+    handlerRightBtn() {
       if (this.currIndex === this.teachers.length) {
         this.currIndex = 1;
       } else {
         this.currIndex++;
       }
     },
-    handlerLeftBtn () {
+    handlerLeftBtn() {
       if (this.currIndex === 1) {
         this.currIndex = this.teachers.length;
       } else {
@@ -90,7 +121,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style style="less" scoped>
@@ -123,7 +154,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  min-height: 395px;
+  height: 395px;
 }
 .teacher:nth-child(2n + 0) {
   flex-direction: row-reverse;
@@ -173,8 +204,11 @@ export default {
 .teach_style {
   color: #666;
 }
+.img {
+  height: 100%;
+}
 .img > img {
-  width: 400px;
+  height: 100%;
   display: block;
   transform: translateX(30px);
   z-index: -1;

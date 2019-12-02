@@ -6,10 +6,10 @@
       </div>
       <div class="recruitment-content">
         <div
-          v-for="(item,index) of recruitments"
+          v-for="(item, index) of recruitments"
           :key="index"
           class="word"
-          :style="{'background':item.color}"
+          :style="{ background: item.color }"
         >
           <div class="img">
             <img :src="item.icon" alt width="100%" class="pc_icon" />
@@ -48,14 +48,14 @@
 </template>
 
 <script>
-import vTitle from '../common/vTitle'
-import tag from './components/tagrandtype.vue'
+import vTitle from '../common/vTitle';
+import tag from './components/tagrandtype.vue';
 export default {
   components: {
     vTitle,
     tag
   },
-  data () {
+  data() {
     return {
       initTtile: {
         cnTitle: '招生简章',
@@ -70,7 +70,8 @@ export default {
           icon: require('../../assets/images/index/国画.jpg'),
           phone_icon: require('../../assets/images/index/国画_phone.jpg'),
           title: '油画艺术班',
-          introduc: '油画定制课专属于你的艺术油画定制课专属于你的艺术短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
+          introduc:
+            '油画定制课专属于你的艺术油画定制课专属于你的艺术短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
           color: '#fff',
           number: 599,
           rate: 3,
@@ -81,7 +82,8 @@ export default {
           icon: require('../../assets/images/index/留学生.jpg'),
           phone_icon: require('../../assets/images/index/留学生_phone.jpg'),
           title: '留学班',
-          introduc: '体验课进行时素描、水彩任你选体验课进行时素描、水彩任你选短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
+          introduc:
+            '体验课进行时素描、水彩任你选体验课进行时素描、水彩任你选短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
           color: '#fff',
           number: 599,
           rate: 3.5,
@@ -92,7 +94,8 @@ export default {
           icon: require('../../assets/images/index/艺术生.jpg'),
           phone_icon: require('../../assets/images/index/艺术生_phone.jpg'),
           title: '绘画兴趣班',
-          introduc: '短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
+          introduc:
+            '短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
           color: '#fff',
           number: 599,
           rate: 5,
