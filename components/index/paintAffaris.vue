@@ -4,7 +4,12 @@
   <div class="affaris">
     <!-- pc端画室动态左边图片 -->
     <div class="affaris-left">
-      <img src="../../assets/images/index/2017330105615377.png" />
+      <van-image :src="leftImg">
+        <template v-slot:loading>
+          <van-loading type="spinner" size="20" />
+        </template>
+      </van-image>
+      <!-- <img src="../../assets/images/index/2017330105615377.png" /> -->
     </div>
     <!-- 画室动态 -->
     <div class="affaris-right">
@@ -45,6 +50,7 @@ export default {
   },
   data() {
     return {
+      leftImg: require('../../assets/images/index/2017330105615377.png'),
       initTtile: {
         cnTitle: '画室动态',
         enTitle: 'Painting Studio News',

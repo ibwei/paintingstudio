@@ -7,7 +7,11 @@
       </div>
       <!-- 介绍中间图片 -->
       <div class="sign">
-        <img src="../../assets/images/index/sign.png" />
+        <van-image :src="introduceImg">
+          <template v-slot:loading>
+            <van-loading type="spinner" size="20" />
+          </template>
+        </van-image>
       </div>
       <div class="introduce-text">
         <div class="phone-steps">
@@ -38,7 +42,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import vTitle from '../common/vTitle';
 import { Color } from '../../config/color';
 export default {
@@ -56,6 +59,8 @@ export default {
       },
       /** 画室介绍当前进度 */
       active: 2,
+      /** 介绍中间的图片 */
+      introduceImg: require('../../assets/images/index/sign.png'),
       status: 'finish',
       title: '创办时间',
       introduce: [
@@ -82,9 +87,7 @@ export default {
       ]
     };
   },
-  computed: {
-    ...mapState(['isPhone']) // 加载设备类型
-  },
+  computed: {},
   methods: {
     /**
      * @methed 跳转到校务详情页
@@ -120,6 +123,8 @@ export default {
 }
 
 .introduce-text {
+  max-width: 1200px;
+  margin: 0 auto;
   font-size: 16px;
   font-weight: 700;
   padding-bottom: 5px;
@@ -128,8 +133,7 @@ export default {
 
 .steps {
   display: block;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 20px;
 }
 .phone-steps {
   display: none;
