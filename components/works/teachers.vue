@@ -225,8 +225,8 @@ export default {
   cursor: pointer;
 }
 @media screen and (max-width: 900px) {
-  .img {
-    width: 350px;
+  #teachers {
+    display: none;
   }
 }
 </style>
