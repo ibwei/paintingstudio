@@ -9,17 +9,19 @@
       <bottom-footer></bottom-footer>
     </div>
     <!-- 底部标题栏 -->
-    <van-tabbar
-      v-model="menuIndex"
-      :z-index="9999"
-      :active-color="Color.colorbrand"
-      inactive-color="#000"
-    >
-      <van-tabbar-item icon="wap-home-o">品贤画室</van-tabbar-item>
-      <van-tabbar-item icon="hot-o">课程介绍</van-tabbar-item>
-      <van-tabbar-item icon="photo-o">作品</van-tabbar-item>
-      <van-tabbar-item icon="comment-circle-o">联系我们</van-tabbar-item>
-    </van-tabbar>
+    <div class="tabbar-menu">
+      <van-tabbar
+        v-model="menuIndex"
+        :z-index="9999"
+        :active-color="Color.colorbrand"
+        inactive-color="#000"
+      >
+        <van-tabbar-item icon="wap-home-o">品贤画室</van-tabbar-item>
+        <van-tabbar-item icon="hot-o">课程介绍</van-tabbar-item>
+        <van-tabbar-item icon="photo-o">作品</van-tabbar-item>
+        <van-tabbar-item icon="comment-circle-o">联系我们</van-tabbar-item>
+      </van-tabbar>
+    </div>
     <!-- 右侧悬浮快捷入口 -->
     <div v-if="stickyShow">
       <sticky v-on:wechat-click="showQRCode"></sticky>
@@ -102,5 +104,10 @@ export default {
 }
 .qr-code {
   padding: 1px;
+}
+@media screen and( min-width:720px) {
+  .tabbar-menu {
+    display: none;
+  }
 }
 </style>

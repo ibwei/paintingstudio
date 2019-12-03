@@ -22,12 +22,12 @@
 export default {
   components: {},
   props: {},
-  data () {
+  data() {
     return {};
   },
   computed: {},
-  created () { },
-  mounted () { },
+  created() {},
+  mounted() {},
   methods: {}
 };
 </script>
@@ -40,7 +40,7 @@ export default {
   align-items: center;
   width: 100%;
   background: #fff;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 }
 .logo {
   display: flex;
@@ -83,6 +83,15 @@ export default {
 }
 
 @media screen and (max-width: 720px) {
+  .footer-wrap {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 40px;
+  }
   .c-one,
   .c-two {
     display: flex;

@@ -4,12 +4,17 @@
   <div class="affaris">
     <!-- pc端画室动态左边图片 -->
     <div class="affaris-left">
-      <img src="../../assets/images/index/2017330105615377.jpg" />
+      <van-image :src="leftImg">
+        <template v-slot:loading>
+          <van-loading type="spinner" size="20" />
+        </template>
+      </van-image>
+      <!-- <img src="../../assets/images/index/2017330105615377.png" /> -->
     </div>
     <!-- 画室动态 -->
     <div class="affaris-right">
       <div class="right-head" @click="goAffaris">
-        <v-title v-bind:initTitle="initTtile"></v-title>
+        <v-title :init-title="initTtile"></v-title>
       </div>
       <!-- 画室动态列表 -->
       <van-list>
@@ -29,20 +34,23 @@
         </div>
       </van-list>
       <div class="more">
-        <van-button plain type="danger" size="small" @click="goAffaris">查看更多</van-button>
+        <van-button plain type="danger" size="small" @click="goAffaris">
+          查看更多
+        </van-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import vTitle from '../common/vTitle'
+import vTitle from '../common/vTitle';
 export default {
   components: {
-    vTitle,
+    vTitle
   },
-  data () {
+  data() {
     return {
+      leftImg: require('../../assets/images/index/2017330105615377.png'),
       initTtile: {
         cnTitle: '画室动态',
         enTitle: 'Painting Studio News',
@@ -85,7 +93,7 @@ export default {
           color: 'success'
         }
       ]
-    }
+    };
   },
   methods: {
     /**
@@ -93,12 +101,11 @@ export default {
      * @params {null}
      * @return voic
      */
-    goAffaris () {
-      console.log('affaris :');
+    goAffaris() {
       this.$router.push({ path: 'news' });
     }
   }
-}
+};
 </script>
 
 <style lang="less" scope>
