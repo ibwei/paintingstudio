@@ -52,8 +52,38 @@
       </van-nav-bar>
     </div>
     <div class="pc-nav">
-      <div class="pc-nav-bar" id="main-navbar">
-        <vue-navigation-bar :options="navbarOptions" />
+      <div class="pc-nav-bar" id="new-nav">
+        <div class="nav-left">
+          <img src="../../assets/images/logo/logo.jpg" style="max-height:30px">
+          <nav class="pc-navs">
+            <a-popover placement="bottom">
+              <template slot="content">
+                <p>Content</p>
+                <p>Content</p>
+              </template>
+              <div class="nav-item">
+                <span>主页</span>
+                <span class="icon iconfont">&#xe60e;</span>
+              </div>
+            </a-popover>
+            <div class="nav-item">
+              <span>热门课程</span>
+              <span class="icon iconfont">&#xe60d;</span>
+            </div>
+            <div class="nav-item">
+              <span>学生作品</span>
+              <span class="icon iconfont">&#xe618;</span>
+            </div>
+            <div class="nav-item">
+              <span>关于我们</span>
+              <span class="icon iconfont">&#xe672;</span>
+            </div>
+            <div class="nav-item">
+              <span>联系我们</span>
+              <span class="icon iconfont">&#xe616;</span>
+            </div>
+          </nav>
+        </div>
         <div class="heart-cover">
           <van-icon
             size="30px"
@@ -357,6 +387,34 @@ export default {
 }
 .heart-cover {
   cursor: pointer;
+}
+/** 导航样式 */
+.flex {
+  display: -webkit-flex;
+  display: flex;
+}
+.nav-left {
+  .flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  padding: 15px 0px 15px 10px;
+}
+.pc-navs {
+  .flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  padding-left: 30px;
+  font-size: 14.4px;
+}
+.nav-item {
+  .flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-right: 18px;
+}
+.nav-item .iconfont {
+  font-size: 17px;
+  margin-left: 5px;
 }
 @media screen and(max-width: 720px) {
   .pc-nav {
