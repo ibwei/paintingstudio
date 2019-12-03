@@ -15,14 +15,8 @@
       </div>
       <div class="introduce-text">
         <div class="phone-steps">
-          <van-steps
-            :active="active"
-            :active-color="Color.colorbrand"
-            direction="vertical"
-          >
-            <van-step v-for="item of introduce" :key="item.index">
-              {{ item.desc }}
-            </van-step>
+          <van-steps :active="active" :active-color="Color.colorbrand" direction="vertical">
+            <van-step v-for="item of introduce" :key="item.index">{{ item.desc }}</van-step>
           </van-steps>
         </div>
         <div class="steps">
@@ -48,13 +42,13 @@ export default {
   components: {
     vTitle
   },
-  data() {
+  data () {
     return {
       Color,
       initTtile: {
         cnTitle: '关于品贤画室',
         enTitle: 'About PinXian Painting Studio',
-        mode: 'red',
+        mode: 'black',
         icon: '&#xe672;'
       },
       /** 画室介绍当前进度 */
@@ -94,7 +88,7 @@ export default {
      * @params {index} 校务对应id
      * @return void
      */
-    goDetail(index) {
+    goDetail (index) {
       this.$router.push({ path: `detail?id=${index}` });
     }
   }
@@ -103,7 +97,7 @@ export default {
 <style lang="less" scoped>
 @import url('../../assets/css/color');
 .introduce {
-  background: #fff;
+  background: @color-bg-base;
   text-align: center;
   .introduce-title {
     padding: 30px 0 10px 0px;
