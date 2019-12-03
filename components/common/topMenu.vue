@@ -54,18 +54,12 @@
     <div class="pc-nav">
       <div class="pc-nav-bar" id="new-nav">
         <div class="nav-left">
-          <img src="../../assets/images/logo/logo.jpg" style="max-height:30px">
+          <img src="../../assets/images/logo/logo.jpg" class="menuLogo" />
           <nav class="pc-navs">
-            <a-popover placement="bottom">
-              <template slot="content">
-                <p>Content</p>
-                <p>Content</p>
-              </template>
-              <div class="nav-item">
-                <span>主页</span>
-                <span class="icon iconfont">&#xe60e;</span>
-              </div>
-            </a-popover>
+            <div class="nav-item">
+              <span>主页</span>
+              <span class="icon iconfont arrow">&#xe60e;</span>
+            </div>
             <div class="nav-item">
               <span>热门课程</span>
               <span class="icon iconfont">&#xe60d;</span>
@@ -174,18 +168,8 @@ export default {
       finished: true,
       /* 电脑端导航栏 */
       navbarOptions: {
-        elementId: 'main-navbar',
-        isUsingVueRouter: true,
-        mobileBreakpoint: 992,
-        brandImagePath: './',
-        brandImage: require('../../assets/images/logo/logo.jpg'),
-        brandImageAltText: 'brand-image',
-        /* collapseButtonImageOpen: require(''),
-        collapseButtonImageClose: require(''), */
-        showBrandImageInMobilePopup: true,
-        ariaLabelMainNav: 'Main Navigation',
-        tooltipAnimationType: 'shift-away',
-        menuOptionsLeft: [
+        menuLeftLogo: require('../../assets/images/logo/logo.jpg'),
+        menuOptions: [
           {
             type: 'link',
             text: '主页',
@@ -333,6 +317,7 @@ export default {
 };
 </script>
 <style scoped lang="less">
+@import url('../../assets/css/color.less');
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.2s;
@@ -385,13 +370,17 @@ export default {
   align-items: center;
   padding: 0 60px;
 }
-.heart-cover {
+.heart-cover,
+.nav-item {
   cursor: pointer;
 }
 /** 导航样式 */
 .flex {
   display: -webkit-flex;
   display: flex;
+}
+.menuLogo {
+  max-height: 30px;
 }
 .nav-left {
   .flex;
@@ -411,6 +400,15 @@ export default {
   flex-flow: row nowrap;
   align-items: center;
   margin-right: 18px;
+}
+.arrow {
+  transition: all 0.5s;
+}
+.nav-item:hover {
+  color: @color-brand;
+}
+.nav-item:hover .arrow {
+  transform: rotate(180deg);
 }
 .nav-item .iconfont {
   font-size: 17px;
