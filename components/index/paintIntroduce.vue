@@ -48,7 +48,7 @@ export default {
       initTtile: {
         cnTitle: '关于品贤画室',
         enTitle: 'About PinXian Painting Studio',
-        mode: 'red',
+        mode: 'black',
         icon: '&#xe672;'
       },
       /** 画室介绍当前进度 */
@@ -97,7 +97,7 @@ export default {
 <style lang="less" scoped>
 @import url('../../assets/css/color');
 .introduce {
-  background: #fff;
+  background: @color-bg-base;
   text-align: center;
   .introduce-title {
     padding: 30px 0 10px 0px;
