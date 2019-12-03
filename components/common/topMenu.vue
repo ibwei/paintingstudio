@@ -12,39 +12,27 @@
       >
         <div slot="left" class="left">
           <div class="logo">
-            <img
-              src="../../assets/images/logo/logo.jpg"
-              width="100%"
-              height="100%"
-              alt
-            />
+            <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
           </div>
         </div>
         <div slot="title" class="title">
           <div>
-            <van-icon
-              size="30px"
-              :color="heartColor"
-              name="like"
-              @click="changeHeartColor"
-            />
+            <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
           </div>
         </div>
         <div slot="right" class="right">
           <div class="menu">
             <transition name="fade">
-              <span v-show="!isOpen" @click="hideSticky" class="icon iconfont"
-                >&#xeb71;</span
-              >
+              <span v-show="!isOpen" class="icon iconfont" @click="hideSticky">&#xeb71;</span>
             </transition>
             <transition name="show">
               <van-icon
                 v-show="isOpen"
-                @click="showSticky"
                 :key="2"
                 name="cross"
                 size="20px"
                 color="rgba(0,0,0,0.6)"
+                @click="showSticky"
               />
             </transition>
           </div>
@@ -52,43 +40,45 @@
       </van-nav-bar>
     </div>
     <div class="pc-nav">
-      <div class="pc-nav-bar" id="new-nav">
+      <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
-          <img src="../../assets/images/logo/logo.jpg" class="menuLogo" />
+          <img :src="navbarOptions.menuLeftLogo" class="menuLogo" />
           <nav class="pc-navs">
-            <div class="nav-item">
-              <span>主页</span>
-              <span class="icon iconfont arrow">&#xe60e;</span>
-            </div>
-            <div class="nav-item">
-              <span>热门课程</span>
-              <span class="icon iconfont">&#xe60d;</span>
-            </div>
-            <div class="nav-item">
-              <span>学生作品</span>
-              <span class="icon iconfont">&#xe618;</span>
-            </div>
-            <div class="nav-item">
-              <span>关于我们</span>
-              <span class="icon iconfont">&#xe672;</span>
-            </div>
-            <div class="nav-item">
-              <span>联系我们</span>
-              <span class="icon iconfont">&#xe616;</span>
+            <div v-for="(nav, index) of navbarOptions.menuOptions" :key="index" class="nav-item">
+              <span>{{ nav.text }}</span>
+              <span
+                :class="{icon: true, iconfont: true, arrow:nav.icon=='&#xe60e;'}"
+                v-html="nav.icon"
+              ></span>
+              <div class="submenu">
+                <div class="submenu-arrow"></div>
+                <div
+                  v-for="(submenu, index) of nav.subMenuOptions"
+                  :key="index"
+                  class="submenu-list"
+                >
+                  <div class="submenu-logo" v-html="submenu.iconLeft"></div>
+                  <div class="submenu-container">
+                    <div class="submenu-title">{{ submenu.text }}</div>
+                    <div class="submenu-content">{{ submenu.subText }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </nav>
         </div>
         <div class="heart-cover">
           <van-icon
             size="30px"
-            @click="changeHeartColor"
             :color="heartColor"
             :finished="true"
             name="like"
+            @click="changeHeartColor"
           />
         </div>
       </div>
     </div>
+    <div class="pc-nav-margin"></div>
     <van-popup
       v-model="isOpen"
       position="right"
@@ -106,12 +96,7 @@
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon
-            size="20px"
-            color="rgba(0,0,0,0.8)"
-            :finished="true"
-            :name="item.icon"
-          />
+          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
         </van-cell>
       </van-list>
     </van-popup>
@@ -122,7 +107,7 @@ import { mapState } from 'vuex';
 import { Color } from '../../config/color';
 export default {
   props: {},
-  data() {
+  data () {
     return {
       Color,
       isOpen: false,
@@ -174,6 +159,7 @@ export default {
             type: 'link',
             text: '主页',
             path: '/',
+            icon: '&#xe60e;',
             subMenuOptions: [
               {
                 isLinkAction: true,
@@ -184,17 +170,11 @@ export default {
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
-                type: 'hr'
-              },
-              {
                 type: 'link',
                 text: '画室环境',
                 subText: '好的艺术陶冶，需要好的环境支撑，我们一致在这里等你。',
                 path: './locations',
                 iconLeft: '<span class="icon iconfont">&#xe66c;</span>'
-              },
-              {
-                type: 'hr'
               },
               {
                 type: 'link',
@@ -204,9 +184,6 @@ export default {
                 iconLeft: '<span class="icon iconfont">&#xe6d9;</span>'
               },
               {
-                type: 'hr'
-              },
-              {
                 type: 'link',
                 text: '学生作品',
                 subText: '看看曾经如你一般的小白最近画得怎么样了?',
@@ -214,17 +191,11 @@ export default {
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
-                type: 'hr'
-              },
-              {
                 type: 'link',
                 text: '为什么选择我们',
                 subText: '为什么选择我们，看看我们的优势所在吧',
                 path: './blog',
                 iconLeft: '<span class="icon iconfont">&#xe65b;</span>'
-              },
-              {
-                type: 'hr'
               },
               {
                 type: 'link',
@@ -239,25 +210,25 @@ export default {
             type: 'link',
             text: '热门课程',
             path: './course',
-            iconRight: '<span class="icon iconfont">&#xe60d;</span>'
+            icon: '&#xe60d;'
           },
           {
             type: 'link',
             text: '学生作品',
             path: './pricing',
-            iconRight: '<span class="icon iconfont">&#xe618;</span>'
+            icon: '&#xe618;'
           },
           {
             type: 'link',
             text: '关于我们',
             path: './pricing',
-            iconRight: '<span class="icon iconfont">&#xe672;</span>'
+            icon: '&#xe672;'
           },
           {
             type: 'link',
             text: '联系我们',
             path: './contact',
-            iconRight: '<span class="icon iconfont">&#xe616;</span>'
+            icon: '&#xe616;'
           }
         ]
       }
@@ -266,14 +237,14 @@ export default {
   computed: {
     ...mapState(['isPhone']) // 加载设备类型
   },
-  created() {
+  created () {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
         : 'rgba(0,0,0,0.4)';
     }
   },
-  mounted() {},
+  mounted () { },
 
   methods: {
     /**
@@ -281,24 +252,24 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage(item) {
+    navToPage (item) {
       this.$router.push({ path: item.path });
       this.isOpen = false;
     },
-    onLoad() {
+    onLoad () {
       // 异步更新数据
       // 加载状态结束
       this.loading = true;
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft() {
+    onClickLeft () {
       this.$toast('返回');
     },
-    onClickRight() {
+    onClickRight () {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor() {
+    changeHeartColor () {
       if (this.heartColor === 'red') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
@@ -307,10 +278,10 @@ export default {
         this.heartColor = '#cf2729';
       }
     },
-    hideSticky() {
+    hideSticky () {
       this.$emit('menu-open');
     },
-    showSticky() {
+    showSticky () {
       this.$emit('menu-close');
     }
   }
@@ -354,9 +325,16 @@ export default {
 }
 .pc-nav {
   display: block;
-  z-index: 999;
+  width: 100%;
+  position: fixed;
+  z-index: 999999;
+  background: rgba(255, 255, 255, 0.985);
 }
-
+.pc-nav-margin {
+  width: 100%;
+  height: 60px;
+  background: transparent;
+}
 .iconfont {
   font-size: 30px;
 }
@@ -400,22 +378,81 @@ export default {
   flex-flow: row nowrap;
   align-items: center;
   margin-right: 18px;
+  position: relative;
 }
 .arrow {
   transition: all 0.5s;
 }
-.nav-item:hover {
+.nav-item:hover span,
+.nav-item:hover .iconfont {
   color: @color-brand;
 }
 .nav-item:hover .arrow {
   transform: rotate(180deg);
 }
+.nav-item:hover .submenu {
+  opacity: 0.985;
+  width: 342px;
+  overflow: visible;
+}
 .nav-item .iconfont {
   font-size: 17px;
   margin-left: 5px;
 }
+.submenu {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 35px;
+  left: -165px;
+  transition: opacity 0.5s;
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+.submenu-arrow {
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  top: -4px;
+  border-top-color: #fff;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: #fff;
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.06);
+  position: absolute;
+  display: block;
+  width: 8.48528137px;
+  height: 8.48528137px;
+  background: transparent;
+  border-width: 4.24264069px;
+  border-style: solid;
+  z-index: 3;
+}
+.submenu-list {
+  .flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  border-bottom: 1px solid @color-black-3;
+}
+.submenu-list:hover {
+  color: @color-brand;
+}
+.submenu-logo {
+  padding: 10px;
+}
+.submenu-title {
+  padding: 10px 0 0 10px;
+  font-size: 16px;
+}
+.submenu-content {
+  padding: 10px 20px 20px 10px;
+  width: 300px;
+}
 @media screen and(max-width: 720px) {
   .pc-nav {
+    display: none;
+  }
+  .pc-nav-margin {
     display: none;
   }
   .phone-nav {

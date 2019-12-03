@@ -15,14 +15,8 @@
       </div>
       <div class="introduce-text">
         <div class="phone-steps">
-          <van-steps
-            :active="active"
-            :active-color="Color.colorbrand"
-            direction="vertical"
-          >
-            <van-step v-for="item of introduce" :key="item.index">
-              {{ item.desc }}
-            </van-step>
+          <van-steps :active="active" :active-color="Color.colorbrand" direction="vertical">
+            <van-step v-for="item of introduce" :key="item.index">{{ item.desc }}</van-step>
           </van-steps>
         </div>
         <div class="steps">
@@ -48,7 +42,7 @@ export default {
   components: {
     vTitle
   },
-  data() {
+  data () {
     return {
       Color,
       initTtile: {
@@ -94,7 +88,7 @@ export default {
      * @params {index} 校务对应id
      * @return void
      */
-    goDetail(index) {
+    goDetail (index) {
       this.$router.push({ path: `detail?id=${index}` });
     }
   }
@@ -133,7 +127,7 @@ export default {
 
 .steps {
   display: block;
-  padding: 20px;
+  padding: 20px 20px 50px 20px;
 }
 .phone-steps {
   display: none;
