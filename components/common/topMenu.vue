@@ -151,9 +151,9 @@ export default {
           name: '首页'
         },
         {
-          path: 'recruitment',
+          path: 'news',
           icon: 'label-o',
-          name: '招生事项'
+          name: '画室动态'
         },
         {
           path: 'recruitment',
@@ -237,6 +237,13 @@ export default {
                 iconLeft: '<span class="icon iconfont">&#xe616;</span>'
               }
             ]
+          },
+          {
+            type: 'link',
+            text: '画室动态',
+            path: 'news',
+            icon: '&#xe60d;',
+            subMenuOptions: []
           },
           {
             type: 'link',
