@@ -44,17 +44,20 @@
         <div class="nav-left">
           <img :src="navbarOptions.menuLeftLogo" class="menuLogo" />
           <nav class="pc-navs">
+            <!-- 菜单 -->
             <div v-for="(nav, index) of navbarOptions.menuOptions" :key="index" class="nav-item">
-              <span>{{ nav.text }}</span>
-              <span
+              <span @click="navToPage(nav)">{{ nav.text }}</span>
+              <span @click="navToPage(nav)"
                 :class="{icon: true, iconfont: true, arrow:nav.icon=='&#xe60e;'}"
                 v-html="nav.icon"
               ></span>
-              <div class="submenu">
+              <!-- 子菜单 -->
+              <div class="submenu" v-if="nav.subMenuOptions!== null && nav.subMenuOptions.length > 0">
                 <div class="submenu-arrow"></div>
                 <div
                   v-for="(submenu, index) of nav.subMenuOptions"
                   :key="index"
+                  @click="navToPage(submenu)"
                   class="submenu-list"
                 >
                   <div class="submenu-logo" v-html="submenu.iconLeft"></div>
@@ -166,42 +169,42 @@ export default {
                 type: 'link',
                 text: '热门课程',
                 subText: '各种丰富的绘画课程，还能为你定制。艺术，与生俱来。',
-                path: '/about',
+                path: 'about',
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
                 type: 'link',
                 text: '画室环境',
                 subText: '好的艺术陶冶，需要好的环境支撑，我们一致在这里等你。',
-                path: './locations',
+                path: 'locations',
                 iconLeft: '<span class="icon iconfont">&#xe66c;</span>'
               },
               {
                 type: 'link',
                 text: '画室动态',
                 subText: '看看品贤画室最近都发生了什么？',
-                path: './blog',
+                path: 'blog',
                 iconLeft: '<span class="icon iconfont">&#xe6d9;</span>'
               },
               {
                 type: 'link',
                 text: '学生作品',
                 subText: '看看曾经如你一般的小白最近画得怎么样了?',
-                path: './blog',
+                path: 'blog',
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
                 type: 'link',
                 text: '为什么选择我们',
                 subText: '为什么选择我们，看看我们的优势所在吧',
-                path: './blog',
+                path: 'blog',
                 iconLeft: '<span class="icon iconfont">&#xe65b;</span>'
               },
               {
                 type: 'link',
                 text: '在线报名',
                 subText: '为兴趣，就现在。',
-                path: './blog',
+                path: 'blog',
                 iconLeft: '<span class="icon iconfont">&#xe616;</span>'
               }
             ]
@@ -209,26 +212,34 @@ export default {
           {
             type: 'link',
             text: '热门课程',
-            path: './course',
-            icon: '&#xe60d;'
+            path: 'course',
+            icon: '&#xe60d;',
+            subMenuOptions: [
+            ]
           },
           {
             type: 'link',
             text: '学生作品',
-            path: './pricing',
-            icon: '&#xe618;'
+            path: 'pricing',
+            icon: '&#xe618;',
+            subMenuOptions: [
+            ]
           },
           {
             type: 'link',
             text: '关于我们',
-            path: './pricing',
-            icon: '&#xe672;'
+            path: 'pricing',
+            icon: '&#xe672;',
+            subMenuOptions: [
+            ]
           },
           {
             type: 'link',
             text: '联系我们',
-            path: './contact',
-            icon: '&#xe616;'
+            path: 'contact',
+            icon: '&#xe616;',
+            subMenuOptions: [
+            ]
           }
         ]
       }
@@ -253,6 +264,7 @@ export default {
      * @return void
      */
     navToPage (item) {
+      console.log(item)
       this.$router.push({ path: item.path });
       this.isOpen = false;
     },
@@ -380,6 +392,9 @@ export default {
   margin-right: 18px;
   position: relative;
 }
+.nav-item span {
+  line-height: 17px;
+}
 .arrow {
   transition: all 0.5s;
 }
@@ -391,8 +406,8 @@ export default {
   transform: rotate(180deg);
 }
 .nav-item:hover .submenu {
-  opacity: 0.985;
-  width: 342px;
+  opacity: 0.965;
+  width: 336px;
   overflow: visible;
 }
 .nav-item .iconfont {
@@ -400,20 +415,20 @@ export default {
   margin-left: 5px;
 }
 .submenu {
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: transparent;
   position: absolute;
-  top: 35px;
+  top: 25px;
   left: -165px;
   transition: opacity 0.5s;
   opacity: 0;
-  width: 0;
+  padding-top: 10px;
   overflow: hidden;
+  width: 0;
 }
 .submenu-arrow {
-  left: 50%;
+  left: 55%;
+  top: 7px;
   transform: translateX(-50%) rotate(45deg);
-  top: -4px;
   border-top-color: #fff;
   border-right-color: transparent;
   border-bottom-color: transparent;
@@ -429,10 +444,14 @@ export default {
   z-index: 3;
 }
 .submenu-list {
+  color: @color-grey-1;
   .flex;
   flex-flow: row nowrap;
   align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid @color-black-3;
+  background: rgba(255,255,255,0.95);
+  overflow: hidden;
 }
 .submenu-list:hover {
   color: @color-brand;
@@ -445,7 +464,7 @@ export default {
   font-size: 16px;
 }
 .submenu-content {
-  padding: 10px 20px 20px 10px;
+  padding: 5px 20px 20px 10px;
   width: 300px;
 }
 @media screen and(max-width: 720px) {
