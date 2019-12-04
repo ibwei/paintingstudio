@@ -12,22 +12,12 @@
       >
         <div slot="left" class="left">
           <div class="logo">
-            <img
-              src="../../assets/images/logo/logo.jpg"
-              width="100%"
-              height="100%"
-              alt
-            />
+            <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
           </div>
         </div>
         <div slot="title" class="title">
           <div>
-            <van-icon
-              size="30px"
-              :color="heartColor"
-              name="like"
-              @click="changeHeartColor"
-            />
+            <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
           </div>
         </div>
         <div slot="right" class="right">
@@ -49,17 +39,13 @@
         </div>
       </van-nav-bar>
     </div>
-    <div v-scroll-reveal.reset class="pc-nav">
+    <div class="pc-nav">
       <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
           <img :src="navbarOptions.menuLeftLogo" class="menuLogo" />
           <nav class="pc-navs">
             <!-- 菜单 -->
-            <div
-              v-for="(nav, index) of navbarOptions.menuOptions"
-              :key="index"
-              class="nav-item"
-            >
+            <div v-for="(nav, index) of navbarOptions.menuOptions" :key="index" class="nav-item">
               <span @click="navToPage(nav)">{{ nav.text }}</span>
               <span
                 :class="{
@@ -123,12 +109,7 @@
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon
-            size="20px"
-            color="rgba(0,0,0,0.8)"
-            :finished="true"
-            :name="item.icon"
-          />
+          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
         </van-cell>
       </van-list>
     </van-popup>
@@ -139,7 +120,7 @@ import { mapState } from 'vuex';
 import { Color } from '../../config/color';
 export default {
   props: {},
-  data() {
+  data () {
     return {
       Color,
       isOpen: false,
@@ -153,32 +134,27 @@ export default {
         {
           path: 'news',
           icon: 'label-o',
+          name: '课程中心'
+        },
+        {
+          path: 'news',
+          icon: 'notes-o',
           name: '画室动态'
         },
         {
           path: 'recruitment',
-          icon: 'manager-o',
-          name: '师资'
-        },
-        {
-          path: 'recruitment',
-          icon: 'cluster-o',
-          name: '环境'
-        },
-        {
-          path: 'works',
-          icon: 'photo-o',
-          name: '学生作品'
-        },
-        {
-          path: 'position',
-          icon: 'location-o',
-          name: '地点'
+          icon: 'info-o',
+          name: '关于我们'
         },
         {
           path: 'contact',
           icon: 'phone-circle-o',
           name: '联系我们'
+        },
+        {
+          path: 'me',
+          icon: 'manager-o',
+          name: '个人中心'
         }
       ],
       loading: false,
@@ -240,13 +216,6 @@ export default {
           },
           {
             type: 'link',
-            text: '画室动态',
-            path: 'news',
-            icon: '&#xe60d;',
-            subMenuOptions: []
-          },
-          {
-            type: 'link',
             text: '热门课程',
             path: 'course',
             icon: '&#xe60d;',
@@ -254,9 +223,9 @@ export default {
           },
           {
             type: 'link',
-            text: '学生作品',
-            path: 'pricing',
-            icon: '&#xe618;',
+            text: '画室动态',
+            path: 'news',
+            icon: '&#xe60d;',
             subMenuOptions: []
           },
           {
@@ -280,14 +249,14 @@ export default {
   computed: {
     ...mapState(['isPhone']) // 加载设备类型
   },
-  created() {
+  created () {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
         : 'rgba(0,0,0,0.4)';
     }
   },
-  mounted() {
+  mounted () {
     // ScrollReveal().reveal('.pc-nav');
     console.log(this);
   },
@@ -298,25 +267,28 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage(item) {
-      console.log(item);
+    navToPage (item) {
+
+      if (item.path === 'me') {
+        return false;
+      }
       this.$router.push({ path: item.path });
       this.isOpen = false;
     },
-    onLoad() {
+    onLoad () {
       // 异步更新数据
       // 加载状态结束
       this.loading = true;
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft() {
+    onClickLeft () {
       this.$toast('返回');
     },
-    onClickRight() {
+    onClickRight () {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor() {
+    changeHeartColor () {
       if (this.heartColor === 'red') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
@@ -325,10 +297,10 @@ export default {
         this.heartColor = '#cf2729';
       }
     },
-    hideSticky() {
+    hideSticky () {
       this.$emit('menu-open');
     },
-    showSticky() {
+    showSticky () {
       this.$emit('menu-close');
     }
   }

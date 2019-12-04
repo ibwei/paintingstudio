@@ -12,30 +12,30 @@
     </div>
 
     <!-- 轮播图 -->
-    <carousel />
+    <carousel v-scroll-reveal.scaleUp="{scale:0.15}" />
 
     <!-- 招生详情 -->
-    <recruitment />
+    <recruitment v-scroll-reveal.scaleUp="{scale:0.15}" />
 
     <!-- 介绍 -->
-    <paintIntroduce />
+    <paintIntroduce v-scroll-reveal.smooth="{easing:'ease-in'}" />
 
     <!-- 动态 -->
-    <paintAffaris />
+    <paintAffaris v-scroll-reveal.smooth="{easing:'ease-in'}" />
     <!-- 画室环境 -->
-    <paintingEnvironment />
+    <paintingEnvironment v-scroll-reveal.smooth="{easing:'ease-in'}" />
 
     <!-- 师资力量 -->
-    <teachers />
+    <teachers v-scroll-reveal.smooth="{easing:'ease-in'}" />
 
     <!-- 学生作品 -->
-    <worksCarous />
+    <worksCarous v-scroll-reveal.smooth="{easing:'ease-in'}" />
 
     <!-- 优势 -->
-    <advantage />
+    <advantage v-scroll-reveal.smooth="{easing:'ease-in'}" />
 
     <!-- 底部菜单栏 -->
-    <message-board />
+    <message-board v-scroll-reveal.smooth="{easing:'ease-in'}" />
   </div>
 </template>
 

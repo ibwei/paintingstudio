@@ -29,7 +29,7 @@
     <div class="swiper">
       <van-swipe :autoplay="3000">
         <van-swipe-item v-for="(item, index) in carasels" :key="index">
-          <img :src="item.imgUrl" width="100%" />
+          <img :src="isPhone?item.phoneImg:item.imgUrl" class="item-img" />
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -37,18 +37,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
+  computed: {
+    ...mapState(['isPhone']),
+  },
   data () {
     return {
       titmer1: '',
       titmer2: null,
       currentIndex: 1, // 当前的index
       carasels: [
-        { index: 1, imgUrl: require('../../assets/images/carasel/1.jpg') },
-        { index: 2, imgUrl: require('../../assets/images/carasel/2.jpg') },
-        { index: 3, imgUrl: require('../../assets/images/carasel/3.jpg') },
-        { index: 4, imgUrl: require('../../assets/images/carasel/4.jpg') },
-        { index: 5, imgUrl: require('../../assets/images/carasel/5.jpg') }
+        { index: 1, imgUrl: require('../../assets/images/carasel/1.jpg'), phoneImg: require('../../assets/images/carasel/f1.jpg') },
+        { index: 2, imgUrl: require('../../assets/images/carasel/2.jpg'), phoneImg: require('../../assets/images/carasel/f2.jpg') },
+        { index: 3, imgUrl: require('../../assets/images/carasel/3.jpg'), phoneImg: require('../../assets/images/carasel/f3.jpg') },
+        { index: 4, imgUrl: require('../../assets/images/carasel/4.jpg'), phoneImg: require('../../assets/images/carasel/f4.jpg') },
+        { index: 5, imgUrl: require('../../assets/images/carasel/5.jpg'), phoneImg: require('../../assets/images/carasel/f5.jpg') }
       ],
       carasel: {
         index: 1,
@@ -143,6 +147,12 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
+.item-img {
+  width: 100%;
+  height: auto;
+}
+
 .swiper {
   display: none;
   width: 100%;
@@ -153,6 +163,12 @@ export default {
   }
   .swiper {
     display: block;
+    height: 100%;
+    max-height: 600px;
+  }
+  .item-img {
+    width: 100%;
+    height: 200px;
   }
 }
 </style>
