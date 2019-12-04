@@ -12,12 +12,22 @@
       >
         <div slot="left" class="left">
           <div class="logo">
-            <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
+            <img
+              src="../../assets/images/logo/logo.jpg"
+              width="100%"
+              height="100%"
+              alt
+            />
           </div>
         </div>
         <div slot="title" class="title">
           <div>
-            <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
+            <van-icon
+              size="30px"
+              :color="heartColor"
+              name="like"
+              @click="changeHeartColor"
+            />
           </div>
         </div>
         <div slot="right" class="right">
@@ -39,23 +49,40 @@
         </div>
       </van-nav-bar>
     </div>
-    <div class="pc-nav">
+    <div v-scroll-reveal.reset class="pc-nav">
       <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
           <img :src="navbarOptions.menuLeftLogo" class="menuLogo" />
           <nav class="pc-navs">
-            <div v-for="(nav, index) of navbarOptions.menuOptions" :key="index" class="nav-item">
-              <span>{{ nav.text }}</span>
+            <!-- 菜单 -->
+            <div
+              v-for="(nav, index) of navbarOptions.menuOptions"
+              :key="index"
+              class="nav-item"
+            >
+              <span @click="navToPage(nav)">{{ nav.text }}</span>
               <span
-                :class="{icon: true, iconfont: true, arrow:nav.icon=='&#xe60e;'}"
+                :class="{
+                  icon: true,
+                  iconfont: true,
+                  arrow: nav.icon == '&#xe60e;'
+                }"
+                @click="navToPage(nav)"
                 v-html="nav.icon"
               ></span>
-              <div class="submenu">
+              <!-- 子菜单 -->
+              <div
+                v-if="
+                  nav.subMenuOptions !== null && nav.subMenuOptions.length > 0
+                "
+                class="submenu"
+              >
                 <div class="submenu-arrow"></div>
                 <div
-                  v-for="(submenu, index) of nav.subMenuOptions"
-                  :key="index"
+                  v-for="(submenu, index1) of nav.subMenuOptions"
+                  :key="index1"
                   class="submenu-list"
+                  @click="navToPage(submenu)"
                 >
                   <div class="submenu-logo" v-html="submenu.iconLeft"></div>
                   <div class="submenu-container">
@@ -96,7 +123,12 @@
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
+          <van-icon
+            size="20px"
+            color="rgba(0,0,0,0.8)"
+            :finished="true"
+            :name="item.icon"
+          />
         </van-cell>
       </van-list>
     </van-popup>
@@ -107,7 +139,7 @@ import { mapState } from 'vuex';
 import { Color } from '../../config/color';
 export default {
   props: {},
-  data () {
+  data() {
     return {
       Color,
       isOpen: false,
@@ -166,42 +198,42 @@ export default {
                 type: 'link',
                 text: '热门课程',
                 subText: '各种丰富的绘画课程，还能为你定制。艺术，与生俱来。',
-                path: '/about',
+                path: 'about',
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
                 type: 'link',
                 text: '画室环境',
                 subText: '好的艺术陶冶，需要好的环境支撑，我们一致在这里等你。',
-                path: './locations',
+                path: 'locations',
                 iconLeft: '<span class="icon iconfont">&#xe66c;</span>'
               },
               {
                 type: 'link',
                 text: '画室动态',
                 subText: '看看品贤画室最近都发生了什么？',
-                path: './blog',
+                path: 'blog',
                 iconLeft: '<span class="icon iconfont">&#xe6d9;</span>'
               },
               {
                 type: 'link',
                 text: '学生作品',
                 subText: '看看曾经如你一般的小白最近画得怎么样了?',
-                path: './blog',
+                path: 'blog',
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
                 type: 'link',
                 text: '为什么选择我们',
                 subText: '为什么选择我们，看看我们的优势所在吧',
-                path: './blog',
+                path: 'blog',
                 iconLeft: '<span class="icon iconfont">&#xe65b;</span>'
               },
               {
                 type: 'link',
                 text: '在线报名',
                 subText: '为兴趣，就现在。',
-                path: './blog',
+                path: 'blog',
                 iconLeft: '<span class="icon iconfont">&#xe616;</span>'
               }
             ]
@@ -209,26 +241,30 @@ export default {
           {
             type: 'link',
             text: '热门课程',
-            path: './course',
-            icon: '&#xe60d;'
+            path: 'course',
+            icon: '&#xe60d;',
+            subMenuOptions: []
           },
           {
             type: 'link',
             text: '学生作品',
-            path: './pricing',
-            icon: '&#xe618;'
+            path: 'pricing',
+            icon: '&#xe618;',
+            subMenuOptions: []
           },
           {
             type: 'link',
             text: '关于我们',
-            path: './pricing',
-            icon: '&#xe672;'
+            path: 'pricing',
+            icon: '&#xe672;',
+            subMenuOptions: []
           },
           {
             type: 'link',
             text: '联系我们',
-            path: './contact',
-            icon: '&#xe616;'
+            path: 'contact',
+            icon: '&#xe616;',
+            subMenuOptions: []
           }
         ]
       }
@@ -237,14 +273,17 @@ export default {
   computed: {
     ...mapState(['isPhone']) // 加载设备类型
   },
-  created () {
+  created() {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
         : 'rgba(0,0,0,0.4)';
     }
   },
-  mounted () { },
+  mounted() {
+    // ScrollReveal().reveal('.pc-nav');
+    console.log(this);
+  },
 
   methods: {
     /**
@@ -252,24 +291,25 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage (item) {
+    navToPage(item) {
+      console.log(item);
       this.$router.push({ path: item.path });
       this.isOpen = false;
     },
-    onLoad () {
+    onLoad() {
       // 异步更新数据
       // 加载状态结束
       this.loading = true;
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft () {
+    onClickLeft() {
       this.$toast('返回');
     },
-    onClickRight () {
+    onClickRight() {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor () {
+    changeHeartColor() {
       if (this.heartColor === 'red') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
@@ -278,10 +318,10 @@ export default {
         this.heartColor = '#cf2729';
       }
     },
-    hideSticky () {
+    hideSticky() {
       this.$emit('menu-open');
     },
-    showSticky () {
+    showSticky() {
       this.$emit('menu-close');
     }
   }
@@ -380,6 +420,9 @@ export default {
   margin-right: 18px;
   position: relative;
 }
+.nav-item span {
+  line-height: 17px;
+}
 .arrow {
   transition: all 0.5s;
 }
@@ -391,8 +434,8 @@ export default {
   transform: rotate(180deg);
 }
 .nav-item:hover .submenu {
-  opacity: 0.985;
-  width: 342px;
+  opacity: 0.965;
+  width: 336px;
   overflow: visible;
 }
 .nav-item .iconfont {
@@ -400,20 +443,20 @@ export default {
   margin-left: 5px;
 }
 .submenu {
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: transparent;
   position: absolute;
-  top: 35px;
+  top: 25px;
   left: -165px;
   transition: opacity 0.5s;
   opacity: 0;
-  width: 0;
+  padding-top: 10px;
   overflow: hidden;
+  width: 0;
 }
 .submenu-arrow {
-  left: 50%;
+  left: 55%;
+  top: 7px;
   transform: translateX(-50%) rotate(45deg);
-  top: -4px;
   border-top-color: #fff;
   border-right-color: transparent;
   border-bottom-color: transparent;
@@ -429,10 +472,14 @@ export default {
   z-index: 3;
 }
 .submenu-list {
+  color: @color-grey-1;
   .flex;
   flex-flow: row nowrap;
   align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid @color-black-3;
+  background: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
 }
 .submenu-list:hover {
   color: @color-brand;
@@ -445,7 +492,7 @@ export default {
   font-size: 16px;
 }
 .submenu-content {
-  padding: 10px 20px 20px 10px;
+  padding: 5px 20px 20px 10px;
   width: 300px;
 }
 @media screen and(max-width: 720px) {

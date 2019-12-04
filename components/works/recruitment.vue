@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-v-html */
 <template>
   <div id="recruitment">
     <div class="recruitment">
@@ -5,15 +6,15 @@
         <v-title :init-title="initTtile"></v-title>
       </div>
       <div class="recruitment-content">
-        <div
-          v-for="(item, index) of recruitments"
-          :key="index"
-          class="word"
-          :style="{ background: item.color }"
-        >
+        <div v-for="(item, index) of recruitments" :key="index" class="word">
           <div class="img">
-            <img :src="item.icon" alt width="100%" class="pc_icon" />
-            <img :src="item.phone_icon" alt heihgt="100%" class="phone_icon" />
+            <img :src="item.imgUrl" alt width="100%" class="pc_imgUrl" />
+            <img
+              :src="item.phone_imgUrl"
+              alt
+              heihgt="100%"
+              class="phone_imgUrl"
+            />
           </div>
           <div class="cont">
             <div class="cont-title" v-html="item.title"></div>
@@ -21,7 +22,7 @@
               <span class="tag">课程性质：</span>
               <tag :infos="item.infos" />
             </div>
-            <div class="cont-intr" v-html="item.introduc"></div>
+            <div class="cont-intr" v-html="item.intrduce"></div>
             <div class="cont-rate">
               <span class="rate">学生评分：</span>
               <van-rate
@@ -43,6 +44,18 @@
           </div>
         </div>
       </div>
+      <div class="phone-content">
+        <div
+          v-for="(item, index) of recruitments"
+          :key="index"
+          class="phone-word"
+          :style="{ 'background-color': item.color }"
+        >
+          <div class="icon iconfont" v-html="item.icon"></div>
+          <div class="phone-title">{{ item.title }}</div>
+          <span class="line"></span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -55,7 +68,7 @@ export default {
     vTitle,
     tag
   },
-  data () {
+  data() {
     return {
       initTtile: {
         cnTitle: '热门课程',
@@ -67,36 +80,39 @@ export default {
       recruitments: [
         {
           index: 1,
-          icon: require('../../assets/images/index/国画.jpg'),
-          phone_icon: require('../../assets/images/index/国画_phone.jpg'),
+          icon: '&#xe672;',
+          imgUrl: require('../../assets/images/index/国画.jpg'),
+          phone_imgUrl: require('../../assets/images/index/国画_phone.jpg'),
           title: '油画艺术班',
-          introduc:
+          intrduce:
             '油画定制课专属于你的艺术油画定制课专属于你的艺术短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
-          color: '#fff',
+          color: 'rgb(250,76,51)',
           number: 599,
           rate: 3,
           infos: ['有趣', '有技术含量', '从零开始']
         },
         {
           index: 2,
-          icon: require('../../assets/images/index/留学生.jpg'),
-          phone_icon: require('../../assets/images/index/留学生_phone.jpg'),
+          icon: '&#xe60c;',
+          imgUrl: require('../../assets/images/index/留学生.jpg'),
+          phone_imgUrl: require('../../assets/images/index/留学生_phone.jpg'),
           title: '留学班',
-          introduc:
+          intrduce:
             '体验课进行时素描、水彩任你选体验课进行时素描、水彩任你选短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
-          color: '#fff',
+          color: '#FFB900',
           number: 599,
           rate: 3.5,
           infos: ['有趣', '有技术含量', '从零开始']
         },
         {
           index: 3,
-          icon: require('../../assets/images/index/艺术生.jpg'),
-          phone_icon: require('../../assets/images/index/艺术生_phone.jpg'),
+          icon: '&#xe624;',
+          imgUrl: require('../../assets/images/index/艺术生.jpg'),
+          phone_imgUrl: require('../../assets/images/index/艺术生_phone.jpg'),
           title: '绘画兴趣班',
-          introduc:
+          intrduce:
             '短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
-          color: '#fff',
+          color: 'rgb(0,172,236)',
           number: 599,
           rate: 5,
           infos: ['有趣', '有技术含量', '从零开始']
@@ -113,8 +129,9 @@ export default {
 #recruitment {
   width: 100%;
   background: #fff;
-  padding-top: 30px;
   padding-bottom: 30px;
+  padding: 15px;
+  padding-top: 30px;
 }
 .recruitment {
   display: flex;
@@ -129,6 +146,9 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   margin-top: 30px;
+}
+.phone-content {
+  display: none;
 }
 .img {
   border-radius: 5px 5px 0px 0px;
@@ -202,10 +222,10 @@ export default {
 .tag-info {
   margin-top: 8px;
 }
-.phone_icon {
+.phone_imgUrl {
   display: none;
 }
-.pc_icon {
+.pc_imgUrl {
   display: block;
 }
 @media screen and (max-width: 1000px) {
@@ -215,10 +235,10 @@ export default {
   }
 }
 @media screen and (max-width: 900px) {
-  .phone_icon {
+  .phone_imgUrl {
     display: block;
   }
-  .pc_icon {
+  .pc_imgUrl {
     display: none;
   }
   .recruitment-content {
@@ -235,36 +255,61 @@ export default {
     max-height: 100%;
   }
 }
-@media screen and (max-width: 550px) {
-  .phone_icon {
+@media screen and (max-width: 720px) {
+  .recruitment-content {
     display: none;
   }
-  .pc_icon {
-    display: block;
-  }
-  #recruitment {
-    width: 100%;
-    padding: 30px 10px 0px;
-  }
-  .word {
-    width: 93%;
-    margin: 15px 0px;
-    flex-direction: column;
-  }
-  .cont-number {
-    width: 100%;
+  .phone-content {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
   }
-  .cont-number > span {
-    line-height: 3em;
-    flex: 1;
-    text-align: center;
+  .phone-word {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    padding-bottom: 15px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px rgba(169, 169, 169);
   }
-  .button {
-    align-self: flex-end;
-    margin: 0px 30px 5px 0px;
+  .phone-word:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(169, 169, 169);
+  }
+  .phone-word:nth-child(2) {
+    margin: 0px 15px;
+  }
+  .phone-content > .iconfont {
+    font-size: 40px;
+  }
+  .iconfont {
+    margin-top: 10px;
+    font-size: 45px;
+  }
+  .phone-title {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  .phone-button {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #e00;
+    padding: 4px 6px;
+    border: 1px solid #e00;
+  }
+  .line {
+    display: block;
+    width: 25px;
+    border: 1px solid #666;
+    background-color: #666;
+    box-shadow: 1px 1px 0.5px #666;
+    border-radius: 5px;
+    margin-top: 10px;
   }
 }
 </style>

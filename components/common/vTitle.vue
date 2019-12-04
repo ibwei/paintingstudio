@@ -22,12 +22,12 @@ export default {
   props: {
     initTitle: {
       type: Object,
-      default: function () {
+      default () {
         return {
-          mode: 'black', //两种颜色  [red | black ]
-          cnTitle: '品贤画室', //标题
-          enTitle: 'PinXian Painting Studio', //英文标题
-          icon: '&#xe672;' //iconfont
+          mode: 'black', // 两种颜色  [red | black ]
+          cnTitle: '品贤画室', // 标题
+          enTitle: 'PinXian Painting Studio', // 英文标题
+          icon: '&#xe672;' // iconfont
         };
       }
     }
@@ -52,6 +52,12 @@ export default {
 
 <style scoped lang="less">
 @import url('../../assets/css/color');
+.title-wrap{
+  width: 100%;
+  max-width: 1200px;
+  margin:0 auto;
+  box-sizing: border-box;
+}
 .iconfont {
   position: relative;
   right: 0px;
