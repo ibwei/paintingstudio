@@ -22,7 +22,7 @@ export default {
   props: {
     initTitle: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           mode: 'black', //两种颜色  [red | black ]
           cnTitle: '品贤画室', //标题
@@ -32,13 +32,13 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       dividerClass: 'divider',
       mainClass: 'main-title'
     };
   },
-  created() {
+  created () {
     if (this.initTitle.mode === 'red') {
       this.dividerClass = 'divider';
       this.mainClass = 'main-title';
@@ -120,7 +120,7 @@ export default {
     width: auto;
     text-align: center;
     .cn-title {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: bold;
     }
     .en-title {

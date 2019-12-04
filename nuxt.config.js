@@ -58,6 +58,10 @@ module.exports = {
     {
         src: '~plugins/antd'
     },
+    {
+        src: '~plugins/vue-amap.js',
+        ssr: false
+    },
         '~/plugins/axios'
     ],
     /*

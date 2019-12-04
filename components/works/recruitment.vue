@@ -55,12 +55,12 @@ export default {
     vTitle,
     tag
   },
-  data() {
+  data () {
     return {
       initTtile: {
-        cnTitle: '招生简章',
-        enTitle: 'Student Recruitment Brochure',
-        mode: 'black',
+        cnTitle: '热门课程',
+        enTitle: 'Hot Course Availabel',
+        mode: 'red',
         icon: '&#xe6d9;'
       },
 
@@ -112,7 +112,7 @@ export default {
 
 #recruitment {
   width: 100%;
-  background: #f8f8f9;
+  background: #fff;
   padding-top: 30px;
   padding-bottom: 30px;
 }
