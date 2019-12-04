@@ -6,12 +6,7 @@
         <v-title :init-title="initTtile"></v-title>
       </div>
       <div class="recruitment-content">
-        <div
-          v-for="(item, index) of recruitments"
-          :key="index"
-          class="word"
-          :style="{ background: item.color }"
-        >
+        <div v-for="(item, index) of recruitments" :key="index" class="word">
           <div class="img">
             <img :src="item.imgUrl" alt width="100%" class="pc_imgUrl" />
             <img
@@ -311,6 +306,7 @@ export default {
     display: block;
     width: 25px;
     border: 1px solid #666;
+    background-color: #666;
     box-shadow: 1px 1px 0.5px #666;
     border-radius: 5px;
     margin-top: 10px;
