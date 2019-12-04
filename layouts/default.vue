@@ -1,7 +1,7 @@
 <template>
-  <div class="app" ref="app">
+  <div ref="app" class="app">
     <div>
-      <top-menu v-on:menu-open="hideSticky" v-on:menu-close="showSticky"></top-menu>
+      <top-menu @menu-open="hideSticky" @menu-close="showSticky"></top-menu>
     </div>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
@@ -24,11 +24,14 @@
     </div>
     <!-- 右侧悬浮快捷入口 -->
     <div v-if="stickyShow">
-      <sticky v-on:wechat-click="showQRCode"></sticky>
+      <sticky @wechat-click="showQRCode"></sticky>
     </div>
     <van-popup v-model="wechatQRCodeshow">
       <img src="../assets/images/weixin.png" class="qr-code" width="150" height="150" alt />
     </van-popup>
+
+    <!-- 回到顶部 -->
+    <scroll-top />
   </div>
 </template>
 
@@ -37,12 +40,15 @@ import { Color } from '../config/color'
 import topMenu from '../components/common/topMenu';
 import bottomFooter from '../components/common/bottomFooter';
 import sticky from '../components/common/sticky';
+import scrollTop from '../components/common/scrollTop';
+
 export default {
   name: 'Default',
   components: {
     topMenu,
     bottomFooter,
-    sticky
+    sticky,
+    scrollTop
   },
   data () {
     return {
@@ -91,7 +97,6 @@ export default {
         return;
       }
       this.wechatQRCodeshow = !this.wechatQRCodeshow;
-
     }
   }
 

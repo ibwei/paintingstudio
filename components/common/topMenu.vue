@@ -12,12 +12,22 @@
       >
         <div slot="left" class="left">
           <div class="logo">
-            <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
+            <img
+              src="../../assets/images/logo/logo.jpg"
+              width="100%"
+              height="100%"
+              alt
+            />
           </div>
         </div>
         <div slot="title" class="title">
           <div>
-            <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
+            <van-icon
+              size="30px"
+              :color="heartColor"
+              name="like"
+              @click="changeHeartColor"
+            />
           </div>
         </div>
         <div slot="right" class="right">
@@ -39,26 +49,40 @@
         </div>
       </van-nav-bar>
     </div>
-    <div class="pc-nav">
+    <div v-scroll-reveal.reset class="pc-nav">
       <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
           <img :src="navbarOptions.menuLeftLogo" class="menuLogo" />
           <nav class="pc-navs">
             <!-- 菜单 -->
-            <div v-for="(nav, index) of navbarOptions.menuOptions" :key="index" class="nav-item">
+            <div
+              v-for="(nav, index) of navbarOptions.menuOptions"
+              :key="index"
+              class="nav-item"
+            >
               <span @click="navToPage(nav)">{{ nav.text }}</span>
-              <span @click="navToPage(nav)"
-                :class="{icon: true, iconfont: true, arrow:nav.icon=='&#xe60e;'}"
+              <span
+                :class="{
+                  icon: true,
+                  iconfont: true,
+                  arrow: nav.icon == '&#xe60e;'
+                }"
+                @click="navToPage(nav)"
                 v-html="nav.icon"
               ></span>
               <!-- 子菜单 -->
-              <div class="submenu" v-if="nav.subMenuOptions!== null && nav.subMenuOptions.length > 0">
+              <div
+                v-if="
+                  nav.subMenuOptions !== null && nav.subMenuOptions.length > 0
+                "
+                class="submenu"
+              >
                 <div class="submenu-arrow"></div>
                 <div
-                  v-for="(submenu, index) of nav.subMenuOptions"
-                  :key="index"
-                  @click="navToPage(submenu)"
+                  v-for="(submenu, index1) of nav.subMenuOptions"
+                  :key="index1"
                   class="submenu-list"
+                  @click="navToPage(submenu)"
                 >
                   <div class="submenu-logo" v-html="submenu.iconLeft"></div>
                   <div class="submenu-container">
@@ -99,7 +123,12 @@
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
+          <van-icon
+            size="20px"
+            color="rgba(0,0,0,0.8)"
+            :finished="true"
+            :name="item.icon"
+          />
         </van-cell>
       </van-list>
     </van-popup>
@@ -110,7 +139,7 @@ import { mapState } from 'vuex';
 import { Color } from '../../config/color';
 export default {
   props: {},
-  data () {
+  data() {
     return {
       Color,
       isOpen: false,
@@ -214,32 +243,28 @@ export default {
             text: '热门课程',
             path: 'course',
             icon: '&#xe60d;',
-            subMenuOptions: [
-            ]
+            subMenuOptions: []
           },
           {
             type: 'link',
             text: '学生作品',
             path: 'pricing',
             icon: '&#xe618;',
-            subMenuOptions: [
-            ]
+            subMenuOptions: []
           },
           {
             type: 'link',
             text: '关于我们',
             path: 'pricing',
             icon: '&#xe672;',
-            subMenuOptions: [
-            ]
+            subMenuOptions: []
           },
           {
             type: 'link',
             text: '联系我们',
             path: 'contact',
             icon: '&#xe616;',
-            subMenuOptions: [
-            ]
+            subMenuOptions: []
           }
         ]
       }
@@ -248,14 +273,17 @@ export default {
   computed: {
     ...mapState(['isPhone']) // 加载设备类型
   },
-  created () {
+  created() {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
         : 'rgba(0,0,0,0.4)';
     }
   },
-  mounted () { },
+  mounted() {
+    // ScrollReveal().reveal('.pc-nav');
+    console.log(this);
+  },
 
   methods: {
     /**
@@ -263,25 +291,25 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage (item) {
-      console.log(item)
+    navToPage(item) {
+      console.log(item);
       this.$router.push({ path: item.path });
       this.isOpen = false;
     },
-    onLoad () {
+    onLoad() {
       // 异步更新数据
       // 加载状态结束
       this.loading = true;
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft () {
+    onClickLeft() {
       this.$toast('返回');
     },
-    onClickRight () {
+    onClickRight() {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor () {
+    changeHeartColor() {
       if (this.heartColor === 'red') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
@@ -290,10 +318,10 @@ export default {
         this.heartColor = '#cf2729';
       }
     },
-    hideSticky () {
+    hideSticky() {
       this.$emit('menu-open');
     },
-    showSticky () {
+    showSticky() {
       this.$emit('menu-close');
     }
   }
@@ -450,7 +478,7 @@ export default {
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid @color-black-3;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   overflow: hidden;
 }
 .submenu-list:hover {
