@@ -4,7 +4,12 @@
     <span class="notice">您当前位置：</span>
     <div class="address">
       <template v-for="(item,index) of breadListName">
-        <router-link :key="index" :to="breadListPath[index]">{{ item }}</router-link>
+        <template v-if="index < length-1">
+          <router-link :key="index" :to="breadListPath[index]">{{ item }}</router-link>
+        </template>
+        <template v-else>
+          <a :key="index">{{ item }}</a>
+        </template>
       </template>
     </div>
   </div>
@@ -15,6 +20,7 @@ export default {
   data () {
     return {
       // 配置方法 path: 组件名称   name: 中文名称
+      length: 0,
       breadListIm: [
         {
           path: 'news',
@@ -69,8 +75,7 @@ export default {
           this.breadListPath.push(str);
         }
       }
-      console.log(this.breadListName)
-      console.log(this.breadListPath)
+      this.length = this.breadListPath.length;
     }
   }
 };
@@ -109,8 +114,17 @@ a {
 .address a:last-child:after {
   content: '';
 }
-.address a .address a {
+.address a:last-child:hover {
+  cursor: text;
   color: #515a6e;
-  transition: color 0.3s ease-in-out;
+}
+.address a {
+  color: #515a6e;
+  display: inline-block;
+  transition: color 0.2s ease-in-out;
+  transition-property: color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
 }
 </style>
