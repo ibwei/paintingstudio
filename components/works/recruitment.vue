@@ -9,12 +9,7 @@
         <div v-for="(item, index) of recruitments" :key="index" class="word">
           <div class="img">
             <img :src="item.imgUrl" alt width="100%" class="pc_imgUrl" />
-            <img
-              :src="item.phone_imgUrl"
-              alt
-              heihgt="100%"
-              class="phone_imgUrl"
-            />
+            <img :src="item.phone_imgUrl" alt heihgt="100%" class="phone_imgUrl" />
           </div>
           <div class="cont">
             <div class="cont-title" v-html="item.title"></div>
@@ -28,6 +23,7 @@
               <van-rate
                 v-model="item.rate"
                 :size="18"
+                readonly
                 allow-half
                 color="#ee0a24"
                 void-color="#e00"
@@ -68,7 +64,7 @@ export default {
     vTitle,
     tag
   },
-  data() {
+  data () {
     return {
       initTtile: {
         cnTitle: '热门课程',

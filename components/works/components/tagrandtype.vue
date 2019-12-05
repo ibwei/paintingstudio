@@ -1,46 +1,26 @@
 <template>
   <div class="tag-info">
-    <template v-for="(item, index) of infos">
-      <template v-if="colors[index].plain">
-        <van-tag
-          :color="
-            colors[index].color
-              ? colors[index].color
-              : colors[index - length + 1].color
-          "
-          :key="index"
-          plain
-        >
-          {{ item }}
-        </van-tag>
+    <template v-for="(item, index) of taglist">
+      <template v-if="item.plain">
+        <van-tag :key="index" :color="item.color" plain class="tag">{{ item.info }}</van-tag>
       </template>
       <template v-else>
-        <van-tag
-          :color="
-            colors[index].color
-              ? colors[index].color
-              : colors[index - length + 1].color
-          "
-          :key="index"
-          plain
-        >
-          {{ item }}
-        </van-tag>
+        <van-tag :key="index" :color="item.color" class="tag">{{ item.info }}</van-tag>
       </template>
     </template>
   </div>
 </template>
 <script>
 export default {
-  // eslint-disable-next-line vue/require-prop-types
   props: {
     infos: {
       type: Array,
       default: () => []
     }
   },
-  data() {
+  data () {
     return {
+      taglist: [{}],
       length: 8,
       colors: [
         { color: '#f2826a', plain: false },
@@ -53,6 +33,19 @@ export default {
         { color: '#1989FA', plain: true }
       ]
     };
+  },
+  mounted () {
+    let i;
+    let item
+    for (item of this.infos) {
+      i = Math.floor(Math.random() * this.length);
+      let obj = {};
+      obj.plain = this.colors[i].plain;
+      obj.color = this.colors[i].color;
+      obj.info = item;
+      this.taglist.push(obj)
+    }
+    this.taglist = JSON.parse(JSON.stringify(this.taglist));
   }
 };
 </script>

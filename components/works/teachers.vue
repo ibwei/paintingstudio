@@ -41,11 +41,9 @@
 
 <script>
 import vTitle from '../common/vTitle';
-import tag from './components/tagrandtype.vue';
 export default {
   components: {
-    vTitle,
-    tag
+    vTitle
   },
   data () {
     return {

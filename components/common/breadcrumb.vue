@@ -80,7 +80,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="less" scoped>
 .bread {
   margin: 0px auto;
   display: flex;
