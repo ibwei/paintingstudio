@@ -52,10 +52,10 @@ export default {
 
 <style scoped lang="less">
 @import url('../../assets/css/color');
-.title-wrap{
+.title-wrap {
   width: 100%;
   max-width: 1200px;
-  margin:0 auto;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 .iconfont {

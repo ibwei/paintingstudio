@@ -18,7 +18,7 @@
       >
         <van-tabbar-item icon="wap-home-o">品贤画室</van-tabbar-item>
         <van-tabbar-item icon="hot-o">课程介绍</van-tabbar-item>
-        <van-tabbar-item icon="photo-o">作品</van-tabbar-item>
+        <van-tabbar-item icon="photo-o">关于我们</van-tabbar-item>
         <van-tabbar-item icon="comment-circle-o">联系我们</van-tabbar-item>
       </van-tabbar>
     </div>
@@ -68,10 +68,10 @@ export default {
           this.$router.push({ path: '/' });
           break;
         case 1:
-          this.$router.push({ path: 'recuitment' });
+          this.$router.push({ path: 'course' });
           break;
         case 2:
-          this.$router.push({ path: 'works' });
+          this.$router.push({ path: 'about' });
           break;
         case 3:
           this.$router.push({ path: 'contact' });
