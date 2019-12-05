@@ -20,8 +20,7 @@ export default {
   },
   data () {
     return {
-      taglist: [{}],
-      length: 8,
+      taglist: [],
       colors: [
         { color: '#f2826a', plain: false },
         { color: '#f2826a', plain: true },
@@ -34,18 +33,16 @@ export default {
       ]
     };
   },
-  mounted () {
-    let i;
-    let item
-    for (item of this.infos) {
-      i = Math.floor(Math.random() * this.length);
-      let obj = {};
-      obj.plain = this.colors[i].plain;
-      obj.color = this.colors[i].color;
-      obj.info = item;
-      this.taglist.push(obj)
-    }
-    this.taglist = JSON.parse(JSON.stringify(this.taglist));
+  created () {
+    const colorsLength = this.colors.length;
+    const infosLength = this.infos.length;
+    this.$nextTick(() => {
+      for (let i = 0; i < infosLength; i++) {
+        let random = Math.floor(Math.random() * colorsLength);
+        const temp = { info: this.infos[i], ...this.colors[random] };
+        this.taglist.push(temp);
+      }
+    })
   }
 };
 </script>

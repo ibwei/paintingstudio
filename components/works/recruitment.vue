@@ -77,7 +77,7 @@ export default {
         cnTitle: '热门课程',
         enTitle: 'Hot Course Availabel',
         mode: 'red',
-        icon: '&#xe6d9;'
+        icon: '&#xe680;'
       },
 
       recruitments: [
@@ -301,7 +301,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     width: 32%;
-    padding: 10px 0px 20px 0px;
+    padding: 10px 0px 35px 0px;
     line-height: 1.2;
     margin: 0;
     border-radius: 1px;
