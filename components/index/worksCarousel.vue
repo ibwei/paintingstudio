@@ -16,7 +16,12 @@
       <div class="student-works-phone">
         <van-swipe :autoplay="5000" @change="onChange">
           <van-swipe-item v-for="(item, index) of worksImg" :key="index">
-            <van-image :src="item.imgUrl" class="carouselImg" @load="onLoad()">
+            <van-image
+              :src="item.imgUrl"
+              class="carouselImg"
+              @load="onLoad()"
+              @click="showPreview(index)"
+            >
               <template v-slot:loading>
                 <van-loading type="spinner" size="20" />
               </template>
@@ -28,10 +33,22 @@
         </van-swipe>
       </div>
     </div>
+    <div class="preview-area">
+      <van-image-preview
+        v-model="show"
+        :show-indicators="true"
+        :images="imgUrls"
+        @change="onChange"
+      >
+        <template v-slot:index>第{{ currentIndex }}张</template>
+      </van-image-preview>
+    </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 import vTitle from '../../components/common/vTitle';
+import { isPhone } from '../../utils';
 export default {
   components: {
     vTitle
@@ -45,6 +62,7 @@ export default {
         mode: 'black',
         icon: '&#xe618;'
       },
+      show: false,
       /** 当前图片索引 */
       currentIndex: 1,
       /** 学生作品图片-图片比例需统一，16:9效果较佳 */
@@ -73,9 +91,19 @@ export default {
     };
   },
   computed: {
+    ...mapState(['isPhone']),
     /** 图片数量 */
     imgLength() {
+      console.log('this.worksImg.length :', this.worksImg.length);
       return this.worksImg.length;
+    },
+    /** 图片地址数组 */
+    imgUrls() {
+      const arr = [];
+      this.worksImg.forEach((item) => {
+        arr.push(item.imgUrl);
+      });
+      return arr;
     }
   },
   methods: {
@@ -87,6 +115,15 @@ export default {
     },
     onLoad() {
       this.showImages = true;
+    },
+    /* 打开图片预览 */
+    showPreview(index) {
+      if (!this.isPhone) {
+        window.open(this.imgUrls[index]);
+        return;
+      }
+      this.currentIndex = index + 1;
+      this.show = true;
     }
   }
 };
