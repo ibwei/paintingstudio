@@ -1,7 +1,7 @@
 <template>
   <div class="contact">
     <!-- 头部图片信息 -->
-    <div class="contact-img">
+    <div class="contact-img" v-scroll-reveal.scaleUp="{scale:0.15}">
       <van-image width="100%" :src="bgUrl" />
       <div class="bg-title">
         <h1>您好，很高兴为您服务</h1>
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="online">
+    <div class="online" v-scroll-reveal.smooth="{easing:'ease-in'}">
       <v-title :init-title='initTtile'></v-title>
       <!-- 表单内容 -->
       <van-cell-group class="form">
@@ -44,8 +44,9 @@
         >提交信息</van-button
       >
     </div>
+    <v-title :init-title='initMap' v-scroll-reveal.smooth="{easing:'ease-in'}"></v-title>
     <!-- 插入地图 -->
-    <gMap />
+    <g-map></g-map>
   </div>
 </template>
 
@@ -69,10 +70,17 @@ export default {
       // 意见反馈
       initTtile: {
         cnTitle: '在线意见反馈',
-        enTitle: 'Online feedback',
+        enTitle: 'Feedback Online ',
         mode: 'black',
         icon: '&#xe66f;'
       },
+      //地图标题
+      initMap:{
+        cnTitle: '联系地址',
+        enTitle: 'Contact Address',
+        mode: 'black',
+        icon: '&#xe600;'
+      }
     };
   },
   methods: {
