@@ -9,7 +9,7 @@
         class="amap-demo"
         :center="center"
       >
-        <el-amap-marker ></el-amap-marker>
+        <el-amap-marker :label='label'></el-amap-marker>
       </el-amap>
     </div>
   </div>
@@ -21,7 +21,10 @@ export default {
     const self = this;
     return {
       zoom: 14, //缩放比例
-
+      label:{
+        content:'品贤画室',
+        offset: [20,2]
+      },
       center: [105.927043, 29.369582],
       lng: 0,
       lat: 0,
@@ -62,8 +65,12 @@ export default {
 };
 </script>
 
-<style>
-.amap-demo {
+<style lang='less' scope>
+.amap-page-container{
+  margin-top: 20px;
+  .amap-demo {
   height: 300px;
 }
+}
+
 </style>
