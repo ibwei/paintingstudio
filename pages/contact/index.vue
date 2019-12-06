@@ -2,7 +2,7 @@
   <div class="contact">
     <!-- 头部图片信息 -->
     <div class="contact-img" v-scroll-reveal.scaleUp="{scale:0.15}">
-      <van-image width="100%" :src="bgUrl" />
+      <van-image class="bgImg" width="100%" :src="bgUrl" />
       <div class="bg-title">
         <h1>您好，很高兴为您服务</h1>
         <h2>
@@ -100,6 +100,7 @@ export default {
   .contact-img {
     position: relative;
     .bg-title {
+        padding: 20px;
       position: absolute;
       display: flex;
       top: 0;
@@ -153,6 +154,32 @@ export default {
       flex-flow: column wrap;
       justify-content: center;
       align-items: center;
+    }
+  }
+}
+@media screen and (min-width: 720px) {
+  .contact{
+    width: 100%;
+    .contact-img{
+      .bg-title{
+        padding: 20px;
+        h1{
+          font-size: 3vw;
+        }
+        h2{
+          font-size: 2vw;
+        }
+      }
+    }
+    .online{
+      .form{
+  max-width: 450px;
+      margin: 0 auto;
+      }
+      .submit{
+        max-width: 450px;
+      }
+    
     }
   }
 }

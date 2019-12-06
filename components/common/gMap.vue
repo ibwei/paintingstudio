@@ -43,21 +43,22 @@ export default {
           zoomToAccuracy: true, //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：f
           extensions: 'all',
           pName: 'Geolocation',
-          events: {
-            init(o) {
-              // o 是高德地图定位插件实例
-              o.getCurrentPosition((status, result) => {
-                console.log(result);
-                if (result && result.position) {
-                  self.lng = result.position.lng;
-                  self.lat = result.position.lat;
-                  self.center = [self.lng, self.lat];
-                  self.loaded = true;
-                  self.$nextTick();
-                }
-              });
-            }
-          }
+          //自动定位
+          // events: {
+          //   init(o) {
+          //     // o 是高德地图定位插件实例
+          //     o.getCurrentPosition((status, result) => {
+          //       console.log(result);
+          //       if (result && result.position) {
+          //         self.lng = result.position.lng;
+          //         self.lat = result.position.lat;
+          //         self.center = [self.lng, self.lat];
+          //         self.loaded = true;
+          //         self.$nextTick();
+          //       }
+          //     });
+          //   }
+          // }
         }
       ]
     };
@@ -71,6 +72,15 @@ export default {
   .amap-demo {
   height: 300px;
 }
+}
+@media screen and (min-width: 720px) {
+  .amap-page-container{
+    .amap-demo{
+      max-height: 450px;
+      max-width: 60%;
+      margin:0 auto;
+    }
+  }
 }
 
 </style>
