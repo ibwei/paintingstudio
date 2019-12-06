@@ -5,7 +5,7 @@
     </div>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
-    <div>
+    <div v-if="!currentPath.startsWith('/course')">
       <bottom-footer></bottom-footer>
     </div>
     <!-- 底部标题栏 -->
@@ -52,6 +52,7 @@ export default {
   },
   data () {
     return {
+      currentPath: '/',
       stickyShow: true,
       menuIndex: 0,
       Color,
@@ -59,6 +60,10 @@ export default {
     };
   },
   watch: {
+    // 监听路由,某些页面不需要显示footer
+    $route (to, from) {
+      this.currentPath = this.$route.path;
+    },
     menuIndex (newV, oldV) {
       if (newV === oldV) {
         return;
