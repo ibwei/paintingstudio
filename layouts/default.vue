@@ -87,7 +87,7 @@ export default {
     }
   },
   created () {
-
+    this.currentPath = this.$route.path;
   },
   methods: {
     hideSticky () {

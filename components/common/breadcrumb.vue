@@ -68,7 +68,6 @@ export default {
           return value.path === item;
         });
         if (i === 'undefined') {
-          console.log('路由配置出错，请您仔细查看');
         } else {
           str += '/' + this.breadListIm[i].path;
           this.breadListName.push(this.breadListIm[i].name);

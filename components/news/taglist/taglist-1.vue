@@ -5,9 +5,7 @@
       :key="index"
       :color="item.color"
       :plain="item.plain"
-    >
-{{ item.info }}
-</van-tag>
+    >{{ item.info }}</van-tag>
   </div>
 </template>
 
@@ -59,7 +57,6 @@ export default {
     init () {
       const oDiv = document.getElementById('tag-list');
       const aA = oDiv.getElementsByTagName('span');
-      console.log(aA[5]);
       const length = aA.length;
       let i;
       for (i = 0; i < length; i++) {

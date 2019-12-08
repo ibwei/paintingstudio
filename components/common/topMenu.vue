@@ -258,7 +258,6 @@ export default {
   },
   mounted () {
     // ScrollReveal().reveal('.pc-nav');
-    console.log(this);
   },
 
   methods: {

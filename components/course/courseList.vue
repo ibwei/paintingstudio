@@ -11,7 +11,7 @@
             <div class="course-name">{{ course.courseName }}</div>
             <div class="course-time">
               <van-icon name="clock-o" size="14px" />
-              <span>有效期:{{ course.validTIME }}</span>
+              <span>有效期:{{ course.validTime }}</span>
             </div>
             <div class="course-teacher">
               <van-icon name="balance-pay" size="14px" />
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="bottom">
-          <div class="b-left">
+          <div class="b-left" v-if="listType==='basic'">
             <van-tag
               v-for="(tag,tagIndex) of course.tagList"
               :key="tagIndex"
@@ -28,11 +28,12 @@
               style="margin-left:2px"
               :type="getRandomColor()"
               round
-            >
-              {{ tag }}
-            </van-tag>
+            >{{ tag }}</van-tag>
           </div>
-          <div class="b-right">去预约</div>
+          <div class="b-left" v-if="listType==='memo'">PS:{{course.memo}}</div>
+          <div class="b-right">
+            <a href="tel:18883923917">预约</a>
+          </div>
         </div>
       </div>
     </div>
@@ -42,9 +43,13 @@
 <script>
 export default {
   props: {
+    listType: {
+      type: String,
+      default: 'basic'
+    },
     categoryList: {
       type: Array,
-      default() {
+      default () {
         return null;
       }
     }
@@ -128,16 +133,27 @@ export default {
   padding-top: 5px;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   font-size: 10px;
   margin: 10px 0px 0px 0px;
+}
+.b-left {
+  text-align: justify;
+  flex: 1;
+  line-height: 2;
 }
 .b-right {
   box-sizing: border-box;
   background: @color-brand;
   color: #fff;
+  width: 50px;
   padding: 2px 5px;
   border-radius: 2px;
+  margin-left: 5px;
+  text-align: center;
+  a {
+    color: #fff;
+  }
 }
 </style>
