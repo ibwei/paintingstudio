@@ -217,28 +217,28 @@ export default {
           {
             type: 'link',
             text: '热门课程',
-            path: 'course',
+            path: '/course',
             icon: '&#xe60d;',
             subMenuOptions: []
           },
           {
             type: 'link',
             text: '画室动态',
-            path: 'news',
+            path: '/news',
             icon: '&#xe60d;',
             subMenuOptions: []
           },
           {
             type: 'link',
             text: '关于我们',
-            path: 'pricing',
+            path: '/about',
             icon: '&#xe672;',
             subMenuOptions: []
           },
           {
             type: 'link',
             text: '联系我们',
-            path: 'contact',
+            path: '/contact',
             icon: '&#xe616;',
             subMenuOptions: []
           }
