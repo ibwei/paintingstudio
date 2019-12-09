@@ -51,7 +51,7 @@ export default {
             validTime: '两个月',
             tuition: '3500元/期',
             tagList: ['素描', '动漫', '手绘']
-          }],
+          }]
         }, {
           categoryName: '综合班',
           courseList: [{

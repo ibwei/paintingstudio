@@ -13,8 +13,6 @@ export default {
     paintEnvironment,
     teacher
   },
-  data () {
-  },
   methods: {}
 };
 </script>
