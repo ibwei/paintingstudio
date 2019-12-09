@@ -11,7 +11,7 @@
     <!-- 底部标题栏 -->
     <div class="tabbar-menu">
       <van-tabbar
-        v-model="menuIndex"
+        v-model="currentMenuIndex"
         :z-index="9999"
         :active-color="Color.colorbrand"
         inactive-color="#000"
@@ -29,7 +29,6 @@
     <van-popup v-model="wechatQRCodeshow">
       <img src="../assets/images/weixin.png" class="qr-code" width="150" height="150" alt />
     </van-popup>
-
     <!-- 回到顶部 -->
     <scroll-top />
   </div>
@@ -41,7 +40,7 @@ import topMenu from '../components/common/topMenu';
 import bottomFooter from '../components/common/bottomFooter';
 import sticky from '../components/common/sticky';
 import scrollTop from '../components/common/scrollTop';
-
+import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'Default',
   components: {
@@ -50,24 +49,20 @@ export default {
     sticky,
     scrollTop
   },
+  computed: {
+    ...mapState(['menuIndex']),
+  },
   data () {
     return {
+      currentMenuIndex: 0,
       currentPath: '/',
       stickyShow: true,
-      menuIndex: 0,
       Color,
       wechatQRCodeshow: false
     };
   },
   watch: {
-    // 监听路由,某些页面不需要显示footer
-    $route (to, from) {
-      console.log('to :', to);
-      console.log('from :', from);
-      this.currentPath = this.$route.path;
-      console.log('this.currentPath :', this.currentPath);
-    },
-    menuIndex (newV, oldV) {
+    currentMenuIndex (newV, oldV) {
       if (newV === oldV) {
         return;
       }
@@ -76,23 +71,28 @@ export default {
           this.$router.push({ path: '/' });
           break;
         case 1:
-          this.$router.push({ path: 'course' });
+          this.$router.push({ path: '/course' });
           break;
         case 2:
-          this.$router.push({ path: 'about' });
+          this.$router.push({ path: '/about' });
           break;
         case 3:
-          this.$router.push({ path: 'contact' });
+          this.$router.push({ path: '/contact' });
           break;
         default:
           this.$toast('操作异常')
       }
+    },
+    menuIndex (newV, oldV) {
+      console.log('hahah')
+      this.currentMenuIndex = newV;
     }
   },
   created () {
     this.currentPath = this.$route.path;
   },
   methods: {
+    ...mapMutations(['changeMenuIndex']),
     hideSticky () {
       this.stickyShow = false;
     },
