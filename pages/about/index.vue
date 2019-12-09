@@ -37,7 +37,14 @@ export default {
       Color
     };
   },
-  methods: {}
+  methods: {},
+  watch: {
+    /** 监听路由 */
+    $router(to, from) {
+      console.log('routerto :', to);
+      console.log('router from :', from);
+    },
+  }
 };
 </script>
 
