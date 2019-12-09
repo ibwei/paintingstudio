@@ -27,9 +27,13 @@
               </template>
             </van-image>
           </van-swipe-item>
-          <div v-show="showImages" slot="indicator" class="custom-indicator">
-            {{ currentIndex }}/ {{ imgLength }}
-          </div>
+          <div
+            v-show="showImages"
+            slot="indicator"
+            class="custom-indicator"
+          >
+{{ currentIndex }}/ {{ imgLength }}
+</div>
         </van-swipe>
       </div>
     </div>
@@ -48,12 +52,11 @@
 <script>
 import { mapState } from 'vuex';
 import vTitle from '../../components/common/vTitle';
-import { isPhone } from '../../utils';
 export default {
   components: {
     vTitle
   },
-  data() {
+  data () {
     return {
       // 学生作品标题
       initTtile: {
@@ -93,12 +96,11 @@ export default {
   computed: {
     ...mapState(['isPhone']),
     /** 图片数量 */
-    imgLength() {
-      console.log('this.worksImg.length :', this.worksImg.length);
+    imgLength () {
       return this.worksImg.length;
     },
     /** 图片地址数组 */
-    imgUrls() {
+    imgUrls () {
       const arr = [];
       this.worksImg.forEach((item) => {
         arr.push(item.imgUrl);
@@ -110,14 +112,14 @@ export default {
     /**
      * @method 滑动图片改变时
      */
-    onChange(index) {
+    onChange (index) {
       this.currentIndex = index + 1;
     },
-    onLoad() {
+    onLoad () {
       this.showImages = true;
     },
     /* 打开图片预览 */
-    showPreview(index) {
+    showPreview (index) {
       if (!this.isPhone) {
         window.open(this.imgUrls[index]);
         return;

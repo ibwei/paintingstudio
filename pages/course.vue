@@ -5,11 +5,10 @@
     </div>-->
     <div class="content">
       <div class="nav">
-        <van-sidebar v-model="activeKey">
+        <van-sidebar v-model="activeKey" style="height:calc(100vh - 100px);width:100%;">
           <van-sidebar-item
             v-for="(item,index) of sidebarList"
             :key="index"
-            style="width:100px;"
             :title="item.name"
             :to="item.url"
             :disabled="item.disabled?true:false"
@@ -24,34 +23,29 @@
 </template>
 
 <script>
-import vTitle from '../components/common/vTitle'
 export default {
   components: {
-    vTitle,
+
   },
   data () {
     return {
       activeKey: 0,
       sidebarList: [{
-        name: '推荐课程',
-        url: '/course',
-      }, {
         name: '绘画兴趣班',
-        url: '/course/interest',
+        url: '/course'
       }, {
         name: '国画书法班',
-        url: '/course/nation',
+        url: '/course/nation'
       }, {
         name: '艺考基础班',
-        url: '/course/art',
+        url: '/course/art'
       }, {
         name: '留学考研班',
-        url: '/course/abroad',
+        url: '/course/abroad'
       }, {
-        name: '私人订制',
-        url: '/course',
-        disabled: true,
-      },],
+        name: '上课时间',
+        url: '/course/time'
+      }],
       initTtile: {
         cnTitle: '热门课程',
         enTitle: 'Hot Course Available',
@@ -72,9 +66,14 @@ export default {
   min-height: calc(100vh - 250px);
 }
 .nav {
-  width: 100px;
+  height: auto;
+  width: 130px;
+  background: #fafafa;
+  min-height: calc(100vh - 50px);
 }
 .nav-list {
   width: 100%;
+  height: calc(100vh - 100px);
+  overflow: auto;
 }
 </style>
