@@ -1,31 +1,43 @@
 <template>
   <div class="app-container">
     <!-- 顶部通知栏 -->
-    <van-notice-bar
-      :color="Color.colorbrand"
-      :speed="50"
-      background="rgba(244,205,205,1)"
-      left-icon="volume-o"
-      :scrollable="true"
-    >
+    <div class="phone-notice">
+      <van-notice-bar
+        :color="Color.colorbrand"
+        :speed="50"
+        background="rgba(244,205,205,1)"
+        left-icon="volume-o"
+        :scrollable="true"
+      >
 品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
 </van-notice-bar>
+    </div>
+
     <!-- 轮播图 -->
-    <carousel />
-    <!-- 招生 -->
-    <recruitment />
+    <carousel v-scroll-reveal.scaleUp="{scale:0.15}" />
+
+    <!-- 招生详情 -->
+    <recruitment v-scroll-reveal.scaleUp="{scale:0.15}" />
+
     <!-- 介绍 -->
-    <paint-introduce />
-    画室动态
-    <paintAffaris />
-    学生作品
-    <worksCarousel />
-    <!-- 优势 -->
-    <advantage />
+    <paintIntroduce v-scroll-reveal.smooth="{easing:'ease-in'}" />
+
+    <!-- 动态 -->
+    <paintAffaris v-scroll-reveal.smooth="{easing:'ease-in'}" />
+    <!-- 画室环境 -->
+    <paintingEnvironment v-scroll-reveal.smooth="{easing:'ease-in'}" />
+
     <!-- 师资力量 -->
-    <teachers />
+    <teachers v-scroll-reveal.smooth="{easing:'ease-in'}" />
+
+    <!-- 学生作品 -->
+    <worksCarous v-scroll-reveal.smooth="{easing:'ease-in'}" />
+
+    <!-- 优势 -->
+    <advantage v-scroll-reveal.smooth="{easing:'ease-in'}" />
+
     <!-- 底部菜单栏 -->
-    <message-board />
+    <message-board v-scroll-reveal.smooth="{easing:'ease-in'}" />
   </div>
 </template>
 
@@ -34,12 +46,15 @@ import { mapState, mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
-import teachers from '../components/works/teachers'
+import teachers from '../components/works/teachers';
 import paintIntroduce from '../components/index/paintIntroduce';
+import { isPhone } from '../utils/index';
+import worksCarous from '../components/index/worksCarousel';
 import paintAffaris from '../components/index/paintAffaris';
 import worksCarousel from '../components/index/worksCarousel';
 import { isPhone } from '../utils/index';
 import MessageBoard from '../components/common/messageBoard';
+import paintingEnvironment from '../components/index/paintingEnvironment';
 import { Color } from '../config/color';
 export default {
   components: {
@@ -118,5 +133,11 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+@media screen and(min-width: 720px) {
+  .phone-notice {
+    display: none;
+  }
 }
 </style>

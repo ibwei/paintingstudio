@@ -2,7 +2,7 @@
   <div class="advantage">
     <div id="title">
       <div class="title">
-        <v-title v-bind:initTitle="initTtile"></v-title>
+        <v-title :initTitle="initTtile"></v-title>
       </div>
       <div class="title-word">{{ title_word }}</div>
     </div>
@@ -11,7 +11,7 @@
         <div
           class="icon iconfont"
           :style="{
-            'background-color': '#fff',
+            'background-color': '#fff'
           }"
           v-html="item.icon"
         />
@@ -23,22 +23,24 @@
     </div>
     <div id="button">
       <van-button
-        :style="{backgroundColor:button.color,color:'#fff'}"
+        :style="{ backgroundColor: button.color, color: '#fff' }"
         class="button2"
         size="large"
-      >{{ button.title }}</van-button>
+      >
+        {{ button.title }}
+      </van-button>
       <div class="button1">{{ button.title }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import vTitle from '../../components/common/vTitle'
+import vTitle from '../../components/common/vTitle';
 export default {
   components: {
-    vTitle,
+    vTitle
   },
-  data () {
+  data() {
     return {
       initTtile: {
         cnTitle: '为什么选择品贤画室',
@@ -101,9 +103,7 @@ export default {
      * @author 程序员阿森
      * @returns void
      * */
-    clickBtn (link) {
-      console.log(link);
-    }
+    clickBtn(link) {}
   }
 };
 </script>
@@ -173,8 +173,8 @@ export default {
 #content {
   margin: 0px auto;
   align-items: center;
-  justify-content: center;
-  width: 1200px;
+  justify-content: space-around;
+  max-width: 1100px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -187,7 +187,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin: 30px 15px;
+  margin: 20px 0px;
 }
 .word .iconfont {
   color: @color-brand;
@@ -226,16 +226,13 @@ export default {
   display: none;
 }
 .button1 {
-  display: block;
-  width: 200px;
-  height: 60px;
-  border: 2px solid #cc0000;
-  font-size: 18px;
-  color: #cc0000;
-  line-height: 2em;
+  display: inline-block;
+  border: 1px solid @color-brand;
+  color: @color-brand;
+  font-weight: 500;
   margin: 0px auto;
-  line-height: 60px;
-  border-radius: 5px;
+  border-radius: 0px;
+  padding: 6px 12px;
   cursor: pointer;
 }
 .van-button--large {
@@ -244,11 +241,7 @@ export default {
   height: 40px;
   line-height: 40px;
 }
-@media screen and (max-width: 1199px) {
-  #content {
-    width: 100%;
-  }
-}
+
 @media screen and (max-width: 720px) {
   .button2 {
     display: block;

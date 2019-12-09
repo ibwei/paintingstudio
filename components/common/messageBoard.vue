@@ -3,13 +3,30 @@
     <!-- 头部文字 -->
     <v-title v-bind:initTitle="initTtile"></v-title>
     <div class="title">
-      <span>请留下您的邮箱和联系方式，我们客服专员会把资料发送至您的QQ邮箱并第一时间联系您。</span>
+      <span
+        >请留下您的邮箱和联系方式，我们客服专员会把资料发送至您的QQ邮箱并第一时间联系您。</span
+      >
     </div>
     <!-- 表单内容 -->
     <van-cell-group class="form">
-      <van-field v-model="name" label="姓 名" placeholder="请输入姓名" label-class="name" required />
-      <van-field v-model="phone" label="电 话" placeholder="请输入电话号码" required />
-      <van-field v-model="weChat" label="微 信" placeholder="请填写你的微信号" />
+      <van-field
+        v-model="name"
+        label="姓 名"
+        placeholder="请输入姓名"
+        label-class="name"
+        required
+      />
+      <van-field
+        v-model="phone"
+        label="电 话"
+        placeholder="请输入电话号码"
+        required
+      />
+      <van-field
+        v-model="weChat"
+        label="微 信"
+        placeholder="请填写你的微信号"
+      />
       <van-field
         readonly
         clickable
@@ -38,18 +55,20 @@
         show-word-limit
       />
     </van-cell-group>
-    <van-button class="submit" @click="submit">提交</van-button>
+    <div class="submit-area">
+      <van-button class="submit" @click="submit">提交</van-button>
+    </div>
     <div class="contact-us"></div>
   </div>
 </template>
 
 <script>
-import vTitle from '../../components/common/vTitle'
+import vTitle from '../../components/common/vTitle';
 export default {
   components: {
-    vTitle,
+    vTitle
   },
-  data () {
+  data() {
     return {
       /* 标题初始化 */
       initTtile: {
@@ -81,14 +100,14 @@ export default {
      * submit 提交所有数据
      * @return void
      */
-    submit () {
+    submit() {
       this.$toast('提交了所有数据');
     },
     /**
      * onConfirm 点击完成按钮时触发
      * @param value{String} 选择值
      */
-    onConfirm (value) {
+    onConfirm(value) {
       this.value = value;
       this.showPicker = false;
     }
@@ -119,6 +138,8 @@ export default {
     border-top: 1px solid @color-bg-grey;
     word-spacing: 25px;
     margin-top: 15px;
+    max-width: 450px;
+    margin: 0 auto;
     .pc-select {
       display: none;
     }
@@ -127,18 +148,47 @@ export default {
       height: 30px;
       border-radius: 20px 20px;
       margin: 10px 10vw;
-
       background-color: @color-brand;
       color: #fff;
     }
   }
 }
+.submit-area {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.submit {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  max-width: 450px;
+  margin: 20px auto;
+  cursor: pointer;
+}
 @media screen and (min-width: 720px) {
+  .submit-area {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .submit {
+    text-align: center;
+    max-width: 450px;
+    margin-top: 10px;
+    margin: 20px auto;
+    cursor: pointer;
+  }
   .msg-board {
     width: 50vw;
     margin: 0 auto;
     background: #fff;
     .form {
+      margin-top: 40px;
       .select {
         display: none;
       }
@@ -152,10 +202,5 @@ export default {
       }
     }
   }
-}
-.submit {
-  text-align: center;
-  width: 100%;
-  margin-top: 10px;
 }
 </style>

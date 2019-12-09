@@ -1,6 +1,9 @@
 /**
  * 全局less
  */
+
+@import url('./animate.min.css');
+
 * {
   margin            : 0;
   padding           : 0;
@@ -158,12 +161,12 @@ html {
 @font-face {
   font-family: 'iconfont';
   /* project id 1531752 */
-  src: url('//at.alicdn.com/t/font_1531752_oo4c1w29r2.eot');
-  src: url('//at.alicdn.com/t/font_1531752_oo4c1w29r2.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_1531752_oo4c1w29r2.woff2') format('woff2'),
-    url('//at.alicdn.com/t/font_1531752_oo4c1w29r2.woff') format('woff'),
-    url('//at.alicdn.com/t/font_1531752_oo4c1w29r2.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_1531752_oo4c1w29r2.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1531752_ongno4qhly.eot');
+  src: url('//at.alicdn.com/t/font_1531752_ongno4qhly.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1531752_ongno4qhly.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1531752_ongno4qhly.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1531752_ongno4qhly.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1531752_ongno4qhly.svg#iconfont') format('svg');
 }
 
 .icon {
@@ -172,7 +175,14 @@ html {
 }
 
 @media screen and (max-width: 720px) {
-  body {
-    padding-top: 45px;
-  }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity .2s;
+}
+
+.page-enter,
+.page-leave-active {
+  opacity: 0;
 }
