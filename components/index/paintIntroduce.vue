@@ -3,27 +3,18 @@
     <!-- 画室介绍 -->
     <div class="introduce">
       <div class="introduce-title">
-        <van-divider
-          :style="{
-            fontSize: '18px',
-            color: '#cf2729',
-            fontWeight: '300',
-            padding: '0 16px'
-          }"
-        >
-关于品贤画室
-</van-divider>
+        <v-title v-bind:initTitle="initTtile"></v-title>
       </div>
       <!-- 介绍中间图片 -->
       <div class="sign">
         <img src="../../assets/images/index/sign.png" />
       </div>
       <div class="introduce-text">
-        <van-steps :active="active" direction="vertical">
+        <van-steps :active="active" :active-color="Color.colorbrand" direction="vertical">
           <van-step>2019年创办于重庆大学城，两兄弟所办,朝气蓬勃</van-step>
-          <van-step>全年开课，随到随学，自由选择学习时间，分开辅导．</van-step>
+          <van-step>全年开课，随到随学，自由选择学习时间</van-step>
           <van-step>任何分点报名均可在其他分点学习，课时不作废</van-step>
-          <van-step>主教老师均为固定全职老师，科班出身，专业扎实．</van-step>
+          <van-step>主教老师均为固定全职老师，科班出身，专业扎实</van-step>
         </van-steps>
       </div>
     </div>
@@ -32,12 +23,24 @@
 </template>
 
 <script>
+import vTitle from '../common/vTitle'
 import { mapState } from 'vuex';
+import { Color } from '../../config/color'
 export default {
+  components: {
+    vTitle,
+  },
   data () {
     return {
+      Color,
+      initTtile: {
+        cnTitle: '关于品贤画室',
+        enTitle: 'About PinXian Painting Studio',
+        mode: 'red',
+        icon: '&#xe672;'
+      },
       /** 画室介绍当前进度 */
-      active: 1
+      active: 2
     };
   },
   computed: {
@@ -55,14 +58,13 @@ export default {
   }
 };
 </script>
-
 <style lang="less" scoped>
 @import url('../../assets/css/color');
 .introduce {
-  background: @color-bg-base;
+  background: #fff;
   text-align: center;
   .introduce-title {
-    padding: 40px 0 10px 0px;
+    padding: 30px 0 10px 0px;
     span {
       &::before {
         content: '—';

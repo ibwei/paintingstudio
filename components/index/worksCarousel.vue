@@ -1,17 +1,8 @@
 <template>
   <!-- 学生作品 -->
-  <div>
+  <div class="works-wrap">
     <!-- 学生作品 -->
-    <van-divider
-      :style="{
-        fontSize: '18px',
-        color: '#cf2729',
-        fontWeight: '300',
-        padding: '0 16px'
-      }"
-    >
-学生作品
-</van-divider>
+    <v-title v-bind:initTitle="initTtile"></v-title>
     <!-- pc端 -->
     <div class="works">
       <div class="student-works">
@@ -29,11 +20,21 @@
     </div>
   </div>
 </template>
-
 <script>
+import vTitle from '../../components/common/vTitle'
 export default {
+  components: {
+    vTitle,
+  },
   data () {
     return {
+      // 学生作品标题
+      initTtile: {
+        cnTitle: '学生作品',
+        enTitle: "Student Painting Works",
+        mode: 'black',
+        icon: '&#xe618;'
+      },
       /** 当前图片索引 */
       currentIndex: 1,
       /** 学生作品图片-图片比例需统一，16:9效果较佳 */
@@ -75,8 +76,13 @@ export default {
 </script>
 
 <style lang="less" scope>
+@import url('../../assets/css/color');
+.works-wrap {
+  background: @color-bg-base;
+  padding: 20px 10px 40px 10px;
+}
 .works {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .student-works {
   display: block;

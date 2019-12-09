@@ -1,8 +1,5 @@
 <template>
   <div class="footer-wrap">
-    <div class="logo">
-      <img class="logo-image" src="../../assets/images/logo/logo.jpg" alt />
-    </div>
     <div class="contact">
       <div class="c-one">
         <div class="phone">

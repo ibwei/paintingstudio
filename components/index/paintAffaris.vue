@@ -1,54 +1,54 @@
 <template>
   <!-- 画室动态 -->
-  <div>
-    <div class="affaris">
-      <!-- pc端画室动态左边图片 -->
-      <div class="affaris-left">
-        <img src="../../assets/images/index/2017330105615377.jpg" />
+
+  <div class="affaris">
+    <!-- pc端画室动态左边图片 -->
+    <div class="affaris-left">
+      <img src="../../assets/images/index/2017330105615377.jpg" />
+    </div>
+    <!-- 画室动态 -->
+    <div class="affaris-right">
+      <div class="right-head" @click="goAffaris">
+        <v-title v-bind:initTitle="initTtile"></v-title>
       </div>
-      <!-- 画室动态 -->
-      <div class="affaris-right">
-        <div class="right-head" @click="goAffaris">
-          <van-divider
-            :style="{
-              fontSize: '18px',
-              color: '#cf2729',
-              fontWeight: '300',
-              padding: '0 16px'
-            }"
-          >
-画室动态
-</van-divider>
-        </div>
-        <!-- 画室动态列表 -->
-        <van-list>
-          <div v-for="item of list" :key="item.id" @click="goDetail(item.id)">
-            <div class="article">
-              <div class="one">
-                <div>
-                  <span class="title">{{ item.title }}</span>
-                  <van-tag :type="item.color">{{ item.type }}</van-tag>
-                </div>
-                <div class="date">{{ item.date }}</div>
+      <!-- 画室动态列表 -->
+      <van-list>
+        <div v-for="item of list" :key="item.id" @click="goDetail(item.id)">
+          <div class="article">
+            <div class="one">
+              <div>
+                <span class="title">{{ item.title }}</span>
+                <van-tag :type="item.color">{{ item.type }}</van-tag>
               </div>
-              <div class="two">
-                <span>{{ item.desc }}</span>
-              </div>
+              <div class="date">{{ item.date }}</div>
+            </div>
+            <div class="two">
+              <span>{{ item.desc }}</span>
             </div>
           </div>
-        </van-list>
-        <div class="more">
-          <van-button plain type="danger" size="small" @click="goAffaris">查看更多</van-button>
         </div>
+      </van-list>
+      <div class="more">
+        <van-button plain type="danger" size="small" @click="goAffaris">查看更多</van-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import vTitle from '../common/vTitle'
 export default {
+  components: {
+    vTitle,
+  },
   data () {
     return {
+      initTtile: {
+        cnTitle: '画室动态',
+        enTitle: 'Painting Studio News',
+        mode: 'red',
+        icon: '&#xe6d9;'
+      },
       /** 画室动态列表 */
       list: [
         {
@@ -104,13 +104,14 @@ export default {
 <style lang="less" scope>
 @import url('../../assets/css/color');
 .affaris {
-  display: -webkit-flex; /* Safari */
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  padding: 40px 0 10px 0px;
-  margin: 0 auto;
+  padding: 20px 0 10px 0px;
+  margin-left: 10px;
+  margin-right: 10px;
   max-width: 1200px;
+  margin: 0 auto;
 }
 .affaris-left {
   display: -webkit-flex;

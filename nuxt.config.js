@@ -4,10 +4,13 @@ module.exports = {
      ** Headers of the page
      */
     head: {
-        title: '田奇画室官网',
+        title: '品贤画室 | For Art,For U',
         meta: [{
             charset: 'utf-8'
         },
+        { name: 'renderer', content: 'webkit' },
+        { name: 'force-renderer', content: 'webkit' },
+        { name: 'keywords', content: '画室,培训,绘画,品贤画室,品贤,重庆品贤画室' },
         { name: 'format-detection', content: 'telephone=yes' },
         {
             name: 'viewport',

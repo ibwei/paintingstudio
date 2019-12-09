@@ -16,9 +16,9 @@
     <recruitment />
     <!-- 介绍 -->
     <paint-introduce />
-    <!-- 画室动态 -->
+    画室动态
     <paintAffaris />
-    <!-- 学生作品 -->
+    学生作品
     <worksCarousel />
     <!-- 优势 -->
     <advantage />
