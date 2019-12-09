@@ -1,11 +1,11 @@
 <template>
   <div ref="app" class="app">
-    <div>
+    <div v-if="!currentPath.startsWith('/about/detail')">
       <top-menu @menu-open="hideSticky" @menu-close="showSticky"></top-menu>
     </div>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
-    <div v-if="!currentPath.startsWith('/course')">
+    <div v-if="!currentPath.startsWith('/course') && !currentPath.startsWith('/about/detail')">
       <bottom-footer></bottom-footer>
     </div>
     <!-- 底部标题栏 -->
@@ -23,7 +23,7 @@
       </van-tabbar>
     </div>
     <!-- 右侧悬浮快捷入口 -->
-    <div v-if="stickyShow">
+    <div v-if="stickyShow && !currentPath.startsWith('/about/detail')">
       <sticky @wechat-click="showQRCode"></sticky>
     </div>
     <van-popup v-model="wechatQRCodeshow">
@@ -62,7 +62,10 @@ export default {
   watch: {
     // 监听路由,某些页面不需要显示footer
     $route (to, from) {
+      console.log('to :', to);
+      console.log('from :', from);
       this.currentPath = this.$route.path;
+      console.log('this.currentPath :', this.currentPath);
     },
     menuIndex (newV, oldV) {
       if (newV === oldV) {

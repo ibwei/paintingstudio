@@ -131,7 +131,7 @@ export default {
 };
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 @import url('../../assets/css/color');
 .works-wrap {
   background: @color-bg-base;

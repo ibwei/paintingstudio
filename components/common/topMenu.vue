@@ -484,6 +484,8 @@ export default {
     display: block;
     position: relative;
     z-index: 9999;
+    width: 100%;
+    min-height: 45px;
   }
 }
 </style>
