@@ -5,7 +5,7 @@
     </div>-->
     <div class="content">
       <div class="nav">
-        <van-sidebar v-model="activeKey" style="height:calc(100vh - 100px);width:100%;">
+        <van-sidebar v-model="activeKey" style="width:100%;">
           <van-sidebar-item
             v-for="(item,index) of sidebarList"
             :key="index"
@@ -19,15 +19,19 @@
         <keep-alive>
           <nuxt-child />
         </keep-alive>
+        <div class="three-d">
+          <threed-background></threed-background>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import threedBackground from '@/components/common/threeDbackground'
 export default {
   components: {
-
+    threedBackground,
   },
   data () {
     return {
@@ -72,22 +76,57 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.course-wrap {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
 .content {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
-  height: auto;
-  min-height: calc(100vh - 250px);
+  height: calc(100vh - 90px);
 }
 .nav {
-  height: auto;
   width: 130px;
   background: #fafafa;
-  min-height: calc(100vh - 50px);
+  position: relative;
+  z-index: 99999;
+  top: -2px;
+  height: calc(100vh - 90px);
 }
 .nav-list {
   width: 100%;
-  height: calc(100vh - 100px);
+  height: 100%;
   overflow: auto;
+  margin-top: 0px;
+}
+.three-d {
+  display: none;
+}
+
+@media screen and(min-width:720px) {
+  .three-d {
+    display: block;
+  }
+  .nav {
+    height: calc(100vh - 50px);
+    position: fixed;
+    left: 0;
+    top: 50px;
+  }
+  .nav-list {
+    z-index: 33;
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-left: 130px;
+    margin-top: 0px;
+  }
+  .content {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    height: auto;
+    min-height: calc(100vh - 60px);
+  }
 }
 </style>

@@ -8,9 +8,7 @@
         background="rgba(244,205,205,1)"
         left-icon="volume-o"
         :scrollable="true"
-      >
-品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
-</van-notice-bar>
+      >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
     </div>
 
     <!-- 轮播图 -->
@@ -38,21 +36,23 @@
 
     <!-- 底部菜单栏 -->
     <message-board v-scroll-reveal.smooth="{easing:'ease-in'}" />
+
+    <!-- 底部footer -->
+    <bottom-footer></bottom-footer>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
 import teachers from '../components/works/teachers';
 import paintIntroduce from '../components/index/paintIntroduce';
-import { isPhone } from '../utils/index';
 import worksCarous from '../components/index/worksCarousel';
 import paintAffaris from '../components/index/paintAffaris';
 import MessageBoard from '../components/common/messageBoard';
 import paintingEnvironment from '../components/index/paintingEnvironment';
+import BottomFooter from '../components/common/bottomFooter'
 import { Color } from '../config/color';
 export default {
   components: {
@@ -64,46 +64,14 @@ export default {
     worksCarous,
     MessageBoard,
     paintingEnvironment,
-    teachers
+    teachers,
+    BottomFooter
   },
   data () {
     return {
       Color
     };
   },
-  computed: {
-    ...mapState(['isPhone']) // 利用vuex的辅助函数把isPhone代理到当前组件,用this.isPhone访问
-  },
-
-  created () {
-    if (process.client) {
-      this.$nextTick(() => {
-        // 只要在客户端,并且拖动浏览器,就会触发检查设备,以达到响应式
-        // 开始手动调用一次
-        this.checkDevice();
-      });
-    }
-  },
-  mounted () {
-    window.addEventListener('resize', this.checkDevice);
-  },
-  destroyed () {
-    window.removeEventListener('resize', this.checkDevice);
-  },
-  methods: {
-    ...mapMutations(['changeIsPhone']), // 利用vuex的辅助函数把changeIsPhone代理到当前组件,用this.changeIsPhone访问
-
-    /**
-     * @method 检查是什么设备
-     */
-    checkDevice () {
-      // 在客户端才能获取到dom,才能判断是否是移动设备
-      if (process.client) {
-        const result = isPhone();
-        this.changeIsPhone(result); // 将结果写入到vuex仓库里
-      }
-    }
-  }
 };
 </script>
 

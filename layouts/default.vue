@@ -5,9 +5,6 @@
     </div>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
-    <div v-if="currentPath==='/course'">
-      <bottom-footer></bottom-footer>
-    </div>
     <!-- 底部标题栏 -->
     <div class="tabbar-menu">
       <van-tabbar
@@ -15,7 +12,6 @@
         :z-index="9999"
         :active-color="Color.colorbrand"
         inactive-color="#000"
-        :safe-area-inset-bottom="true"
       >
         <van-tabbar-item icon="wap-home-o">品贤画室</van-tabbar-item>
         <van-tabbar-item icon="hot-o">课程介绍</van-tabbar-item>
@@ -36,13 +32,13 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
 import { Color } from '../config/color'
 import topMenu from '../components/common/topMenu';
 import bottomFooter from '../components/common/bottomFooter';
 import sticky from '../components/common/sticky';
 import scrollTop from '../components/common/scrollTop';
-
+import { isPhone } from '../utils/index';
+import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'Default',
   components: {
@@ -52,21 +48,30 @@ export default {
     scrollTop
   },
   computed: {
-    ...mapState(['menuIndex'])
+    ...mapState(['menuIndex', 'isPhone']),
   },
   data () {
     return {
       currentMenuIndex: 0,
-      currentPath: '',
+      currentPath: '/',
       stickyShow: true,
       Color,
       wechatQRCodeshow: false
     };
   },
+  created () {
+    if (process.client) {
+      this.currentPath = this.$route.path;
+      this.checkDevice();
+    }
+  },
+  mounted () {
+    window.addEventListener('resize', this.checkDevice);
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.checkDevice);
+  },
   watch: {
-    $route (to, from) {
-      this.currentPath = to.path
-    },
     currentMenuIndex (newV, oldV) {
       if (newV === oldV) {
         return;
@@ -89,11 +94,22 @@ export default {
       }
     },
     menuIndex (newV, oldV) {
+      console.log('hahah')
       this.currentMenuIndex = newV;
     }
   },
   methods: {
-    ...mapMutations(['changeMenuIndex']),
+    ...mapMutations(['changeIsPhone']), // 利用vuex的辅助函数把changeIsPhone代理到当前组件,
+    /**
+      * @method 检查是什么设备
+      */
+    checkDevice () {
+      // 在客户端才能获取到dom,才能判断是否是移动设备
+      if (process.client) {
+        const result = isPhone();
+        this.changeIsPhone(result); // 将结果写入到vuex仓库里
+      }
+    },
     hideSticky () {
       this.stickyShow = false;
     },

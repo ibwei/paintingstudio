@@ -5,20 +5,14 @@
       :key="index"
       :color="item.color"
       :plain="item.plain"
-<<<<<<< HEAD
-    >
-      {{ item.info }}
-    </van-tag>
-=======
     >{{ item.info }}</van-tag>
->>>>>>> fdf4922d92b123aae70810ba77bda0f86e4791a6
   </div>
 </template>
 
 <script>
 export default {
   props: ['width', 'height'],
-  data() {
+  data () {
     return {
       infos: [
         '田奇',
@@ -59,7 +53,7 @@ export default {
       ]
     };
   },
-  create() {
+  create () {
     let i;
     let a;
     // eslint-disable-next-line prefer-const
@@ -78,13 +72,13 @@ export default {
     }
     this.taglist = JSON.parse(JSON.stringify(a));
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       this.init();
     });
   },
   methods: {
-    init() {
+    init () {
       const oDiv = document.getElementById('tag-list');
       const aA = oDiv.getElementsByTagName('span');
       const length = aA.length;
@@ -93,16 +87,16 @@ export default {
         aA[i].pause = 1;
         aA[i].time = null;
         initialize(aA[i]);
-        aA[i].onmouseover = function() {
+        aA[i].onmouseover = function () {
           this.pause = 0;
         };
-        aA[i].onmouseout = function() {
+        aA[i].onmouseout = function () {
           this.pause = 1;
         };
       }
       setInterval(starmove, 50);
 
-      function starmove() {
+      function starmove () {
         for (i = 0; i < length; i++) {
           if (aA[i].pause) {
             domove(aA[i]);
@@ -110,7 +104,7 @@ export default {
         }
       }
 
-      function domove(obj) {
+      function domove (obj) {
         if (obj.offsetTop <= -obj.offsetHeight) {
           obj.style.top = oDiv.offsetHeight + 'px';
           initialize(obj);
@@ -119,7 +113,7 @@ export default {
         }
       }
 
-      function initialize(obj) {
+      function initialize (obj) {
         const iLeft = parseInt(Math.random() * oDiv.offsetWidth);
         const iTimer = parseInt(Math.random() * 1500);
         obj.pause = 0;
@@ -129,7 +123,7 @@ export default {
           obj.style.left = iLeft + 'px';
         }
         clearTimeout(obj.time);
-        obj.time = setTimeout(function() {
+        obj.time = setTimeout(function () {
           obj.pause = 1;
         }, iTimer);
         obj.ispeed = Math.ceil(Math.random() * 4 + 1);
