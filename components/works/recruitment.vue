@@ -1,4 +1,3 @@
-/* eslint-disable vue/no-v-html */
 <template>
   <div id="recruitment">
     <div class="recruitment">
@@ -8,9 +7,9 @@
       <div class="recruitment-content">
         <div
           v-for="(item, index) of recruitments"
-          @click="navToCourse(item)"
           :key="index"
           class="word"
+          @click="navToCourse(item)"
         >
           <div class="img">
             <img :src="item.imgUrl" alt width="100%" class="pc_imgUrl" />
@@ -49,9 +48,9 @@
         <div
           v-for="(item, index) of recruitments"
           :key="index"
-          @click="navToCourse(item)"
           class="phone-word"
           :style="{ 'background-color': item.color }"
+          @click="navToCourse(item)"
         >
           <div class="icon iconfont" v-html="item.icon"></div>
           <div class="phone-title">{{ item.title }}</div>
@@ -217,12 +216,6 @@ export default {
   color: #e00;
   font-size: 16px;
 }
-<<<<<<< HEAD
-@media screen and (max-width: 991px) {
-  .rec-demo .iconfont {
-    font-size: 100px;
-    margin: 10px auto;
-=======
 .cont-number {
   align-self: flex-start;
   margin-top: 5px;
@@ -249,7 +242,6 @@ export default {
   .word {
     width: 32%;
     margin: 0px 5px;
->>>>>>> beeaaf59c75939e0c06651c639430f7887efce35
   }
 }
 @media screen and (max-width: 900px) {
@@ -263,8 +255,6 @@ export default {
     flex-direction: column;
     align-items: center;
   }
-<<<<<<< HEAD
-=======
   .word {
     width: 93%;
     margin: 15px 0px;
@@ -274,7 +264,6 @@ export default {
   .img {
     max-height: 100%;
   }
->>>>>>> beeaaf59c75939e0c06651c639430f7887efce35
 }
 @media screen and (max-width: 720px) {
   .iconfont1 {
@@ -293,19 +282,12 @@ export default {
   .recruitment-content {
     display: none;
   }
-<<<<<<< HEAD
-}
-@media screen and (max-width: 540px) {
-  .recruitment {
-    padding: 5px;
-=======
   .title {
     display: none;
   }
   .phone-content {
     display: flex;
     flex-direction: row;
->>>>>>> beeaaf59c75939e0c06651c639430f7887efce35
     justify-content: space-around;
     align-items: center;
     width: 100%;
@@ -339,8 +321,6 @@ export default {
     font-size: 16px;
     margin-top: 5px;
   }
-<<<<<<< HEAD
-=======
   .phone-button {
     margin-top: 10px;
     font-size: 14px;
@@ -355,6 +335,5 @@ export default {
     width: 100%;
     margin-top: 10px;
   }
->>>>>>> beeaaf59c75939e0c06651c639430f7887efce35
 }
 </style>

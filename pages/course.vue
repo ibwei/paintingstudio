@@ -16,7 +16,9 @@
         </van-sidebar>
       </div>
       <div class="nav-list">
-        <nuxt-child />
+        <keep-alive>
+          <nuxt-child />
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -53,7 +55,19 @@ export default {
         icon: '&#xe672;'
       }
     }
+  },
+  created () {
+    if (process.client) {
+      const key = localStorage.getItem('courseActiveIndex') || 0;
+      this.activeKey = key;
+    }
+  },
+  watch: {
+    activeKey (v) {
+      localStorage.setItem('courseActiveIndex', v);
+    }
   }
+
 }
 </script>
 

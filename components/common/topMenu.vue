@@ -116,7 +116,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import { Color } from '../../config/color';
 export default {
   props: {},
@@ -132,29 +132,24 @@ export default {
           name: '首页'
         },
         {
-          path: 'news',
+          path: '/course',
           icon: 'label-o',
-          name: '课程中心'
+          name: '热门课程'
         },
         {
-          path: 'news',
+          path: '/news',
           icon: 'notes-o',
           name: '画室动态'
         },
         {
-          path: 'recruitment',
+          path: '/about',
           icon: 'info-o',
           name: '关于我们'
         },
         {
-          path: 'contact',
+          path: '/contact',
           icon: 'phone-circle-o',
           name: '联系我们'
-        },
-        {
-          path: 'me',
-          icon: 'manager-o',
-          name: '个人中心'
         }
       ],
       loading: false,
@@ -174,44 +169,30 @@ export default {
                 type: 'link',
                 text: '热门课程',
                 subText: '各种丰富的绘画课程，还能为你定制。艺术，与生俱来。',
-                path: 'about',
+                path: '/course',
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
               {
                 type: 'link',
                 text: '画室环境',
                 subText: '好的艺术陶冶，需要好的环境支撑，我们一致在这里等你。',
-                path: 'locations',
+                path: '/about',
                 iconLeft: '<span class="icon iconfont">&#xe66c;</span>'
               },
               {
                 type: 'link',
                 text: '画室动态',
                 subText: '看看品贤画室最近都发生了什么？',
-                path: 'blog',
+                path: '/news',
                 iconLeft: '<span class="icon iconfont">&#xe6d9;</span>'
               },
               {
                 type: 'link',
                 text: '学生作品',
                 subText: '看看曾经如你一般的小白最近画得怎么样了?',
-                path: 'blog',
+                path: '/about',
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
               },
-              {
-                type: 'link',
-                text: '为什么选择我们',
-                subText: '为什么选择我们，看看我们的优势所在吧',
-                path: 'blog',
-                iconLeft: '<span class="icon iconfont">&#xe65b;</span>'
-              },
-              {
-                type: 'link',
-                text: '在线报名',
-                subText: '为兴趣，就现在。',
-                path: 'blog',
-                iconLeft: '<span class="icon iconfont">&#xe616;</span>'
-              }
             ]
           },
           {
@@ -261,18 +242,32 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['changeMenuIndex']),
     /**
      * @method 导航到具体页面
      * @param {listItem}
      * @return void
      */
     navToPage (item) {
-
-      if (item.path === 'me') {
-        return false;
-      }
-      this.$router.push({ path: item.path });
+      this.changeTabbar(item.path);
       this.isOpen = false;
+      this.$router.push({ path: item.path });
+    },
+    // 监听路由,更改tabbar激活菜单
+    changeTabbar (path) {
+      let menuIndex;
+      if (path === '/course') {
+        menuIndex = 1;
+      } else if (path === '/news') {
+        menuIndex = 2;
+      } else if (path === '/about') {
+        menuIndex = 2;
+      } else if (path === '/contact') {
+        menuIndex = 3;
+      } else {
+        menuIndex = 0;
+      }
+      this.changeMenuIndex(menuIndex);
     },
     onLoad () {
       // 异步更新数据
