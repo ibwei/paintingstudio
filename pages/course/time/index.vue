@@ -1,10 +1,10 @@
 <template>
   <div class="time-wrap">
     <van-steps :active="active" direction="vertical">
-      <van-step>
-        <div v-for="(item,index) of courseSchedual" :key="index" class="date">
+      <van-step v-for="(item,index) of courseSchedual" :key="index">
+        <div class="date">
           <div class="day-name">{{item.name}}</div>
-          <div class="day-detail">
+          <div class="day-detail" :class="{'active':index===active}">
             <div class="day">
               <div class="time">上午</div>
               <div class="available">{{getCourseStatus(item.course[0])}}</div>
@@ -56,6 +56,9 @@ export default {
         }]
     }
   },
+  created () {
+    this.getToday();
+  },
   methods: {
     getCourseStatus (number) {
       if (number === 1) {
@@ -64,6 +67,11 @@ export default {
         return '放假';
       }
       return '预约';
+    },
+    getToday () {
+      let date = new Date().getDay();
+      this.active = date;
+      console.log(date)
     }
   }
 }
@@ -71,22 +79,36 @@ export default {
 
 <style scoped lang="less">
 .time-wrap {
-  margin: 5px;
-  border: 1px solid #dcdee2;
-}
-.time {
   box-sizing: border-box;
   width: 100%;
-  margin-top: 4px;
+  margin-left: 0px;
+  max-width: 100%;
+  border: none;
+}
+.time,
+.available {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 0px;
   display: flex;
+  padding: 4px;
   flex-flow: column nowrap;
   border: 1px solid #dcdee2;
 }
+.time {
+  margin-top: 5px;
+}
+.available {
+  border-top: none;
+}
 .date {
+  position: relative;
+  top: -20px;
   width: 100%;
   margin-top: 10px;
 }
 .day-detail {
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -98,5 +120,28 @@ export default {
   width: 100%;
   text-align: center;
   line-height: 1.5;
+}
+.active {
+  .time,
+  .available {
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  box-sizing: border-box;
+  margin-top: 3px;
+  border: 1px solid #07c160;
+  padding: 3px 5px;
+  padding-bottom: 7px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+@media screen and(max-width:720px) {
+  .time-wrap {
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 0px;
+    max-width: 100%;
+    border: none;
+  }
 }
 </style>

@@ -2,37 +2,39 @@
   <div class="category">
     <div v-for="(category,index) of categoryList" :key="index" class="course-item">
       <div class="category-title">{{ category.categoryName }}</div>
-      <div v-for="(course,courseIndex) of category.courseList" :key="courseIndex" class="content">
-        <div class="top">
-          <div class="t-left">
-            <img :src="course.courseImage" alt class="course-img" />
-          </div>
-          <div class="t-right">
-            <div class="course-name">{{ course.courseName }}</div>
-            <div class="course-time">
-              <van-icon name="clock-o" size="14px" />
-              <span>有效期:{{ course.validTime }}</span>
+      <div class="content-list animated bounceInDown delay-0.5s">
+        <div v-for="(course,courseIndex) of category.courseList" :key="courseIndex" class="content">
+          <div class="top">
+            <div class="t-left">
+              <img :src="course.courseImage" alt class="course-img" />
             </div>
-            <div class="course-teacher">
-              <van-icon name="balance-pay" size="14px" />
-              <span>学费:￥{{ course.tuition }}</span>
+            <div class="t-right">
+              <div class="course-name">{{ course.courseName }}</div>
+              <div class="course-time">
+                <van-icon name="clock-o" size="14px" />
+                <span>有效期:{{ course.validTime }}</span>
+              </div>
+              <div class="course-teacher">
+                <van-icon name="balance-pay" size="14px" />
+                <span>学费:￥{{ course.tuition }}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="bottom">
-          <div class="b-left" v-if="listType==='basic'">
-            <van-tag
-              v-for="(tag,tagIndex) of course.tagList"
-              :key="tagIndex"
-              size="8px"
-              style="margin-left:2px"
-              :type="getRandomColor()"
-              round
-            >{{ tag }}</van-tag>
-          </div>
-          <div class="b-left" v-if="listType==='memo'">PS:{{course.memo}}</div>
-          <div class="b-right">
-            <a href="tel:18883923917">预约</a>
+          <div class="bottom">
+            <div class="b-left" v-if="listType==='basic'">
+              <van-tag
+                v-for="(tag,tagIndex) of course.tagList"
+                :key="tagIndex"
+                size="8px"
+                style="margin-left:2px"
+                :type="getRandomColor()"
+                round
+              >{{ tag }}</van-tag>
+            </div>
+            <div class="b-left" v-if="listType==='memo'">PS:{{course.memo}}</div>
+            <div class="b-right">
+              <a href="tel:18883923917">预约</a>
+            </div>
           </div>
         </div>
       </div>
@@ -81,6 +83,13 @@ export default {
   color: #000;
   margin: 10px 0px;
   font-family: '微软雅黑';
+}
+.content-list {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 .content {
   width: 100%;
@@ -141,19 +150,76 @@ export default {
 .b-left {
   text-align: justify;
   flex: 1;
-  line-height: 2;
 }
 .b-right {
   box-sizing: border-box;
   background: @color-brand;
   color: #fff;
   width: 50px;
-  padding: 2px 5px;
+  padding: 0px 5px;
   border-radius: 2px;
   margin-left: 5px;
   text-align: center;
   a {
+    display: block;
     color: #fff;
+    font-size: 14px;
+    padding: 2px 0px;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .category-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #000;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 2px;
+    margin: 10px 0px;
+    font-family: '微软雅黑';
+  }
+  .category {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .course-item {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .content-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .content {
+    background: #fff;
+    width: 300px;
+    margin-right: 20px;
+    border-radius: 0px;
+    box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.8);
+  }
+  .course-name {
+    font-size: 16px;
+    color: #000;
+  }
+  .course-time,
+  .course-teacher {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    span {
+      margin-left: 5px;
+    }
   }
 }
 </style>

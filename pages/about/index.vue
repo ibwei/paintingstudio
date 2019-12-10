@@ -1,27 +1,34 @@
 <template>
-  <div>
+  <div class="about">
     <paintEnvironment />
+    <studentWork />
     <teacher />
   </div>
 </template>
 
 <script>
 import paintEnvironment from '@/components/about/paintEnvironment';
+import studentWork from '@/components/about/studentWork';
 import teacher from '@/components/about/teacher';
 export default {
   components: {
     paintEnvironment,
-    teacher
+    teacher,
+    studentWork
   },
-  methods: {},
   watch: {
     /** 监听路由 */
-    $router(to, from) {
+    $router (to, from) {
       console.log('routerto :', to);
       console.log('router from :', from);
-    },
-  }
+    }
+  },
+  methods: {}
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.about {
+  padding-bottom: 60px;
+}
+</style>

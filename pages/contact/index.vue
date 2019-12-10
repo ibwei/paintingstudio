@@ -40,7 +40,7 @@ import gMap from '../../components/common/gMap'
 export default {
   components: {
     vTitle,
-    gMap
+    gMap,
   },
   data () {
     return {
