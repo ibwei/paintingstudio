@@ -13,9 +13,14 @@ export default {
     paintEnvironment,
     teacher
   },
-  data () {
-  },
-  methods: {}
+  methods: {},
+  watch: {
+    /** 监听路由 */
+    $router(to, from) {
+      console.log('routerto :', to);
+      console.log('router from :', from);
+    },
+  }
 };
 </script>
 

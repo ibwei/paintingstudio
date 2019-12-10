@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(teacher, index) of cardList" :key="teacher.id" class="card-wrap">
+    <div v-for="(teacher) of cardList" :key="teacher.id" class="card-wrap">
       <div class="card">
         <div class="leftImg">
           <van-image round fit="cover" width="100%" height="100%" :src="teacher.headImg" />
@@ -21,7 +21,7 @@
             {{ teacher.rate }}
           </div>
         </div>
-        <div class="more">
+        <div class="more" @click="goDetail(teacher.id)">
           <van-icon name="arrow" />
         </div>
       </div>
@@ -45,13 +45,18 @@ export default {
       Color
     }
   },
+  methods: {
+    goDetail(id) {
+      this.$router.push({path: '/about/detail?id='+id})
+    }
+  },
   mounted () {
     console.log('this.cardList :', this.cardList);
   }
 }
 </script>
 
-<style lang='less' scope>
+<style lang='less' scoped>
 @import url('../../assets/css/color.less');
 .flex {
   display: -webkit-flex;

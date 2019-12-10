@@ -16,7 +16,9 @@
         </van-sidebar>
       </div>
       <div class="nav-list">
-        <nuxt-child />
+        <keep-alive>
+          <nuxt-child />
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -31,11 +33,8 @@ export default {
     return {
       activeKey: 0,
       sidebarList: [{
-        name: '推荐课程',
-        url: '/course'
-      }, {
         name: '绘画兴趣班',
-        url: '/course/interest'
+        url: '/course'
       }, {
         name: '国画书法班',
         url: '/course/nation'
@@ -46,9 +45,8 @@ export default {
         name: '留学考研班',
         url: '/course/abroad'
       }, {
-        name: '私人订制',
-        url: '/course',
-        disabled: true
+        name: '上课时间',
+        url: '/course/time'
       }],
       initTtile: {
         cnTitle: '热门课程',
@@ -57,7 +55,19 @@ export default {
         icon: '&#xe672;'
       }
     }
+  },
+  created () {
+    if (process.client) {
+      const key = localStorage.getItem('courseActiveIndex') || 0;
+      this.activeKey = key;
+    }
+  },
+  watch: {
+    activeKey (v) {
+      localStorage.setItem('courseActiveIndex', v);
+    }
   }
+
 }
 </script>
 
