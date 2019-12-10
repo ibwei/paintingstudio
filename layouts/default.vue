@@ -5,7 +5,7 @@
     </div>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
-    <div v-if="currentPath.startsWith('/') && !currentPath.startsWith('')">
+    <div v-if="currentPath==='/course'">
       <bottom-footer></bottom-footer>
     </div>
     <!-- 底部标题栏 -->
@@ -57,13 +57,16 @@ export default {
   data () {
     return {
       currentMenuIndex: 0,
-      currentPath: '/',
+      currentPath: '',
       stickyShow: true,
       Color,
       wechatQRCodeshow: false
     };
   },
   watch: {
+    $route (to, from) {
+      this.currentPath = to.path
+    },
     currentMenuIndex (newV, oldV) {
       if (newV === oldV) {
         return;
@@ -86,12 +89,8 @@ export default {
       }
     },
     menuIndex (newV, oldV) {
-      console.log('hahah')
       this.currentMenuIndex = newV;
     }
-  },
-  created () {
-    this.currentPath = this.$route.path;
   },
   methods: {
     ...mapMutations(['changeMenuIndex']),
