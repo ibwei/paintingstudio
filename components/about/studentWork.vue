@@ -139,9 +139,6 @@ export default {
   width: 48%;
   padding-bottom: 10px;
 }
-.img {
-  max-height: 120px;
-}
 .text {
   text-align: center;
 }
