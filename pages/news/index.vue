@@ -3,7 +3,9 @@
     <div class="news-container">
       <breadcrumb />
       <div class="content">
-        <div class="mid-content"></div>
+        <div class="mid-content">
+          <vlabel></vlabel>
+        </div>
         <div class="left-content">
           <taglist />
         </div>
@@ -15,12 +17,23 @@
 <script>
 import breadcrumb from '../../components/common/breadcrumb';
 import taglist from '../../components/news/taglist'
+import vlabel from '../../components/news/label'
 export default {
   components: {
     breadcrumb,
-    taglist
+    taglist,
+    vlabel
   }
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+@media screen and (max-width: 720px) {
+  .bread {
+    display: none;
+  }
+  .taglist {
+    display: none;
+  }
+}
+</style>
