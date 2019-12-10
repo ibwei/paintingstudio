@@ -14,7 +14,7 @@
 
 <script>
 import breadcrumb from '../../components/common/breadcrumb';
-import taglist from '../../components/news/taglist'
+import taglist from '../../components/news/taglist';
 export default {
   components: {
     breadcrumb,
@@ -23,4 +23,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+@media screen and(max-width: 720ox) {
+  .bread {
+    display: none;
+  }
+}
+</style>
