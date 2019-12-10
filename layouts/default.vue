@@ -5,7 +5,7 @@
     </div>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
-    <div v-if="!currentPath.startsWith('/course') && !currentPath.startsWith('/about/detail')">
+    <div v-if="currentPath.startsWith('/') && !currentPath.startsWith('')">
       <bottom-footer></bottom-footer>
     </div>
     <!-- 底部标题栏 -->
@@ -15,6 +15,7 @@
         :z-index="9999"
         :active-color="Color.colorbrand"
         inactive-color="#000"
+        :safe-area-inset-bottom="true"
       >
         <van-tabbar-item icon="wap-home-o">品贤画室</van-tabbar-item>
         <van-tabbar-item icon="hot-o">课程介绍</van-tabbar-item>
@@ -35,12 +36,13 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
 import { Color } from '../config/color'
 import topMenu from '../components/common/topMenu';
 import bottomFooter from '../components/common/bottomFooter';
 import sticky from '../components/common/sticky';
 import scrollTop from '../components/common/scrollTop';
-import { mapState, mapMutations } from 'vuex';
+
 export default {
   name: 'Default',
   components: {
@@ -50,7 +52,7 @@ export default {
     scrollTop
   },
   computed: {
-    ...mapState(['menuIndex']),
+    ...mapState(['menuIndex'])
   },
   data () {
     return {
