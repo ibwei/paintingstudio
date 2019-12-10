@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="about">
     <paintEnvironment />
     <studentWork />
     <teacher />
@@ -27,4 +27,8 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.about {
+  padding-bottom: 60px;
+}
+</style>
