@@ -15,7 +15,7 @@ export default {
       initTtile: {
         cnTitle: '画室环境',
         enTitle: 'Student Painting Works',
-        mode: 'red',
+        mode: 'black',
         icon: '&#xe618;'
       }
     }

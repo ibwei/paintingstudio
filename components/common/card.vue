@@ -45,13 +45,13 @@ export default {
       Color
     }
   },
-  methods: {
-    goDetail(id) {
-      this.$router.push({path: '/about/detail?id='+id})
-    }
-  },
   mounted () {
     console.log('this.cardList :', this.cardList);
+  },
+  methods: {
+    goDetail (id) {
+      this.$router.push({ path: '/about/detail', query: { teacherId: id } })
+    }
   }
 }
 </script>

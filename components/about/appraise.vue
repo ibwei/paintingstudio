@@ -18,7 +18,6 @@
               :size="14"
               readonly
               allow-half
-              :color="orgin"
               void-icon="star"
               void-color="#eee"
             />
