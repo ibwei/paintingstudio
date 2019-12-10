@@ -255,7 +255,6 @@ export default {
     },
     // 监听路由,更改tabbar激活菜单
     changeTabbar (path) {
-      console.log(path)
       let menuIndex;
       if (path === '/course') {
         menuIndex = 1;
