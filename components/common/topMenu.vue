@@ -192,7 +192,7 @@ export default {
                 subText: '看看曾经如你一般的小白最近画得怎么样了?',
                 path: '/about',
                 iconLeft: '<span class="icon iconfont">&#xe618;</span>'
-              },
+              }
             ]
           },
           {

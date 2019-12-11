@@ -21,6 +21,7 @@
 
 <script>
 export default {
+  name: 'Newsdata',
   props: {
     news: {
       type: Array,
