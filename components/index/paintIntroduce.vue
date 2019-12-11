@@ -7,11 +7,7 @@
       </div>
       <!-- 介绍中间图片 -->
       <div class="sign">
-        <van-image :src="introduceImg">
-          <template v-slot:loading>
-            <van-loading type="spinner" size="20" />
-          </template>
-        </van-image>
+        <canvas-gallery height="300px"></canvas-gallery>
       </div>
       <div class="introduce-text">
         <div class="phone-steps">
@@ -37,10 +33,12 @@
 
 <script>
 import vTitle from '../common/vTitle';
+import canvasGallery from '@/components/common/canvasGallery'
 import { Color } from '../../config/color';
 export default {
   components: {
-    vTitle
+    vTitle,
+    canvasGallery,
   },
   data () {
     return {
@@ -97,7 +95,7 @@ export default {
 <style lang="less" scoped>
 @import url('../../assets/css/color');
 .introduce {
-  background: @color-bg-base;
+  background: #fff;
   text-align: center;
   .introduce-title {
     padding: 30px 0 10px 0px;
@@ -157,6 +155,7 @@ export default {
 /* 新增 */
 .sign {
   margin-bottom: 20px;
+  border: none;
 }
 .ant-steps-item-wait .ant-steps-item-icon {
   border-color: @color-brand;

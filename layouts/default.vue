@@ -12,11 +12,12 @@
         :z-index="99999"
         :active-color="Color.colorbrand"
         inactive-color="#000"
+        :safe-area-inset-bottom="true"
       >
-        <van-tabbar-item icon="wap-home-o">品贤画室</van-tabbar-item>
-        <van-tabbar-item icon="hot-o">课程介绍</van-tabbar-item>
-        <van-tabbar-item icon="photo-o">关于我们</van-tabbar-item>
-        <van-tabbar-item icon="comment-circle-o">联系我们</van-tabbar-item>
+        <van-tabbar-item icon="wap-home-o" to="/">品贤画室</van-tabbar-item>
+        <van-tabbar-item icon="hot-o" to="/course">课程介绍</van-tabbar-item>
+        <van-tabbar-item icon="photo-o" to="/news">画室动态</van-tabbar-item>
+        <van-tabbar-item icon="comment-circle-o" to="/contact">关于我们</van-tabbar-item>
       </van-tabbar>
     </div>
     <!-- 右侧悬浮快捷入口 -->
@@ -72,29 +73,7 @@ export default {
     window.removeEventListener('resize', this.checkDevice);
   },
   watch: {
-    currentMenuIndex (newV, oldV) {
-      if (newV === oldV) {
-        return;
-      }
-      switch (newV) {
-        case 0:
-          this.$router.push({ path: '/' });
-          break;
-        case 1:
-          this.$router.push({ path: '/course' });
-          break;
-        case 2:
-          this.$router.push({ path: '/about' });
-          break;
-        case 3:
-          this.$router.push({ path: '/contact' });
-          break;
-        default:
-          this.$toast('操作异常')
-      }
-    },
     menuIndex (newV, oldV) {
-      console.log('hahah')
       this.currentMenuIndex = newV;
     }
   },

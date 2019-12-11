@@ -16,7 +16,7 @@
           </div>
         </div>
         <div slot="title" class="title">
-          <div>
+          <div ref="phoneHeart" :class="heartClass">
             <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
           </div>
         </div>
@@ -80,7 +80,7 @@
             </div>
           </nav>
         </div>
-        <div class="heart-cover">
+        <div ref="pcHeart" class="heart-cover" :class="heartClass">
           <van-icon
             size="30px"
             :color="heartColor"
@@ -123,6 +123,7 @@ export default {
   data () {
     return {
       Color,
+      heartClass: 'animated pulse infinite delay-0.5s',
       isOpen: false,
       heartColor: 'rgba(0,0,0,0.4)',
       list: [
@@ -204,7 +205,7 @@ export default {
           },
           {
             type: 'link',
-            text: '画室动态1',
+            text: '画室动态',
             path: '/news',
             icon: '&#xe60d;',
             subMenuOptions: []
@@ -235,6 +236,9 @@ export default {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
         : 'rgba(0,0,0,0.4)';
+      if (this.heartColor === '#cf2729') {
+        this.heartClass = '';
+      }
     }
   },
   mounted () {
@@ -249,6 +253,9 @@ export default {
      * @return void
      */
     navToPage (item) {
+      console.log('this item is');
+
+      console.log(item)
       this.changeTabbar(item.path);
       this.isOpen = false;
       this.$router.push({ path: item.path });
@@ -283,13 +290,15 @@ export default {
       this.isOpen = !this.isOpen;
     },
     changeHeartColor () {
-      if (this.heartColor === 'red') {
+      if (this.heartColor === '#cf2729') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
         this.$toast('谢谢你喜欢我!');
         localStorage.setItem('heartColor', '#cf2729');
         this.heartColor = '#cf2729';
       }
+      this.$refs.phoneHeart.className = '';
+      this.$refs.pcHeart.className = '';
     },
     hideSticky () {
       this.$emit('menu-open');
