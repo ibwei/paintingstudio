@@ -204,7 +204,7 @@ export default {
           },
           {
             type: 'link',
-            text: '画室动态',
+            text: '画室动态1',
             path: '/news',
             icon: '&#xe60d;',
             subMenuOptions: []

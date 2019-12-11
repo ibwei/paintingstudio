@@ -167,5 +167,8 @@ export default {
   .title-2 {
     font-size: 16px;
   }
+  img {
+    border-radius: 3px;
+  }
 }
 </style>
