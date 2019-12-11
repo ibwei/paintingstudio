@@ -85,7 +85,8 @@ section {
     transform: scale(1) rotate(-15deg);
   }
   50% {
-    transform: scale(1.6) rotate(15deg);
+    transform: scale(1.6) rotate(15
+    deg);
   }
 }
 </style>

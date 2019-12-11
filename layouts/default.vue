@@ -9,7 +9,7 @@
     <div class="tabbar-menu">
       <van-tabbar
         v-model="currentMenuIndex"
-        :z-index="9999"
+        :z-index="99999"
         :active-color="Color.colorbrand"
         inactive-color="#000"
       >

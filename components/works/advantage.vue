@@ -26,9 +26,7 @@
         :style="{ backgroundColor: button.color, color: '#fff' }"
         class="button2"
         size="large"
-      >
-        {{ button.title }}
-      </van-button>
+      >{{ button.title }}</van-button>
       <div class="button1">{{ button.title }}</div>
     </div>
   </div>
@@ -40,7 +38,7 @@ export default {
   components: {
     vTitle
   },
-  data() {
+  data () {
     return {
       initTtile: {
         cnTitle: '为什么选择品贤画室',
@@ -103,7 +101,7 @@ export default {
      * @author 程序员阿森
      * @returns void
      * */
-    clickBtn(link) {}
+    clickBtn (link) { }
   }
 };
 </script>
@@ -125,32 +123,6 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
-#title .title {
-  font-size: 36px;
-  color: #333;
-  line-height: 150%;
-  margin: 0;
-  padding: 0 20px;
-}
-#title .title:before {
-  display: inline-block;
-  height: 1px;
-  background-color: #ddd;
-  padding: 0;
-  content: '';
-  width: 100px;
-  margin: 10px 15px;
-}
-
-#title .title::after {
-  display: inline-block;
-  height: 1px;
-  background-color: #ddd;
-  padding: 0;
-  content: '';
-  width: 100px;
-  margin: 10px 15px;
 }
 #title .title-en {
   font-size: 16px;
@@ -251,10 +223,6 @@ export default {
   }
   #title .title {
     font-size: 24px;
-  }
-  #title .title::before,
-  #title .title::after {
-    display: none;
   }
 
   #content .word {

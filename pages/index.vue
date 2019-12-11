@@ -29,7 +29,7 @@
     <teachers v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 学生作品 -->
-    <worksCarous v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <worksCarousel v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 优势 -->
     <advantage v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
@@ -62,8 +62,10 @@ export default {
     recruitment,
     advantage,
     MessageBoard,
+    paintAffaris,
     paintingEnvironment,
     teachers,
+    worksCarousel,
     BottomFooter
   },
   data () {
