@@ -1,19 +1,11 @@
 import { mapState } from 'vuex';
 <template>
-  <div class="ifame" :style="{height:isPhone?height:'700px'}">
-    <div class="play" @click="load3D" v-if="!isLoad">
+  <div class="iframe" :style="{height:isPhone?height:'700px'}">
+    <div v-if="!isLoad" class="play" @click="load3D">
       <van-icon size="40px" name="play-circle-o" />
       <span>For Art, For You</span>
     </div>
-    <iframe
-      v-else
-      ref="gallery"
-      class="ifa"
-      width="100%"
-      height="100%"
-      frameborder="0"
-      scrolling="no"
-    ></iframe>
+    <iframe v-else :src="GalleryUrl" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
   </div>
 </template>
 
@@ -24,39 +16,35 @@ export default {
   props: {
     height: {
       type: String,
-      default: '300px',
+      default: '300px'
     }
   },
   computed: {
-    ...mapState(['isPhone']),
+    ...mapState(['isPhone'])
   },
   data () {
     return {
       isLoad: false,
+      GalleryUrl
     }
   },
-  created () {
-    if (process.client) {
-      const isLoad3d = localStorage.getItem('isLoad3d');
-      if (isLoad3d === 'true') {
-        this.load3D();
-      }
+  mounted () {
+    const isLoad3d = localStorage.getItem('isLoad3d');
+    if (isLoad3d === 'true') {
+      this.isLoad = true;
     }
   },
   methods: {
     load3D () {
       this.isLoad = true;
       localStorage.setItem('isLoad3d', 'true');
-      this.$nextTick(() => {
-        this.$refs.gallery.src = GalleryUrl;
-      })
     }
   }
 }
 </script>
 
 <style scoped>
-.ifame {
+.iframe {
   border: none;
   width: 100%;
   flex-flow: column nowrap;

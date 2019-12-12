@@ -368,10 +368,11 @@ export default {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 0 60px;
+  padding: 0 0px;
 }
 .heart-cover,
 .nav-item {
+  font-size: 14px;
   cursor: pointer;
 }
 /** 导航样式 */
@@ -393,7 +394,7 @@ export default {
   flex-flow: row nowrap;
   justify-content: flex-start;
   padding-left: 30px;
-  font-size: 14.4px;
+  font-size: 14px;
 }
 .nav-item {
   .flex;
@@ -412,6 +413,7 @@ export default {
 .nav-item:hover .iconfont {
   color: @color-brand;
 }
+
 .nav-item:hover .arrow {
   transform: rotate(180deg);
 }
@@ -471,7 +473,7 @@ export default {
 }
 .submenu-title {
   padding: 10px 0 0 10px;
-  font-size: 16px;
+  font-size: 14px;
 }
 .submenu-content {
   padding: 5px 20px 20px 10px;

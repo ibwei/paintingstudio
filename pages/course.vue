@@ -19,19 +19,19 @@
         <keep-alive>
           <nuxt-child />
         </keep-alive>
-        <div class="three-d">
-          <threed-background></threed-background>
-        </div>
       </div>
+    </div>
+    <div class="pc-content">
+      <pc-course-list></pc-course-list>
     </div>
   </div>
 </template>
 
 <script>
-import threedBackground from '@/components/common/threeDbackground'
+import pcCourseList from '@/components/course/pcCourseList';
 export default {
   components: {
-    threedBackground,
+    pcCourseList
   },
   data () {
     return {
@@ -60,15 +60,15 @@ export default {
       }
     }
   },
+  watch: {
+    activeKey (v) {
+      localStorage.setItem('courseActiveIndex', v);
+    }
+  },
   created () {
     if (process.client) {
       const key = localStorage.getItem('courseActiveIndex') || 0;
       this.activeKey = key;
-    }
-  },
-  watch: {
-    activeKey (v) {
-      localStorage.setItem('courseActiveIndex', v);
     }
   }
 
@@ -102,11 +102,11 @@ export default {
 .three-d {
   display: none;
 }
+.pc-content {
+  display: none;
+}
 
 @media screen and(min-width:720px) {
-  .three-d {
-    display: block;
-  }
   .nav {
     height: calc(100vh - 50px);
     position: fixed;
@@ -122,11 +122,10 @@ export default {
     margin-top: 0px;
   }
   .content {
-    display: flex;
-    flex-flow: row nowrap;
-    width: 100%;
-    height: auto;
-    min-height: calc(100vh - 60px);
+    display: none;
+  }
+  .pc-content {
+    display: block;
   }
 }
 </style>

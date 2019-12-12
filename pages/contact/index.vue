@@ -40,7 +40,7 @@ import gMap from '../../components/common/gMap'
 export default {
   components: {
     vTitle,
-    gMap,
+    gMap
   },
   data () {
     return {
@@ -52,16 +52,16 @@ export default {
       message: '',
       // 意见反馈
       initTtile: {
-        cnTitle: '在线意见反馈',
+        cnTitle: '联系我们',
         enTitle: 'Feedback Online ',
         mode: 'black',
         icon: '&#xe66f;'
       },
       // 地图标题
       initMap: {
-        cnTitle: '联系地址',
-        enTitle: 'Contact Address',
-        mode: 'black',
+        cnTitle: '我们在这里',
+        enTitle: 'Where Are We Locate',
+        mode: 'red',
         icon: '&#xe600;'
       }
     };
@@ -114,14 +114,14 @@ export default {
   }
   .online {
     display: flex;
-    width: 100%;
+    // width: 100%;
     padding: 0 10px;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     .form {
-      width: 100%;
+      // width: 100%;
       margin: 20px 10px;
     }
     .submit {

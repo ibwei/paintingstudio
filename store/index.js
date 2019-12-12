@@ -5,7 +5,10 @@ export const state = () => ({
     isPhone: false,
     // 顶部菜单栏的激活项
     menuIndex: 0,
-
+    //底部菜单是否显示
+    tabbarShow: true,
+    //顶部菜单是否显示
+    topbarShow: true,
 })
 
 export const mutations = {
@@ -14,5 +17,11 @@ export const mutations = {
     },
     changeMenuIndex(state, menuIndex) {
         state.menuIndex = menuIndex
+    },
+    changeTabbarShow(state, show) {
+        state.tabbarShow = show;
+    },
+    changTopbarShow(state, show) {
+        state.topbarShow = show;
     }
 }

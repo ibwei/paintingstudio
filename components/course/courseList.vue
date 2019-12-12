@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="bottom">
-            <div class="b-left" v-if="listType==='basic'">
+            <div v-if="listType==='basic'" class="b-left">
               <van-tag
                 v-for="(tag,tagIndex) of course.tagList"
                 :key="tagIndex"
@@ -29,9 +29,11 @@
                 style="margin-left:2px"
                 :type="getRandomColor()"
                 round
-              >{{ tag }}</van-tag>
+              >
+{{ tag }}
+</van-tag>
             </div>
-            <div class="b-left" v-if="listType==='memo'">PS:{{course.memo}}</div>
+            <div v-if="listType==='memo'" class="b-left">PS:{{ course.memo }}</div>
             <div class="b-right">
               <a href="tel:18883923917">预约</a>
             </div>
