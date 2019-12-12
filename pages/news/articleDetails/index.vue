@@ -3,6 +3,7 @@
     <div class="articleDetails-container">
       <bread-crumb />
       <div class="content">
+        <banner></banner>
         <div class="mid-content">
           <!-- 文章详情组件 -->
           <news-data :news="news" :user="user"></news-data>
@@ -33,13 +34,15 @@ import breadCrumb from '../../../components/common/breadcrumb';
 import newsData from '../../../components/news/newsdata'
 import newsRecommended from '../../../components/news/newsRecommended'
 import comments from '../../../components/news/comments'
+import banner from '../../../components/news/phone/banner'
 export default {
   name: 'ArticleDetails',
   components: {
     breadCrumb,
     newsData,
     newsRecommended,
-    comments
+    comments,
+    banner
 
   },
   data () {
@@ -86,6 +89,9 @@ export default {
 @media screen and (max-width: 720px) {
   .bread {
     display: none;
+  }
+  .content {
+    padding-top: 40px;
   }
   .nav-bar {
     width: 100%;

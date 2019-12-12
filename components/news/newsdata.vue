@@ -15,10 +15,28 @@
         </div>
       </div>
     </div>
-    <div v-html="news.describe"></div>
+    <div class="desc-wrap" v-html="news.describe"></div>
     <div class="state">
-      <div class="zan">{{}}</div>
+      <div class="browse">
+        <van-icon name="fire" />
+        {{ news.browse }}
+      </div>
+      <div>
+        <template v-if="isZan">
+          <van-icon name="good-job-o" />
+        </template>
+        <template v-else>
+          <van-icon name="good-job" />
+        </template>
+        {{ news.praise }}
+      </div>
+      <div>
+        <van-icon name="chat-o" />
+        {{ news.browse }}
+      </div>
+      <div class="fenxiang"></div>
     </div>
+    <div class="share"></div>
     <div class="recommended">
       <div class="reco-title">
         <span>相关搜索</span>
@@ -30,7 +48,12 @@
 <script>
 export default {
   name: 'Newsdata',
-  props: ['user', 'news']
+  props: ['user', 'news'],
+  data () {
+    return {
+      isZan: true
+    }
+  }
 
 }
 </script>
@@ -56,8 +79,8 @@ export default {
     align-items: center;
   }
   .user-img {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     overflow: hidden;
   }
@@ -78,6 +101,39 @@ export default {
   }
   .describe {
     border: 1px solid black;
+  }
+  .desc-wrap {
+    margin-top: 10px;
+  }
+  .state {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .state div {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .state div:nth-of-type(1) {
+    margin-left: 5px;
+  }
+  .state .van-icon {
+    font-size: 22px;
+  }
+  .reco-title {
+    font-size: 16px;
+    color: #bdbdbd;
+  }
+  .reco-title span:after {
+    content: '';
+    width: 2px;
+    height: 100%;
+    background: #e00;
   }
 }
 </style>
