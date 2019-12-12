@@ -6,7 +6,11 @@
     <!-- pc端 -->
     <div class="works">
       <div class="student-works">
+<<<<<<< HEAD
         <van-image :src="pcImgUrl" width="100%">
+=======
+        <van-image :src="pcImgUrl" style="width:100%">
+>>>>>>> 6a797a9f21906cdf08e15cfd2a498e707ff2bc8c
           <template v-slot:loading>
             <van-loading type="spinner" size="20" />
           </template>
