@@ -77,7 +77,13 @@ export default {
   data () {
     return {
       listnews: [{
-        id: 1, praise: 39, browse: 23, comments: 23, type: 1, title: '品贤画室招生呐！', title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../assets/images/art/art1.jpg'), imgUrls: [{ id: 1, imgUrl: require('../../assets/images/art/art1.jpg') }, { id: 2, imgUrl: require('../../assets/images/art/art1.jpg') }, { id: 3, imgUrl: require('../../assets/images/art/art1.jpg') }], info: 1, time: '2019-12-12'
+        id: 1, praise: 39, browse: 23, comments: 23, type: 1, title: '品贤画室招生呐！', title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../assets/images/art/art1.jpg'), 
+        imgUrls: [
+          { id: 1, imgUrl: require('../../assets/images/art/art1.jpg') },
+          { id: 2, imgUrl: require('../../assets/images/art/art1.jpg') },
+          { id: 3, imgUrl: require('../../assets/images/art/art1.jpg') }
+          ], 
+          info: 1, time: '2019-12-12'
       }, {
         id: 2, praise: 39, browse: 34, comments: 23, type: 1, title: '品贤画室招生呐！', title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../assets/images/art/art1.jpg'), imgUrls: [{ id: 1, imgUrl: require('../../assets/images/art/art1.jpg') }], info: 1, time: '2019-12-12'
       }, {

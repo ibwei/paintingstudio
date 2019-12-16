@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
-    <div class="left">
-      <van-icon name="down" />
+    <div class="left" @click="huitui">
+      <van-icon name="arrow-left" />
     </div>
     <div class="right">
       <van-icon name="ellipsis" />
@@ -11,7 +11,11 @@
 
 <script>
 export default {
-
+  methods: {
+    huitui () {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 
@@ -25,13 +29,12 @@ export default {
   background: #f5f5f5;
   padding: 2px 0px;
   position: fixed;
-  top: 50px;
+  top: 0px;
 }
 .van-icon {
   font-size: 22px;
 }
 .left {
-  transform: rotate(90deg);
   margin-left: 2px;
 }
 .right {

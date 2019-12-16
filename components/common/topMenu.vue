@@ -1,5 +1,5 @@
 <template>
-  <div class="top-menu">
+  <div v-show="topbarShow || !isPhone" class="top-menu">
     <div class="phone-nav">
       <van-nav-bar
         title="标题"
@@ -229,7 +229,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['isPhone']) // 加载设备类型
+    ...mapState(['isPhone', 'topbarShow'])// 加载设备类型;
   },
   created () {
     if (process.client) {

@@ -17,29 +17,29 @@
     </div>
     <div class="desc-wrap" v-html="news.describe"></div>
     <div class="state">
-      <div class="browse">
-        <van-icon name="fire" />
-        {{ news.browse }}
+      <div class="state-left">
+        <div class="browse">
+          <van-icon name="fire" />
+          {{ news.browse }}
+        </div>
+        <div>
+          <template v-if="isZan">
+            <van-icon name="good-job-o" />
+          </template>
+          <template v-else>
+            <van-icon name="good-job" />
+          </template>
+          {{ news.praise }}
+        </div>
+        <div>
+          <van-icon name="chat-o" />
+          {{ news.browse }}
+        </div>
       </div>
-      <div>
-        <template v-if="isZan">
-          <van-icon name="good-job-o" />
-        </template>
-        <template v-else>
-          <van-icon name="good-job" />
-        </template>
-        {{ news.praise }}
-      </div>
-      <div>
-        <van-icon name="chat-o" />
-        {{ news.browse }}
-      </div>
-      <div class="fenxiang"></div>
-    </div>
-    <div class="share"></div>
-    <div class="recommended">
-      <div class="reco-title">
-        <span>相关搜索</span>
+      <div class="state-right">
+        <div class="fenxiang">
+          <van-icon name="star" />分享
+        </div>
       </div>
     </div>
   </div>
@@ -65,7 +65,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0px 10px;
   }
   .title {
     font-size: 18px;
@@ -109,7 +108,7 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     margin-top: 20px;
   }
@@ -134,6 +133,9 @@ export default {
     width: 2px;
     height: 100%;
     background: #e00;
+  }
+  .fenxiang {
+    margin-right: 15px;
   }
 }
 </style>
