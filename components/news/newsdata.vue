@@ -22,7 +22,7 @@
           <van-icon name="fire" />
           {{ news.browse }}
         </div>
-        <div>
+        <div @click="handlerClickZan">
           <template v-if="isZan">
             <van-icon name="good-job-o" />
           </template>
@@ -52,6 +52,11 @@ export default {
   data () {
     return {
       isZan: true
+    }
+  },
+  methods: {
+    handlerClickZan () {
+      this.isZan = !this.isZan;
     }
   }
 

@@ -2,7 +2,7 @@
   <div class="nav-bar-wrap">
     <div class="icon left">&#xe645;</div>
     <div class="srk">
-      <van-field v-model="value" placeholder="请输入用户名" right-icon="smile-o" />
+      <van-field v-model="value" placeholder="我也来说两句……" right-icon="smile-o" />
     </div>
     <div class="icon-wrap">
       <van-icon name="comment-o" info="99+" />
@@ -14,7 +14,11 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      value: ''
+    }
+  }
 }
 </script>
 
@@ -43,7 +47,7 @@ export default {
   margin-right: 5px;
 }
 .sc {
-  margin-right: ;
+  margin-right: 5px;
 }
 .van-cell {
   padding: 4px 16px;
