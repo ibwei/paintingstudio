@@ -26,8 +26,12 @@ export default {
         { color: '#f2826a', plain: true },
         { color: '#7232dd', plain: false },
         { color: '#7232dd', plain: true },
-        { color: 'rgb(228,249,238)', plain: true },
+        { color: '#3bd093', plain: false },
         { color: '#1989FA', plain: true },
+        { color: 'rgb(7,193,96)', plain: false },
+        { color: '#1989FA', plain: true },
+        { color: '#f6740b', plain: false },
+        { color: '#593ed0', plain: true },
         { color: 'rgb(7,193,96)', plain: false },
         { color: '#1989FA', plain: true }
       ]
@@ -38,7 +42,7 @@ export default {
     const infosLength = this.infos.length;
     this.$nextTick(() => {
       for (let i = 0; i < infosLength; i++) {
-        let random = Math.floor(Math.random() * colorsLength);
+        const random = Math.floor(Math.random() * colorsLength);
         const temp = { info: this.infos[i], ...this.colors[random] };
         this.taglist.push(temp);
       }

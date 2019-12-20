@@ -48,7 +48,6 @@ import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
 import teachers from '../components/works/teachers';
 import paintIntroduce from '../components/index/paintIntroduce';
-import worksCarous from '../components/index/worksCarousel';
 import paintAffaris from '../components/index/paintAffaris';
 import worksCarousel from '../components/index/worksCarousel';
 import MessageBoard from '../components/common/messageBoard';
@@ -71,9 +70,9 @@ export default {
   data () {
     return {
       Color
-    };
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

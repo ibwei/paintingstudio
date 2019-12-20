@@ -6,7 +6,7 @@
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
     <!-- 底部标题栏 -->
-    <div class="tabbar-menu">
+    <div class="tabbar-menu" v-show="tabbarShow || !isPhone">
       <van-tabbar
         v-model="currentMenuIndex"
         :z-index="99999"
@@ -33,23 +33,18 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
 import { Color } from '../config/color'
 import topMenu from '../components/common/topMenu';
-import bottomFooter from '../components/common/bottomFooter';
 import sticky from '../components/common/sticky';
 import scrollTop from '../components/common/scrollTop';
 import { isPhone } from '../utils/index';
-import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'Default',
   components: {
     topMenu,
-    bottomFooter,
     sticky,
     scrollTop
-  },
-  computed: {
-    ...mapState(['menuIndex', 'isPhone']),
   },
   data () {
     return {
@@ -59,6 +54,9 @@ export default {
       Color,
       wechatQRCodeshow: false
     };
+  },
+  computed: {
+    ...mapState(['menuIndex', 'isPhone', 'tabbarShow'])
   },
   created () {
     if (process.client) {

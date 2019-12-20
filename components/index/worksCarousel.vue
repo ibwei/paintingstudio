@@ -31,9 +31,7 @@
             v-show="showImages"
             slot="indicator"
             class="custom-indicator"
-          >
-{{ currentIndex }}/ {{ imgLength }}
-</div>
+          >{{ currentIndex }}/ {{ imgLength }}</div>
         </van-swipe>
       </div>
     </div>
