@@ -1,14 +1,13 @@
 // vuex存储全局状态数量
 export const state = () => ({
-
     // 是否处于手机模式
     isPhone: false,
     // 顶部菜单栏的激活项
     menuIndex: 0,
-    //底部菜单是否显示
+    // 底部菜单是否显示
     tabbarShow: true,
-    //顶部菜单是否显示
-    topbarShow: true,
+    // 顶部菜单是否显示
+    topbarShow: true
 })
 
 export const mutations = {

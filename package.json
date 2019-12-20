@@ -17,6 +17,7 @@
         "@nuxtjs/axios": "^5.8.0",
         "ant-design-vue": "^1.1.10",
         "apexcharts": "^3.8.6",
+        "axios": "^0.19.0",
         "cross-env": "^5.2.0",
         "import-lazy": "^4.0.0",
         "koa": "^2.6.2",
