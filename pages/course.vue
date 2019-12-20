@@ -89,7 +89,7 @@ export default {
   width: 130px;
   background: #fafafa;
   position: relative;
-  z-index: 99999;
+  z-index: 999;
   top: -2px;
   height: calc(100vh - 90px);
 }
