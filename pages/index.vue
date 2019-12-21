@@ -43,6 +43,7 @@
 </template>
 
 <script>
+
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
@@ -54,7 +55,19 @@ import MessageBoard from '../components/common/messageBoard';
 import paintingEnvironment from '../components/index/paintingEnvironment';
 import BottomFooter from '../components/common/bottomFooter'
 import { Color } from '../config/color';
+import { Api } from '../api/index'
 export default {
+  /**  
+   * 获取服务端渲染数据
+   */
+
+  async asyncData ({ $axios }) {
+    const { data } = await $axios({
+      method: 'POST',
+      url: Api.getPaintingInfo,    })
+    return { paintingInfo: data.data }
+  },
+
   components: {
     carousel,
     paintIntroduce,
@@ -71,6 +84,9 @@ export default {
     return {
       Color
     }
+  },
+  created () {
+    console.log(this.paintingInfo)
   }
 }
 </script>
