@@ -8,7 +8,9 @@
         background="rgba(244,205,205,1)"
         left-icon="volume-o"
         :scrollable="true"
-      >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
+      >
+        品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
+      </van-notice-bar>
     </div>
 
     <!-- 轮播图 -->
@@ -43,6 +45,7 @@
 </template>
 
 <script>
+
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
@@ -54,7 +57,9 @@ import MessageBoard from '../components/common/messageBoard';
 import paintingEnvironment from '../components/index/paintingEnvironment';
 import BottomFooter from '../components/common/bottomFooter'
 import { Color } from '../config/color';
+import { Api } from '../api/index'
 export default {
+
   components: {
     carousel,
     paintIntroduce,
@@ -72,9 +77,23 @@ export default {
       Color
     }
   },
+  /**
+   * 获取服务端渲染数据
+   */
+
   async asyncData ({ $axios }) {
-    const { data } = await $axios.get('http://127.0.0.1/api/coursel/courselBannerList')
-    return { carouselList: data.data }
+    // 获取画室信息
+    const paintingInfo = await $axios({ method: 'POST',
+      url: Api.getPaintingInfo });
+      // 获取前台轮播图
+    const bannerList = await $axios.get(Api.courselBannerList);
+    return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data }
+  },
+  created () {
+    if (process.client) {
+
+    }
+    console.log(this.paintingInfo)
   }
 }
 </script>

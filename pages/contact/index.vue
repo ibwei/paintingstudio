@@ -29,9 +29,9 @@
           required
           @blur="checkPhone('phone')"
         />
-        <van-field v-model="weChat" label="微 信" placeholder="您的的微信号" />
+        <van-field v-model="email" label="邮箱" placeholder="强烈建议您填写邮箱" />
         <van-field
-          v-model="message"
+          v-model="content"
           rows="3"
           autosize
           label="留 言"
@@ -39,11 +39,12 @@
           maxlength="300"
           placeholder="留下您反馈内容与宝贵意见"
           show-word-limit
-          :error-message="error.cotent"
+          required
+          :error-message="error.content"
           @blur="checkPhone('content')"
         />
       </van-cell-group>
-      <van-button class="submit" size="large" @click="submit">提交信息</van-button>
+      <van-button class="submit" size="large" :loading="isloading" @click="submit">提交信息</van-button>
     </div>
     <v-title v-scroll-reveal.smooth="{easing:'ease-in'}" :init-title="initMap"></v-title>
     <!-- 插入地图 -->
@@ -54,6 +55,7 @@
 <script>
 import vTitle from '../../components/common/vTitle'
 import gMap from '../../components/common/gMap'
+import { Api } from '../../api//index'
 export default {
   components: {
     vTitle,
@@ -61,11 +63,14 @@ export default {
   },
   data () {
     return {
+      // 加载状态
+      isloading: false,
       // 表单绑定值
       name: '',
       phone: '',
-      weChat: '',
+      email: '',
       time: '',
+      content: '',
       message: '',
       error: {
         phone: '',
@@ -119,7 +124,25 @@ export default {
      * @return void
      */
     submit () {
-
+      this.isloading = true
+      this.$axios({
+        method: 'post',
+        url: Api.feedbackAdd,
+        data: {
+          name: this.name,
+          phone: this.phone,
+          email: this.email,
+          wechat: this.phone,
+          content: this.content
+        } }).then(() => {
+        this.isloading = false,
+        this.name = '',
+        this.phone = '',
+        this.content = '',
+        this.email = '',
+        this.$toast('反馈内容提交成功')
+      })
+        .catch(() => this.$toast('填写数据有误，请重新填写'))
     }
   }
 };
