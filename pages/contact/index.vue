@@ -12,8 +12,23 @@
       <v-title :init-title="initTtile"></v-title>
       <!-- 表单内容 -->
       <van-cell-group class="form">
-        <van-field v-model="name" label="姓 名" placeholder="您的姓名" label-class="name" required />
-        <van-field v-model="phone" label="电 话" placeholder="您的电话号码" required />
+        <van-field
+          v-model="name"
+          label="姓 名"
+          placeholder="您的姓名"
+          label-class="name"
+          required
+          :error-message="error.name"
+          @blur="checkPhone('name')"
+        />
+        <van-field
+          v-model="phone"
+          label="电 话"
+          placeholder="您的电话号码"
+          :error-message="error.phone"
+          required
+          @blur="checkPhone('phone')"
+        />
         <van-field v-model="weChat" label="微 信" placeholder="您的的微信号" />
         <van-field
           v-model="message"
@@ -24,6 +39,8 @@
           maxlength="300"
           placeholder="留下您反馈内容与宝贵意见"
           show-word-limit
+          :error-message="error.cotent"
+          @blur="checkPhone('content')"
         />
       </van-cell-group>
       <van-button class="submit" size="large" @click="submit">提交信息</van-button>
@@ -50,6 +67,11 @@ export default {
       weChat: '',
       time: '',
       message: '',
+      error: {
+        phone: '',
+        name: '',
+        content: ''
+      },
       // 意见反馈
       initTtile: {
         cnTitle: '联系我们',
@@ -67,12 +89,37 @@ export default {
     };
   },
   methods: {
+
+    checkPhone (type) {
+      const typeTable = {
+        phone: '电话',
+        name: '姓名',
+        content: '反馈内容'
+      }
+      let reg;
+      switch (type) {
+        case 'phone':
+          reg = /^[1]\d{10}/;
+          break;
+        case 'name':
+          reg = /\S{2,10}/;
+          break;
+        case 'content':
+          reg = /\S{2,300}/;
+      }
+
+      if (!reg.test(this[type])) {
+        this.error = { ...this.error, [type]: typeTable[type] + '格式错误!' };
+      } else {
+        this.error = { ...this.error, [type]: '' };
+      }
+    },
     /**
      * submit 提交所有数据
      * @return void
      */
     submit () {
-      this.$toast('提交了所有数据');
+
     }
   }
 };

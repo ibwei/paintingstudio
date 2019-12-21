@@ -12,7 +12,7 @@
     </div>
 
     <!-- 轮播图 -->
-    <carousel v-scroll-reveal.scaleUp="{ scale: 0.15 }" />
+    <carousel v-scroll-reveal.scaleUp="{ scale: 0.15 }" :list="carouselList" />
 
     <!-- 招生详情 -->
     <recruitment v-scroll-reveal.scaleUp="{ scale: 0.15 }" />
@@ -71,6 +71,10 @@ export default {
     return {
       Color
     }
+  },
+  async asyncData ({ $axios }) {
+    const { data } = await $axios.get('http://127.0.0.1/api/coursel/courselBannerList')
+    return { carouselList: data.data }
   }
 }
 </script>
