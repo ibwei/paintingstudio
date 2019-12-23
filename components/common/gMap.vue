@@ -1,15 +1,26 @@
 <template>
   <div class="amap-page-container">
     <div :style="{ width: '100%', height: '300px' }">
-      <el-amap vid="amap" :zoom="zoom" visible :plugin="plugin" class="amap-demo" :center="center">
+      <el-amap
+        vid="amap"
+        :zoom="zoom"
+        visible
+        :plugin="plugin"
+        class="amap-demo"
+        :center="center"
+      >
         <el-amap-marker :label="label"></el-amap-marker>
       </el-amap>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 export default {
-  data () {
+  computed: {
+    ...mapState(['paintingInfo'])
+  },
+  data() {
     return {
       zoom: 14, // 缩放比例
       label: {
@@ -34,30 +45,17 @@ export default {
           zoomToAccuracy: true, // 定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：f
           extensions: 'all',
           pName: 'Geolocation'
-          // 自动定位
-          // events: {
-          //   init(o) {
-          //     // o 是高德地图定位插件实例
-          //     o.getCurrentPosition((status, result) => {
-          //       console.log(result);
-          //       if (result && result.position) {
-          //         self.lng = result.position.lng;
-          //         self.lat = result.position.lat;
-          //         self.center = [self.lng, self.lat];
-          //         self.loaded = true;
-          //         self.$nextTick();
-          //       }
-          //     });
-          //   }
-          // }
         }
       ]
     };
+  },
+  mounted() {
+    this.center = this.paintingInfo.address_location.split(',');
   }
 };
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .amap-page-container {
   margin-top: 20px;
   width: 100%;

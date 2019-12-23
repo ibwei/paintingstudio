@@ -8,7 +8,8 @@
         background="rgba(244,205,205,1)"
         left-icon="volume-o"
         :scrollable="true"
-      >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
+        >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar
+      >
     </div>
 
     <!-- 轮播图 -->
@@ -35,15 +36,14 @@
     <advantage v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部菜单栏 -->
-    <message-board v-scroll-reveal.smooth="{easing:'ease-in'}" />
+    <message-board v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部footer -->
-    <bottom-footer></bottom-footer>
+    <bottom-footer :paintingInfo="paintingInfo[0]"></bottom-footer>
   </div>
 </template>
 
 <script>
-
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
@@ -53,19 +53,21 @@ import paintAffaris from '../components/index/paintAffaris';
 import worksCarousel from '../components/index/worksCarousel';
 import MessageBoard from '../components/common/messageBoard';
 import paintingEnvironment from '../components/index/paintingEnvironment';
-import BottomFooter from '../components/common/bottomFooter'
+import BottomFooter from '../components/common/bottomFooter';
 import { Color } from '../config/color';
-import { Api } from '../api/index'
+import { Api } from '../api/index';
+import { mapMutations } from 'vuex';
 export default {
-  /**  
+  /**
    * 获取服务端渲染数据
    */
 
-  async asyncData ({ $axios }) {
+  async asyncData({ $axios }) {
     const { data } = await $axios({
       method: 'POST',
-      url: Api.getPaintingInfo,    })
-    return { paintingInfo: data.data }
+      url: Api.getPaintingInfo
+    });
+    return { paintingInfo: data.data };
   },
 
   components: {
@@ -80,15 +82,25 @@ export default {
     worksCarousel,
     BottomFooter
   },
-  data () {
+  data() {
     return {
       Color
+    };
+  },
+  created() {
+    if (process.client) {
+      this.setPaintingInfo(this.paintingInfo[0]);
+      localStorage.setItem(
+        'paintingInfo',
+        JSON.stringify(this.paintingInfo[0])
+      );
     }
   },
-  created () {
-    console.log(this.paintingInfo)
+  mounted() {},
+  methods: {
+    ...mapMutations(['setPaintingInfo'])
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

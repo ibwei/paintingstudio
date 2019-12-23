@@ -17,7 +17,9 @@
         <van-tabbar-item icon="wap-home-o" to="/">品贤画室</van-tabbar-item>
         <van-tabbar-item icon="hot-o" to="/course">课程介绍</van-tabbar-item>
         <van-tabbar-item icon="photo-o" to="/news">画室动态</van-tabbar-item>
-        <van-tabbar-item icon="comment-circle-o" to="/contact">关于我们</van-tabbar-item>
+        <van-tabbar-item icon="comment-circle-o" to="/contact"
+          >关于我们</van-tabbar-item
+        >
       </van-tabbar>
     </div>
     <!-- 右侧悬浮快捷入口 -->
@@ -25,7 +27,18 @@
       <sticky @wechat-click="showQRCode"></sticky>
     </div>
     <van-popup v-model="wechatQRCodeshow">
-      <img src="../assets/images/weixin.png" class="qr-code" width="150" height="150" alt />
+      <template v-if="paintingInfo && paintingInfo.er_code">
+        <img
+          :src="paintingInfo.er_code"
+          class="qr-code"
+          width="150"
+          height="150"
+          alt
+        />
+      </template>
+      <template v-else>
+        <span>加载中...</span>
+      </template>
     </van-popup>
     <!-- 回到顶部 -->
     <scroll-top />
@@ -34,7 +47,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import { Color } from '../config/color'
+import { Color } from '../config/color';
 import topMenu from '../components/common/topMenu';
 import sticky from '../components/common/sticky';
 import scrollTop from '../components/common/scrollTop';
@@ -46,7 +59,7 @@ export default {
     sticky,
     scrollTop
   },
-  data () {
+  data() {
     return {
       currentMenuIndex: 0,
       currentPath: '/',
@@ -56,44 +69,48 @@ export default {
     };
   },
   computed: {
-    ...mapState(['menuIndex', 'isPhone', 'tabbarShow'])
+    ...mapState(['menuIndex', 'isPhone', 'tabbarShow', 'paintingInfo'])
   },
-  created () {
+  created() {
     if (process.client) {
       this.currentPath = this.$route.path;
       this.checkDevice();
+      const paint = localStorage.getItem('paintingInfo');
+      if (paint) {
+        this.setPaintingInfo(JSON.parse(paint));
+      }
     }
   },
-  mounted () {
+  mounted() {
     window.addEventListener('resize', this.checkDevice);
   },
-  destroyed () {
+  destroyed() {
     window.removeEventListener('resize', this.checkDevice);
   },
   watch: {
-    menuIndex (newV, oldV) {
+    menuIndex(newV, oldV) {
       this.currentMenuIndex = newV;
     }
   },
   methods: {
-    ...mapMutations(['changeIsPhone']), // 利用vuex的辅助函数把changeIsPhone代理到当前组件,
+    ...mapMutations(['changeIsPhone', 'setPaintingInfo']), // 利用vuex的辅助函数把changeIsPhone代理到当前组件,
     /**
-      * @method 检查是什么设备
-      */
-    checkDevice () {
+     * @method 检查是什么设备
+     */
+    checkDevice() {
       // 在客户端才能获取到dom,才能判断是否是移动设备
       if (process.client) {
         const result = isPhone();
         this.changeIsPhone(result); // 将结果写入到vuex仓库里
       }
     },
-    hideSticky () {
+    hideSticky() {
       this.stickyShow = false;
     },
-    showSticky () {
+    showSticky() {
       this.stickyShow = true;
     },
-    showQRCode () {
+    showQRCode() {
       if (this.wechatQRCodeshow === true) {
         this.wechatQRCodeshow = false;
         return;
@@ -101,7 +118,6 @@ export default {
       this.wechatQRCodeshow = !this.wechatQRCodeshow;
     }
   }
-
 };
 </script>
 
