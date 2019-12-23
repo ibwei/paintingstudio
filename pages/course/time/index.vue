@@ -1,21 +1,21 @@
 <template>
-  <div class="time-wrap">
+  <div class="time-wrap animated bounceInDown delay-0.5s">
     <van-steps :active="active" direction="vertical">
       <van-step v-for="(item,index) of courseSchedual" :key="index">
         <div class="date">
-          <div class="day-name">{{item.name}}</div>
+          <div class="day-name">{{ item.name }}</div>
           <div class="day-detail" :class="{'active':index===active}">
             <div class="day">
               <div class="time">上午</div>
-              <div class="available">{{getCourseStatus(item.course[0])}}</div>
+              <div class="available">{{ getCourseStatus(item.course[0]) }}</div>
             </div>
             <div class="day">
               <div class="time">下午</div>
-              <div class="available">{{getCourseStatus(item.course[1])}}</div>
+              <div class="available">{{ getCourseStatus(item.course[1]) }}</div>
             </div>
             <div class="day">
               <div class="time">晚上</div>
-              <div class="available">{{getCourseStatus(item.course[2])}}</div>
+              <div class="available">{{ getCourseStatus(item.course[2]) }}</div>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default {
       return '预约';
     },
     getToday () {
-      let date = new Date().getDay();
+      const date = new Date().getDay();
       this.active = date;
       console.log(date)
     }
@@ -125,8 +125,9 @@ export default {
   .time,
   .available {
     border: none;
-    font-weight: bold;
-    font-size: 16px;
+    font-weight: 400;
+    color: #07c160;
+    font-size: 14px;
   }
   box-sizing: border-box;
   margin-top: 3px;

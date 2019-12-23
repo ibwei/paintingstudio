@@ -14,3 +14,5 @@ export const Color = {
     homebuttonbg: '#c4c4c4',
     homemenubot: '#FD7168'
 };
+
+export const tagsColor = ['danger', 'success', 'primary', 'warning'];

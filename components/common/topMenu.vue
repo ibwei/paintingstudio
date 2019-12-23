@@ -6,7 +6,7 @@
         left-text="logo"
         right-text="按钮"
         :fixed="true"
-        :z-index="99"
+        :z-index="99999"
         @click-left="onClickLeft"
         @click-right="onClickRight"
       >

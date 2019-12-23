@@ -1,8 +1,12 @@
 <template>
   <div class="category">
-    <div v-for="(category,index) of categoryList" :key="index" class="course-item">
+    <div
+      v-for="(category,index) of categoryList"
+      :key="index"
+      class="course-item animated bounceInDown delay-0.5s"
+    >
       <div class="category-title">{{ category.categoryName }}</div>
-      <div class="content-list animated bounceInDown delay-0.5s">
+      <div class="content-list">
         <div v-for="(course,courseIndex) of category.courseList" :key="courseIndex" class="content">
           <div class="top">
             <div class="t-left">

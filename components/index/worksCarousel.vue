@@ -15,9 +15,9 @@
       <!-- 手机端 -->
       <div class="student-works-phone">
         <van-swipe :autoplay="5000" @change="onChange">
-          <van-swipe-item v-for="(item, index) of worksImg" :key="index">
+          <van-swipe-item v-for="(item, index) of studentWorksList" :key="index">
             <van-image
-              :src="item.imgUrl"
+              :src="item.url"
               class="carouselImg"
               @load="onLoad()"
               @click="showPreview(index)"
@@ -31,7 +31,7 @@
             v-show="showImages"
             slot="indicator"
             class="custom-indicator"
-          >{{ currentIndex }}/ {{ imgLength }}</div>
+          >{{ currentIndex }}/ {{ studentWorksList.length }}</div>
         </van-swipe>
       </div>
     </div>
@@ -54,6 +54,14 @@ export default {
   components: {
     vTitle
   },
+  props: {
+    studentWorksList: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   data () {
     return {
       // 学生作品标题
@@ -71,37 +79,16 @@ export default {
       pcImgUrl: require('../../assets/images/index/a42.png'),
       /** 手机端 */
       showImages: false,
-      worksImg: [
-        {
-          index: 1,
-          imgUrl: require('../../assets/images/index/worksImg01.png')
-        },
-        {
-          index: 2,
-          imgUrl: require('../../assets/images/index/worksImg02.png')
-        },
-        {
-          index: 3,
-          imgUrl: require('../../assets/images/index/worksImg03.png')
-        },
-        {
-          index: 4,
-          imgUrl: require('../../assets/images/index/worksImg04.png')
-        }
-      ]
     };
   },
   computed: {
     ...mapState(['isPhone']),
     /** 图片数量 */
-    imgLength () {
-      return this.worksImg.length;
-    },
     /** 图片地址数组 */
     imgUrls () {
       const arr = [];
-      this.worksImg.forEach((item) => {
-        arr.push(item.imgUrl);
+      this.studentWorksList.forEach((item) => {
+        arr.push(item.url);
       });
       return arr;
     }
@@ -151,6 +138,7 @@ export default {
 }
 .carouselImg {
   width: 100%;
+  max-height: 250px;
 }
 .custom-indicator {
   position: absolute;

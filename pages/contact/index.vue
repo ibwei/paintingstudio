@@ -12,11 +12,26 @@
       <v-title :init-title="initTtile"></v-title>
       <!-- 表单内容 -->
       <van-cell-group class="form">
-        <van-field v-model="name" label="姓 名" placeholder="您的姓名" label-class="name" required />
-        <van-field v-model="phone" label="电 话" placeholder="您的电话号码" required />
-        <van-field v-model="weChat" label="微 信" placeholder="您的的微信号" />
         <van-field
-          v-model="message"
+          v-model="name"
+          label="姓 名"
+          placeholder="您的姓名"
+          label-class="name"
+          required
+          :error-message="error.name"
+          @blur="checkPhone('name')"
+        />
+        <van-field
+          v-model="phone"
+          label="电 话"
+          placeholder="您的电话号码"
+          :error-message="error.phone"
+          required
+          @blur="checkPhone('phone')"
+        />
+        <van-field v-model="email" label="邮箱" placeholder="强烈建议您填写邮箱" />
+        <van-field
+          v-model="content"
           rows="3"
           autosize
           label="留 言"
@@ -24,9 +39,12 @@
           maxlength="300"
           placeholder="留下您反馈内容与宝贵意见"
           show-word-limit
+          required
+          :error-message="error.content"
+          @blur="checkPhone('content')"
         />
       </van-cell-group>
-      <van-button class="submit" size="large" @click="submit">提交信息</van-button>
+      <van-button class="submit" size="large" :loading="isloading" @click="submit">提交信息</van-button>
     </div>
     <v-title v-scroll-reveal.smooth="{easing:'ease-in'}" :init-title="initMap"></v-title>
     <!-- 插入地图 -->
@@ -37,6 +55,7 @@
 <script>
 import vTitle from '../../components/common/vTitle'
 import gMap from '../../components/common/gMap'
+import { Api } from '../../api//index'
 export default {
   components: {
     vTitle,
@@ -44,12 +63,20 @@ export default {
   },
   data () {
     return {
+      // 加载状态
+      isloading: false,
       // 表单绑定值
       name: '',
       phone: '',
-      weChat: '',
+      email: '',
       time: '',
+      content: '',
       message: '',
+      error: {
+        phone: '',
+        name: '',
+        content: ''
+      },
       // 意见反馈
       initTtile: {
         cnTitle: '联系我们',
@@ -67,12 +94,55 @@ export default {
     };
   },
   methods: {
+
+    checkPhone (type) {
+      const typeTable = {
+        phone: '电话',
+        name: '姓名',
+        content: '反馈内容'
+      }
+      let reg;
+      switch (type) {
+        case 'phone':
+          reg = /^[1]\d{10}/;
+          break;
+        case 'name':
+          reg = /\S{2,10}/;
+          break;
+        case 'content':
+          reg = /\S{2,300}/;
+      }
+
+      if (!reg.test(this[type])) {
+        this.error = { ...this.error, [type]: typeTable[type] + '格式错误!' };
+      } else {
+        this.error = { ...this.error, [type]: '' };
+      }
+    },
     /**
      * submit 提交所有数据
      * @return void
      */
     submit () {
-      this.$toast('提交了所有数据');
+      this.isloading = true
+      this.$axios({
+        method: 'post',
+        url: Api.feedbackAdd,
+        data: {
+          name: this.name,
+          phone: this.phone,
+          email: this.email,
+          wechat: this.phone,
+          content: this.content
+        } }).then(() => {
+        this.isloading = false,
+        this.name = '',
+        this.phone = '',
+        this.content = '',
+        this.email = '',
+        this.$toast('反馈内容提交成功')
+      })
+        .catch(() => this.$toast('填写数据有误，请重新填写'))
     }
   }
 };

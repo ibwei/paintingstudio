@@ -8,12 +8,11 @@
         background="rgba(244,205,205,1)"
         left-icon="volume-o"
         :scrollable="true"
-        >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar
-      >
+      >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
     </div>
 
     <!-- 轮播图 -->
-    <carousel v-scroll-reveal.scaleUp="{ scale: 0.15 }" />
+    <carousel v-scroll-reveal.scaleUp="{ scale: 0.15 }" :list="carouselList" />
 
     <!-- 招生详情 -->
     <recruitment v-scroll-reveal.scaleUp="{ scale: 0.15 }" />
@@ -22,7 +21,7 @@
     <paintIntroduce v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 动态 -->
-    <paintAffaris v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <paintAffaris :articleList="articleList" v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
     <!-- 画室环境 -->
     <paintingEnvironment v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
@@ -30,7 +29,10 @@
     <teachers v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 学生作品 -->
-    <worksCarousel v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <worksCarousel
+      :studentWorksList="studentWorksList"
+      v-scroll-reveal.smooth="{ easing: 'ease-in' }"
+    />
 
     <!-- 优势 -->
     <advantage v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
@@ -62,14 +64,21 @@ export default {
    * 获取服务端渲染数据
    */
 
-  async asyncData({ $axios }) {
-    const { data } = await $axios({
-      method: 'POST',
-      url: Api.getPaintingInfo
-    });
-    return { paintingInfo: data.data };
-  },
+  /**
+ * 获取服务端渲染数据
+ */
 
+  async asyncData ({ $axios }) {
+    // 获取画室信息
+    const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
+    // 获取前台轮播图
+    const bannerList = await $axios.get(Api.courselBannerList);
+    // 获取首页画室动态列表
+    const studentWorksList = await $axios({ method: 'get', url: Api.getStudentWorksList, data: { start: 0, end: 30 } });
+    // 获取首页文章列表
+    const articleList = await $axios({ method: 'post', url: Api.getArticleList, data: { pageSize: 6, pageNum: 1 } })
+    return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data, articleList: articleList.data.data, studentWorksList: studentWorksList.data.data }
+  },
   components: {
     carousel,
     paintIntroduce,
@@ -82,13 +91,14 @@ export default {
     worksCarousel,
     BottomFooter
   },
-  data() {
+  data () {
     return {
       Color
     };
   },
-  created() {
+  created () {
     if (process.client) {
+      console.log(this.articleList)
       this.setPaintingInfo(this.paintingInfo[0]);
       localStorage.setItem(
         'paintingInfo',
@@ -96,11 +106,10 @@ export default {
       );
     }
   },
-  mounted() {},
   methods: {
-    ...mapMutations(['setPaintingInfo'])
+    ...mapMutations(['setPaintingInfo']),
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

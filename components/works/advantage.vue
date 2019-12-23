@@ -21,14 +21,6 @@
         </div>
       </div>
     </div>
-    <div id="button">
-      <van-button
-        :style="{ backgroundColor: button.color, color: '#fff' }"
-        class="button2"
-        size="large"
-      >{{ button.title }}</van-button>
-      <div class="button1">{{ button.title }}</div>
-    </div>
   </div>
 </template>
 
