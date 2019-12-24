@@ -3,8 +3,11 @@
     <div class="news-container">
       <div class="content">
         <div class="mid-content">
-          <vlabel v-if="isPhone"></vlabel>
-          <newslist v-if="isPhone"></newslist>
+          <!-- 手机端的label选项 -->
+          <vlabel></vlabel>
+          <!-- 手机端的内容 -->
+          <newslist></newslist>
+          <!-- PC端的主体内容 -->
           <mid-content></mid-content>
         </div>
         <div class="left-content">
@@ -46,11 +49,15 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
+.news-list {
+  display: none;
+}
+.pc-mid-content {
+  display: block;
+}
 .news-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 1200px;
   margin: 0px auto;
 }
 .left-content {
@@ -60,7 +67,19 @@ export default {
 .note_label {
   margin-top: 30px;
 }
+.label-wrap {
+  display: none;
+}
 @media screen and (max-width: 720px) {
+  .pc-mid-content {
+    display: none;
+  }
+  .left-content {
+    display: none;
+  }
+  .label-wrap {
+    display: block;
+  }
   .bread {
     display: none;
   }
@@ -68,6 +87,7 @@ export default {
     display: none;
   }
   .news-list {
+    display: flex;
     margin-top: 20px;
   }
 }

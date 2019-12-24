@@ -68,17 +68,8 @@ export default {
   width: 72px;
   font-size: 12px;
   cursor: pointer;
-}
-.btn:hover {
   color: #e00;
   border-color: #e00;
-}
-.number {
-  margin-top: 4px;
-}
-.label-list-wrap {
-  font-size: 12px;
-  cursor: pointer;
 }
 .label-word:hover {
   color: #fa7d3c;
