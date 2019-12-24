@@ -4,16 +4,15 @@
       <div class="c-one">
         <div class="phone">
           <van-icon size="20px" name="phone-circle-o" />
-          <a class="tel" href="tel:18883923917">18883923917</a>
+          <a class="tel" :href="phoneUrl">{{ paintingInfo.phone }}</a>
         </div>
         <div class="address">
-          <van-icon size="20px" name="location-o" />重庆·沙坪坝区·大学城
-          品贤画室
+          <van-icon size="20px" name="location-o" />{{ paintingInfo.address }}
         </div>
       </div>
       <div class="c-two">
         <div class="copyright">COPYRIGHT © 2019</div>
-        <div class="owner">版权所有：重庆品贤艺术培训中心</div>
+        <div class="owner">版权所有：{{ paintingInfo.name }}</div>
       </div>
     </div>
   </div>
@@ -21,12 +20,28 @@
 <script>
 export default {
   components: {},
-  props: {},
+  props: {
+    paintingInfo: {
+      type: Object,
+      default() {
+        return {
+          address: '重庆·沙坪坝区·大学城'
+        };
+      }
+    }
+  },
   data() {
-    return {};
+    return {
+      phoneUrl: ''
+    };
   },
   computed: {},
-  created() {},
+  created() {
+    if (process.client) {
+      console.log(this.paintingInfo);
+      this.phoneUrl = `tel:${this.paintingInfo.phone}`;
+    }
+  },
   mounted() {},
   methods: {}
 };

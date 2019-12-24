@@ -12,7 +12,7 @@
     </div>
 
     <!-- 轮播图 -->
-    <carousel v-scroll-reveal.scaleUp="{ scale: 0.15 }" />
+    <carousel v-scroll-reveal.scaleUp="{ scale: 0.15 }" :list="carouselList" />
 
     <!-- 招生详情 -->
     <recruitment v-scroll-reveal.scaleUp="{ scale: 0.15 }" />
@@ -21,7 +21,7 @@
     <paintIntroduce v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 动态 -->
-    <paintAffaris v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <paintAffaris :articleList="articleList" v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
     <!-- 画室环境 -->
     <paintingEnvironment v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
@@ -29,16 +29,19 @@
     <teachers v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 学生作品 -->
-    <worksCarousel v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <worksCarousel
+      :studentWorksList="studentWorksList"
+      v-scroll-reveal.smooth="{ easing: 'ease-in' }"
+    />
 
     <!-- 优势 -->
     <advantage v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部菜单栏 -->
-    <message-board v-scroll-reveal.smooth="{easing:'ease-in'}" />
+    <message-board v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部footer -->
-    <bottom-footer></bottom-footer>
+    <bottom-footer :paintingInfo="paintingInfo[0]"></bottom-footer>
   </div>
 </template>
 
@@ -52,9 +55,30 @@ import paintAffaris from '../components/index/paintAffaris';
 import worksCarousel from '../components/index/worksCarousel';
 import MessageBoard from '../components/common/messageBoard';
 import paintingEnvironment from '../components/index/paintingEnvironment';
-import BottomFooter from '../components/common/bottomFooter'
+import BottomFooter from '../components/common/bottomFooter';
 import { Color } from '../config/color';
+import { Api } from '../api/index';
+import { mapMutations } from 'vuex';
 export default {
+  /**
+   * 获取服务端渲染数据
+   */
+
+  /**
+ * 获取服务端渲染数据
+ */
+
+  async asyncData ({ $axios }) {
+    // 获取画室信息
+    const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
+    // 获取前台轮播图
+    const bannerList = await $axios.get(Api.courselBannerList);
+    // 获取首页画室动态列表
+    const studentWorksList = await $axios({ method: 'get', url: Api.getStudentWorksList, data: { start: 0, end: 30 } });
+    // 获取首页文章列表
+    const articleList = await $axios({ method: 'post', url: Api.getArticleList, data: { pageSize: 6, pageNum: 1 } })
+    return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data, articleList: articleList.data.data, studentWorksList: studentWorksList.data.data }
+  },
   components: {
     carousel,
     paintIntroduce,
@@ -70,7 +94,20 @@ export default {
   data () {
     return {
       Color
+    };
+  },
+  created () {
+    if (process.client) {
+      console.log(this.articleList)
+      this.setPaintingInfo(this.paintingInfo[0]);
+      localStorage.setItem(
+        'paintingInfo',
+        JSON.stringify(this.paintingInfo[0])
+      );
     }
+  },
+  methods: {
+    ...mapMutations(['setPaintingInfo']),
   }
 }
 </script>

@@ -2,16 +2,28 @@
   <div class="sticky-wrap">
     <div class="function">
       <div v-show="!isUnfold" class="function-item" @click="openWechat">
-        <span class="iconfont icon" :style="{color:'#1aad19',fontSize:iconSize1+'px'}">&#xe632;</span>
+        <span
+          class="iconfont icon"
+          :style="{ color: '#1aad19', fontSize: iconSize1 + 'px' }"
+          >&#xe632;</span
+        >
       </div>
       <div v-show="!isUnfold" class="function-item">
-        <a class="tel" href="tel:18883923917">
-          <span class="icon" :style="{color:'#cf2729',fontSize:iconSize1+'px'}">&#xe626;</span>
+        <a class="tel" :href="phoneUlr">
+          <span
+            class="icon"
+            :style="{ color: '#cf2729', fontSize: iconSize1 + 'px' }"
+            >&#xe626;</span
+          >
         </a>
       </div>
-      <div v-show="(!isUnfold)&&(!isPhone)" class="function-item">
-        <a href="tencent://message/?uin=785486779&Site=sc.chinaz.com&Menu=yes">
-          <span class="icon" :style="{color:'#4889f7',fontSize:iconSize1+'px'}">&#xe657;</span>
+      <div v-show="!isUnfold && !isPhone" class="function-item">
+        <a :href="qqUrl">
+          <span
+            class="icon"
+            :style="{ color: '#4889f7', fontSize: iconSize1 + 'px' }"
+            >&#xe657;</span
+          >
         </a>
       </div>
       <div v-show="!isUnfold" class="function-item" @click="changeIsUnfold">
@@ -28,34 +40,39 @@ import { mapState } from 'vuex';
 export default {
   components: {},
   props: {},
-  data () {
+  data() {
     return {
       iconSize: 20,
       iconSize1: 30,
-      isUnfold: false
+      isUnfold: false,
+      qqUrl: '',
+      phoneUlr: ''
     };
   },
   computed: {
-    ...mapState(['isPhone'])
+    ...mapState(['isPhone', 'paintingInfo'])
   },
   watch: {
-    isPhone () {
+    isPhone() {
       this.changeSize();
     }
   },
-  created () {
-  },
-  mounted () {
-
+  mounted() {
+    if (process.client) {
+      this.qqUrl = `tencent://message/?uin=${
+        this.paintingInfo ? this.paintingInfo.qq : ''
+      }&Site=sc.chinaz.com&Menu=yes`;
+      this.phoneUlr = `tel:${this.paintingInfo ? this.paintingInfo.phone : ''}`;
+    }
   },
   methods: {
-    changeIsUnfold () {
+    changeIsUnfold() {
       this.isUnfold = !this.isUnfold;
     },
-    openWechat () {
+    openWechat() {
       this.$emit('wechat-click');
     },
-    changeSize () {
+    changeSize() {
       if (this.isPhone === true) {
         this.iconSize = 20;
         this.iconSize1 = 30;

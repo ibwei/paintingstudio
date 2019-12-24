@@ -2,34 +2,19 @@
   <div class="lunbo">
     <div class="carasel-wrap">
       <div class="carasel-img">
-        <div v-for="(item, index) of carasels" :key="index" class="img">
+        <div v-for="(item, index) of list" :key="index" class="img">
           <transition name="fade">
             <a v-show="index === currentIndex - 1">
-              <img :src="item.imgUrl" width="100%" />
+              <img :src="item.url" width="100%" />
             </a>
           </transition>
         </div>
-        <div class="hide1">
-          <a>
-            <img :src="carasel.imgUrl" width="100%" />
-          </a>
-        </div>
-      </div>
-
-      <div class="carasel-button">
-        <span
-          v-for="(item, index) of carasels"
-          :key="index"
-          class="btn"
-          :class="{ active: index === currentIndex - 1 }"
-          @click="handlerCheckBtn(item.index)"
-        ></span>
       </div>
     </div>
     <div class="swiper">
       <van-swipe :autoplay="3000">
-        <van-swipe-item v-for="(item, index) in carasels" :key="index">
-          <img :src="isPhone?item.phoneImg:item.imgUrl" class="item-img" />
+        <van-swipe-item v-for="(item, index) in list" :key="index">
+          <img :src="item.url" class="item-img" @click="navTo(item.routerUrl)" />
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -39,34 +24,39 @@
 <script>
 import { mapState } from 'vuex';
 export default {
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   computed: {
-    ...mapState(['isPhone']),
+    ...mapState(['isPhone'])
   },
   data () {
     return {
       titmer1: '',
       titmer2: null,
-      currentIndex: 1, // 当前的index
-      carasels: [
-        { index: 1, imgUrl: require('../../assets/images/carasel/1.jpg'), phoneImg: require('../../assets/images/carasel/f1.jpg') },
-        { index: 2, imgUrl: require('../../assets/images/carasel/2.jpg'), phoneImg: require('../../assets/images/carasel/f2.jpg') },
-        { index: 3, imgUrl: require('../../assets/images/carasel/3.jpg'), phoneImg: require('../../assets/images/carasel/f3.jpg') },
-        { index: 4, imgUrl: require('../../assets/images/carasel/4.jpg'), phoneImg: require('../../assets/images/carasel/f4.jpg') },
-        { index: 5, imgUrl: require('../../assets/images/carasel/5.jpg'), phoneImg: require('../../assets/images/carasel/f5.jpg') }
-      ],
-      carasel: {
-        index: 1,
-        imgUrl: require('../../assets/images/carasel/2.jpg')
-      }
+      currentIndex: 1 // 当前的index
+
     };
   },
+
   mounted () {
+    console.log(this.list)
     this.titmer1 = setInterval(this.get, 3000);
   },
   beforeDestroy () {
     clearInterval(this.titmer1);
   },
   methods: {
+    navTo (url) {
+      if (url) {
+        this.$router.push({ path: url });
+      }
+    },
     handlerCheckBtn (index) {
       this.currentIndex = index;
       clearInterval(this.titmer1);
@@ -80,7 +70,7 @@ export default {
       }, 5000);
     },
     get () {
-      if (this.currentIndex === this.carasels.length) {
+      if (this.currentIndex === this.list.length) {
         this.currentIndex = 1;
       } else {
         this.currentIndex++;
@@ -154,13 +144,9 @@ export default {
 }
 
 .swiper {
-  display: none;
   width: 100%;
 }
 @media screen and (max-width: 720px) {
-  .carasel-wrap {
-    display: none;
-  }
   .swiper {
     display: block;
     height: 100%;

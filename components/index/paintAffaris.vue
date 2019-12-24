@@ -18,25 +18,26 @@
       </div>
       <!-- 画室动态列表 -->
       <van-list>
-        <div v-for="item of list" :key="item.id" @click="goDetail(item.id)">
+        <div v-for="item of articleList" :key="item.id" @click="goDetail(item.id)">
           <div class="article">
             <div class="one">
-              <div>
+              <div class="title-area">
                 <span class="title">{{ item.title }}</span>
-                <van-tag :type="item.color">{{ item.type }}</van-tag>
+                <van-tag
+                  :style="{position:'relative',top:'-2px'}"
+                  :type="item.color"
+                >{{ item.category }}</van-tag>
               </div>
               <div class="date">{{ item.date }}</div>
             </div>
             <div class="two">
-              <span>{{ item.desc }}</span>
+              <span v-html="item.desc"></span>
             </div>
           </div>
         </div>
       </van-list>
       <div class="more">
-        <van-button plain type="danger" size="small" @click="goAffaris">
-          查看更多
-        </van-button>
+        <van-button plain type="danger" size="small" @click="goAffaris">查看更多</van-button>
       </div>
     </div>
   </div>
@@ -44,12 +45,23 @@
 
 <script>
 import vTitle from '../common/vTitle';
+import { tagsColor } from '@/config/color';
+import { getSimpleText } from '@/utils/handleText'
 export default {
   components: {
     vTitle
   },
-  data() {
+  props: {
+    articleList: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
+  data () {
     return {
+      tagsColor,
       leftImg: require('../../assets/images/index/2017330105615377.png'),
       initTtile: {
         cnTitle: '画室动态',
@@ -57,43 +69,21 @@ export default {
         mode: 'red',
         icon: '&#xe6d9;'
       },
-      /** 画室动态列表 */
-      list: [
-        {
-          id: 1,
-          title: '重庆品贤画室正在筹备中',
-          desc: '预选地点定为莲花购物广场附近，预计12月下旬开业',
-          date: '2019/11/22',
-          type: '热门',
-          color: 'danger'
-        },
-        {
-          id: 2,
-          title: '零基础学画画也没有那么难',
-          desc:
-            '如果你问我：“从毫无基础的绘画小白,到能画出绚丽的油画或插画，要经历多久？',
-          date: '2019/11/11',
-          type: '教程',
-          color: 'primary'
-        },
-        {
-          id: 3,
-          title: '宁波品贤画室已开',
-          desc: '地点定为莲花购物广场附近，现已开业',
-          date: '2019/11/01',
-          type: '推送',
-          color: 'success'
-        },
-        {
-          id: 4,
-          title: '重庆品贤画室已开',
-          desc: '地点定为重庆大学城',
-          date: '2019/11/01',
-          type: '推送',
-          color: 'success'
-        }
-      ]
     };
+  },
+  created () {
+    if (process.client) {
+
+      //处理首页画室动态数据
+      for (let i = 0; i < this.articleList.length; i++) {
+        this.articleList[i].tags = this.articleList[i].tags.split('-');
+        const random = Math.floor(Math.random() * 4);
+        this.articleList[i].color = this.tagsColor[random];
+        this.articleList[i].desc = getSimpleText(this.articleList[i].content).slice(0, 40) + '...';
+
+        this.articleList[i].date = this.articleList[i].created_at.slice(0, 11);
+      }
+    }
   },
   methods: {
     /**
@@ -101,7 +91,7 @@ export default {
      * @params {null}
      * @return voic
      */
-    goAffaris() {
+    goAffaris () {
       this.$router.push({ path: 'news' });
     }
   }
@@ -153,6 +143,12 @@ export default {
     }
   }
 }
+.date {
+  width: 80px;
+  font-size: 12px;
+  margin-top: 5px;
+  color: #777777;
+}
 .list-date {
   color: #777777;
 }
@@ -175,6 +171,10 @@ export default {
   padding: 16px 10px;
   border-bottom: 1px solid @color-grey-4;
 }
+.title-area {
+  line-height: 1.5;
+  flex: 1;
+}
 .article .title {
   margin-top: 10px;
   font-size: 16px;
@@ -185,7 +185,7 @@ export default {
   width: 100%;
   flex-flow: row nowrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 .two {
   width: 70%;

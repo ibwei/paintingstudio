@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <div class="button">查看更多</div>
+      <div class="button" @click="navToContact">查看更多</div>
     </div>
   </div>
 </template>
@@ -55,6 +55,11 @@ export default {
         icon: '&#xe601;'
       }
     };
+  },
+  methods: {
+    navToContact () {
+      this.$router.push({ path: '/contact' });
+    }
   }
 };
 </script>
