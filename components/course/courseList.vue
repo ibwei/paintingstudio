@@ -7,7 +7,12 @@
     >
       <div class="category-title">{{ category.categoryName }}</div>
       <div class="content-list">
-        <div v-for="(course,courseIndex) of category.courseList" :key="courseIndex" class="content">
+        <div
+          v-for="(course,courseIndex) of category.courseList"
+          :key="courseIndex"
+          @click="showCourse(course.courseName)"
+          class="content"
+        >
           <div class="top">
             <div class="t-left">
               <img :src="course.courseImage" alt class="course-img" />
@@ -33,9 +38,7 @@
                 style="margin-left:2px"
                 :type="getRandomColor()"
                 round
-              >
-{{ tag }}
-</van-tag>
+              >{{ tag }}</van-tag>
             </div>
             <div v-if="listType==='memo'" class="b-left">PS:{{ course.memo }}</div>
             <div class="b-right">
@@ -45,11 +48,18 @@
         </div>
       </div>
     </div>
+    <van-popup v-model="show" round position="bottom" :style="{ height: '60%' }">
+      <message-board :courseName="course" :closeable="true" close-icon="cross" @success="close"></message-board>
+    </van-popup>
   </div>
 </template>
 
 <script>
+import MessageBoard from '@/components/common/messageBoard';
 export default {
+  components: {
+    MessageBoard,
+  },
   props: {
     listType: {
       type: String,
@@ -64,12 +74,22 @@ export default {
   },
   data () {
     return {
-      tagColorList: ['default', 'success', 'danger', 'primary']
+      tagColorList: ['default', 'success', 'danger', 'primary'],
+      show: false,
+      course: '',
     }
   },
   methods: {
     getRandomColor () {
       return this.tagColorList[Math.floor(Math.random() * 4)];
+    },
+    showCourse (courseName) {
+      this.course = courseName;
+      this.show = true;
+    },
+    close () {
+      console.log('haha')
+      this.show = false;
     }
   }
 }

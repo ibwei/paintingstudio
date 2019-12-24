@@ -15,5 +15,15 @@ export const Api = {
     getStudentWorksList: baseUrl + '/studentWorks/list',
     // 首页获取画室动态作品列表
     getArticleList: baseUrl + '/article/articleList',
-    
+    // 获取文章分类列表
+    getArticleType: baseUrl + '/article/categoryList',
+    // 获取文章详情
+    getArticleDetail: baseUrl + '/article/detail',
+    // 获取文章列表(根据分类)
+    getArticleListByType: baseUrl + '/article/list',
+    // 文章阅读+1
+    articleAddRead: baseUrl + '/article/addRead',
+    // 文章点赞量+1
+    articleAddPraise: baseUrl + '/article/addPraise',
+
 }

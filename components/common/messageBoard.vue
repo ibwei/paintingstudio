@@ -60,12 +60,23 @@ export default {
   components: {
     vTitle
   },
+  props: {
+    courseName: {
+      type: String,
+      default: '',
+    }
+  },
+  created () {
+    if (process.client) {
+      this.course = this.courseName;
+    }
+  },
   data () {
     return {
       /* 标题初始化 */
       initTtile: {
         cnTitle: '在线报名',
-        enTitle: 'Contact Us Online',
+        enTitle: 'Available Course Enroll Online',
         mode: 'black',
         icon: '&#xe616;'
       },
@@ -144,7 +155,8 @@ export default {
           this.phone = '';
           this.course = '';
           this.email = '';
-          this.$toast('提交成功');
+          this.$toast('报名成功');
+          this.$emit('success');
         } else {
           this.canSubmit = false;
           this.$toast('报名失败,请联系画室管理员');
