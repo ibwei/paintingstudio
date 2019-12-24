@@ -15,4 +15,5 @@ export const Api = {
     getStudentWorksList: baseUrl + '/studentWorks/list',
     // 首页获取画室动态作品列表
     getArticleList: baseUrl + '/article/articleList',
+    
 }
