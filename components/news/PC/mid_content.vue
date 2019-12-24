@@ -1,5 +1,5 @@
 <template>
-  <div class="mid-content">
+  <div class="pc-mid-content">
     <div class="mid-cont-label">
       <div class="btn-1" :class="{'active-label':label==1}" @click="handleClickLabel(1)">最新更新</div>
       <div class="btn-2" :class="{'active-label':label==2}" @click="handleClickLabel(2)">热门推荐</div>
@@ -159,7 +159,7 @@ export default {
 </script>
 
 <style scoped>
-.mid-content {
+.pc-mid-content {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
     'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei UI', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;

@@ -70,8 +70,6 @@ export default {
   width: 72px;
   font-size: 12px;
   cursor: pointer;
-}
-.btn:hover {
   color: #e00;
   border-color: #e00;
 }
