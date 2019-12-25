@@ -1,44 +1,47 @@
 <template>
   <div class="articleDetails">
     <div class="articleDetails-container">
-      <bread-crumb />
       <div class="content">
         <banner></banner>
         <div class="mid-content">
-          <!-- 文章详情组件 -->
+          <!-- PC端文章详情 -->
+          <news-data-pc :news="news" :user="user"></news-data-pc>
+          <!-- 文章详情组件 移动端-->
           <news-data :news="news" :user="user"></news-data>
-          <!-- 推荐文章组件 -->
+          <!-- 推荐文章组件 移动端-->
           <news-recommended :recommendeds="recommended"></news-recommended>
-          <!-- 评论列表组件 -->
+          <!-- 评论列表组件 移动端-->
           <comments :comments="comments"></comments>
         </div>
         <div class="left-content">
-          <div class="left-content-top"></div>
-          <div class="left-content-bottom"></div>
+          <!-- pc端推荐文章组件 -->
+          <news-recommended-pc :recommendeds="recommended"></news-recommended-pc>
         </div>
       </div>
-      <!-- 浮动到最下面得操作框 -->
-      <div class="nav-bar">
-        <nav-bar></nav-bar>
-      </div>
+    </div>
+    <!-- 浮动到最下面得操作框 -->
+    <div class="nav-bar">
+      <nav-bar></nav-bar>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import breadCrumb from '../../../components/common/breadcrumb';
 import newsData from '../../../components/news/newsdata';
 import newsRecommended from '../../../components/news/newsRecommended';
 import comments from '../../../components/news/comments';
 import banner from '../../../components/news/phone/banner';
 import navBar from '../../../components/news/phone/navBar'
+import newsDataPc from '../../../components/news/PC/news_data_pc'
+import newsRecommendedPc from '../../../components/news/PC/news_recommended_pc'
 export default {
   name: 'ArticleDetails',
   components: {
-    breadCrumb,
     newsData,
     newsRecommended,
+    newsRecommendedPc,
+    newsDataPc,
     comments,
     banner,
     navBar
@@ -66,10 +69,10 @@ export default {
         time: '2019-12-12'      }, // 当前文章
       user: { id: 1, name: '程序员阿森', imgUrl: require('../../../assets/images/user/asen.jpg'), info: '最骚程序员' }, // 当前文章得作者
       recommended: [{
-        id: 1, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1      }, {
-        id: 2, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1      }, {
-        id: 3, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1      }, {
-        id: 4, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1      }], // 文章相关推荐列表
+        id: 1, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23      }, {
+        id: 2, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23      }, {
+        id: 3, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23      }, {
+        id: 4, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23      }], // 文章相关推荐列表
       comments: []// 文章相关评论列表
     }
   },
@@ -77,14 +80,10 @@ export default {
     ...mapState(['tabbarShow', 'topbarShow']) // 加载设备类型
   },
   created () {
-    console.log('触发事件');
     this.changeTabbarShow(false);
     this.changTopbarShow(false);
-    console.log(this.$store.state.tabbarShow);
-    console.log(this.$store.state.topbarShow);
   },
   destroyed () {
-    console.log('触发销毁事件')
     this.changeTabbarShow(true);
     this.changTopbarShow(true);
   },
@@ -99,17 +98,76 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.articleDetails {
+  width: 100%;
+  background: #f9f9f9;
+}
+.news-data-pc-wrap {
+  display: flex;
+  background: #fff;
+  width: 730px;
+}
+.content {
+  width: 1200px;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.left-content {
+  width: 350px;
+  min-height: 200px;
+}
+//文章详情相关推荐页面
+.news-recom-phone-wrap {
+  display: none;
+}
+//文章详情文章内容PC页面
+.news-detile-phone-wrap {
+  display: none;
+}
+.reco-pc-wrap {
+  display: block;
+}
+//手机端最下面浮动按钮组
+.nav-bar-wrap {
+  display: none;
+}
+//手机端的文章详情评论内容
+.comments-phone-wrap {
+  display: none;
+}
 @media screen and (max-width: 720px) {
+  .left-content {
+    display: none;
+  }
+  .news-data-pc-wrap {
+    display: none;
+  }
+  .news-detile-phone-wrap {
+    display: flex;
+  }
+  .news-recom-phone-wrap {
+    margin-top: 20px;
+    display: flex;
+  }
+  .nav-bar-wrap {
+    display: flex;
+  }
+  .reco-pc-wrap {
+    display: none;
+  }
   .bread {
     display: none;
   }
   .content {
     padding-top: 40px;
+    width: 100%;
   }
   .nav-bar {
     width: 100%;
     position: fixed;
-    bottom: 0;
+    bottom: 5px;
     height: 35px;
     z-index: 99;
     background: #eee;

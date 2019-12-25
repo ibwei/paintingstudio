@@ -3,6 +3,7 @@
     <div class="left" @click="huitui">
       <van-icon name="arrow-left" />
     </div>
+    <div class="banner-cont">动态详情</div>
     <div class="right" @click="showAction">
       <van-icon name="ellipsis" />
     </div>
@@ -50,8 +51,8 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: #f5f5f5;
-  padding: 2px 0px;
+  background: #fff;
+  padding: 8px 0px;
   position: fixed;
   top: 0px;
 }
@@ -59,12 +60,16 @@ export default {
   font-size: 22px;
 }
 .left {
-  margin-left: 2px;
+  margin-left: 8px;
 }
 .right {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 .right .van-icon {
   font-size: 26px;
+}
+.banner-cont {
+  color: #e00;
+  font-size: 16px;
 }
 </style>

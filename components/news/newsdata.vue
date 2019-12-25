@@ -1,5 +1,5 @@
 <template>
-  <div class="news-detile">
+  <div class="news-detile-phone-wrap">
     <div class="title">{{ news.title }}</div>
     <div class="user">
       <div class="user-img">
@@ -65,7 +65,7 @@ export default {
 
 <style lang="less" scoped>
 @media screen and (max-width: 720px) {
-  .news-detile {
+  .news-detile-phone-wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;

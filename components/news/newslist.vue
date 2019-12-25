@@ -1,13 +1,13 @@
 <template>
   <div class="news-list">
     <template v-for="(item,index) in listNews">
-      <van-skeleton title :key="index" :row="3" row-width="300px" :loading="loading">
+      <van-skeleton :key="index" title :row="3" row-width="300px" :loading="loading">
         <template v-if="item.imgUrls.length===1">
           <div :key="index" class="word" @click="onclick(item)">
             <div class="content">
               <div class="cont-wrap">
                 <div class="word-wrap">
-                  <div class="title-1">{{item.title}}</div>
+                  <div class="title-1">{{ item.title }}</div>
                   <div class="content-1" v-html="item.content"></div>
                 </div>
                 <div class="img-1">
@@ -76,8 +76,8 @@
   </div>
 </template>
 <script>
-import { getSimpleText } from '../../utils/handleText';
 import { mapState } from 'vuex';
+import { getSimpleText } from '../../utils/handleText';
 import { Api } from '@/api/index';
 export default {
   name: 'Newslist',
@@ -90,21 +90,26 @@ export default {
     }
   },
   computed: {
-    ...mapState(['articleCategory']),
+    ...mapState(['articleCategory'])
   },
   data () {
     return {
       loading: true,
-      listNews: [],
+      listNews: []
+    }
+  },
+  watch: {
+    articleCategory (newV) {
+      this.changeList(newV);
     }
   },
   created () {
     if (process.client) {
       this.listNews = this.list.map((item, index) => {
-        let temp = item;
+        const temp = item;
         temp.imgUrls = item.thumbnail ? item.thumbnail.split(',') : [];
         temp.tags = item.tags ? item.tags.split('-') : [];
-        temp.content = getSimpleText(temp.content).slice(0, 40) + "...";
+        temp.content = getSimpleText(temp.content).slice(0, 40) + '...';
         temp.created_at = item.created_at.slice(0, 10);
         return temp;
       })
@@ -117,13 +122,13 @@ export default {
     },
     changeList (category) {
       this.loading = true;
-      this.$axios({ method: 'post', url: Api.getArticleListByType, data: { pageNum: 1, pageSize: 10, category: category } }).then((res) => {
+      this.$axios({ method: 'post', url: Api.getArticleListByType, data: { pageNum: 1, pageSize: 10, category } }).then((res) => {
         if (res.data.resultCode === 0) {
           this.listNews = res.data.data[category].map((item, index) => {
-            let temp = item;
+            const temp = item;
             temp.imgUrls = item.thumbnail ? item.thumbnail.split(',') : [];
             temp.tags = item.tags ? item.tags.split('-') : [];
-            temp.content = getSimpleText(temp.content).slice(0, 40) + "...";
+            temp.content = getSimpleText(temp.content).slice(0, 40) + '...';
             temp.created_at = item.created_at.slice(0, 10);
             return temp;
           })
@@ -136,11 +141,6 @@ export default {
         this.$toast('网络异常');
         this.loading = false;
       })
-    }
-  },
-  watch: {
-    articleCategory (newV) {
-      this.changeList(newV);
     }
   }
 
