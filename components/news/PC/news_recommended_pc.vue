@@ -4,7 +4,7 @@
     <div class="recom-news-wrap">
       <div v-for="(item,index) of recommendeds" :key="index" class="recom-news">
         <div class="news-word-wrap">
-          <div class="news-title">{{ item.title_info }}</div>
+          <div class="news-title" @click="handlerToDetails(item.id)">{{ item.title_info }}</div>
           <div class="news-cont-wrap">
             <div class="browse">浏览{{ item.browse ||0 }}次</div>
             <div class="time">{{ item.time }}</div>
@@ -21,7 +21,12 @@
 
 <script>
 export default {
-  props: ['recommendeds']
+  props: ['recommendeds'],
+  methods: {
+    handlerToDetails (id) {
+      console.log('跳转详情页！id：', id)
+    }
+  }
 
 }
 </script>
@@ -59,6 +64,7 @@ export default {
   justify-content: space-between;
 }
 .news-title {
+  cursor: pointer;
   font-size: 14px;
   line-height: 1.5em;
   overflow: hidden;

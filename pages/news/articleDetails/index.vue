@@ -117,6 +117,7 @@ export default {
 .left-content {
   width: 350px;
   min-height: 200px;
+  margin-top: 20px;
 }
 //文章详情相关推荐页面
 .news-recom-phone-wrap {
