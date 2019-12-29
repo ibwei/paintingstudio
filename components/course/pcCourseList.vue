@@ -173,7 +173,7 @@ export default {
               tuition: '3800元/40次课',
               memo: '一对一授课，一年内上完，可免费试学，每次课120分钟；自由选择学国画，书法，纂刻画室提供工具。'
             }]
-          }] }, {
+          }]        }, {
           name: '艺考基础班',
           list: [{
             categoryName: '艺考基础班',
@@ -190,7 +190,7 @@ export default {
               tuition: '9800元/期',
               memo: '主要针对参加美术校考的初高中生，按艺考生标准严格要求对素描、色彩、速写进行针对训练；周末，节假日均可来画，不计课时。'
             }]
-          }] }, {
+          }]        }, {
           name: '留学考研班',
           list: [{
             categoryName: '留学考研班',
@@ -207,13 +207,8 @@ export default {
               tuition: '52800元/期',
               memo: '学习时间同上，协议班签订专业报过协议，学习课时不少于80次课，专业未过退一半学费，留学班包括辅导作品集在内。'
             }]
-          }] }
+          }]        }
       ]
-    }
-  },
-  created () {
-    if (process.client) {
-      console.log(this.categoryList)
     }
   },
   methods: {
@@ -221,7 +216,6 @@ export default {
       return this.tagColorList[Math.floor(Math.random() * 4)];
     },
     navTo (course) {
-      console.log(course)
       this.$router.push({ path: '/contact', courseName: course.courseName })
     }
 

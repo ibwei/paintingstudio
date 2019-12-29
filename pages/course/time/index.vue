@@ -71,7 +71,6 @@ export default {
     getToday () {
       const date = new Date().getDay();
       this.active = date;
-      console.log(date)
     }
   }
 }

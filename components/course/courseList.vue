@@ -88,7 +88,6 @@ export default {
       this.show = true;
     },
     close () {
-      console.log('haha')
       this.show = false;
     }
   }

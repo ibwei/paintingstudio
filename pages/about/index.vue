@@ -16,13 +16,6 @@ export default {
     teacher,
     studentWork
   },
-  watch: {
-    /** 监听路由 */
-    $router (to, from) {
-      console.log('routerto :', to);
-      console.log('router from :', from);
-    }
-  },
   methods: {}
 };
 </script>

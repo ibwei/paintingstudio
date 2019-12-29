@@ -79,7 +79,7 @@ export default {
         this.articleList[i].tags = this.articleList[i].tags.split('-');
         const random = Math.floor(Math.random() * 4);
         this.articleList[i].color = this.tagsColor[random];
-        this.articleList[i].desc = getSimpleText(this.articleList[i].content).slice(0, 40) + '...';
+        this.articleList[i].desc = getSimpleText(this.articleList[i].content?this.articleList[i].content:'无主题内容').slice(0, 40) + '...';
 
         this.articleList[i].date = this.articleList[i].created_at.slice(0, 11);
       }
