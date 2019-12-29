@@ -4,9 +4,9 @@
       <div class="content">
         <div class="mid-content">
           <!-- 手机端的label选项 -->
-          <vlabel></vlabel>
+          <vlabel :list="categoryList"></vlabel>
           <!-- 手机端的内容 -->
-          <newslist></newslist>
+          <newslist :list="articleList"></newslist>
           <!-- PC端的主体内容 -->
           <mid-content></mid-content>
         </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-
+import { Api } from '@/api/index'
 import { mapState } from 'vuex'
 import vlabel from '../../components/news/label'
 import newslist from '../../components/news/newslist'
@@ -28,6 +28,15 @@ import midContent from '../../components/news/PC/mid_content'
 import studentQuestion from '../../components/news/PC/student_question'
 import noteLabel from '../../components/news/PC/note_label'
 export default {
+  async asyncData ({ $axios }) {
+
+
+    // 获取首页文章分类列表
+    const categoryList = await $axios({ method: 'get', url: Api.getArticleType });
+    // 根据第一个分类名获取文章列表
+    const articleList = await $axios({ method: 'post', url: Api.getArticleListByType, data: { pageNum: 1, pageSize: 10, category: categoryList.data.data[0].category } });
+    return { categoryList: categoryList.data.data, articleList: articleList.data.data[categoryList.data.data[0].category] };
+  },
   components: {
     vlabel,
     midContent,

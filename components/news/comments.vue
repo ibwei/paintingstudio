@@ -1,5 +1,5 @@
 <template>
-  <div class="comments"></div>
+  <div class="comments-phone-wrap"></div>
 </template>
 
 <script>

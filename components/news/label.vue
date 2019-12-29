@@ -1,27 +1,40 @@
+import { mapMutations } from 'vuex';
 <template>
   <div class="label-wrap">
     <van-tabs swipeable sticky @click="onClick">
-      <template v-for="item of labels">
-        <van-tab :key="item.id" :title="item.value" :style="{'flex-basis':'20%'}"></van-tab>
+      <template v-for="(item,index) of list">
+        <van-tab :key="index" :title="item.category" :style="{'flex-basis':'20%'}"></van-tab>
       </template>
     </van-tabs>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
   name: 'Label',
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   data () {
     return {
       active: 1,
-      labels: [
-        { id: 0, value: '推荐' }, { id: 1, value: '最新' }, { id: 2, value: '最热' }, { id: 3, value: '课程' }, { id: 4, value: '师资' }, { id: 5, value: '教学环境' }
-      ]
+    }
+  },
+  created () {
+    if (process.client) {
+      this.setArticleCategory(this.list[0].category);
     }
   },
   methods: {
+    ...mapMutations(['setArticleCategory']),
     onClick (name, title) {
-      this.$toast(title);
+      this.setArticleCategory(title);
     }
   }
 }

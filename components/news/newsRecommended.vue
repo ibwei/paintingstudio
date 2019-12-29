@@ -1,5 +1,5 @@
 <template>
-  <div class="news-recom-wrap">
+  <div class="news-recom-phone-wrap">
     <div class="news-recom-title">相关推荐</div>
     <div class="news-recom-cont">
       <div v-for="(item,index) of recommendeds" :key="index" class="news-recom">
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style scoped>
-.news-recom-wrap {
+.news-recom-phone-wrap {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -91,6 +91,11 @@ export default {
 .news-title {
   font-size: 16px;
   line-height: 1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .news-user-name {
   margin-top: 20px;

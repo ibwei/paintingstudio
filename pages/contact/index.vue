@@ -4,7 +4,7 @@
     <div v-scroll-reveal.scaleUp="{scale:0.15}" class="contact-img">
       <div class="bg-title">
         <h1>Hey，欢迎来到这里，请联系我们吧</h1>
-        <h2>2019年创办于重庆大学城，两兄弟所办朝气蓬勃，全年开课，随到随学，自由选择学习时间，给我们留下您宝贵的留言吧。</h2>
+        <h2>品贤画室于2019年创办于成都 ，我们朝气蓬勃，我们正青春。我们全年开课，随到随学，我们自由选择学习时间，欢迎来体验绘画课或者给我们留下宝贵的建议。</h2>
       </div>
     </div>
 
@@ -79,15 +79,15 @@ export default {
       },
       // 意见反馈
       initTtile: {
-        cnTitle: '联系我们',
-        enTitle: 'Feedback Online ',
+        cnTitle: '我要反馈',
+        enTitle: 'Complain Or Feedback Online',
         mode: 'black',
         icon: '&#xe66f;'
       },
       // 地图标题
       initMap: {
-        cnTitle: '我们在这里',
-        enTitle: 'Where Are We Locate',
+        cnTitle: '画室地址',
+        enTitle: 'Where We Are Locate',
         mode: 'red',
         icon: '&#xe600;'
       }
@@ -134,13 +134,13 @@ export default {
           email: this.email,
           wechat: this.phone,
           content: this.content
-        } }).then(() => {
-        this.isloading = false,
-        this.name = '',
-        this.phone = '',
-        this.content = '',
-        this.email = '',
-        this.$toast('反馈内容提交成功')
+        }      }).then(() => {
+        this.isloading = false;
+        this.name = '';
+        this.phone = '';
+        this.content = '';
+        this.email = '';
+        this.$toast('反馈内容提交成功');
       })
         .catch(() => this.$toast('填写数据有误，请重新填写'))
     }

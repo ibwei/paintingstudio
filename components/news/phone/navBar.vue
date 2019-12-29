@@ -1,6 +1,8 @@
 <template>
   <div class="nav-bar-wrap">
-    <div class="icon left">&#xe645;</div>
+    <div class="icon left iconfont">
+      <van-icon name="arrow-left" />
+    </div>
     <div class="srk">
       <van-field v-model="value" placeholder="我也来说两句……" right-icon="smile-o" />
     </div>
@@ -23,6 +25,10 @@ export default {
 </script>
 
 <style scoped>
+.nav-bar-wrap {
+  padding: 8px 0px;
+  background: #fff;
+}
 .van-icon {
   font-size: 24px;
 }
