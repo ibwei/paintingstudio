@@ -98,6 +98,7 @@ export default {
   },
   created () {
     if (process.client) {
+      console.log(Api.getPaintingInfo);
       this.setPaintingInfo(this.paintingInfo[0]);
       localStorage.setItem(
         'paintingInfo',

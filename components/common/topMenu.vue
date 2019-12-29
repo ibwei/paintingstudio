@@ -148,11 +148,6 @@ export default {
           name: '画室动态'
         },
         {
-          path: '/about',
-          icon: 'info-o',
-          name: '关于我们'
-        },
-        {
           path: '/contact',
           icon: 'phone-circle-o',
           name: '联系我们'
@@ -169,37 +164,7 @@ export default {
             text: '主页',
             path: '/',
             icon: '&#xe60e;',
-            subMenuOptions: [
-              {
-                isLinkAction: true,
-                type: 'link',
-                text: '热门课程',
-                subText: '各种丰富的绘画课程，还能为你定制。艺术，与生俱来。',
-                path: '/course',
-                iconLeft: '<span class="icon iconfont">&#xe618;</span>'
-              },
-              {
-                type: 'link',
-                text: '画室环境',
-                subText: '好的艺术陶冶，需要好的环境支撑，我们一致在这里等你。',
-                path: '/about',
-                iconLeft: '<span class="icon iconfont">&#xe66c;</span>'
-              },
-              {
-                type: 'link',
-                text: '画室动态',
-                subText: '看看品贤画室最近都发生了什么？',
-                path: '/news',
-                iconLeft: '<span class="icon iconfont">&#xe6d9;</span>'
-              },
-              {
-                type: 'link',
-                text: '学生作品',
-                subText: '看看曾经如你一般的小白最近画得怎么样了?',
-                path: '/about',
-                iconLeft: '<span class="icon iconfont">&#xe618;</span>'
-              }
-            ]
+            subMenuOptions: []
           },
           {
             type: 'link',
@@ -213,13 +178,6 @@ export default {
             text: '画室动态',
             path: '/news',
             icon: '&#xe60d;',
-            subMenuOptions: []
-          },
-          {
-            type: 'link',
-            text: '关于我们',
-            path: '/about',
-            icon: '&#xe672;',
             subMenuOptions: []
           },
           {

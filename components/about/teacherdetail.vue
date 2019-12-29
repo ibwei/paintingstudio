@@ -1,7 +1,7 @@
 <template>
   <div class="teacher-detail">
     <div class="head">
-      <div class="head-left">
+      <div class="head-left" @click="back">
         <van-icon name="arrow-left" size="16" />
       </div>
       <div class="head-title">教师详情</div>
@@ -49,9 +49,7 @@
         </div>
         <div
           class="introduction-content"
-        >
-毕业于西南大学美术学院，致力于美术教育行业，擅长中小学生的创意美术，包括水粉画，油画棒，线描画，动漫，插画，点彩，素描。多次辅导学生参加等级考试，不管在课堂教学，还是在室外写生教学中，都以培养学生能力为主，把孩子的创造力解放出来是她教学的目标和动力。
-</div>
+        >毕业于西南大学美术学院，致力于美术教育行业，擅长中小学生的创意美术，包括水粉画，油画棒，线描画，动漫，插画，点彩，素描。多次辅导学生参加等级考试，不管在课堂教学，还是在室外写生教学中，都以培养学生能力为主，把孩子的创造力解放出来是她教学的目标和动力。</div>
       </div>
       <div class="skill">
         <div class="skill-title">擅长课程</div>
@@ -79,14 +77,7 @@
           <van-tag type="primary" size="large">时间把控得好</van-tag>
           <van-tag size="large">实战达人</van-tag>
           <van-tag size="large">基础功超高</van-tag>
-          <div class="student-appraise">
-            <appraise />
-            <appraise />
-            <appraise />
-            <appraise />
-            <appraise />
-            <appraise />
-          </div>
+          <div class="student-appraise">暂未开启互动功能</div>
         </div>
       </div>
     </div>
@@ -105,7 +96,13 @@ export default {
       Color,
       rate: 4.5
     }
+  },
+  methods: {
+    back () {
+      this.$router.back();
+    }
   }
+
 }
 </script>
 
@@ -217,6 +214,12 @@ export default {
   }
 }
 .student-appraise {
-  padding-top: 10px;
+  margin-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
 }
 </style>

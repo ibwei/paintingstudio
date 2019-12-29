@@ -34,16 +34,18 @@
           </div>
         </div>
       </div>
-      <div class="button" @click="navToContact">查看更多</div>
+      <tearch-list></tearch-list>
     </div>
   </div>
 </template>
 
 <script>
 import vTitle from '../common/vTitle';
+import tearchList from '@/components/about/teacher';
 export default {
   components: {
-    vTitle
+    vTitle,
+    tearchList,
   },
   data () {
     return {

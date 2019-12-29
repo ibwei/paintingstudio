@@ -60,7 +60,9 @@ export default {
   display: flex;
 }
 .card-wrap {
-  padding: 0 5px 5px 5px;
+  margin: 5px 10px;
+  box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.1);
+  // border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 .card {
   .flex;

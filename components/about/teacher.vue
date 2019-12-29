@@ -1,6 +1,5 @@
 <template>
   <div class="teacher">
-    <v-title :init-title="initTtile"></v-title>
     <card :card-list="teacherList" />
   </div>
 </template>
@@ -59,6 +58,6 @@ export default {
 <style lang='less' scope>
 @import url('../../assets/css/color.less');
 .teacher {
-  background: @color-grey-5;
+  background: #fff;
 }
 </style>
