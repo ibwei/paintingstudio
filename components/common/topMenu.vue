@@ -123,6 +123,8 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import { Color } from '../../config/color';
+import { Api } from '@/api/index';
+import { getDay } from '@/utils/index';
 export default {
   props: {},
   data () {
@@ -220,6 +222,27 @@ export default {
       this.isOpen = false;
       this.$router.push({ path: item.path });
     },
+    // 网站点赞
+    addPraise () {
+      this.$axios({
+        method: 'post',
+        url: Api.addPraise,
+        data: {
+          praise_time: getDay(),
+          device: this.isPhone ? '手机' : '电脑'
+        }
+      }).then((res) => {
+        if (res.data.resultCode === 0) {
+          localStorage.setItem('heartColor', '#cf2729');
+          this.heartColor = '#cf2729';
+          this.$toast('点赞成功，谢谢你喜欢我。');
+        } else {
+          this.$toast('点赞失败，未知异常。');
+        }
+      }).catch(() => {
+        this.$toast('点赞失败，未知异常。');
+      })
+    },
     // 监听路由,更改tabbar激活菜单
     changeTabbar (path) {
       let menuIndex;
@@ -253,9 +276,7 @@ export default {
       if (this.heartColor === '#cf2729') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
-        this.$toast('谢谢你喜欢我!');
-        localStorage.setItem('heartColor', '#cf2729');
-        this.heartColor = '#cf2729';
+        this.addPraise();
       }
       this.$refs.phoneHeart.className = '';
       this.$refs.pcHeart.className = '';

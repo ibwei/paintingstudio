@@ -134,7 +134,8 @@ export default {
           email: this.email,
           wechat: this.phone,
           content: this.content
-        }      }).then(() => {
+        }
+      }).then(() => {
         this.isloading = false;
         this.name = '';
         this.phone = '';

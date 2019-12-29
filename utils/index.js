@@ -10,3 +10,13 @@ export const isPhone = () => {
     }
     return false;
 }
+
+export const getDay = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    month = month < 10 ? ('0' + month) : month;
+    let day = today.getDate();
+    day = day < 10 ? ('0' + day) : day;
+    return `${year}-${month}-${day}`;
+}

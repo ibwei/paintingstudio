@@ -8,7 +8,9 @@
         background="rgba(244,205,205,1)"
         left-icon="volume-o"
         :scrollable="true"
-      >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
+      >
+        品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
+      </van-notice-bar>
     </div>
 
     <!-- 轮播图 -->
@@ -21,7 +23,7 @@
     <paintIntroduce v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 动态 -->
-    <paintAffaris :articleList="articleList" v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <paintAffaris v-scroll-reveal.smooth="{ easing: 'ease-in' }" :article-list="articleList" />
     <!-- 画室环境 -->
     <paintingEnvironment v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
@@ -30,8 +32,8 @@
 
     <!-- 学生作品 -->
     <worksCarousel
-      :studentWorksList="studentWorksList"
       v-scroll-reveal.smooth="{ easing: 'ease-in' }"
+      :student-works-list="studentWorksList"
     />
 
     <!-- 优势 -->
@@ -41,11 +43,12 @@
     <message-board v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部footer -->
-    <bottom-footer :paintingInfo="paintingInfo[0]"></bottom-footer>
+    <bottom-footer :painting-info="paintingInfo[0]"></bottom-footer>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
 import recruitment from '../components/works/recruitment';
 import advantage from '../components/works/advantage';
@@ -58,27 +61,7 @@ import paintingEnvironment from '../components/index/paintingEnvironment';
 import BottomFooter from '../components/common/bottomFooter';
 import { Color } from '../config/color';
 import { Api } from '../api/index';
-import { mapMutations } from 'vuex';
 export default {
-  /**
-   * 获取服务端渲染数据
-   */
-
-  /**
- * 获取服务端渲染数据
- */
-
-  async asyncData ({ $axios }) {
-    // 获取画室信息
-    const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
-    // 获取前台轮播图
-    const bannerList = await $axios.get(Api.courselBannerList);
-    // 获取首页画室动态列表
-    const studentWorksList = await $axios({ method: 'get', url: Api.getStudentWorksList, data: { start: 0, end: 30 } });
-    // 获取首页文章列表
-    const articleList = await $axios({ method: 'post', url: Api.getArticleList, data: { pageSize: 6, pageNum: 1 } })
-    return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data, articleList: articleList.data.data, studentWorksList: studentWorksList.data.data }
-  },
   components: {
     carousel,
     paintIntroduce,
@@ -96,9 +79,22 @@ export default {
       Color
     };
   },
+  /**
+   * 获取服务端渲染数据
+   */
+  async asyncData ({ $axios }) {
+    // 获取画室信息
+    const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
+    // 获取前台轮播图
+    const bannerList = await $axios.get(Api.courselBannerList);
+    // 获取首页画室动态列表
+    const studentWorksList = await $axios({ method: 'get', url: Api.getStudentWorksList, data: { start: 0, end: 30 } });
+    // 获取首页文章列表
+    const articleList = await $axios({ method: 'post', url: Api.getArticleList, data: { pageSize: 6, pageNum: 1 } })
+    return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data, articleList: articleList.data.data, studentWorksList: studentWorksList.data.data }
+  },
   created () {
     if (process.client) {
-      console.log(Api.getPaintingInfo);
       this.setPaintingInfo(this.paintingInfo[0]);
       localStorage.setItem(
         'paintingInfo',
@@ -107,7 +103,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setPaintingInfo']),
+    ...mapMutations(['setPaintingInfo'])
   }
 }
 </script>

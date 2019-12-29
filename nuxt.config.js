@@ -10,6 +10,7 @@ module.exports = {
                 charset: 'utf-8'
             },
             { name: 'renderer', content: 'webkit' },
+            { name: 'referrer', content: 'no-referrer' },
             { name: 'force-renderer', content: 'webkit' },
             {
                 name: 'keywords',

@@ -6,7 +6,7 @@
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
     <!-- 底部标题栏 -->
-    <div class="tabbar-menu" v-show="tabbarShow || !isPhone">
+    <div v-show="tabbarShow || !isPhone" class="tabbar-menu">
       <van-tabbar
         v-model="currentMenuIndex"
         :z-index="99999"
@@ -63,6 +63,11 @@ export default {
   computed: {
     ...mapState(['menuIndex', 'isPhone', 'tabbarShow', 'paintingInfo'])
   },
+  watch: {
+    menuIndex (newV, oldV) {
+      this.currentMenuIndex = newV;
+    }
+  },
   created () {
     if (process.client) {
       this.currentPath = this.$route.path;
@@ -81,11 +86,6 @@ export default {
   destroyed () {
     window.removeEventListener('resize', this.checkDevice);
   },
-  watch: {
-    menuIndex (newV, oldV) {
-      this.currentMenuIndex = newV;
-    }
-  },
   methods: {
     ...mapMutations(['changeIsPhone', 'setPaintingInfo']), // 利用vuex的辅助函数把changeIsPhone代理到当前组件,
     /**
@@ -98,6 +98,7 @@ export default {
         this.changeIsPhone(result); // 将结果写入到vuex仓库里
       }
     },
+
     hideSticky () {
       this.stickyShow = false;
     },
