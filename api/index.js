@@ -26,5 +26,9 @@ export const Api = {
     // 文章点赞量+1
     articleAddPraise: baseUrl + '/article/addPraise',
     // 网站点赞+1
-    addPraise: baseUrl + '/praise/add'
+    addPraise: baseUrl + '/praise/add',
+    //用户登录统计
+    userLogin: baseUrl + '/statistics/login',
+    //用户登出统计
+    userLogout: baseUrl + '/statistics/logout',
 };

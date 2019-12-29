@@ -43,7 +43,8 @@ import { Color } from '../config/color';
 import topMenu from '../components/common/topMenu';
 import sticky from '../components/common/sticky';
 import scrollTop from '../components/common/scrollTop';
-import { isPhone } from '../utils/index';
+import { isPhone, getDateTime } from '../utils/index';
+import { Api } from '@/api/index';
 export default {
   name: 'Default',
   components: {
@@ -82,6 +83,10 @@ export default {
   },
   mounted () {
     window.addEventListener('resize', this.checkDevice);
+    window.addEventListener('unload', this.logoutStatistics);
+    setTimeout(() => {
+      this.loginStatistics();
+    }, 1000);
   },
   destroyed () {
     window.removeEventListener('resize', this.checkDevice);
@@ -96,6 +101,46 @@ export default {
       if (process.client) {
         const result = isPhone();
         this.changeIsPhone(result); // 将结果写入到vuex仓库里
+      }
+    },
+    // 入口统计
+    loginStatistics () {
+      this.$axios({
+        method: 'post',
+        url: Api.userLogin,
+        timeout: 10000,
+        data: {
+          login_time: getDateTime(),
+          device: this.isPhone ? '手机' : '电脑'
+        }
+      }).then((res) => {
+        if (res.data.resultCode === 0) {
+          localStorage.setItem('currentId', res.data.data);
+        } else {
+          setTimeout(() => {
+            this.loginStatistics();
+          }, 50000);
+        }
+      }).catch(() => {
+        setTimeout(() => {
+          this.loginStatistics();
+        }, 50000);
+      })
+    },
+
+    async logoutStatistics () {
+      await this.$axios({
+        method: 'post',
+        url: Api.userLogout,
+        timeout: 10000,
+        data: {
+          id: localStorage.getItem('currentId'),
+          logout_time: getDateTime()
+        }
+      });
+      // 确保发送成功
+      for (let i = 1; i < 1000000; i++) {
+        for (let m = 1; m < 1000000; m++) { continue; }
       }
     },
 
