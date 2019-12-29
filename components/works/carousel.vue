@@ -45,7 +45,6 @@ export default {
   },
 
   mounted () {
-    console.log(this.list)
     this.titmer1 = setInterval(this.get, 3000);
   },
   beforeDestroy () {

@@ -24,7 +24,6 @@ export default {
   props: ['recommendeds'],
   methods: {
     handlerToDetails (id) {
-      console.log('跳转详情页！id：', id)
     }
   }
 

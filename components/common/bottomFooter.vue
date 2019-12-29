@@ -38,7 +38,6 @@ export default {
   computed: {},
   created() {
     if (process.client) {
-      console.log(this.paintingInfo);
       this.phoneUrl = `tel:${this.paintingInfo.phone}`;
     }
   },

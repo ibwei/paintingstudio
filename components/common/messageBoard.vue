@@ -1,7 +1,7 @@
 <template>
   <div class="msg-board">
     <!-- 头部文字 -->
-    <v-title v-bind:initTitle="initTtile"></v-title>
+    <v-title :init-title="initTtile"></v-title>
     <div class="title">
       <span>请留下您的邮箱和联系方式，我们客服专员会把资料发送至您的QQ邮箱并第一时间联系您。</span>
     </div>
@@ -27,15 +27,14 @@
       />
       <van-field v-model="email" label="电子邮箱" maxlength="22" placeholder="强烈建议填写您的电子邮箱 " />
       <van-field
+        v-model="course"
         clickable
         required
         readonly
         label="报名课程"
-        v-model="course"
         placeholder="请选择课程"
         :error-message="error.course"
         @click="showPicker = true"
-        class="select"
       />
       <van-popup v-model="showPicker" position="bottom">
         <van-picker
@@ -63,12 +62,7 @@ export default {
   props: {
     courseName: {
       type: String,
-      default: '',
-    }
-  },
-  created () {
-    if (process.client) {
-      this.course = this.courseName;
+      default: ''
     }
   },
   data () {
@@ -94,7 +88,7 @@ export default {
       error: {
         name: '',
         phone: '',
-        course: '',
+        course: ''
       },
       courses: [
         '体验课',
@@ -106,9 +100,14 @@ export default {
         '长期班',
         '国画书法班',
         '艺考基础班',
-        '留学考研班',
+        '留学考研班'
       ]
     };
+  },
+  created () {
+    if (process.client) {
+      this.course = this.courseName;
+    }
   },
   methods: {
     /**
@@ -119,9 +118,9 @@ export default {
       this.error = {
         name: '',
         phone: '',
-        course: '',
+        course: ''
       }
-      //表单验证
+      // 表单验证
       if (!this.name) {
         this.error = { ...this.error, 'name': '这是必填项' };
         return false;
@@ -140,15 +139,17 @@ export default {
       this.error = {
         name: '',
         phone: '',
-        course: '',
+        course: ''
       }
 
-      this.$axios({        method: 'post', url: Api.courseEnroll, data: {
+      this.$axios({ method: 'post',
+        url: Api.courseEnroll,
+        data: {
           name: this.name,
           phone: this.phone,
           course_name: this.course,
-          email: this.email,
-        },      }).then((res) => {
+          email: this.email
+        } }).then((res) => {
         if (res.data.resultCode === 0) {
           this.canSubmit = false;
           this.name = '';
@@ -165,8 +166,6 @@ export default {
         this.canSubmit = false;
         this.$toast('网络异常!');
       })
-
-
     },
     /**
      * onConfirm 点击完成按钮时触发
@@ -205,9 +204,7 @@ export default {
     margin-top: 15px;
     max-width: 450px;
     margin: 0 auto;
-    .pc-select {
-      display: none;
-    }
+
     .btn {
       width: 80%;
       height: 30px;
@@ -256,9 +253,6 @@ export default {
       margin-top: 40px;
       .select {
         display: none;
-      }
-      .pc-select {
-        display: block;
       }
       .btn {
         width: 10vw;

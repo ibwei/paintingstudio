@@ -35,7 +35,6 @@ export default {
     },
     onCancel () {
       this.show = false;
-      console.log('取消！');
     },
     showAction () {
       this.show = true;

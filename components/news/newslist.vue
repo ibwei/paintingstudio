@@ -109,7 +109,7 @@ export default {
         const temp = item;
         temp.imgUrls = item.thumbnail ? item.thumbnail.split(',') : [];
         temp.tags = item.tags ? item.tags.split('-') : [];
-        temp.content = getSimpleText(temp.content).slice(0, 40) + '...';
+        temp.content = getSimpleText(temp.content?temp.content:'无内容').slice(0, 40) + '...';
         temp.created_at = item.created_at.slice(0, 10);
         return temp;
       })

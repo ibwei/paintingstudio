@@ -6,7 +6,7 @@
     <!-- pc端 -->
     <div class="works">
       <div class="student-works">
-        <van-image :src="pcImgUrl" width="100%">
+        <van-image :src="pcImgUrl" fit="contain">
           <template v-slot:loading>
             <van-loading type="spinner" size="20" />
           </template>
@@ -31,7 +31,9 @@
             v-show="showImages"
             slot="indicator"
             class="custom-indicator"
-          >{{ currentIndex }}/ {{ studentWorksList.length }}</div>
+          >
+            {{ currentIndex }}/ {{ studentWorksList.length }}
+          </div>
         </van-swipe>
       </div>
     </div>
@@ -78,7 +80,7 @@ export default {
       /** 电脑端 */
       pcImgUrl: require('../../assets/images/index/a42.png'),
       /** 手机端 */
-      showImages: false,
+      showImages: false
     };
   },
   computed: {
