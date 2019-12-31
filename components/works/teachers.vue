@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <tearch-list></tearch-list>
+      <tearch-list :teacher-list="list"></tearch-list>
     </div>
   </div>
 </template>
@@ -45,14 +45,22 @@ import tearchList from '@/components/about/teacher';
 export default {
   components: {
     vTitle,
-    tearchList,
+    tearchList
+  },
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
   },
   data () {
     return {
       currIndex: 2,
       initTtile: {
         cnTitle: '师资力量',
-        enTitle: 'Teacher Resources',
+        enTitle: 'Excellent Teacher Resource',
         mode: 'red',
         icon: '&#xe601;'
       }

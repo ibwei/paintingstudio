@@ -44,20 +44,6 @@
           </div>
         </div>
       </div>
-      <div class="phone-content">
-        <div
-          v-for="(item, index) of recruitments"
-          :key="index"
-          class="phone-word"
-          :style="{ 'background-color': item.color }"
-          @click="navToCourse(item)"
-        >
-          <div class="icon iconfont" v-html="item.icon"></div>
-          <div class="phone-title">{{ item.title }}</div>
-          <span class="line">为兴趣,就现在</span>
-          <span v-if="index!==0" class="icon iconfont1">&#xe61c;</span>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -89,7 +75,8 @@ export default {
           title: '油画定制课',
           intrduce:
             '油画定制课专属于你的艺术油画定制课专属于你的艺术短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
-          color: 'rgb(250,76,51)',
+          // color: 'rgb(250,76,51)',
+          color: '#fff',
           number: 599,
           rate: 3,
           infos: ['有趣', '有技术含量', '从零开始']
@@ -103,7 +90,8 @@ export default {
           title: '体验课进行时',
           intrduce:
             '体验课进行时素描、水彩任你选体验课进行时素描、水彩任你选短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
-          color: '#FFB900',
+          // color: '#FFB900',
+          color: '#fff',
           number: 599,
           rate: 3.5,
           infos: ['有趣', '有技术含量', '从零开始']
@@ -117,7 +105,8 @@ export default {
           title: '绘画兴趣班',
           intrduce:
             '短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
-          color: 'rgb(0,172,236)',
+          // color: 'rgb(0,172,236)',
+          color: '#fff',
           number: 599,
           rate: 5,
           infos: ['有趣', '有技术含量', '从零开始']

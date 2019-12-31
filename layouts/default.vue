@@ -4,7 +4,7 @@
       <top-menu @menu-open="hideSticky" @menu-close="showSticky"></top-menu>
     </div>
     <!-- <Affix/> -->
-    <nuxt class="nuxt-content" />
+    <nuxt class="nuxt-content" keep-alive />
     <!-- 底部标题栏 -->
     <div v-show="tabbarShow || !isPhone" class="tabbar-menu">
       <van-tabbar

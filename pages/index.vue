@@ -8,9 +8,7 @@
         background="rgba(244,205,205,1)"
         left-icon="volume-o"
         :scrollable="true"
-      >
-        品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
-      </van-notice-bar>
+      >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
     </div>
 
     <!-- 轮播图 -->
@@ -25,10 +23,10 @@
     <!-- 动态 -->
     <paintAffaris v-scroll-reveal.smooth="{ easing: 'ease-in' }" :article-list="articleList" />
     <!-- 画室环境 -->
-    <paintingEnvironment v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <paintingEnvironment v-scroll-reveal.smooth="{ easing: 'ease-in' }" :list="environmentList" />
 
     <!-- 师资力量 -->
-    <teachers v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <teachers v-scroll-reveal.smooth="{ easing: 'ease-in' }" :list="teacherList" />
 
     <!-- 学生作品 -->
     <worksCarousel
@@ -83,28 +81,63 @@ export default {
    * 获取服务端渲染数据
    */
   async asyncData ({ $axios }) {
-    // 获取画室信息
-    const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
-    // 获取前台轮播图
-    const bannerList = await $axios.get(Api.courselBannerList);
-    // 获取首页画室动态列表
-    const studentWorksList = await $axios({ method: 'get', url: Api.getStudentWorksList, data: { start: 0, end: 30 } });
-    // 获取首页文章列表
-    const articleList = await $axios({ method: 'post', url: Api.getArticleList, data: { pageSize: 6, pageNum: 1 } })
-    return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data, articleList: articleList.data.data, studentWorksList: studentWorksList.data.data }
+    // 判断是否在服务端
+    if (process.server) {
+      // 获取画室信息
+      const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
+      // 获取前台轮播图
+      const bannerList = await $axios.get(Api.courselBannerList);
+      // 获取首页画室动态列表
+      const studentWorksList = await $axios({ method: 'get', url: Api.getStudentWorksList, data: { start: 0, end: 30 } });
+      // 获取首页文章列表
+      const articleList = await $axios({ method: 'post', url: Api.getArticleList, data: { pageSize: 6, pageNum: 1 } });
+      // 获取画室环境列表
+      const environmentList = await $axios({ method: 'get', url: Api.environmentList });
+      // 获取教师列表
+      const teacherList = await $axios({ method: 'get', url: Api.teacherList });
+
+      return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data, articleList: articleList.data.data, studentWorksList: studentWorksList.data.data, environmentList: environmentList.data.data, teacherList: teacherList.data.data }
+    }
   },
   created () {
     if (process.client) {
+      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo[0]));
       this.setPaintingInfo(this.paintingInfo[0]);
-      localStorage.setItem(
-        'paintingInfo',
-        JSON.stringify(this.paintingInfo[0])
-      );
+    }
+  },
+  mounted () {
+    if (this.teacherList) {
+      localStorage.setItem('teacherList', JSON.stringify(this.teacherList));
+      localStorage.setItem('bannerList', JSON.stringify(this.carouselList));
+      localStorage.setItem('studentWorksList', JSON.stringify(this.studentWorksList));
+      localStorage.setItem('articleList', JSON.stringify(this.articleList));
+      localStorage.setItem('environmentList', JSON.stringify(this.environmentList));
+      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo[0]));
+    }
+  },
+  activated () {
+    if (!this.teacherList) {
+      this.getCacheData();
     }
   },
   methods: {
-    ...mapMutations(['setPaintingInfo'])
+    ...mapMutations(['setPaintingInfo']),
+    getCacheData () {
+      console.log('开始初始化')
+      try {
+        this.teacherList = JSON.parse(localStorage.getItem('teacherList'));
+        this.carouselList = JSON.parse(localStorage.getItem('bannerList'));
+        this.studentWorksList = JSON.parse(localStorage.getItem('studentWorksList'));
+        this.articleList = JSON.parse(localStorage.getItem('articleList'));
+        this.environmentList = JSON.parse(localStorage.getItem('environmentList'));
+        this.paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'));
+        console.log(this.teacherList)
+      } catch (e) {
+        console.log(e)
+      }
+    }
   }
+
 }
 </script>
 

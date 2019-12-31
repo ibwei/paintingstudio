@@ -10,18 +10,13 @@
     <div class="content">
       <div class="info">
         <div class="info-img">
-          <van-image
-            fit="cover"
-            width="100%"
-            height="100%"
-            src="/_nuxt/assets/images/index/cat.png"
-          />
+          <van-image fit="cover" width="100%" height="100%" :src="teacher.photo" />
         </div>
         <div class="info-basic">
-          <div class="name">田奇</div>
+          <div class="name">{{ teacher.name }}</div>
           <div class="rate">
             <van-rate
-              v-model="rate"
+              v-model="teacher.rate"
               :size="16"
               readonly
               allow-half
@@ -29,9 +24,6 @@
               void-icon="star"
               void-color="#eee"
             />
-          </div>
-          <div class="tab">
-            <van-tag plain round type="danger">适合高级学员</van-tag>
           </div>
           <div class="honor">
             <van-icon name="fire" size="16" :color="Color.colorbrand" />
@@ -42,23 +34,18 @@
       <div class="introduction">
         <div class="introduction-title">
           <div class="title-text">老师简介</div>
-          <div class="more">
-            更多
-            <van-icon name="arrow-down" />
-          </div>
         </div>
-        <div
-          class="introduction-content"
-        >毕业于西南大学美术学院，致力于美术教育行业，擅长中小学生的创意美术，包括水粉画，油画棒，线描画，动漫，插画，点彩，素描。多次辅导学生参加等级考试，不管在课堂教学，还是在室外写生教学中，都以培养学生能力为主，把孩子的创造力解放出来是她教学的目标和动力。</div>
+        <div class="introduction-content">{{ teacher.desc }}</div>
       </div>
       <div class="skill">
         <div class="skill-title">擅长课程</div>
         <div class="skill-content">
-          <van-tag plain>水墨画</van-tag>
-          <van-tag plain type="primary">素描</van-tag>
-          <van-tag plain type="success">静物</van-tag>
-          <van-tag plain type="danger">石膏几何</van-tag>
-          <van-tag plain type="warning">油画</van-tag>
+          <van-tag
+            v-for="(item,index) of teacher.good_ats"
+            :key="index"
+            plain
+            :style="{marginRight:'10px'}"
+          >{{ item }}</van-tag>
         </div>
       </div>
       <div class="appraise">
@@ -70,13 +57,7 @@
           </div>
         </div>
         <div class="appraise-content">
-          <van-tag type="danger" size="large">画风细腻</van-tag>
-          <van-tag type="danger" size="large">对学生好</van-tag>
-          <van-tag type="danger" size="large">有耐心</van-tag>
-          <van-tag type="warning" size="large">普通话标准</van-tag>
-          <van-tag type="primary" size="large">时间把控得好</van-tag>
-          <van-tag size="large">实战达人</van-tag>
-          <van-tag size="large">基础功超高</van-tag>
+          <van-tag v-for="(item,index) of teacher.impressions" :key="index" plain>{{ item }}</van-tag>
           <div class="student-appraise">暂未开启互动功能</div>
         </div>
       </div>
@@ -85,19 +66,44 @@
 </template>
 
 <script>
-import { Color } from '../../config/color';
-import appraise from './appraise';
+import { Color, tagsColor } from '../../config/color';
+import { Api } from '@/api/index';
 export default {
-  components: {
-    appraise
-  },
   data () {
     return {
       Color,
-      rate: 4.5
+      teacher: {
+        name: '',
+        photo: '',
+        rate: 0,
+        desc: '',
+        deeds: '',
+        impression: '',
+        good_at: ''
+      }
     }
   },
+  mounted () {
+    this.getTeacherDetail();
+  },
   methods: {
+    getTeacherDetail () {
+      this.$axios({ method: 'post', url: Api.teacherDetail, data: { id: this.$route.query.teacherId } }).then((res) => {
+        if (res.data.resultCode === 0) {
+          this.teacher = res.data.data;
+          this.teacher.good_ats = this.teacher.good_at.split('-');
+          this.teacher.impressions = this.teacher.impression.split('-');
+        } else {
+          this.$toast('获取教师信息失败！');
+        }
+      }).catch(() => {
+
+      })
+    },
+    /* 获取随机颜色 */
+    getRandomColor () {
+      return tagsColor[Math.floor(Math.random() * tagsColor.length)]
+    },
     back () {
       this.$router.back();
     }
@@ -126,7 +132,7 @@ export default {
   height: 16px;
 }
 .head-title {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 16px;
 }
 .head-right {
@@ -142,14 +148,15 @@ export default {
 }
 .info-img {
   width: 100px;
-  height: 130px;
+  height: 100px;
   border-radius: 5px;
   overflow: hidden;
 }
 .info-basic {
-  .flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
   padding-left: 15px;
   flex: 1;
   div {
@@ -157,8 +164,8 @@ export default {
   }
 }
 .name {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 300;
   padding-top: 5px;
 }
 .honor {
@@ -171,6 +178,10 @@ export default {
   span {
     padding-left: 5px;
   }
+}
+.introduction {
+  flex: 1;
+  height: auto;
 }
 .introduction,
 .skill,
@@ -187,8 +198,8 @@ export default {
 }
 .title-text,
 .skill-title {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 300;
 }
 .more {
   font-size: 13px;
@@ -198,11 +209,6 @@ export default {
   font-size: 13px;
   line-height: 1.5em;
   color: @color-grey-2;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .skill-content,
 .appraise-content {

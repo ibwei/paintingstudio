@@ -33,12 +33,12 @@
 
 <script>
 import vTitle from '../common/vTitle';
-import canvasGallery from '@/components/common/canvasGallery'
 import { Color } from '../../config/color';
+import canvasGallery from '@/components/common/canvasGallery'
 export default {
   components: {
     vTitle,
-    canvasGallery,
+    canvasGallery
   },
   data () {
     return {

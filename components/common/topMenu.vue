@@ -56,32 +56,11 @@
                 :class="{
                   icon: true,
                   iconfont: true,
-                  arrow: nav.icon == '&#xe60e;'
                 }"
                 @click="navToPage(nav)"
                 v-html="nav.icon"
               ></span>
               <!-- 子菜单 -->
-              <div
-                v-if="
-                  nav.subMenuOptions !== null && nav.subMenuOptions.length > 0
-                "
-                class="submenu"
-              >
-                <div class="submenu-arrow"></div>
-                <div
-                  v-for="(submenu, index1) of nav.subMenuOptions"
-                  :key="index1"
-                  class="submenu-list"
-                  @click="navToPage(submenu)"
-                >
-                  <div class="submenu-logo" v-html="submenu.iconLeft"></div>
-                  <div class="submenu-container">
-                    <div class="submenu-title">{{ submenu.text }}</div>
-                    <div class="submenu-content">{{ submenu.subText }}</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </nav>
         </div>
@@ -165,8 +144,7 @@ export default {
             type: 'link',
             text: '主页',
             path: '/',
-            icon: '&#xe60e;',
-            subMenuOptions: []
+            icon: '&#xe672;'
           },
           {
             type: 'link',
@@ -249,8 +227,6 @@ export default {
       if (path === '/course') {
         menuIndex = 1;
       } else if (path === '/news') {
-        menuIndex = 2;
-      } else if (path === '/about') {
         menuIndex = 2;
       } else if (path === '/contact') {
         menuIndex = 3;

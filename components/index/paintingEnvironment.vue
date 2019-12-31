@@ -6,7 +6,7 @@
     <div class="content">
       <div class="grid">
         <div v-for="(item, index) of environmentList" :key="index" class="grid-item">
-          <div class="gird-item">
+          <div v-if="index<9" class="gird-item">
             <van-image :src="item" fit="fill" @click="showPreview(index)">
               <template v-slot:loading>
                 <van-loading type="spinner" size="20" />
@@ -36,6 +36,14 @@ export default {
   components: {
     vTitle
   },
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   computed: {
     ...mapState(['isPhone'])
   },
@@ -52,7 +60,17 @@ export default {
       environmentList: []
     };
   },
+  created () {
+    if (process.client) {
+      this.handleList();
+    }
+  },
   methods: {
+    handleList () {
+      this.environmentList = this.list.map((item) => {
+        return item.url;
+      })
+    },
     onChange (index) {
       this.index = index + 1;
     },
@@ -103,6 +121,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
+  cursor: pointer;
   border: 1px solid #fff;
 }
 </style>
