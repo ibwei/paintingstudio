@@ -1,7 +1,8 @@
 const baseUrl =
     process.env.NODE_ENV === 'production'
         ? 'http://www.paintingapi.ibwei.com/api'
-        : '/api';
+        : 'http://www.paintingapi.ibwei.com/api';
+        // : '/api';
 export const Api = {
     //获取画室信息
     getPaintingInfo: baseUrl + '/paintingStudio/info',

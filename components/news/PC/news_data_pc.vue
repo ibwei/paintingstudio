@@ -1,6 +1,6 @@
 <template>
   <div class="news-data-pc-wrap">
-    <div class="news-title-wrap">{{ news.title_info }}</div>
+    <div class="news-title-wrap">{{ news.title }}</div>
     <div class="user-info-wrap">
       <div class="user-img">
         <img :src="user.imgUrl" width="100%" />
@@ -14,12 +14,12 @@
         </div>
         <div class="info-bottom">
           <div class="news-browse">浏览{{ news.browse }}次</div>
-          <div class="news-time">{{ news.time }}</div>
+          <div class="news-time">{{ news.updated_at }}</div>
         </div>
       </div>
     </div>
     <div class="news-content-wrap">
-      <div v-html="news.describe"></div>
+      <div v-html="news.content"></div>
     </div>
   </div>
 </template>
