@@ -7,18 +7,60 @@
       <van-field v-model="value" placeholder="我也来说两句……" right-icon="smile-o" />
     </div>
     <div class="icon-wrap">
-      <van-icon name="comment-o" info="99+" />
-      <div class="icon sc">&#xe611;</div>
+      <template v-if="news.comment_count <=0">
+        <van-icon name="comment-o" />
+      </template>
+      <template v-else>
+        <van-icon name="comment-o" :info="news.comment_count" />
+      </template>
+
+      <div @click="handlerClickZan(zan)">
+        <template v-if="zan">
+          <van-icon name="good-job" />
+        </template>
+        <template v-else>
+          <van-icon name="good-job-o" />
+        </template>
+        {{ news.praise_count }}
+      </div>
       <div class="icon fx">&#xe637;</div>
     </div>
   </div>
 </template>
 
 <script>
+import { Dialog } from 'vant';
 export default {
+  props: ['news', 'zan'],
   data () {
     return {
       value: ''
+    }
+  },
+  watch: {
+    zan (val, oldVal) {
+    }
+
+  },
+  methods: {
+    // 点赞
+    handlerClickZan (val) {
+      if (val) {
+        Dialog.confirm({
+          title: '标题',
+          message: '是否取消赞'
+        }).then(() => {
+          this.zan = !val;
+          this.$emit('changeZan', !val)
+
+          this.$toast('取消点赞')
+        }).catch(() => {
+          // on cancel
+        });
+      } else {
+        this.zan = !val;
+        this.$emit('changeZan', !val)
+      }
     }
   }
 }

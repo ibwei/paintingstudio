@@ -52,6 +52,7 @@
 
 <script>
 export default {
+  props: ['list'],
   data () {
     return {
       label: 1,

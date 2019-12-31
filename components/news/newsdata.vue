@@ -11,29 +11,32 @@
           <div class="user-tag">
             <van-tag color="#f2826a" plain>{{ user.info }}</van-tag>
           </div>
-          <div class="time">{{ news.time }}</div>
+          <div class="time">{{ news.updated_at }}</div>
         </div>
       </div>
     </div>
-    <div class="desc-wrap" v-html="news.describe"></div>
+    <div class="news-img">
+      <!-- <img :src="news." alt /> -->
+    </div>
+    <div class="desc-wrap" v-html="news.content"></div>
     <div class="state">
       <div class="state-left">
         <div class="browse">
           <van-icon name="fire" />
-          {{ news.browse }}
+          {{ news.read_count }}
         </div>
-        <div @click="handlerClickZan">
-          <template v-if="isZan">
-            <van-icon name="good-job-o" />
-          </template>
-          <template v-else>
+        <div @click="handlerClickZan(zan)">
+          <template v-if="zan">
             <van-icon name="good-job" />
           </template>
-          {{ news.praise }}
+          <template v-else>
+            <van-icon name="good-job-o" />
+          </template>
+          {{ news.praise_count }}
         </div>
-        <div>
+        <div @click="pl">
           <van-icon name="chat-o" />
-          {{ news.browse }}
+          {{ news.comment_count }}
         </div>
       </div>
       <div class="state-right">
@@ -46,17 +49,32 @@
 </template>
 
 <script>
+import { Dialog } from 'vant';
 export default {
   name: 'Newsdata',
-  props: ['user', 'news'],
-  data () {
-    return {
-      isZan: true
-    }
-  },
+  props: ['user', 'news', 'zan'],
   methods: {
-    handlerClickZan () {
-      this.isZan = !this.isZan;
+    // 点赞
+    handlerClickZan (val) {
+      if (val) {
+        Dialog.confirm({
+          title: '标题',
+          message: '是否取消赞'
+        }).then(() => {
+          this.zan = !val;
+          this.$emit('changeZan', !val)
+          this.$toast('取消点赞')
+        }).catch(() => {
+          // on cancel
+        });
+      } else {
+        this.$emit('changeZan', !val)
+        this.zan = !val;
+      }
+    },
+    // 点击评论按钮
+    pl () {
+      this.$toast('暂未开放评论系统')
     }
   }
 
@@ -65,6 +83,9 @@ export default {
 
 <style lang="less" scoped>
 @media screen and (max-width: 720px) {
+  .desc-wrap img {
+    width: 100%;
+  }
   .news-detile-phone-wrap {
     display: flex;
     flex-direction: column;
@@ -81,6 +102,7 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-top: 10px;
   }
   .user-img {
     width: 55px;
