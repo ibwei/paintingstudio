@@ -2,14 +2,11 @@
   <div class="news-data-pc-wrap">
     <div class="news-title-wrap">{{ news.title }}</div>
     <div class="user-info-wrap">
-      <div class="user-img">
-        <img :src="user.imgUrl" width="100%" />
-      </div>
       <div class="info-wrap">
         <div class="info-top">
-          <div class="news-title">{{ user.name }}</div>
+          <div class="news-title">{{ 565 }}</div>
           <div class="lable">
-            <van-tag color="#f2826a" class="tag">{{ user.info }}</van-tag>
+            <van-tag color="#f2826a" class="tag">{{ 5656 }}</van-tag>
           </div>
         </div>
         <div class="info-bottom">
@@ -26,7 +23,18 @@
 
 <script>
 export default {
-  props: ['user', 'news']
+  props: {
+    news: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
+    zan: {
+      type: Boolean,
+      default: true
+    }
+  }
 
 }
 </script>

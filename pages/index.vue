@@ -41,7 +41,7 @@
     <message-board v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部footer -->
-    <bottom-footer :painting-info="paintingInfo[0]"></bottom-footer>
+    <bottom-footer :painting-info="paintingInfo"></bottom-footer>
   </div>
 </template>
 
@@ -82,6 +82,8 @@ export default {
    */
   async asyncData ({ $axios }) {
     // 判断是否在服务端
+
+    // 如果是在首次加载首页，则从服务器读取数据。
     if (process.server) {
       // 获取画室信息
       const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
@@ -96,34 +98,40 @@ export default {
       // 获取教师列表
       const teacherList = await $axios({ method: 'get', url: Api.teacherList });
 
-      return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data, articleList: articleList.data.data, studentWorksList: studentWorksList.data.data, environmentList: environmentList.data.data, teacherList: teacherList.data.data }
+      return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data[0], articleList: articleList.data.data, studentWorksList: studentWorksList.data.data, environmentList: environmentList.data.data, teacherList: teacherList.data.data }
+    }
+
+    // 如果是在客户端刷新首页，则从缓存里读取数据。
+    if (process.client) {
+      const teacherList = JSON.parse(localStorage.getItem('teacherList'));
+      const carouselList = JSON.parse(localStorage.getItem('bannerList'));
+      const studentWorksList = JSON.parse(localStorage.getItem('studentWorksList'));
+      const articleList = JSON.parse(localStorage.getItem('articleList'));
+      const environmentList = JSON.parse(localStorage.getItem('environmentList'));
+      const paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'));
+      return { carouselList, paintingInfo, articleList, studentWorksList, environmentList, teacherList }
     }
   },
   created () {
     if (process.client) {
-      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo[0]));
-      this.setPaintingInfo(this.paintingInfo[0]);
+      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo));
+      this.setPaintingInfo(this.paintingInfo);
     }
   },
   mounted () {
+    // 不论是从哪里获取的数据，都再次存一遍。
     if (this.teacherList) {
       localStorage.setItem('teacherList', JSON.stringify(this.teacherList));
       localStorage.setItem('bannerList', JSON.stringify(this.carouselList));
       localStorage.setItem('studentWorksList', JSON.stringify(this.studentWorksList));
       localStorage.setItem('articleList', JSON.stringify(this.articleList));
       localStorage.setItem('environmentList', JSON.stringify(this.environmentList));
-      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo[0]));
-    }
-  },
-  activated () {
-    if (!this.teacherList) {
-      this.getCacheData();
+      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo));
     }
   },
   methods: {
     ...mapMutations(['setPaintingInfo']),
     getCacheData () {
-      console.log('开始初始化')
       try {
         this.teacherList = JSON.parse(localStorage.getItem('teacherList'));
         this.carouselList = JSON.parse(localStorage.getItem('bannerList'));
@@ -131,9 +139,8 @@ export default {
         this.articleList = JSON.parse(localStorage.getItem('articleList'));
         this.environmentList = JSON.parse(localStorage.getItem('environmentList'));
         this.paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'));
-        console.log(this.teacherList)
       } catch (e) {
-        console.log(e)
+        console.log('设置缓存出错！');
       }
     }
   }

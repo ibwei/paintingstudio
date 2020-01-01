@@ -4,7 +4,7 @@
       <top-menu @menu-open="hideSticky" @menu-close="showSticky"></top-menu>
     </div>
     <!-- <Affix/> -->
-    <nuxt class="nuxt-content" keep-alive />
+    <nuxt class="nuxt-content" />
     <!-- 底部标题栏 -->
     <div v-show="tabbarShow || !isPhone" class="tabbar-menu">
       <van-tabbar
@@ -74,7 +74,7 @@ export default {
       this.currentPath = this.$route.path;
       this.checkDevice();
       const paint = localStorage.getItem('paintingInfo');
-      if (paint) {
+      if (paint && paint !== 'undefined') {
         this.setPaintingInfo(JSON.parse(paint));
       } else {
         this.$router.push({ path: '/' })

@@ -27,11 +27,6 @@ export default {
         icon: '&#xe618;'
       }
     }
-  },
-  created () {
-    if (process.client) {
-      console.log(this.teacherList)
-    }
   }
 }
 </script>

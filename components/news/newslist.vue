@@ -115,7 +115,7 @@ export default {
       this.listNews = this.list.map((item, index) => {
         const temp = item;
         temp.imgUrls = item.thumbnail ? item.thumbnail.split(',') : [];
-        temp.tags = item.tags ? item.tags.split('-') : [];
+        temp.tag = item.tags ? item.tags.split('-') : [];
         temp.content = getSimpleText(temp.content ? temp.content : '无内容').slice(0, 40) + '...';
         temp.created_at = item.created_at.slice(0, 10);
         return temp;
@@ -130,7 +130,6 @@ export default {
     changeList (category) {
       this.loading = true;
       this.$axios({ method: 'post', url: Api.getArticleListByType, data: { pageNum: 1, pageSize: 10, category } }).then((res) => {
-        console.log('res:', res);
         if (res.data.resultCode === 0) {
           this.listNews = res.data.data[category].map((item, index) => {
             const temp = item;
@@ -157,7 +156,7 @@ export default {
         this.isLoading = false;
       }, 500);
     },
-    onLoad() {
+    onLoad () {
       // 异步更新数据
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {

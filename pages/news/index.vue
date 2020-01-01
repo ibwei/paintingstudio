@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import vlabel from '../../components/news/label'
 import newslist from '../../components/news/newslist'
 import midContent from '../../components/news/PC/mid_content'
@@ -35,6 +35,9 @@ export default {
     studentQuestion,
     newslist
   },
+  computed: {
+    ...mapState(['isPhone']) // 加载设备类型
+  },
   async asyncData ({ $axios }) {
     // 获取首页文章分类列表
     const categoryList = await $axios({ method: 'get', url: Api.getArticleType });
@@ -42,8 +45,12 @@ export default {
     const articleList = await $axios({ method: 'post', url: Api.getArticleListByType, data: { pageNum: 1, pageSize: 10, category: categoryList.data.data[0].category } });
     return { categoryList: categoryList.data.data, articleList: articleList.data.data[categoryList.data.data[0].category] };
   },
-  computed: {
-    ...mapState(['isPhone']) // 加载设备类型
+  mounted () {
+    this.changeTabbarShow(true);
+    this.changTopbarShow(true);
+  },
+  methods: {
+    ...mapMutations(['changeTabbarShow', 'changTopbarShow'])
   }
 };
 </script>

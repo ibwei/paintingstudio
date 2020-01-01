@@ -2,16 +2,15 @@
   <div class="articleDetails">
     <div class="articleDetails-container">
       <div class="content">
-        <banner></banner>
+        <banner :title="news.title"></banner>
         <div class="mid-content">
           <!-- PC端文章详情 -->
-          <news-data-pc :news="news" :user="user"></news-data-pc>
+          <news-data-pc :news="news"></news-data-pc>
           <!-- 文章详情组件 移动端-->
-          <news-data :news="news" :user="user" :zan="zan" @changeZan="changeZan"></news-data>
+          <news-data :news="news" @changeZan="changeZan"></news-data>
           <!-- 推荐文章组件 移动端-->
           <news-recommended :recommendeds="recommended"></news-recommended>
           <!-- 评论列表组件 移动端-->
-          <comments :comments="comments"></comments>
         </div>
         <div class="left-content">
           <!-- pc端推荐文章组件 -->
@@ -20,9 +19,9 @@
       </div>
     </div>
     <!-- 浮动到最下面得操作框 -->
-    <div class="nav-bar">
+    <!-- <div class="nav-bar">
       <nav-bar :news="news" @changeZan="changeZan"></nav-bar>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -30,7 +29,6 @@
 import { mapState, mapMutations } from 'vuex';
 import newsData from '../../../components/news/newsdata';
 import newsRecommended from '../../../components/news/newsRecommended';
-import comments from '../../../components/news/comments';
 import banner from '../../../components/news/phone/banner';
 import navBar from '../../../components/news/phone/navBar'
 import newsDataPc from '../../../components/news/PC/news_data_pc'
@@ -43,52 +41,49 @@ export default {
     newsRecommended,
     newsRecommendedPc,
     newsDataPc,
-    comments,
-    banner,
-    navBar
+    banner
   },
   data () {
     return {
       zan: false,
       news: '',
       user: { id: 1, name: '程序员阿森', imgUrl: require('../../../assets/images/user/asen.jpg'), info: '最骚程序员' }, // 当前文章得作者
-      recommended: [{
-        id: 1, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23      }, {
-        id: 2, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23      }, {
-        id: 3, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23      }, {
-        id: 4, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23      }], // 文章相关推荐列表
+      recommended: [
+        {
+          id: 1, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23        },
+        {
+          id: 2, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23        }, {
+          id: 3, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23        }, {
+          id: 4, title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间', describe: '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来', imgUrl: require('../../../assets/images/art/art1.jpg'), time: '2019-12-12', userId: 1, browse: 23        }], // 文章相关推荐列表
       comments: []// 文章相关评论列表
     }
   },
   computed: {
     ...mapState(['tabbarShow', 'topbarShow']) // 加载设备类型
   },
-  mounted () {
-    this.changeTabbarShow(false);
-    this.changTopbarShow(false);
-    // 通过Id获取当前文章详情数据
-    this.$axios({ method: 'post', url: Api.getArticleDetail, data: { id: this.$route.query.news_id } }).then((res) => {
-      this.news = res.data.data[0]
-    }).catch((res) => {
-      this.$toast('网络异常');
-    });
-    // 阅读量+1
-    this.$axios({ method: 'post', url: Api.articleAddRead, data: { id: this.$route.query.news_id } })
-  },
-  destroyed () {
-    this.changeTabbarShow(true);
-    this.changTopbarShow(true);
+  created () {
+    if (process.client) {
+      this.changeTabbarShow(false);
+      this.changTopbarShow(false);
+      // 通过Id获取当前文章详情数据
+      this.$axios({ method: 'post', url: Api.getArticleDetail, data: { id: this.$route.query.news_id } }).then((res) => {
+        this.news = res.data.data[0]
+      }).catch((res) => {
+        this.$toast('网络异常');
+      });
+      // 阅读量+1
+      this.$axios({ method: 'post', url: Api.articleAddRead, data: { id: this.$route.query.news_id } })
+    }
   },
   methods: {
+    ...mapMutations(['changeTabbarShow', 'changTopbarShow']),
     leftBarClick () {
       this.$router.go(-1);
     },
     // 改变点赞状态
     changeZan (val) {
       this.zan = val;
-      console.log(this.zan)
-    },
-    ...mapMutations(['changeTabbarShow', 'changTopbarShow'])
+    }
   }
 
 };
@@ -97,7 +92,7 @@ export default {
 <style lang="less" scoped>
 .articleDetails {
   width: 100%;
-  background: #f9f9f9;
+  background: #fff;
 }
 .news-data-pc-wrap {
   display: flex;
@@ -184,8 +179,6 @@ export default {
   }
   .mid-content {
     width: 100%;
-    overflow: hidden;
-    padding: 0px 10px;
   }
   .news-recom-wrap {
     margin-top: 30px;

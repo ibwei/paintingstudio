@@ -68,18 +68,17 @@ export default {
         enTitle: 'Painting Studio News',
         mode: 'red',
         icon: '&#xe6d9;'
-      },
+      }
     };
   },
   created () {
     if (process.client) {
-
-      //处理首页画室动态数据
+      // 处理首页画室动态数据
       for (let i = 0; i < this.articleList.length; i++) {
-        this.articleList[i].tags = this.articleList[i].tags.split('-');
+        this.articleList[i].tag = this.articleList[i].tags ? this.articleList[i].tags.split('-') : [];
         const random = Math.floor(Math.random() * 4);
         this.articleList[i].color = this.tagsColor[random];
-        this.articleList[i].desc = getSimpleText(this.articleList[i].content?this.articleList[i].content:'无主题内容').slice(0, 40) + '...';
+        this.articleList[i].desc = getSimpleText(this.articleList[i].content ? this.articleList[i].content : '无主题内容').slice(0, 40) + '...';
 
         this.articleList[i].date = this.articleList[i].created_at.slice(0, 11);
       }

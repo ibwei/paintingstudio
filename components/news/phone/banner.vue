@@ -1,11 +1,11 @@
 <template>
   <div class="banner">
     <div class="left" @click="huitui">
-      <van-icon name="arrow-left" />
+      <span style="margin-left:10px;">返回</span>
     </div>
-    <div class="banner-cont">动态详情</div>
+    <div class="banner-cont">标题：{{ title }}</div>
     <div class="right" @click="showAction">
-      <van-icon name="ellipsis" />
+      <van-icon name="ellipsis" color="rgba(0,0,0,.4)" />
     </div>
     <van-action-sheet
       v-model="show"
@@ -19,13 +19,19 @@
 
 <script>
 export default {
+  props: {
+    title: {
+      type: String,
+      default: '文章详情'
+    }
+  },
   data () {
     return {
       show: false,
       actions: [
-        { name: '选项' },
-        { name: '选项' },
-        { name: '选项', subname: '描述信息' }
+        { name: '分享到qq空间' },
+        { name: '分享到朋友圈', subname: '让更多人看到' },
+        { name: '分享到微博' }
       ]
     };
   },
@@ -51,15 +57,19 @@ export default {
   justify-content: space-between;
   align-items: center;
   background: #fff;
+  box-shadow: 1px 1px 5px rgba(33, 33, 33, 0.1);
   padding: 8px 0px;
   position: fixed;
   top: 0px;
+  z-index: 999;
 }
 .van-icon {
   font-size: 22px;
 }
 .left {
   margin-left: 8px;
+  width: 40px;
+  color: rgba(0, 0, 0, 0.4);
 }
 .right {
   margin-right: 10px;
@@ -68,7 +78,10 @@ export default {
   font-size: 26px;
 }
 .banner-cont {
-  color: #e00;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #000;
   font-size: 16px;
 }
 </style>

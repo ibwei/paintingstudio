@@ -44,14 +44,17 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+  background: #fff;
+  padding: 20px 10px;
 }
 .news-recom-title {
+  font-weight: 300;
   font-size: 16px;
   color: #616161;
 }
 .news-recom-title::before {
   content: '';
-  height: 14px;
+  height: 16px;
   display: inline-block;
   border: 2px solid #e00;
   border-radius: 1px;
@@ -89,7 +92,7 @@ export default {
   justify-content: space-around;
 }
 .news-title {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5em;
   overflow: hidden;
   text-overflow: ellipsis;

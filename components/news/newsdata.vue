@@ -1,18 +1,12 @@
 <template>
   <div class="news-detile-phone-wrap">
-    <div class="title">{{ news.title }}</div>
     <div class="user">
-      <div class="user-img">
-        <img :src="user.imgUrl" width="100%" />
-      </div>
-      <div class="user-info">
-        <div class="user-name">{{ user.name }}</div>
-        <div class="user-tag-wrap">
-          <div class="user-tag">
-            <van-tag color="#f2826a" plain>{{ user.info }}</van-tag>
-          </div>
-          <div class="time">{{ news.updated_at }}</div>
+      <div class="user-tag-wrap">
+        <div class="user-tag">
+          分类：
+          <van-tag color="#f2826a" plain>{{ news.tag }}</van-tag>
         </div>
+        <div class="time">{{ news.updated_at }}</div>
       </div>
     </div>
     <div class="news-img">
@@ -23,7 +17,7 @@
       <div class="state-left">
         <div class="browse">
           <van-icon name="fire" />
-          {{ news.read_count }}
+          <span class="count">{{ news.read_count }}</span>
         </div>
         <div @click="handlerClickZan(zan)">
           <template v-if="zan">
@@ -32,11 +26,11 @@
           <template v-else>
             <van-icon name="good-job-o" />
           </template>
-          {{ news.praise_count }}
+          <span class="count">{{ news.praise_count }}</span>
         </div>
         <div @click="pl">
           <van-icon name="chat-o" />
-          {{ news.comment_count }}
+          <span class="count">{{ news.comment_count }}</span>
         </div>
       </div>
       <div class="state-right">
@@ -52,7 +46,18 @@
 import { Dialog } from 'vant';
 export default {
   name: 'Newsdata',
-  props: ['user', 'news', 'zan'],
+  props: {
+    news: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
+    zan: {
+      type: Boolean,
+      default: true
+    }
+  },
   methods: {
     // 点赞
     handlerClickZan (val) {
@@ -83,11 +88,26 @@ export default {
 
 <style lang="less" scoped>
 @media screen and (max-width: 720px) {
-  .desc-wrap img {
+  .count {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 200;
+  }
+  .desc-wrap {
     width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
   }
   .news-detile-phone-wrap {
     display: flex;
+    background: #fff;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -118,12 +138,15 @@ export default {
   .user-tag-wrap {
     margin-top: 5px;
     display: flex;
+    width: 100%;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
   .time {
     margin-left: 4px;
+    font-size: 12px;
+    color: #bdbdbd;
   }
   .describe {
     border: 1px solid black;
