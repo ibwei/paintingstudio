@@ -39,12 +39,14 @@ export default {
     };
   },
   created () {
-    if (this.initTitle.mode === 'red') {
-      this.dividerClass = 'divider';
-      this.mainClass = 'main-title';
-    } else {
-      this.dividerClass = 'divider1';
-      this.mainClass = 'main-title1';
+    if (process.client) {
+      if (this.initTitle.mode === 'red') {
+        this.dividerClass = 'divider';
+        this.mainClass = 'main-title';
+      } else {
+        this.dividerClass = 'divider1';
+        this.mainClass = 'main-title1';
+      }
     }
   }
 };

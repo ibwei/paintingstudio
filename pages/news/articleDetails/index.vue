@@ -30,7 +30,6 @@ import { mapState, mapMutations } from 'vuex';
 import newsData from '../../../components/news/newsdata';
 import newsRecommended from '../../../components/news/newsRecommended';
 import banner from '../../../components/news/phone/banner';
-import navBar from '../../../components/news/phone/navBar'
 import newsDataPc from '../../../components/news/PC/news_data_pc'
 import newsRecommendedPc from '../../../components/news/PC/news_recommended_pc'
 import { Api } from '@/api/index';

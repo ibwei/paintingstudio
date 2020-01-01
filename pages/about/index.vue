@@ -7,7 +7,7 @@
 import teacher from '@/components/about/teacher';
 export default {
   components: {
-    teacher,
+    teacher
   },
   methods: {}
 };

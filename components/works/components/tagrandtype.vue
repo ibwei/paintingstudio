@@ -38,15 +38,17 @@ export default {
     };
   },
   created () {
-    const colorsLength = this.colors.length;
-    const infosLength = this.infos.length;
-    this.$nextTick(() => {
-      for (let i = 0; i < infosLength; i++) {
-        const random = Math.floor(Math.random() * colorsLength);
-        const temp = { info: this.infos[i], ...this.colors[random] };
-        this.taglist.push(temp);
-      }
-    })
+    if (process.client) {
+      const colorsLength = this.colors.length;
+      const infosLength = this.infos.length;
+      this.$nextTick(() => {
+        for (let i = 0; i < infosLength; i++) {
+          const random = Math.floor(Math.random() * colorsLength);
+          const temp = { info: this.infos[i], ...this.colors[random] };
+          this.taglist.push(temp);
+        }
+      })
+    }
   }
 };
 </script>

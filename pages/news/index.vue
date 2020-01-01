@@ -7,8 +7,6 @@
           <vlabel :list="categoryList"></vlabel>
           <!-- 手机端的内容 -->
           <newslist :list="articleList"></newslist>
-          <!-- PC端的主体内容 -->
-          <mid-content :list="articleList"></mid-content>
         </div>
         <div class="left-content">
           <student-question></student-question>
@@ -23,14 +21,12 @@
 import { mapState, mapMutations } from 'vuex'
 import vlabel from '../../components/news/label'
 import newslist from '../../components/news/newslist'
-import midContent from '../../components/news/PC/mid_content'
 import studentQuestion from '../../components/news/PC/student_question'
 import noteLabel from '../../components/news/PC/note_label'
 import { Api } from '@/api/index'
 export default {
   components: {
     vlabel,
-    midContent,
     noteLabel,
     studentQuestion,
     newslist
