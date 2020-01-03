@@ -70,7 +70,7 @@ export default {
           index: 1,
           phoneColor: '#fff',
           icon: '&#xe672;',
-          imgUrl: require('../../assets/images/index/国画.jpg'),
+          imgUrl: require('../../assets/images/index/guohua.jpg'),
           phone_imgUrl: require('../../assets/images/index/国画_phone.jpg'),
           title: '油画定制课',
           intrduce:
@@ -85,8 +85,8 @@ export default {
           index: 2,
           phoneColor: '#fff',
           icon: '&#xe60c;',
-          imgUrl: require('../../assets/images/index/留学生.jpg'),
-          phone_imgUrl: require('../../assets/images/index/留学生_phone.jpg'),
+          imgUrl: require('../../assets/images/index/liuxuesheng.jpg'),
+          phone_imgUrl: require('../../assets/images/index/liuxuesheng_phone.jpg'),
           title: '体验课进行时',
           intrduce:
             '体验课进行时素描、水彩任你选体验课进行时素描、水彩任你选短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
@@ -100,8 +100,8 @@ export default {
           index: 3,
           phoneColor: '#fff',
           icon: '&#xe624;',
-          imgUrl: require('../../assets/images/index/艺术生.jpg'),
-          phone_imgUrl: require('../../assets/images/index/艺术生_phone.jpg'),
+          imgUrl: require('../../assets/images/index/yishusheng.jpg'),
+          phone_imgUrl: require('../../assets/images/index/yishusheng_phone.jpg'),
           title: '绘画兴趣班',
           intrduce:
             '短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',

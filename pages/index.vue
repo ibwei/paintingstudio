@@ -84,8 +84,9 @@ export default {
     // 判断是否在服务端
 
     // 如果是在首次加载首页，则从服务器读取数据。
+
+    // 获取画室信息
     if (process.server) {
-      // 获取画室信息
       const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
       // 获取前台轮播图
       const bannerList = await $axios.get(Api.courselBannerList);
@@ -131,18 +132,18 @@ export default {
   },
   methods: {
     ...mapMutations(['setPaintingInfo']),
-    getCacheData () {
-      try {
-        this.teacherList = JSON.parse(localStorage.getItem('teacherList'));
-        this.carouselList = JSON.parse(localStorage.getItem('bannerList'));
-        this.studentWorksList = JSON.parse(localStorage.getItem('studentWorksList'));
-        this.articleList = JSON.parse(localStorage.getItem('articleList'));
-        this.environmentList = JSON.parse(localStorage.getItem('environmentList'));
-        this.paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'));
-      } catch (e) {
-        console.log('设置缓存出错！');
-      }
-    }
+    /*   getCacheData () {
+        try {
+          this.teacherList = JSON.parse(localStorage.getItem('teacherList'));
+          this.carouselList = JSON.parse(localStorage.getItem('bannerList'));
+          this.studentWorksList = JSON.parse(localStorage.getItem('studentWorksList'));
+          this.articleList = JSON.parse(localStorage.getItem('articleList'));
+          this.environmentList = JSON.parse(localStorage.getItem('environmentList'));
+          this.paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'));
+        } catch (e) {
+          console.log('设置缓存出错！');
+        }
+      } */
   }
 
 }

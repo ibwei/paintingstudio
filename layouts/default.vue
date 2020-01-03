@@ -77,16 +77,14 @@ export default {
       if (paint && paint !== 'undefined') {
         this.setPaintingInfo(JSON.parse(paint));
       } else {
-        this.$router.push({ path: '/' })
+        window.location.replace('http://www.ibwei.com:3001');
       }
     }
   },
   mounted () {
     window.addEventListener('resize', this.checkDevice);
     window.addEventListener('unload', this.logoutStatistics);
-    setTimeout(() => {
-      this.loginStatistics();
-    }, 1000);
+    this.loginStatistics();
   },
   destroyed () {
     window.removeEventListener('resize', this.checkDevice);
@@ -117,14 +115,10 @@ export default {
         if (res.data.resultCode === 0) {
           localStorage.setItem('currentId', res.data.data);
         } else {
-          setTimeout(() => {
-            this.loginStatistics();
-          }, 50000);
+
         }
       }).catch(() => {
-        setTimeout(() => {
-          this.loginStatistics();
-        }, 50000);
+
       })
     },
 
@@ -138,10 +132,6 @@ export default {
           logout_time: getDateTime()
         }
       });
-      // 确保发送成功
-      for (let i = 1; i < 1000000; i++) {
-        for (let m = 1; m < 1000000; m++) { continue; }
-      }
     },
 
     hideSticky () {
