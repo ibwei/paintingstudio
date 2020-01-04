@@ -1,11 +1,5 @@
 import Vue from 'vue'
-import {
-  Swipe,
-  SwipeItem
-} from 'vant';
-import Breadcrumb from 'ant-design-vue/lib/breadcrumb'
 import Button from 'ant-design-vue/lib/button'
-import Input from 'ant-design-vue/lib/input'
 import Tag from 'ant-design-vue/lib/tag'
 import List from 'ant-design-vue/lib/list'
 import Tab from 'ant-design-vue/lib/tabs'
@@ -28,9 +22,7 @@ import BackTop from 'ant-design-vue/lib/back-top'
 import Steps from 'ant-design-vue/lib/steps'
 import Popover from 'ant-design-vue/lib/popover'
 
-import 'ant-design-vue/lib/breadcrumb/style/index.css'
 import 'ant-design-vue/lib/button/style/index.css'
-import 'ant-design-vue/lib/input/style/index.css'
 import 'ant-design-vue/lib/tag/style/index.css'
 import 'ant-design-vue/lib/list/style/index.css'
 import 'ant-design-vue/lib/tabs/style/index.css'
@@ -52,9 +44,6 @@ import 'ant-design-vue/lib/back-top/style/index.css'
 import 'ant-design-vue/lib/steps/style/index.css'
 import 'ant-design-vue/lib/popover/style/index.css'
 
-Vue.use(Breadcrumb)
-Vue.use(Button)
-Vue.use(Input)
 Vue.use(Tag)
 Vue.use(List)
 Vue.use(Tab)
@@ -76,4 +65,3 @@ Vue.use(Message)
 Vue.use(BackTop)
 Vue.use(Steps)
 Vue.use(Popover)
-Vue.use(Swipe).use(SwipeItem)

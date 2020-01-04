@@ -55,14 +55,15 @@ module.exports = {
         },
         {
             src: '~plugins/scrollreveal.js',
-            ssr: false
-        },
-        {
-            src: '~plugins/vant',
             ssr: false,
         },
         {
-            src: '~plugins/antd'
+            src: '~plugins/vant',
+            ssr: true,
+        },
+        {
+            src: '~plugins/antd',
+            ssr: true,
         },
         {
             src: '~plugins/vue-amap.js',
