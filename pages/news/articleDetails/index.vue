@@ -5,16 +5,16 @@
         <banner :title="news.title"></banner>
         <div class="mid-content">
           <!-- PC端文章详情 -->
-          <news-data-pc :news="news"></news-data-pc>
           <!-- 文章详情组件 移动端-->
-          <news-data :news="news" @changeZan="changeZan"></news-data>
+          <van-skeleton title :row="10" row-width="100%" :loading="loading">
+            <news-data :news="news" @changeZan="changeZan"></news-data>
+            <news-recommended :recommendeds="recommended"></news-recommended>
+            <div class="left-content">
+              <!-- pc端推荐文章组件 -->
+            </div>
+          </van-skeleton>
           <!-- 推荐文章组件 移动端-->
-          <news-recommended :recommendeds="recommended"></news-recommended>
           <!-- 评论列表组件 移动端-->
-        </div>
-        <div class="left-content">
-          <!-- pc端推荐文章组件 -->
-          <news-recommended-pc :recommendeds="recommended"></news-recommended-pc>
         </div>
       </div>
     </div>
@@ -45,7 +45,8 @@ export default {
   data () {
     return {
       zan: false,
-      news: '',
+      loading: true,
+      news: {},
       user: { id: 1, name: '程序员阿森', imgUrl: require('../../../assets/images/user/asen.jpg'), info: '最骚程序员' }, // 当前文章得作者
       recommended: [
         {
@@ -66,9 +67,11 @@ export default {
       this.changTopbarShow(false);
       // 通过Id获取当前文章详情数据
       this.$axios({ method: 'post', url: Api.getArticleDetail, data: { id: this.$route.query.news_id } }).then((res) => {
-        this.news = res.data.data[0]
+        this.news = res.data.data[0];
+        this.loading = false;
       }).catch((res) => {
         this.$toast('网络异常');
+        this.loading = true;
       });
       // 阅读量+1
       this.$axios({ method: 'post', url: Api.articleAddRead, data: { id: this.$route.query.news_id } })

@@ -1,15 +1,8 @@
 <template>
   <div class="amap-page-container">
     <div :style="{ width: '100%', height: '300px' }">
-      <el-amap
-        vid="amap"
-        :zoom="zoom"
-        visible
-        :plugin="plugin"
-        class="amap-demo"
-        :center="center"
-      >
-        <el-amap-marker :label="label"></el-amap-marker>
+      <el-amap vid="amap" :zoom="zoom" visible :plugin="plugin" class="amap-demo" :center="center">
+        <el-amap-marker :v-text="true" :label="label"></el-amap-marker>
       </el-amap>
     </div>
   </div>
@@ -20,12 +13,12 @@ export default {
   computed: {
     ...mapState(['paintingInfo'])
   },
-  data() {
+  data () {
     return {
       zoom: 14, // 缩放比例
       label: {
         content: '品贤画室',
-        offset: [20, 2]
+        offset: [20, 2],
       },
       center: [105.927043, 29.369582],
       lng: 0,
@@ -49,8 +42,10 @@ export default {
       ]
     };
   },
-  mounted() {
-    this.center = this.paintingInfo.address_location.split(',');
+  created () {
+    if (process.client) {
+      this.center = this.paintingInfo.address_location.split(',');
+    }
   }
 };
 </script>

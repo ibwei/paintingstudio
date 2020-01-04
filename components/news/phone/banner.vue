@@ -58,17 +58,17 @@ export default {
   align-items: center;
   background: #fff;
   box-shadow: 1px 1px 5px rgba(33, 33, 33, 0.1);
-  padding: 8px 0px;
   position: fixed;
   top: 0px;
+  padding: 8px 10px;
   z-index: 999;
 }
 .van-icon {
   font-size: 22px;
 }
 .left {
-  margin-left: 8px;
-  width: 40px;
+  padding-left: 8px;
+  width: 60px;
   color: rgba(0, 0, 0, 0.4);
 }
 .right {

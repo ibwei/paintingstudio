@@ -1,6 +1,6 @@
 <template>
-  <div v-show="topbarShow || !isPhone" class="top-menu">
-    <div class="phone-nav">
+  <div class="top-menu">
+    <div v-if="topbarShow" class="phone-nav">
       <van-nav-bar
         title="标题"
         left-text="logo"
@@ -12,10 +12,7 @@
       >
         <div slot="left" class="left">
           <div class="logo">
-            <template v-if="paintingInfo && paintingInfo.logo">
-              <img :src="paintingInfo.logo" width="100%" height="100%" alt />
-            </template>
-            <template v-else>加载中...</template>
+            <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
           </div>
         </div>
         <div slot="title" class="title">
@@ -45,13 +42,15 @@
     <div class="pc-nav">
       <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
-          <template v-if="paintingInfo && paintingInfo.logo">
-            <img :src="paintingInfo.logo" class="menuLogo" />
-          </template>
+          <img src="../../assets/images/logo/logo.jpg" class="menuLogo" />
           <nav class="pc-navs">
-            <!-- 菜单 -->
-            <div v-for="(nav, index) of navbarOptions.menuOptions" :key="index" class="nav-item">
-              <span @click="navToPage(nav)">{{ nav.text }}</span>
+            <div
+              v-for="(nav, index) of navbarOptions.menuOptions"
+              :key="index"
+              @click="navToPage(nav)"
+              class="nav-item"
+            >
+              <span>{{ nav.text }}</span>
               <span
                 :class="{
                   icon: true,
@@ -60,7 +59,6 @@
                 @click="navToPage(nav)"
                 v-html="nav.icon"
               ></span>
-              <!-- 子菜单 -->
             </div>
           </nav>
         </div>
@@ -172,7 +170,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['isPhone', 'topbarShow', 'paintingInfo']) // 加载设备类型;
+    ...mapState(['isPhone', 'topbarShow']) // 加载设备类型;
   },
   created () {
     if (process.client) {
@@ -183,9 +181,6 @@ export default {
         this.heartClass = '';
       }
     }
-  },
-  mounted () {
-    // ScrollReveal().reveal('.pc-nav');
   },
 
   methods: {

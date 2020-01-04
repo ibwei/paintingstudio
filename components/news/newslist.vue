@@ -3,7 +3,7 @@
     <div class="news-list">
       <van-list v-model="loading2" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <template v-for="(item,index) in listNews">
-          <van-skeleton :key="index" title :row="3" row-width="300px" :loading="loading">
+          <van-skeleton :key="index" title :row="3" row-width="100%" :loading="loading">
             <template v-if="item.imgUrls.length===1">
               <div :key="index" class="word" @click="onclick(item)">
                 <div class="content">
@@ -97,9 +97,9 @@ export default {
     return {
       loading2: false,
       loading: true,
-      isLoading: false,
+      isLoading: true,
       listNews: [],
-      finished: false
+      finished: true,
     }
   },
   computed: {
@@ -151,25 +151,25 @@ export default {
       })
     },
     onRefresh () {
-      /*  setTimeout(() => {
+      setTimeout(() => {
         this.$toast('刷新成功');
         this.isLoading = false;
-      }, 500); */
+      }, 500);
     },
     onLoad () {
       // 异步更新数据
-      /*   setTimeout(() => {
-          for (let i = 0; i < 10; i++) {
-            this.list.push(this.list.length + 1);
-          }
-          // 加载状态结束
-          this.loading = false;
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          this.list.push(this.list.length + 1);
+        }
+        // 加载状态结束
+        this.loading = false;
 
-          // 数据全部加载完成
-          if (this.list.length >= 40) {
-            this.finished = true;
-          }
-        }, 500); */
+        // 数据全部加载完成
+        if (this.list.length >= 40) {
+          this.finished = true;
+        }
+      }, 500);
     }
   }
 }

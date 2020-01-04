@@ -17,7 +17,7 @@
         <v-title :init-title="initTtile"></v-title>
       </div>
       <!-- 画室动态列表 -->
-      <van-list>
+      <van-list :finished="true">
         <div v-for="item of articleList" :key="item.id" @click="goDetail(item.id)">
           <div class="article">
             <div class="one">
@@ -92,6 +92,9 @@ export default {
      */
     goAffaris () {
       this.$router.push({ path: 'news' });
+    },
+    goDetail (id) {
+      this.$router.push({ path: '/news/articleDetails', query: { news_id: id } })
     }
   }
 };

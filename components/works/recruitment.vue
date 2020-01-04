@@ -71,7 +71,7 @@ export default {
           phoneColor: '#fff',
           icon: '&#xe672;',
           imgUrl: require('../../assets/images/index/guohua.jpg'),
-          phone_imgUrl: require('../../assets/images/index/国画_phone.jpg'),
+          phone_imgUrl: require('../../assets/images/index/guohua_phone.jpg'),
           title: '油画定制课',
           intrduce:
             '油画定制课专属于你的艺术油画定制课专属于你的艺术短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',

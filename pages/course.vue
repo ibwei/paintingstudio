@@ -15,7 +15,7 @@
           />
         </van-sidebar>
       </div>
-      <div class="nav-list">
+      <div class="nav-list" :finished="true">
         <keep-alive>
           <nuxt-child />
         </keep-alive>

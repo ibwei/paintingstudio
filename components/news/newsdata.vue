@@ -4,7 +4,7 @@
       <div class="user-tag-wrap">
         <div class="user-tag">
           分类：
-          <van-tag color="#f2826a" plain>{{ news.tag }}</van-tag>
+          <van-tag color="#f2826a" plain v-for="(item,index) of news.tag" :key="index">{{ item }}</van-tag>
         </div>
         <div class="time">{{ news.updated_at }}</div>
       </div>
@@ -16,26 +16,26 @@
     <div class="state">
       <div class="state-left">
         <div class="browse">
-          <van-icon name="fire" />
+          <van-icon size="16px" name="fire-o" />
           <span class="count">{{ news.read_count }}</span>
         </div>
-        <div @click="handlerClickZan(zan)">
+        <div>
           <template v-if="zan">
-            <van-icon name="good-job" />
+            <van-icon size="16px" name="like" :color="Color.colorbrand" />
           </template>
           <template v-else>
-            <van-icon name="good-job-o" />
+            <van-icon @click="handlerClickZan()" size="16px" name="like-o" />
           </template>
           <span class="count">{{ news.praise_count }}</span>
         </div>
         <div @click="pl">
-          <van-icon name="chat-o" />
+          <van-icon size="16px" name="chat-o" />
           <span class="count">{{ news.comment_count }}</span>
         </div>
       </div>
       <div class="state-right">
         <div class="fenxiang">
-          <van-icon name="star" />分享
+          <van-icon size="16px" name="star" />分享
         </div>
       </div>
     </div>
@@ -44,6 +44,8 @@
 
 <script>
 import { Dialog } from 'vant';
+import { Color } from '@/config/color';
+import { Api } from '@/api/index'
 export default {
   name: 'Newsdata',
   props: {
@@ -52,30 +54,38 @@ export default {
       default () {
         return {}
       }
-    },
-    zan: {
-      type: Boolean,
-      default: true
+    }
+  },
+  created () {
+    if (process.client) {
+      this.news.tag = this.news.tags ? this.news.tags.split('-') : ['无'];
+      const zan = localStorage.getItem('article' + this.news.id);
+      if (zan === '1') {
+        this.zan = true;
+      }
+    }
+  },
+  data () {
+    return {
+      Color,
+      zan: false,
     }
   },
   methods: {
     // 点赞
-    handlerClickZan (val) {
-      if (val) {
-        Dialog.confirm({
-          title: '标题',
-          message: '是否取消赞'
-        }).then(() => {
-          this.zan = !val;
-          this.$emit('changeZan', !val)
-          this.$toast('取消点赞')
-        }).catch(() => {
-          // on cancel
-        });
-      } else {
-        this.$emit('changeZan', !val)
-        this.zan = !val;
-      }
+    handlerClickZan () {
+      this.$axios({ method: 'post', url: Api.addPraise, data: { id: this.news.id } }).then((res) => {
+        if (res.data.resultCode === 0) {
+          this.zan = !this.zan;
+          localStorage.setItem('article' + this.news.id, '1');
+          this.$toast('已点赞');
+        } else {
+          this.$toast('点赞失败,未知异常');
+        }
+      }).catch(() => {
+        this.$toast('网络异常');
+      })
+
     },
     // 点击评论按钮
     pl () {
@@ -88,6 +98,10 @@ export default {
 
 <style lang="less" scoped>
 @media screen and (max-width: 720px) {
+  .desc-wrap img {
+    width: 30% !important;
+    height: auto;
+  }
   .count {
     margin-left: 5px;
     font-size: 16px;
@@ -96,7 +110,9 @@ export default {
   }
   .desc-wrap {
     width: 100%;
+    overflow: hidden;
     padding: 20px;
+    padding-top: 5px;
     box-sizing: border-box;
     display: flex;
     flex-flow: column nowrap;
@@ -134,6 +150,13 @@ export default {
     margin-left: 5px;
     display: flex;
     flex-direction: column;
+  }
+  .user-tag {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
   }
   .user-tag-wrap {
     margin-top: 5px;

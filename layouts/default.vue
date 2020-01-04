@@ -1,8 +1,6 @@
 <template>
   <div ref="app" class="app">
-    <div v-if="!currentPath.startsWith('/about/detail')">
-      <top-menu @menu-open="hideSticky" @menu-close="showSticky"></top-menu>
-    </div>
+    <top-menu @menu-open="hideSticky" @menu-close="showSticky"></top-menu>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" />
     <!-- 底部标题栏 -->
