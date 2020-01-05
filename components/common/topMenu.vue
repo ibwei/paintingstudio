@@ -180,6 +180,9 @@ export default {
       if (this.heartColor === '#cf2729') {
         this.heartClass = '';
       }
+      //监听路由
+      const path = this.$route.path;
+      this.changeTabbar(path);
     }
   },
 
@@ -334,6 +337,7 @@ export default {
 }
 .menuLogo {
   max-height: 30px;
+  max-width: 100px;
 }
 .nav-left {
   .flex;

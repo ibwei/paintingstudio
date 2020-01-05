@@ -129,9 +129,11 @@ export default {
       localStorage.setItem('environmentList', JSON.stringify(this.environmentList));
       localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo));
     }
+    this.changeTabbarShow(true);
+    this.changTopbarShow(true);
   },
   methods: {
-    ...mapMutations(['setPaintingInfo']),
+    ...mapMutations(['setPaintingInfo', 'changeTabbarShow', 'changTopbarShow']),
     /*   getCacheData () {
         try {
           this.teacherList = JSON.parse(localStorage.getItem('teacherList'));

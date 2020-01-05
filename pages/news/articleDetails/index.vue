@@ -2,12 +2,12 @@
   <div class="articleDetails">
     <div class="articleDetails-container">
       <div class="content">
-        <banner :title="news.title"></banner>
+        <banner :news="news"></banner>
         <div class="mid-content">
           <!-- PC端文章详情 -->
           <!-- 文章详情组件 移动端-->
-          <van-skeleton title :row="10" row-width="100%" :loading="loading">
-            <news-data :news="news" @changeZan="changeZan"></news-data>
+          <van-skeleton style="margin-top:10px" title :row="10" row-width="100%" :loading="loading">
+            <news-data :news="news"></news-data>
             <news-recommended :recommendeds="recommended"></news-recommended>
             <div class="left-content">
               <!-- pc端推荐文章组件 -->
@@ -79,13 +79,7 @@ export default {
   },
   methods: {
     ...mapMutations(['changeTabbarShow', 'changTopbarShow']),
-    leftBarClick () {
-      this.$router.go(-1);
-    },
     // 改变点赞状态
-    changeZan (val) {
-      this.zan = val;
-    }
   }
 
 };

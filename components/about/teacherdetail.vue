@@ -38,6 +38,14 @@
         <div class="introduction-content">{{ teacher.desc }}</div>
       </div>
       <div class="skill">
+        <div class="skill-title">曾获荣誉</div>
+        <div class="deed">
+          <div class="deed-item" v-for="(item,index) of teacher.deed" :key="index">
+            <span style="{marginRight:'10px'}">{{ item }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill">
         <div class="skill-title">擅长课程</div>
         <div class="skill-content">
           <van-tag
@@ -93,6 +101,7 @@ export default {
           this.teacher = res.data.data;
           this.teacher.good_ats = this.teacher.good_at.split('-');
           this.teacher.impressions = this.teacher.impression.split('-');
+          this.teacher.deed = this.teacher.deeds.split('-');
         } else {
           this.$toast('获取教师信息失败！');
         }
@@ -126,6 +135,7 @@ export default {
   padding: 10px;
   background: #fafafa;
 }
+
 .head-left {
   min-width: 40px;
   text-align: center;
@@ -227,5 +237,17 @@ export default {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+}
+.deed {
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+  flex-flow: column nowrap;
+}
+.deed-item {
+  margin-top: 5px;
+  color: #999;
+  font-size: 13px;
+  line-height: 1.5;
 }
 </style>

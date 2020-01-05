@@ -1,4 +1,3 @@
-import courseList from '@/components/course/courseList';
 <template>
   <div class="category">
     <div

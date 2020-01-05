@@ -1,5 +1,5 @@
 <template>
-  <div class="time-wrap animated bounceInDown delay-0.5s">
+  <div class="time-wrap">
     <van-steps :active="active" direction="vertical">
       <van-step v-for="(item,index) of courseSchedual" :key="index">
         <div class="date">
@@ -57,7 +57,9 @@ export default {
     }
   },
   created () {
-    this.getToday();
+    if (process.client) {
+      this.getToday();
+    }
   },
   methods: {
     getCourseStatus (number) {
