@@ -2,7 +2,7 @@
   <div class="advantage">
     <div id="title">
       <div class="title">
-        <v-title :initTitle="initTtile"></v-title>
+        <v-title :init-title="initTtile"></v-title>
       </div>
       <div class="title-word">{{ title_word }}</div>
     </div>
@@ -40,42 +40,30 @@ export default {
       },
       title: '为什么选择品贤画室',
       title_en: 'Why Choose Us',
-      title_word: '优秀的师资+完善的服务+严格的管理+个性化教学',
+      title_word: '优秀的师资+完善的服务+个性化教学',
       list: [
         {
-          title: '私人定制',
+          title: '教学系统',
           icon: '&#xe63b;',
-          word: '与高三文化课同步教学，优质的文化课师资。',
+          word: '重视理论技巧同步',
           color: ''
         },
         {
-          title: '文化课同步 双重保障',
+          title: '独立的教学进度',
           icon: '&#xe663;',
-          word: '与高三文化课同步教学，优质的文化课师资。',
+          word: '根据学生实际情况安排内容​。',
           color: ''
         },
         {
-          title: '安全完善的食宿',
+          title: '私人订制',
           icon: '&#xe697;',
-          word: '军事化食宿管理，饮食中每一道工序都有据可查。',
+          word: '教学时间灵活，随到随学。',
           color: ''
         },
         {
-          title: '24小时全方位服务',
+          title: '优秀师资',
           icon: '&#xe66f;',
-          word: '全方位，高品质的服务体系，24小时响应，时刻服务好每一位同学。',
-          color: ''
-        },
-        {
-          title: '多样化的教学',
-          icon: '&#xe627;',
-          word: '下乡写生、名校参观、校庆活动。',
-          color: ''
-        },
-        {
-          title: '无忧的考试服务',
-          icon: '&#xe65e;',
-          word: '爱心送考、志愿填报指导会等一系列的后续服务。',
+          word: '全老师美院毕业，耐心随和很好沟通。',
           color: ''
         }
       ],
@@ -232,9 +220,6 @@ export default {
   }
   .word-cont {
     font-size: 14px;
-  }
-  #content .word:nth-child(2n + 0) {
-    display: none;
   }
 }
 </style>

@@ -3,8 +3,8 @@
     <!-- 头部图片信息 -->
     <div v-scroll-reveal.scaleUp="{scale:0.15}" class="contact-img">
       <div class="bg-title">
-        <h1>Hey，欢迎来到这里，请联系我们吧</h1>
-        <h2>品贤画室于2019年创办于成都 ，我们朝气蓬勃，我们正青春。我们全年开课，随到随学，我们自由选择学习时间，欢迎来体验绘画课或者给我们留下宝贵的建议。</h2>
+        <!-- <h1>Hey，欢迎来到这里，请联系我们吧</h1>
+        <h2>品贤画室于2019年创办于成都 ，我们朝气蓬勃，我们正青春。我们全年开课，随到随学，我们自由选择学习时间，欢迎来体验绘画课或者给我们留下宝贵的建议。</h2> -->
       </div>
     </div>
 
@@ -166,7 +166,7 @@ export default {
       flex-flow: column nowrap;
       justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.2);
       width: 100%;
       height: 100%;
       h1 {

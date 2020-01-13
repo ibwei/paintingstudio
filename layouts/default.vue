@@ -74,12 +74,15 @@ export default {
       const paint = localStorage.getItem('paintingInfo');
       if (paint && paint !== 'undefined') {
         this.setPaintingInfo(JSON.parse(paint));
-      } else {
-        window.location.replace('http://www.ibwei.com:3001');
       }
     }
   },
   mounted () {
+    const paint = localStorage.getItem('paintingInfo');
+    if (!paint || paint === 'undefined') {
+      window.location.replace('http://www.pinxianhs.com');
+    }
+
     window.addEventListener('resize', this.checkDevice);
     window.addEventListener('unload', this.logoutStatistics);
     this.loginStatistics();
