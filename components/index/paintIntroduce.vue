@@ -50,7 +50,7 @@ export default {
         icon: '&#xe672;'
       },
       /** 画室介绍当前进度 */
-      active: 2,
+      active: 4,
       /** 介绍中间的图片 */
       introduceImg: require('../../assets/images/index/sign.png'),
       status: 'finish',
@@ -59,22 +59,26 @@ export default {
         {
           index: 0,
           title: '创办时间',
-          desc: '2019年创办于重庆大学城，两兄弟所办,朝气蓬勃'
+          desc: '2016年成立于重庆，原为重庆七空间艺术工作室。'
         },
         {
           index: 1,
-          title: '随到随学',
-          desc: '全年开课，随到随学，自由选择学习时间'
+          title: '重要里程',
+          desc: '2019年更名为品贤画室，在西安和成都开设了两家店。'
         },
         {
           index: 2,
-          title: '学习自由',
-          desc: '任何分点报名均可在其他分点学习，课时不作废'
+          title: '画室理念',
+          desc: '致力于打造专业系统的成人美术教育；注重培养学生审美与绘画技巧。'
         },
         {
           index: 3,
           title: '专业师资',
-          desc: '主教老师均为固定全职老师，科班出身，专业扎实'
+          desc: '老师都是科班出身教学经验丰富,一对一教学，上课时间灵活。'
+        }, {
+          index: 4,
+          title: '开设课程',
+          desc: '开设了素描、油画、国画、水彩、速写、彩铅等丰富内容。'
         }
       ]
     };

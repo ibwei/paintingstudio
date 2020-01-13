@@ -9,7 +9,7 @@
         left-icon="volume-o"
         :scrollable="true"
       >
-        品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
+        美团下单享受优惠！详情联系我们。
       </van-notice-bar>
     </div>
 
@@ -89,30 +89,62 @@ export default {
 
     // 获取画室信息
     if (process.server) {
-      const paintingInfo = await $axios({ method: 'post', url: Api.getPaintingInfo });
+      const paintingInfo = await $axios({
+        method: 'post',
+        url: Api.getPaintingInfo
+      });
       // 获取前台轮播图
       const bannerList = await $axios.get(Api.courselBannerList);
       // 获取首页画室动态列表
-      const studentWorksList = await $axios({ method: 'get', url: Api.getStudentWorksList, data: { start: 0, end: 30 } });
+      const studentWorksList = await $axios({
+        method: 'get',
+        url: Api.getStudentWorksList,
+        data: { start: 0, end: 30 }
+      });
       // 获取首页文章列表
-      const articleList = await $axios({ method: 'post', url: Api.getArticleList, data: { pageSize: 6, pageNum: 1 } });
+      const articleList = await $axios({
+        method: 'post',
+        url: Api.getArticleList,
+        data: { pageSize: 6, pageNum: 1 }
+      });
       // 获取画室环境列表
-      const environmentList = await $axios({ method: 'get', url: Api.environmentList });
+      const environmentList = await $axios({
+        method: 'get',
+        url: Api.environmentList
+      });
       // 获取教师列表
       const teacherList = await $axios({ method: 'get', url: Api.teacherList });
 
-      return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data[0], articleList: articleList.data.data, studentWorksList: studentWorksList.data.data, environmentList: environmentList.data.data, teacherList: teacherList.data.data }
+      return {
+        carouselList: bannerList.data.data,
+        paintingInfo: paintingInfo.data.data[0],
+        articleList: articleList.data.data,
+        studentWorksList: studentWorksList.data.data,
+        environmentList: environmentList.data.data,
+        teacherList: teacherList.data.data
+      };
     }
 
     // 如果是在客户端刷新首页，则从缓存里读取数据。
     if (process.client) {
       const teacherList = JSON.parse(localStorage.getItem('teacherList'));
       const carouselList = JSON.parse(localStorage.getItem('bannerList'));
-      const studentWorksList = JSON.parse(localStorage.getItem('studentWorksList'));
+      const studentWorksList = JSON.parse(
+        localStorage.getItem('studentWorksList')
+      );
       const articleList = JSON.parse(localStorage.getItem('articleList'));
-      const environmentList = JSON.parse(localStorage.getItem('environmentList'));
+      const environmentList = JSON.parse(
+        localStorage.getItem('environmentList')
+      );
       const paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'));
-      return { carouselList, paintingInfo, articleList, studentWorksList, environmentList, teacherList }
+      return {
+        carouselList,
+        paintingInfo,
+        articleList,
+        studentWorksList,
+        environmentList,
+        teacherList
+      };
     }
   },
   created () {
@@ -126,9 +158,15 @@ export default {
     if (this.teacherList) {
       localStorage.setItem('teacherList', JSON.stringify(this.teacherList));
       localStorage.setItem('bannerList', JSON.stringify(this.carouselList));
-      localStorage.setItem('studentWorksList', JSON.stringify(this.studentWorksList));
+      localStorage.setItem(
+        'studentWorksList',
+        JSON.stringify(this.studentWorksList)
+      );
       localStorage.setItem('articleList', JSON.stringify(this.articleList));
-      localStorage.setItem('environmentList', JSON.stringify(this.environmentList));
+      localStorage.setItem(
+        'environmentList',
+        JSON.stringify(this.environmentList)
+      );
       localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo));
     }
   },
@@ -147,8 +185,7 @@ export default {
         }
       } */
   }
-
-}
+};
 </script>
 
 <style lang="less" scoped>
