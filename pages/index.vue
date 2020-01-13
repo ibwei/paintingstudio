@@ -102,6 +102,7 @@ export default {
       return { carouselList: bannerList.data.data, paintingInfo: paintingInfo.data.data[0], articleList: articleList.data.data, studentWorksList: studentWorksList.data.data, environmentList: environmentList.data.data, teacherList: teacherList.data.data }
     }
 
+
     // 如果是在客户端刷新首页，则从缓存里读取数据。
     if (process.client) {
       const teacherList = JSON.parse(localStorage.getItem('teacherList'));
