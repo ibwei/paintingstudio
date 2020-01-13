@@ -8,7 +8,9 @@
         background="rgba(244,205,205,1)"
         left-icon="volume-o"
         :scrollable="true"
-      >品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。</van-notice-bar>
+      >
+        品贤画室新开业，现在报名享受各种优惠，详情请电话联系我们。
+      </van-notice-bar>
     </div>
 
     <!-- 轮播图 -->
@@ -131,7 +133,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setPaintingInfo']),
+    ...mapMutations(['setPaintingInfo'])
     /*   getCacheData () {
         try {
           this.teacherList = JSON.parse(localStorage.getItem('teacherList'));
