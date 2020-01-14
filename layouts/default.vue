@@ -158,6 +158,8 @@ export default {
 }
 .qr-code {
   padding: 1px;
+  width: 150px;
+  height: 150px;
 }
 @media screen and( min-width:720px) {
   .tabbar-menu {

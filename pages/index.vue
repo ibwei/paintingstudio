@@ -8,7 +8,9 @@
         background="rgba(244,205,205,1)"
         left-icon="volume-o"
         :scrollable="true"
-      >美团下单享受优惠！详情联系我们。</van-notice-bar>
+      >
+        美团下单享受优惠！详情联系我们。
+      </van-notice-bar>
     </div>
 
     <!-- 轮播图 -->
@@ -21,12 +23,21 @@
     <paintIntroduce v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 动态 -->
-    <paintAffaris v-scroll-reveal.smooth="{ easing: 'ease-in' }" :article-list="articleList" />
+    <paintAffaris
+      v-scroll-reveal.smooth="{ easing: 'ease-in' }"
+      :article-list="articleList"
+    />
     <!-- 画室环境 -->
-    <paintingEnvironment v-scroll-reveal.smooth="{ easing: 'ease-in' }" :list="environmentList" />
+    <paintingEnvironment
+      v-scroll-reveal.smooth="{ easing: 'ease-in' }"
+      :list="environmentList"
+    />
 
     <!-- 师资力量 -->
-    <teachers v-scroll-reveal.smooth="{ easing: 'ease-in' }" :list="teacherList" />
+    <teachers
+      v-scroll-reveal.smooth="{ easing: 'ease-in' }"
+      :list="teacherList"
+    />
 
     <!-- 学生作品 -->
     <worksCarousel
@@ -72,7 +83,7 @@ export default {
     worksCarousel,
     BottomFooter
   },
-  data () {
+  data() {
     return {
       Color
     };
@@ -80,7 +91,7 @@ export default {
   /**
    * 获取服务端渲染数据
    */
-  async asyncData ({ $axios }) {
+  async asyncData({ $axios }) {
     // 判断是否在服务端
 
     // 如果是在首次加载首页，则从服务器读取数据。
@@ -122,8 +133,6 @@ export default {
         teacherList: teacherList.data.data
       };
     }
-
-
     // 如果是在客户端刷新首页，则从缓存里读取数据。
     if (process.client) {
       const teacherList = JSON.parse(localStorage.getItem('teacherList'));
@@ -146,13 +155,13 @@ export default {
       };
     }
   },
-  created () {
+  created() {
     if (process.client) {
       localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo));
       this.setPaintingInfo(this.paintingInfo);
     }
   },
-  mounted () {
+  mounted() {
     // 不论是从哪里获取的数据，都再次存一遍。
     if (this.teacherList) {
       localStorage.setItem('teacherList', JSON.stringify(this.teacherList));
@@ -172,7 +181,7 @@ export default {
     this.changTopbarShow(true);
   },
   methods: {
-    ...mapMutations(['setPaintingInfo', 'changeTabbarShow', 'changTopbarShow']),
+    ...mapMutations(['setPaintingInfo', 'changeTabbarShow', 'changTopbarShow'])
     /*   getCacheData () {
         try {
           this.teacherList = JSON.parse(localStorage.getItem('teacherList'));

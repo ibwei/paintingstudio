@@ -2,46 +2,50 @@
   <div class="news">
     <div class="news-container">
       <div class="content">
-        <div class="mid-content">
-          <!-- 手机端的label选项 -->
-          <vlabel :list="categoryList"></vlabel>
-          <!-- 手机端的内容 -->
-          <newslist :list="articleList"></newslist>
-        </div>
-        <div class="left-content">
-          <student-question></student-question>
-          <note-label></note-label>
-        </div>
+        <!-- 手机端的label选项 -->
+        <vlabel :list="categoryList"></vlabel>
+        <!-- 手机端的内容 -->
+        <newslist :list="articleList"></newslist>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
-import vlabel from '../../components/news/label'
-import newslist from '../../components/news/newslist'
-import studentQuestion from '../../components/news/PC/student_question'
-import noteLabel from '../../components/news/PC/note_label'
-import { Api } from '@/api/index'
+import { mapState, mapMutations } from 'vuex';
+import vlabel from '../../components/news/label';
+import newslist from '../../components/news/newslist';
+import { Api } from '@/api/index';
 export default {
   components: {
     vlabel,
-    noteLabel,
-    studentQuestion,
     newslist
   },
   computed: {
     ...mapState(['isPhone']) // 加载设备类型
   },
-  async asyncData ({ $axios }) {
+  async asyncData({ $axios }) {
     // 获取首页文章分类列表
-    const categoryList = await $axios({ method: 'get', url: Api.getArticleType });
+    const categoryList = await $axios({
+      method: 'get',
+      url: Api.getArticleType
+    });
     // 根据第一个分类名获取文章列表
-    const articleList = await $axios({ method: 'post', url: Api.getArticleListByType, data: { pageNum: 1, pageSize: 10, category: categoryList.data.data[0].category } });
-    return { categoryList: categoryList.data.data, articleList: articleList.data.data[categoryList.data.data[0].category] };
+    const articleList = await $axios({
+      method: 'post',
+      url: Api.getArticleListByType,
+      data: {
+        pageNum: 1,
+        pageSize: 10,
+        category: categoryList.data.data[0].category
+      }
+    });
+    return {
+      categoryList: categoryList.data.data,
+      articleList: articleList.data.data[categoryList.data.data[0].category]
+    };
   },
-  mounted () {
+  mounted() {
     this.changeTabbarShow(true);
     this.changTopbarShow(true);
   },
@@ -53,57 +57,36 @@ export default {
 
 <style lang="less" scoped>
 .content {
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0px auto;
   border: 1px solid block;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: nowrap;
   justify-content: space-around;
+  position: relative;
 }
 .mid-content {
   width: 100%;
-  overflow: hidden;
-}
-.news-list {
-  display: none;
-}
-.pc-mid-content {
-  display: block;
 }
 .news-container {
   display: flex;
   flex-direction: row;
   margin: 0px auto;
 }
-.left-content {
-  width: 300px;
-  min-height: 200px;
-}
 .note_label {
   margin-top: 30px;
 }
-.label-wrap {
+.bread {
   display: none;
 }
-@media screen and (max-width: 720px) {
-  .pc-mid-content {
-    display: none;
-  }
-  .left-content {
-    display: none;
-  }
-  .label-wrap {
-    display: block;
-  }
-  .bread {
-    display: none;
-  }
-  .taglist {
-    display: none;
-  }
-  .news-list {
-    display: flex;
-    margin-top: 20px;
-  }
+.taglist {
+  display: none;
+}
+.news-list {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
 }
 </style>

@@ -44,26 +44,26 @@ export default {
       list: [
         {
           title: '教学系统',
-          icon: '&#xe63b;',
+          icon: '&#xe601;',
           word: '重视理论技巧同步',
           color: ''
         },
         {
           title: '独立的教学进度',
-          icon: '&#xe663;',
+          icon: '&#xe66f;',
           word: '根据学生实际情况安排内容​。',
           color: ''
         },
         {
           title: '私人订制',
-          icon: '&#xe697;',
+          icon: '&#xe63b;',
           word: '教学时间灵活，随到随学。',
           color: ''
         },
         {
           title: '优秀师资',
-          icon: '&#xe66f;',
-          word: '全老师美院毕业，耐心随和很好沟通。',
+          icon: '&#xe65b;',
+          word: '老师全美院毕业，耐心随和很好沟通。',
           color: ''
         }
       ],

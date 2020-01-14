@@ -1,10 +1,21 @@
 <template>
   <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
     <div class="news-list">
-      <van-list v-model="loading2" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <template v-for="(item,index) in listNews">
-          <van-skeleton :key="index" title :row="3" row-width="100%" :loading="loading">
-            <template v-if="item.imgUrls.length===1">
+      <van-list
+        v-model="loading2"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
+        <template v-for="(item, index) in listNews">
+          <van-skeleton
+            :key="index"
+            title
+            :row="3"
+            row-width="100%"
+            :loading="loading"
+          >
+            <template v-if="item.imgUrls.length === 1">
               <div :key="index" class="word" @click="onclick(item)">
                 <div class="content">
                   <div class="cont-wrap">
@@ -26,13 +37,13 @@
                 </div>
               </div>
             </template>
-            <template v-else-if="item.imgUrls.length===2">
+            <template v-else-if="item.imgUrls.length === 2">
               <div :key="index" class="word" @click="onclick(item)">
                 <div class="content">
                   <div class="title-2">{{ item.title }}</div>
                   <div class="img-2">
-                    <template v-for="(elem,val) of item.imgUrls">
-                      <template v-if="val<2">
+                    <template v-for="(elem, val) of item.imgUrls">
+                      <template v-if="val < 2">
                         <div :key="val" class="img">
                           <img :src="elem" width="100%" />
                         </div>
@@ -55,8 +66,8 @@
                   <div class="title-2">{{ item.title }}</div>
                   <div class="content-1" v-html="item.content"></div>
                   <div class="img-3">
-                    <template v-for="(elem,val) of item.imgUrls">
-                      <template v-if="val<3">
+                    <template v-for="(elem, val) of item.imgUrls">
+                      <template v-if="val < 3">
                         <div :key="val" class="img">
                           <img :src="elem" width="100%" />
                         </div>
@@ -88,48 +99,57 @@ export default {
   props: {
     list: {
       type: Array,
-      default () {
-        return []
+      default() {
+        return [];
       }
     }
   },
-  data () {
+  data() {
     return {
       loading2: false,
       loading: true,
       isLoading: true,
       listNews: [],
-      finished: true,
-    }
+      finished: true
+    };
   },
   computed: {
     ...mapState(['articleCategory'])
   },
   watch: {
-    articleCategory (newV) {
+    articleCategory(newV) {
       this.changeList(newV);
     }
   },
-  created () {
+  created() {
     if (process.client) {
       this.listNews = this.list.map((item, index) => {
         const temp = item;
         temp.imgUrls = item.thumbnail ? item.thumbnail.split(',') : [];
         temp.tag = item.tags ? item.tags.split('-') : [];
-        temp.content = getSimpleText(temp.content ? temp.content : '无内容').slice(0, 40) + '...';
+        temp.content =
+          getSimpleText(temp.content ? temp.content : '无内容').slice(0, 40) +
+          '...';
         temp.created_at = item.created_at.slice(0, 10);
         return temp;
-      })
+      });
       this.loading = false;
     }
   },
   methods: {
-    onclick (item) {
-      this.$router.push({ path: '/news/articleDetails', query: { news_id: item.id } });
+    onclick(item) {
+      this.$router.push({
+        path: '/news/articleDetails',
+        query: { news_id: item.id }
+      });
     },
-    changeList (category) {
+    changeList(category) {
       this.loading = true;
-      this.$axios({ method: 'post', url: Api.getArticleListByType, data: { pageNum: 1, pageSize: 10, category } }).then((res) => {
+      this.$axios({
+        method: 'post',
+        url: Api.getArticleListByType,
+        data: { pageNum: 1, pageSize: 10, category }
+      }).then((res) => {
         if (res.data.resultCode === 0) {
           this.listNews = res.data.data[category].map((item, index) => {
             const temp = item;
@@ -138,25 +158,24 @@ export default {
             temp.content = getSimpleText(temp.content).slice(0, 40) + '...';
             temp.created_at = item.created_at.slice(0, 10);
             return temp;
-          })
+          });
           this.loading = false;
         } else {
-          this.$toast('查询该分类失败');
+          this.$toast('获取失败');
           this.loading = false;
         }
         // eslint-disable-next-line handle-callback-err
-      }).catch((err) => {
-        this.$toast('网络异常');
-        this.loading = false;
       })
+        .catch(() => {
+          this.$toast('网络异常');
+          this.loading = false;
+        });
     },
-    onRefresh () {
-      setTimeout(() => {
-        this.$toast('刷新成功');
-        this.isLoading = false;
-      }, 500);
+    onRefresh() {
+      this.changeList(this.articleCategory);
+      this.isLoading = false;
     },
-    onLoad () {
+    onLoad() {
       // 异步更新数据
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
@@ -172,96 +191,96 @@ export default {
       }, 500);
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
-@media screen and(max-width:720px) {
-  .news-list {
-    padding-left: 10px;
-    padding-right: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  .cont-wrap {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  .word {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 5px;
-  }
-  .word-wrap {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: flex-start;
-  }
-  .content {
-    display: flex;
-    flex-direction: column;
-  }
-  .img-2,
-  .img-3 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 10px;
-  }
-  .img-2 > .img {
-    width: 48%;
-    max-height: 120px;
-    overflow: hidden;
-  }
-  .img-3 > .img {
-    width: 32%;
-    max-height: 120px;
-    overflow: hidden;
-  }
-  .img-1 {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    margin-left: 10px;
-  }
-  .title-1 {
-    margin-left: 10px;
-    font-size: 16px;
-    color: #000;
-  }
-  .content-1 {
-    margin-left: 10px;
-    font-size: 12px;
-    color: #666;
-    margin-top: 6px;
-  }
-  .title-2 {
-    padding: 0px 10px;
-  }
-  .time {
-    margin-top: 10px;
-    display: flex;
-    margin-left: 10px;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  .time > span {
-    font-size: 12px;
-    margin-right: 10px;
-  }
-  .title-2 {
-    font-size: 16px;
-  }
-  .img {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
+.news-list {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.cont-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.word {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+}
+.word-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: flex-start;
+}
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.img-2,
+.img-3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+.img-2 > .img {
+  width: 48%;
+  max-height: 120px;
+  overflow: hidden;
+}
+.img-3 > .img {
+  width: 32%;
+  max-height: 120px;
+  overflow: hidden;
+}
+.img-1 {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  margin-left: 10px;
+}
+.title-1 {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #000;
+}
+.content-1 {
+  margin-left: 10px;
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+.title-2 {
+  padding: 0px 10px;
+}
+.time {
+  margin-top: 10px;
+  display: flex;
+  margin-left: 10px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.time > span {
+  font-size: 12px;
+  margin-right: 10px;
+}
+.title-2 {
+  font-size: 16px;
+}
+.img {
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 </style>

@@ -1,9 +1,8 @@
-import { mapMutations } from 'vuex';
 <template>
   <div class="label-wrap">
     <van-tabs swipeable sticky @click="onClick">
       <template v-for="(item,index) of list">
-        <van-tab :key="index" :title="item.category" :style="{'flex-basis':'20%'}"></van-tab>
+        <van-tab :key="index" :title="item.category"></van-tab>
       </template>
     </van-tabs>
   </div>
@@ -41,4 +40,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.label-wrap{
+  margin:10px 0;
+}
 </style>

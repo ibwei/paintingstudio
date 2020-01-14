@@ -14,7 +14,11 @@
     <div class="swiper">
       <van-swipe :autoplay="3000">
         <van-swipe-item v-for="(item, index) in list" :key="index">
-          <img :src="item.url" class="item-img" @click="navTo(item.routerUrl)" />
+          <img
+            :src="item.url"
+            class="item-img"
+            @click="navTo(item.routerUrl)"
+          />
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -27,36 +31,35 @@ export default {
   props: {
     list: {
       type: Array,
-      default () {
-        return []
+      default() {
+        return [];
       }
     }
   },
   computed: {
     ...mapState(['isPhone'])
   },
-  data () {
+  data() {
     return {
       titmer1: '',
       titmer2: null,
       currentIndex: 1 // 当前的index
-
     };
   },
 
-  mounted () {
+  mounted() {
     this.titmer1 = setInterval(this.get, 3000);
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.titmer1);
   },
   methods: {
-    navTo (url) {
+    navTo(url) {
       if (url) {
         this.$router.push({ path: url });
       }
     },
-    handlerCheckBtn (index) {
+    handlerCheckBtn(index) {
       this.currentIndex = index;
       clearInterval(this.titmer1);
       if (this.titmer2) {
@@ -68,7 +71,7 @@ export default {
         this.titmer2 = null;
       }, 5000);
     },
-    get () {
+    get() {
       if (this.currentIndex === this.list.length) {
         this.currentIndex = 1;
       } else {
@@ -140,6 +143,7 @@ export default {
 .item-img {
   width: 100%;
   height: auto;
+  max-height: 600px;
 }
 
 .swiper {

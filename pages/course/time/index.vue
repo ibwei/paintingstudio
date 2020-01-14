@@ -1,5 +1,9 @@
 <template>
   <div class="time-wrap">
+    <div class="time-notice">
+      <span><b>上课时间</b> 上午：9:00——12:00  下午：14:00——17:00  晚上：18:00——21:00</span>
+      <span class="notice">提醒：预约上课需要提前一天预约</span>
+    </div>
     <van-steps :active="active" direction="vertical">
       <van-step v-for="(item,index) of courseSchedual" :key="index">
         <div class="date">
@@ -40,19 +44,19 @@ export default {
           course: [0, 0, 0]
         }, {
           name: '星期二',
-          course: [1, 1, 2]
+          course: [0, 1, 2]
         }, {
           name: '星期三',
           course: [1, 1, 2]
         }, {
           name: '星期四',
-          course: [1, 1, 2]
+          course: [1, 1, 1]
         }, {
           name: '星期五',
-          course: [1, 1, 2]
+          course: [1, 1, 1]
         }, {
           name: '星期六',
-          course: [1, 1, 2]
+          course: [1, 1, 1]
         }]
     }
   },
@@ -85,6 +89,18 @@ export default {
   margin-left: 0px;
   max-width: 100%;
   border: none;
+}
+.time-notice{
+  margin:20px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  line-height: 20px;
+}
+.notice{
+  margin: 15px 0;
+  color:#f00;
 }
 .time,
 .available {
