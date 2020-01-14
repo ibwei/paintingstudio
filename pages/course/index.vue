@@ -5,111 +5,40 @@
 </template>
 
 <script>
-import courseList from '@/components/course/courseList'
+import courseList from '@/components/course/courseList';
+import { Api } from '@/api/index';
 export default {
   components: {
     courseList
   },
-  data () {
+  async asyncData({ $axios }) {
+    if (process.server) {
+      const categoryList = await $axios({
+        method: 'get',
+        url: Api.courseList
+      });
+      return { categoryList: categoryList.data.data };
+    }
+    if (process.client) {
+      const categoryList = JSON.parse(localStorage.getItem('courseList'));
+    }
+  },
+  data() {
     return {
-      categoryList: [
-        {
-          categoryName: '体验课',
-          courseList: [{
-            courseName: '体验课(三小时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '一次',
-            tuition: '120元/次',
-            tagList: ['水彩', '素描', '自选']
-          }]
-        }, {
-          categoryName: '素描班',
-          courseList: [{
-            courseName: '素描班(20课时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '一年',
-            tuition: '2000元/期',
-            tagList: ['素描基础', '石膏几何', '静物']
-          }, {
-            courseName: '素描班(30课时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '一年半',
-            tuition: '2800元/期',
-            tagList: ['素描基础', '系统训练']
-          }]
-        }, {
-          categoryName: '短期综合班',
-          courseList: [{
-            courseName: '短期综合班(25课时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '一个月',
-            tuition: '2000元/期',
-            tagList: ['素描', '色彩', '速写', '油画']
-          }, {
-            courseName: '短期综合班(50课时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '两个月',
-            tuition: '3500元/期',
-            tagList: ['素描', '动漫', '手绘']
-          }]
-        }, {
-          categoryName: '综合班',
-          courseList: [{
-            courseName: '综合班(35课时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '一个月',
-            tuition: '2000元/期',
-            tagList: ['水粉', '动漫', '手绘']
-          }, {
-            courseName: '短期综合班(50课时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '两个月',
-            tuition: '3500元/期',
-            tagList: ['色彩', '速写', '手绘']
-          }]
-        }, {
-          categoryName: '色彩班',
-          courseList: [{
-            courseName: '综合班(15课时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '三年',
-            tuition: '2000元/期',
-            tagList: ['水彩', '油画', '彩铅']
-          }]
-        }, {
-          categoryName: '油画定制课',
-          courseList: [{
-            courseName: '油画定制课(不限课时)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '不限制',
-            tuition: '1600元/期',
-            tagList: ['大师画册', '自选', '不计课时']
-          }]
-        }, {
-          categoryName: '长期班',
-          courseList: [{
-            courseName: '长期班(半年)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '不限制',
-            tuition: '6500元/期',
-            tagList: ['不限时间', '不限内容']
-          }, {
-            courseName: '长期班(全年)',
-            courseImage: require('@/assets/images/art/art7.png'),
-            validTime: '不限制',
-            tuition: '12000元/期',
-            tagList: ['大师画册', '不限时间']
-          }]
-        }],
       initTtile: {
         cnTitle: '推荐课程',
         enTitle: 'About PinXian Painting Studio',
         mode: 'black',
         icon: '&#xe672;'
       }
+    };
+  },
+  created() {
+    if (process.client) {
+      localStorage.setItem('courseList', JSON.stringify(this.categoryList));
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>

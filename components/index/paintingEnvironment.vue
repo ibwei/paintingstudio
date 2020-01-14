@@ -5,9 +5,13 @@
     </div>
     <div class="content">
       <div class="grid">
-        <div v-for="(item, index) of environmentList" :key="index" class="grid-item">
-          <div v-if="index<9" class="gird-item">
-            <van-image :src="item" fit="fill" @click="showPreview(index)">
+        <div
+          v-for="(item, index) of environmentList"
+          :key="index"
+          class="grid-item"
+        >
+          <div v-if="index < 9" class="gird-item">
+            <van-image :src="item" class="en-image" @click="showPreview(index)">
               <template v-slot:loading>
                 <van-loading type="spinner" size="20" />
               </template>
@@ -39,15 +43,15 @@ export default {
   props: {
     list: {
       type: Array,
-      default () {
-        return []
+      default() {
+        return [];
       }
     }
   },
   computed: {
     ...mapState(['isPhone'])
   },
-  data () {
+  data() {
     return {
       initTtile: {
         cnTitle: '画室环境',
@@ -60,22 +64,22 @@ export default {
       environmentList: []
     };
   },
-  created () {
+  created() {
     if (process.client) {
       this.handleList();
     }
   },
   methods: {
-    handleList () {
-      this.environmentList = this.list.map((item) => {
+    handleList() {
+      this.environmentList = this.list.map(item => {
         return item.url;
-      })
+      });
     },
-    onChange (index) {
+    onChange(index) {
       this.index = index + 1;
     },
     /* 打开图片预览 */
-    showPreview (index) {
+    showPreview(index) {
       if (!this.isPhone) {
         window.open(this.environmentList[index]);
         return;
@@ -109,6 +113,12 @@ export default {
 .content {
   margin: 20px 10px;
   max-width: 1200px;
+}
+.en-image {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  overflow: hidden;
 }
 .grid {
   display: grid;

@@ -1,27 +1,31 @@
 <template>
   <div class="category">
     <div
-      v-for="(category,index) of categoryList"
+      v-for="(value, category, index) of categoryList"
       :key="index"
       class="course-item animated bounceInDown delay-0.5s"
     >
-      <div class="category-title">{{ category.categoryName }}</div>
+      <div class="category-title">{{ category }}</div>
       <div class="content-list">
         <div
-          v-for="(course,courseIndex) of category.courseList"
+          v-for="(course, courseIndex) of categoryList[category]"
           :key="courseIndex"
           class="content"
-          @click="showCourse(course.courseName)"
+          @click.prevent="showCourse(course.name)"
         >
           <div class="top">
             <div class="t-left">
-              <img :src="course.courseImage" alt class="course-img" />
+              <img :src="course.url" alt class="course-img" />
             </div>
             <div class="t-right">
-              <div class="course-name">{{ course.courseName }}</div>
+              <div class="course-name">{{ course.name }}</div>
               <div class="course-time">
                 <van-icon name="clock-o" size="14px" />
-                <span>有效期:{{ course.validTime }}</span>
+                <span
+                  >有效期:{{
+                    course.validTime ? course.validTime : '长期有效'
+                  }}</span
+                >
               </div>
               <div class="course-teacher">
                 <van-icon name="balance-pay" size="14px" />
@@ -30,26 +34,38 @@
             </div>
           </div>
           <div class="bottom">
-            <div v-if="listType==='basic'" class="b-left">
+            <div v-if="listType === 'basic'" class="b-left">
               <van-tag
-                v-for="(tag,tagIndex) of course.tagList"
+                v-for="(tag, tagIndex) of course.tags.split('-')"
                 :key="tagIndex"
                 size="8px"
                 style="margin-left:2px"
                 :type="getRandomColor()"
                 round
-              >{{ tag }}</van-tag>
+                >{{ tag }}</van-tag
+              >
             </div>
-            <div v-if="listType==='memo'" class="b-left">PS:{{ course.memo }}</div>
+
             <div class="b-right">
-              <a href="tel:18883923917">预约</a>
+              <a href="tel:18883923917">报名</a>
             </div>
           </div>
+          <div class="b-left special">PS:{{ course.desc }}</div>
         </div>
       </div>
     </div>
-    <van-popup v-model="show" round position="bottom" :style="{ height: '60%' }">
-      <message-board :course-name="course" :closeable="true" close-icon="cross" @success="close"></message-board>
+    <van-popup
+      v-model="show"
+      round
+      position="bottom"
+      :style="{ height: '60%' }"
+    >
+      <message-board
+        :course-name="course"
+        :closeable="true"
+        close-icon="cross"
+        @success="close"
+      ></message-board>
     </van-popup>
   </div>
 </template>
@@ -66,32 +82,39 @@ export default {
       default: 'basic'
     },
     categoryList: {
-      type: Array,
-      default () {
+      type: Object,
+      default() {
         return null;
       }
     }
   },
-  data () {
+  data() {
     return {
       tagColorList: ['default', 'success', 'danger', 'primary'],
       show: false,
       course: ''
+    };
+  },
+  created() {
+    if (process.client) {
+      console.log('hahah');
+      console.log(this.categoryList);
     }
   },
   methods: {
-    getRandomColor () {
+    getRandomColor() {
       return this.tagColorList[Math.floor(Math.random() * 4)];
     },
-    showCourse (courseName) {
+    showCourse(courseName) {
+      console.log(courseName);
       this.course = courseName;
       this.show = true;
     },
-    close () {
+    close() {
       this.show = false;
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -163,7 +186,7 @@ export default {
 }
 
 .bottom {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  // border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 5px;
   display: flex;
   flex-flow: row nowrap;
@@ -175,6 +198,13 @@ export default {
 .b-left {
   text-align: justify;
   flex: 1;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 10px 0 0 0;
+}
+.special {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
 }
 .b-right {
   box-sizing: border-box;

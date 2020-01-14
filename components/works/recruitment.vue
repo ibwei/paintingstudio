@@ -13,7 +13,12 @@
         >
           <div class="img">
             <img :src="item.imgUrl" alt width="100%" class="pc_imgUrl" />
-            <img :src="item.phone_imgUrl" alt heihgt="100%" class="phone_imgUrl" />
+            <img
+              :src="item.phone_imgUrl"
+              alt
+              heihgt="100%"
+              class="phone_imgUrl"
+            />
           </div>
           <div class="cont">
             <div class="cont-title" v-html="item.title"></div>
@@ -56,7 +61,7 @@ export default {
     vTitle,
     tag
   },
-  data () {
+  data() {
     return {
       initTtile: {
         cnTitle: '热门课程',
@@ -73,12 +78,11 @@ export default {
           imgUrl: require('../../assets/images/index/guohua.jpg'),
           phone_imgUrl: require('../../assets/images/index/guohua_phone.jpg'),
           title: '油画定制课',
-          intrduce:
-            '油画定制课专属于你的艺术油画定制课专属于你的艺术短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
+          intrduce: '塑造出静态的视觉形象，以表达作者审美感受的艺术形式',
           // color: 'rgb(250,76,51)',
           color: '#fff',
-          number: 599,
-          rate: 3,
+          number: 699,
+          rate: 3.5,
           infos: ['有趣', '有技术含量', '从零开始']
         },
         {
@@ -88,11 +92,10 @@ export default {
           imgUrl: require('../../assets/images/index/liuxuesheng.jpg'),
           phone_imgUrl: require('../../assets/images/index/liuxuesheng_phone.jpg'),
           title: '体验课进行时',
-          intrduce:
-            '体验课进行时素描、水彩任你选体验课进行时素描、水彩任你选短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
+          intrduce: '体验课进行时素描、水彩任你选体验课。',
           // color: '#FFB900',
           color: '#fff',
-          number: 599,
+          number: 459,
           rate: 3.5,
           infos: ['有趣', '有技术含量', '从零开始']
         },
@@ -103,11 +106,10 @@ export default {
           imgUrl: require('../../assets/images/index/yishusheng.jpg'),
           phone_imgUrl: require('../../assets/images/index/yishusheng_phone.jpg'),
           title: '绘画兴趣班',
-          intrduce:
-            '短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生短期综合班为兴趣而生',
+          intrduce: '短期综合班,为兴趣而生。',
           // color: 'rgb(0,172,236)',
           color: '#fff',
-          number: 599,
+          number: 966,
           rate: 5,
           infos: ['有趣', '有技术含量', '从零开始']
         }
@@ -115,8 +117,8 @@ export default {
     };
   },
   methods: {
-    navToCourse (item) {
-      this.$router.push({ path: 'course', params: item })
+    navToCourse(item) {
+      this.$router.push({ path: 'course', params: item });
     }
   }
 };

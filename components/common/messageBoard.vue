@@ -3,7 +3,9 @@
     <!-- 头部文字 -->
     <v-title :init-title="initTtile"></v-title>
     <div class="title">
-      <span>请留下您的邮箱和联系方式，我们客服专员会把资料发送至您的QQ邮箱并第一时间联系您。</span>
+      <span
+        >请留下您的邮箱和联系方式，我们客服专员会把资料发送至您的QQ邮箱并第一时间联系您。</span
+      >
     </div>
     <!-- 表单内容 -->
     <van-cell-group class="form">
@@ -25,9 +27,14 @@
         placeholder="请输入电话号码"
         required
       />
-      <van-field v-model="email" label="电子邮箱" maxlength="22" placeholder="强烈建议填写您的电子邮箱 " />
       <van-field
-        v-model="course"
+        v-model="email"
+        label="电子邮箱"
+        maxlength="22"
+        placeholder="强烈建议填写您的电子邮箱 "
+      />
+      <van-field
+        v-model="courseName"
         clickable
         required
         readonly
@@ -46,7 +53,9 @@
       </van-popup>
     </van-cell-group>
     <div class="submit-area">
-      <van-button class="submit" :disabled="canSubmit" @click="submit">提交</van-button>
+      <van-button class="submit" :disabled="canSubmit" @click="submit"
+        >提交</van-button
+      >
     </div>
     <div class="contact-us"></div>
   </div>
@@ -65,7 +74,7 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       /* 标题初始化 */
       initTtile: {
@@ -78,7 +87,6 @@ export default {
       name: '',
       phone: '',
       email: '',
-      course: '',
       time: '',
 
       canSubmit: false,
@@ -104,33 +112,28 @@ export default {
       ]
     };
   },
-  created () {
-    if (process.client) {
-      this.course = this.courseName;
-    }
-  },
   methods: {
     /**
      * submit 提交所有数据
      * @return void
      */
-    submit () {
+    submit() {
       this.error = {
         name: '',
         phone: '',
-        course: ''
-      }
+        courseName: ''
+      };
       // 表单验证
       if (!this.name) {
-        this.error = { ...this.error, 'name': '这是必填项' };
+        this.error = { ...this.error, name: '这是必填项' };
         return false;
       }
       if (!/^[1]\d{10}$/.test(this.phone)) {
-        this.error = { ...this.error, 'phone': '联系号码不正确' };
+        this.error = { ...this.error, phone: '联系号码不正确' };
         return false;
       }
-      if (!this.course) {
-        this.error = { ...this.error, 'course': '请选择课程' };
+      if (!this.courseName) {
+        this.error = { ...this.error, courseName: '请选择课程' };
         return false;
       }
 
@@ -140,38 +143,42 @@ export default {
         name: '',
         phone: '',
         course: ''
-      }
+      };
 
-      this.$axios({ method: 'post',
+      this.$axios({
+        method: 'post',
         url: Api.courseEnroll,
         data: {
           name: this.name,
           phone: this.phone,
           course_name: this.course,
           email: this.email
-        } }).then((res) => {
-        if (res.data.resultCode === 0) {
-          this.canSubmit = false;
-          this.name = '';
-          this.phone = '';
-          this.course = '';
-          this.email = '';
-          this.$toast('报名成功');
-          this.$emit('success');
-        } else {
-          this.canSubmit = false;
-          this.$toast('报名失败,请联系画室管理员');
         }
-      }).catch((e) => {
-        this.canSubmit = false;
-        this.$toast('网络异常!');
       })
+        .then(res => {
+          if (res.data.resultCode === 0) {
+            this.canSubmit = false;
+            this.name = '';
+            this.phone = '';
+            this.course = '';
+            this.email = '';
+            this.$toast('报名成功!');
+            this.$emit('success');
+          } else {
+            this.canSubmit = false;
+            this.$toast('报名失败,请联系画室管理员');
+          }
+        })
+        .catch(e => {
+          this.canSubmit = false;
+          this.$toast('网络异常!');
+        });
     },
     /**
      * onConfirm 点击完成按钮时触发
      * @param value{String} 选择值
      */
-    onConfirm (value) {
+    onConfirm(value) {
       this.course = value;
       this.showPicker = false;
     }
