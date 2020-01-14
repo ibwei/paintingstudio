@@ -21,6 +21,7 @@ export default {
     }
     if (process.client) {
       const categoryList = JSON.parse(localStorage.getItem('courseList'));
+      return { categoryList: categoryList };
     }
   },
   data() {

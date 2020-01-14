@@ -49,6 +49,10 @@ export default {
     this.changeTabbarShow(true);
     this.changTopbarShow(true);
   },
+  activated() {
+    this.changeTabbarShow(true);
+    this.changTopbarShow(true);
+  },
   methods: {
     ...mapMutations(['changeTabbarShow', 'changTopbarShow'])
   }

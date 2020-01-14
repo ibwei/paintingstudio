@@ -117,6 +117,10 @@ export default {
       });
     }
   },
+  activated() {
+    this.changeTabbarShow(false);
+    this.changTopbarShow(false);
+  },
   methods: {
     ...mapMutations(['changeTabbarShow', 'changTopbarShow'])
     // 改变点赞状态

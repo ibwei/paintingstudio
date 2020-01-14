@@ -134,4 +134,12 @@ export default {
   cursor: pointer;
   border: 1px solid #fff;
 }
+@media screen and(max-width: 780px) {
+  .en-image {
+    width: 100%;
+    height: auto;
+    max-height: 80px;
+    overflow: hidden;
+  }
+}
 </style>
