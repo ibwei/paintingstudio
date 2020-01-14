@@ -120,6 +120,25 @@ export default {
   activated() {
     this.changeTabbarShow(false);
     this.changTopbarShow(false);
+    this.$axios({
+      method: 'post',
+      url: Api.getArticleDetail,
+      data: { id: this.$route.query.news_id }
+    })
+      .then(res => {
+        this.news = res.data.data[0];
+        this.loading = false;
+      })
+      .catch(res => {
+        this.$toast('网络异常');
+        this.loading = true;
+      });
+    // 阅读量+1
+    this.$axios({
+      method: 'post',
+      url: Api.articleAddRead,
+      data: { id: this.$route.query.news_id }
+    });
   },
   methods: {
     ...mapMutations(['changeTabbarShow', 'changTopbarShow'])

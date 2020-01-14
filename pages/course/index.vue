@@ -12,17 +12,11 @@ export default {
     courseList
   },
   async asyncData({ $axios }) {
-    if (process.server) {
-      const categoryList = await $axios({
-        method: 'get',
-        url: Api.courseList
-      });
-      return { categoryList: categoryList.data.data };
-    }
-    if (process.client) {
-      const categoryList = JSON.parse(localStorage.getItem('courseList'));
-      return { categoryList: categoryList };
-    }
+    const categoryList = await $axios({
+      method: 'get',
+      url: Api.courseList
+    });
+    return { categoryList: categoryList.data.data };
   },
   data() {
     return {
