@@ -50,15 +50,12 @@ export default {
       }
     };
   },
-  watch: {
-    activeKey(v) {
-      localStorage.setItem('courseActiveIndex', v);
-    }
-  },
-  created() {
-    if (process.client) {
-      const key = localStorage.getItem('courseActiveIndex') || 0;
-      this.activeKey = key;
+  activated() {
+    const key = this.$route.path;
+    if (key === '/course') {
+      this.activeKey = 0;
+    } else {
+      this.activeKey = 1;
     }
   }
 };

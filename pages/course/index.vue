@@ -11,13 +11,6 @@ export default {
   components: {
     courseList
   },
-  async asyncData({ $axios }) {
-    const categoryList = await $axios({
-      method: 'get',
-      url: Api.courseList
-    });
-    return { categoryList: categoryList.data.data };
-  },
   data() {
     return {
       initTtile: {
@@ -28,10 +21,20 @@ export default {
       }
     };
   },
+  async asyncData({ $axios }) {
+    const categoryList = await $axios({
+      method: 'get',
+      url: Api.courseList
+    });
+    return { categoryList: categoryList.data.data };
+  },
   created() {
     if (process.client) {
       localStorage.setItem('courseList', JSON.stringify(this.categoryList));
     }
+  },
+  activated() {
+    localStorage.setItem('courseList', JSON.stringify(this.categoryList));
   }
 };
 </script>

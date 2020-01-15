@@ -40,7 +40,7 @@
       <div class="skill">
         <div class="skill-title">曾获荣誉</div>
         <div class="deed">
-          <div class="deed-item" v-for="(item,index) of teacher.deed" :key="index">
+          <div v-for="(item,index) of teacher.deed" :key="index" class="deed-item">
             <span style="{marginRight:'10px'}">{{ item }}</span>
           </div>
         </div>
@@ -53,7 +53,9 @@
             :key="index"
             plain
             :style="{marginRight:'10px'}"
-          >{{ item }}</van-tag>
+          >
+            {{ item }}
+          </van-tag>
         </div>
       </div>
       <div class="appraise">
@@ -92,6 +94,9 @@ export default {
     }
   },
   mounted () {
+    this.getTeacherDetail();
+  },
+  activated() {
     this.getTeacherDetail();
   },
   methods: {
