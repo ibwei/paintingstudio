@@ -5,13 +5,11 @@
         <div class="user-tag">
           分类：
           <van-tag
-            v-for="(item, index) of news.tag"
+            v-for="(item, index) of news.tags.split('-')"
             :key="index"
             color="#f2826a"
             plain
-          >
-            {{ item }}
-          </van-tag>
+          >{{ item }}</van-tag>
         </div>
         <div class="time">{{ news.updated_at }}</div>
       </div>
@@ -38,9 +36,9 @@
         </div>
       </div>
     </div>
-    <van-divider :style="{width:'100%', color: '#555', borderColor: '#e5e5e5', padding: '0 16px' }">
-      到底啦
-    </van-divider>
+    <van-divider
+      :style="{width:'100%', color: '#555', borderColor: '#e5e5e5', padding: '0 16px' }"
+    >到底啦</van-divider>
   </div>
 </template>
 
@@ -52,29 +50,34 @@ export default {
   props: {
     news: {
       type: Object,
-      default() {
+      default () {
         return {};
       }
     }
   },
-  data() {
+  data () {
     return {
       Color,
       zan: false
     };
   },
-  created() {
+  created () {
     if (process.client) {
-      this.news.tag = this.news.tags ? this.news.tags.split('-') : ['无'];
       const zan = localStorage.getItem('article' + this.news.id);
       if (zan === '1') {
         this.zan = true;
       }
     }
   },
+  activated () {
+    const zan = localStorage.getItem('article' + this.news.id);
+    if (zan === '1') {
+      this.zan = true;
+    }
+  },
   methods: {
     // 点赞
-    handlerClickZan() {
+    handlerClickZan () {
       this.$axios({
         method: 'post',
         url: Api.articleAddPraise,
@@ -94,7 +97,7 @@ export default {
         });
     },
     // 点击评论按钮
-    pl() {
+    pl () {
       this.$toast('暂未开放评论系统');
     }
   }
