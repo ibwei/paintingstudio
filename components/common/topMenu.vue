@@ -12,18 +12,31 @@
       >
         <div slot="left" class="left">
           <div class="logo">
-            <img src="../../assets/images/logo/logo.jpg" width="100%" height="100%" alt />
+            <img
+              src="../../assets/images/logo/logo.jpg"
+              width="100%"
+              height="100%"
+              @click="navToHome"
+              alt
+            />
           </div>
         </div>
         <div slot="title" class="title">
           <div ref="phoneHeart" :class="heartClass">
-            <van-icon size="30px" :color="heartColor" name="like" @click="changeHeartColor" />
+            <van-icon
+              size="30px"
+              :color="heartColor"
+              name="like"
+              @click="changeHeartColor"
+            />
           </div>
         </div>
         <div slot="right" class="right">
           <div class="menu">
             <transition name="fade">
-              <span v-show="!isOpen" class="icon iconfont" @click="hideSticky">&#xeb71;</span>
+              <span v-show="!isOpen" class="icon iconfont" @click="hideSticky"
+                >&#xeb71;</span
+              >
             </transition>
             <transition name="show">
               <van-icon
@@ -42,7 +55,7 @@
     <div class="pc-nav">
       <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
-          <img src="../../assets/images/logo/logo.jpg" class="menuLogo" />
+          <img src="../../assets/images/logo/logo.jpg" @click="navToHome" class="menuLogo" />
           <nav class="pc-navs">
             <div
               v-for="(nav, index) of navbarOptions.menuOptions"
@@ -54,7 +67,7 @@
               <span
                 :class="{
                   icon: true,
-                  iconfont: true,
+                  iconfont: true
                 }"
                 @click="navToPage(nav)"
                 v-html="nav.icon"
@@ -91,7 +104,12 @@
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
+          <van-icon
+            size="20px"
+            color="rgba(0,0,0,0.8)"
+            :finished="true"
+            :name="item.icon"
+          />
         </van-cell>
       </van-list>
     </van-popup>
@@ -104,7 +122,7 @@ import { Api } from '@/api/index';
 import { getDay } from '@/utils/index';
 export default {
   props: {},
-  data () {
+  data() {
     return {
       Color,
       heartClass: 'animated pulse infinite delay-0.5s',
@@ -172,7 +190,7 @@ export default {
   computed: {
     ...mapState(['isPhone', 'topbarShow']) // 加载设备类型;
   },
-  created () {
+  created() {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
@@ -193,13 +211,18 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage (item) {
+    navToPage(item) {
       this.changeTabbar(item.path);
       this.isOpen = false;
       this.$router.push({ path: item.path });
     },
+
+    navToHome() {
+      this.$router.push({ path: '/' });
+    },
+
     // 网站点赞
-    addPraise () {
+    addPraise() {
       this.$axios({
         method: 'post',
         url: Api.addPraise,
@@ -207,20 +230,22 @@ export default {
           praise_time: getDay(),
           device: this.isPhone ? '手机' : '电脑'
         }
-      }).then((res) => {
-        if (res.data.resultCode === 0) {
-          localStorage.setItem('heartColor', '#cf2729');
-          this.heartColor = '#cf2729';
-          this.$toast('点赞成功，谢谢你喜欢我。');
-        } else {
-          this.$toast('点赞失败，未知异常。');
-        }
-      }).catch(() => {
-        this.$toast('点赞失败，未知异常。');
       })
+        .then(res => {
+          if (res.data.resultCode === 0) {
+            localStorage.setItem('heartColor', '#cf2729');
+            this.heartColor = '#cf2729';
+            this.$toast('点赞成功，谢谢你喜欢我。');
+          } else {
+            this.$toast('点赞失败，未知异常。');
+          }
+        })
+        .catch(() => {
+          this.$toast('点赞失败，未知异常。');
+        });
     },
     // 监听路由,更改tabbar激活菜单
-    changeTabbar (path) {
+    changeTabbar(path) {
       let menuIndex;
       if (path === '/course') {
         menuIndex = 1;
@@ -233,20 +258,20 @@ export default {
       }
       this.changeMenuIndex(menuIndex);
     },
-    onLoad () {
+    onLoad() {
       // 异步更新数据
       // 加载状态结束
       this.loading = true;
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft () {
-      this.$toast('返回');
+    onClickLeft() {
+     
     },
-    onClickRight () {
+    onClickRight() {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor () {
+    changeHeartColor() {
       if (this.heartColor === '#cf2729') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
@@ -255,10 +280,10 @@ export default {
       this.$refs.phoneHeart.className = '';
       this.$refs.pcHeart.className = '';
     },
-    hideSticky () {
+    hideSticky() {
       this.$emit('menu-open');
     },
-    showSticky () {
+    showSticky() {
       this.$emit('menu-close');
     }
   }

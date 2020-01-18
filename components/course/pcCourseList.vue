@@ -118,7 +118,6 @@ export default {
     showCourse(courseName) {
       this.course = courseName;
       this.show = true;
-      console.log('haha');
     },
     navTo(course) {
       this.$router.push({ path: '/contact', courseName: course.courseName });

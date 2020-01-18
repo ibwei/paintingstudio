@@ -143,7 +143,7 @@ export default {
 .item-img {
   width: 100%;
   height: auto;
-  max-height: 600px;
+  max-height: 700px;
 }
 
 .swiper {
