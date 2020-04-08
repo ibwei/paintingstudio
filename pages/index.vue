@@ -71,6 +71,9 @@ import BottomFooter from '../components/common/bottomFooter';
 import { Color } from '../config/color';
 import { Api } from '../api/index';
 export default {
+  head: {
+    title: '品贤画室 | For Art,For U'
+  },
   components: {
     carousel,
     paintIntroduce,

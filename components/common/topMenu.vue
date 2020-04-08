@@ -24,10 +24,18 @@
         <div slot="title" class="title">
           <div ref="phoneHeart" :class="heartClass">
             <van-icon
+              v-if="isLogin"
               size="30px"
               :color="heartColor"
               name="like"
               @click="changeHeartColor"
+            />
+            <van-icon
+              v-else
+              size="30px"
+              color="rgba(0,0,0,0.6)"
+              name="user-circle-o"
+              @click="openLoginDialog"
             />
           </div>
         </div>
@@ -55,7 +63,11 @@
     <div class="pc-nav">
       <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
-          <img src="../../assets/images/logo/logo.jpg" @click="navToHome" class="menuLogo" />
+          <img
+            src="../../assets/images/logo/logo.jpg"
+            @click="navToHome"
+            class="menuLogo"
+          />
           <nav class="pc-navs">
             <div
               v-for="(nav, index) of navbarOptions.menuOptions"
@@ -77,12 +89,14 @@
         </div>
         <div ref="pcHeart" class="heart-cover" :class="heartClass">
           <van-icon
+            v-if="isLogin"
             size="30px"
             :color="heartColor"
             :finished="true"
             name="like"
             @click="changeHeartColor"
           />
+          <van-icon v-else size="30px" name="user-circle-o" />
         </div>
       </div>
     </div>
@@ -188,7 +202,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['isPhone', 'topbarShow']) // 加载设备类型;
+    ...mapState(['isPhone', 'topbarShow', 'isLogin']) // 加载设备类型;
   },
   created() {
     if (process.client) {
@@ -219,6 +233,10 @@ export default {
 
     navToHome() {
       this.$router.push({ path: '/' });
+    },
+
+    openLoginDialog() {
+      console.log('0pen');
     },
 
     // 网站点赞
@@ -265,9 +283,7 @@ export default {
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft() {
-     
-    },
+    onClickLeft() {},
     onClickRight() {
       this.isOpen = !this.isOpen;
     },

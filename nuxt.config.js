@@ -14,7 +14,7 @@ module.exports = {
       { name: 'force-renderer', content: 'webkit' },
       {
         name: 'keywords',
-        content: '画室,培训,绘画,品贤画室,品贤,重庆品贤画室'
+        content: '品贤画室,绘画培训,品贤,成都品贤画室'
       },
       { name: 'format-detection', content: 'telephone=yes' },
       {
@@ -24,7 +24,7 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: ''
+        content: '我们是一家专注绘画兴趣培训的画室机构'
       }
     ],
     link: [
