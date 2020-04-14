@@ -1,5 +1,6 @@
 <template>
   <div ref="app" class="app">
+    <login-register v-show="loginDialogShow"></login-register>
     <top-menu @menu-open="hideSticky" @menu-close="showSticky"></top-menu>
     <!-- <Affix/> -->
     <nuxt class="nuxt-content" keepAlive />
@@ -15,7 +16,9 @@
         <van-tabbar-item icon="wap-home-o" to="/">品贤画室</van-tabbar-item>
         <van-tabbar-item icon="hot-o" to="/course">课程介绍</van-tabbar-item>
         <van-tabbar-item icon="photo-o" to="/news">画室动态</van-tabbar-item>
-        <van-tabbar-item icon="comment-circle-o" to="/contact">联系我们</van-tabbar-item>
+        <van-tabbar-item icon="comment-circle-o" to="/contact"
+          >联系我们</van-tabbar-item
+        >
       </van-tabbar>
     </div>
     <!-- 右侧悬浮快捷入口 -->
@@ -24,7 +27,13 @@
     </div>
     <van-popup v-model="wechatQRCodeshow">
       <template v-if="paintingInfo && paintingInfo.er_code">
-        <img :src="paintingInfo.er_code" class="qr-code" width="150" height="150" alt />
+        <img
+          :src="paintingInfo.er_code"
+          class="qr-code"
+          width="150"
+          height="150"
+          alt
+        />
       </template>
       <template v-else>
         <span>加载中...</span>
@@ -44,14 +53,16 @@ import scrollTop from '../components/common/scrollTop';
 import { isPhone, getDateTime } from '../utils/index';
 import { Api } from '@/api/index';
 import { Domain } from '../config';
+import loginRegister from '../components/common/loginDialog';
 export default {
   name: 'Default',
   components: {
     topMenu,
     sticky,
+    loginRegister,
     scrollTop
   },
-  data () {
+  data() {
     return {
       currentMenuIndex: 0,
       currentPath: '/',
@@ -61,14 +72,20 @@ export default {
     };
   },
   computed: {
-    ...mapState(['menuIndex', 'isPhone', 'tabbarShow', 'paintingInfo'])
+    ...mapState([
+      'menuIndex',
+      'isPhone',
+      'tabbarShow',
+      'paintingInfo',
+      'loginDialogShow'
+    ])
   },
   watch: {
-    menuIndex (newV, oldV) {
+    menuIndex(newV, oldV) {
       this.currentMenuIndex = newV;
     }
   },
-  created () {
+  created() {
     if (process.client) {
       this.currentPath = this.$route.path;
       this.checkDevice();
@@ -78,7 +95,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     const paint = localStorage.getItem('paintingInfo');
     if (!paint || paint === 'undefined') {
       window.location.replace(Domain);
@@ -88,7 +105,7 @@ export default {
     window.addEventListener('unload', this.logoutStatistics);
     this.loginStatistics();
   },
-  destroyed () {
+  destroyed() {
     window.removeEventListener('resize', this.checkDevice);
   },
   methods: {
@@ -97,7 +114,7 @@ export default {
     /**
      * @method 检查是什么设备
      */
-    checkDevice () {
+    checkDevice() {
       // 在客户端才能获取到dom,才能判断是否是移动设备
       if (process.client) {
         const result = isPhone();
@@ -105,7 +122,7 @@ export default {
       }
     },
     // 入口统计
-    loginStatistics () {
+    loginStatistics() {
       this.$axios({
         method: 'post',
         url: Api.userLogin,
@@ -121,10 +138,10 @@ export default {
           } else {
           }
         })
-        .catch(() => { });
+        .catch(() => {});
     },
 
-    async logoutStatistics () {
+    async logoutStatistics() {
       await this.$axios({
         method: 'post',
         url: Api.userLogout,
@@ -136,13 +153,13 @@ export default {
       });
     },
 
-    hideSticky () {
+    hideSticky() {
       this.stickyShow = false;
     },
-    showSticky () {
+    showSticky() {
       this.stickyShow = true;
     },
-    showQRCode () {
+    showQRCode() {
       if (this.wechatQRCodeshow === true) {
         this.wechatQRCodeshow = false;
         return;

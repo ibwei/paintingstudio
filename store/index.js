@@ -15,7 +15,7 @@ export const state = () => ({
   user: null,
   isLogin: false,
   loginDialogShow: false,
-  registerDialogShow: false
+  loginDialogType: 'login'
 });
 
 export const mutations = {
@@ -44,9 +44,9 @@ export const mutations = {
     state.isLogin = isLogin;
   },
   changeLoginDialogShow(state, show) {
-    state.changeLoginDialogShow = show;
+    state.loginDialogShow = show;
   },
-  changeRegisterDialogShow(state, show) {
-    state.registerDialogShow = show;
+  changeLoginDialogType(state, type) {
+    state.loginDialogType = type;
   }
 };

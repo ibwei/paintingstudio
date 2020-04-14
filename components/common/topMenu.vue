@@ -34,7 +34,7 @@
               v-else
               size="30px"
               color="rgba(0,0,0,0.6)"
-              name="user-circle-o"
+              name="contact"
               @click="openLoginDialog"
             />
           </div>
@@ -162,6 +162,11 @@ export default {
           path: '/contact',
           icon: 'phone-circle-o',
           name: '联系我们'
+        },
+        {
+          path: '/me',
+          icon: 'manager-o',
+          name: '个人中心'
         }
       ],
       loading: false,
@@ -219,7 +224,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['changeMenuIndex']),
+    ...mapMutations(['changeMenuIndex', 'changeLoginDialogShow']),
     /**
      * @method 导航到具体页面
      * @param {listItem}
@@ -236,7 +241,7 @@ export default {
     },
 
     openLoginDialog() {
-      console.log('0pen');
+      this.changeLoginDialogShow(true);
     },
 
     // 网站点赞
