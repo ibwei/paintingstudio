@@ -9,7 +9,8 @@
             :key="index"
             color="#f2826a"
             plain
-          >{{ item }}</van-tag>
+            >{{ item }}</van-tag
+          >
         </div>
         <div class="time">{{ news.updated_at }}</div>
       </div>
@@ -37,8 +38,14 @@
       </div>
     </div>
     <van-divider
-      :style="{width:'100%', color: '#555', borderColor: '#e5e5e5', padding: '0 16px' }"
-    >到底啦</van-divider>
+      :style="{
+        width: '100%',
+        color: '#555',
+        borderColor: '#e5e5e5',
+        padding: '0 16px'
+      }"
+      >到底啦</van-divider
+    >
   </div>
 </template>
 
@@ -50,18 +57,18 @@ export default {
   props: {
     news: {
       type: Object,
-      default () {
+      default() {
         return {};
       }
     }
   },
-  data () {
+  data() {
     return {
       Color,
       zan: false
     };
   },
-  created () {
+  created() {
     if (process.client) {
       const zan = localStorage.getItem('article' + this.news.id);
       if (zan === '1') {
@@ -69,7 +76,7 @@ export default {
       }
     }
   },
-  activated () {
+  activated() {
     const zan = localStorage.getItem('article' + this.news.id);
     if (zan === '1') {
       this.zan = true;
@@ -77,13 +84,13 @@ export default {
   },
   methods: {
     // 点赞
-    handlerClickZan () {
+    handlerClickZan() {
       this.$axios({
         method: 'post',
         url: Api.articleAddPraise,
         data: { id: this.news.id }
       })
-        .then((res) => {
+        .then(res => {
           if (res.data.resultCode === 0) {
             this.zan = !this.zan;
             localStorage.setItem('article' + this.news.id, '1');
@@ -97,7 +104,7 @@ export default {
         });
     },
     // 点击评论按钮
-    pl () {
+    pl() {
       this.$toast('暂未开放评论系统');
     }
   }

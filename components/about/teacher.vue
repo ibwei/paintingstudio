@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import card from '@/components/common/card'
+import card from '@/components/common/card';
 export default {
   components: {
     card
@@ -13,12 +13,12 @@ export default {
   props: {
     teacherList: {
       type: Array,
-      default () {
+      default() {
         return [];
       }
     }
   },
-  data () {
+  data() {
     return {
       initTtile: {
         cnTitle: '教师资源',
@@ -26,12 +26,12 @@ export default {
         mode: 'block',
         icon: '&#xe618;'
       }
-    }
+    };
   }
-}
+};
 </script>
 
-<style lang='less' scope>
+<style lang="less" scope>
 @import url('../../assets/css/color.less');
 .teacher {
   background: #fff;

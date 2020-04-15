@@ -162,6 +162,15 @@ export default {
     if (process.client) {
       localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo));
       this.setPaintingInfo(this.paintingInfo);
+      const token = localStorage.getItem('token');
+      if (token) {
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.changeUser(user);
+        this.changeIsLogin(true);
+      } else {
+        this.changeUser(null);
+        this.changeIsLogin(false);
+      }
     }
   },
   mounted() {
@@ -184,7 +193,13 @@ export default {
     this.changTopbarShow(true);
   },
   methods: {
-    ...mapMutations(['setPaintingInfo', 'changeTabbarShow', 'changTopbarShow'])
+    ...mapMutations([
+      'setPaintingInfo',
+      'changeTabbarShow',
+      'changTopbarShow',
+      'changeUser',
+      'changeIsLogin'
+    ])
     /*   getCacheData () {
         try {
           this.teacherList = JSON.parse(localStorage.getItem('teacherList'));

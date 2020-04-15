@@ -104,7 +104,7 @@ export default {
       'changeLoginDialogShow',
       'changeLoginDialogType',
       'changeUser',
-      'changeIsLoin'
+      'changeIsLogin'
     ]),
     getContainer() {
       return document.getElementsByTagName('body')[0];
@@ -124,8 +124,9 @@ export default {
       });
       if (result.data.resultCode === 0) {
         localStorage.setItem('token', result.data.data.token);
+        localStorage.setItem('user', JSON.stringify(result.data.data.user));
         this.changeUser(result.data.data.user);
-        this.changeIsLoin(true);
+        this.changeIsLogin(true);
         if (this.loginDialogType === 'login') {
           this.$toast.success('登录成功');
         } else {

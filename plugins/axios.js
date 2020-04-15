@@ -1,4 +1,4 @@
-function axios({ $axios, redirect }) {
+function axios({ $axios, redirect, store }) {
   $axios.onResponse(res => {
     const { status, data } = res;
     const url = res.request.res ? res.request.res.responseUrl : '';
@@ -15,7 +15,10 @@ function axios({ $axios, redirect }) {
       redirect('/400');
     }
     if (code === 401) {
-      this.$store.commit('changeLoginDialogShow', true);
+      localStorage.setItem('token', '');
+      store.commit('changeIsLogin', false);
+      store.commit('changeUser', null);
+      store.commit('changeLoginDialogShow', true);
     }
   });
 }

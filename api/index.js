@@ -42,5 +42,7 @@ export const Api = {
   // 登录
   userLogin: baseUrl + '/user/login',
   // 注册
-  userRegister: baseUrl + '/user/register'
+  userRegister: baseUrl + '/user/register',
+  // 添加教师评论
+  teacherCommentAdd: baseUrl + '/teacher/comment/add'
 };

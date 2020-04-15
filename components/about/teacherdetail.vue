@@ -10,7 +10,12 @@
     <div class="content">
       <div class="info">
         <div class="info-img">
-          <van-image fit="cover" width="100%" height="100%" :src="teacher.photo" />
+          <van-image
+            fit="cover"
+            width="100%"
+            height="100%"
+            :src="teacher.photo"
+          />
         </div>
         <div class="info-basic">
           <div class="name">{{ teacher.name }}</div>
@@ -40,7 +45,11 @@
       <div class="skill">
         <div class="skill-title">曾获荣誉</div>
         <div class="deed">
-          <div v-for="(item,index) of teacher.deed" :key="index" class="deed-item">
+          <div
+            v-for="(item, index) of teacher.deed"
+            :key="index"
+            class="deed-item"
+          >
             <span style="{marginRight:'10px'}">{{ item }}</span>
           </div>
         </div>
@@ -49,26 +58,61 @@
         <div class="skill-title">擅长课程</div>
         <div class="skill-content">
           <van-tag
-            v-for="(item,index) of teacher.good_ats"
+            v-for="(item, index) of teacher.good_ats"
             :key="index"
             plain
-            :style="{marginRight:'10px'}"
+            :style="{ marginRight: '10px' }"
           >
             {{ item }}
           </van-tag>
         </div>
       </div>
+      <van-divider>评论区</van-divider>
+      <div class="skill skill-m">
+        <van-field
+          v-model="message"
+          rows="4"
+          autosize
+          show-word-limit
+          label="评论"
+          maxlength="200"
+          type="textarea"
+          :border="true"
+          placeholder="请输入评论"
+        />
+
+        <van-cell :value="`${star}分`">
+          <!-- 使用 title 插槽来自定义标题 -->
+          <template #title>
+            <van-rate v-model="star" allow-half />
+          </template>
+        </van-cell>
+        <van-button style="margin-top:10px" @click="addComment" size="small"
+          >评分并评论</van-button
+        >
+      </div>
       <div class="appraise">
         <div class="appraise-title">
           <div class="title-text">学员评价</div>
           <div class="more">
-            共48条
+            共{{ teacher.commentList.length }}条
             <van-icon name="arrow" />
           </div>
         </div>
         <div class="appraise-content">
-          <van-tag v-for="(item,index) of teacher.impressions" :key="index" plain>{{ item }}</van-tag>
-          <div class="student-appraise">暂未开启互动功能</div>
+          <van-tag
+            v-for="(item, index) of teacher.impressions"
+            :key="index"
+            plain
+            >{{ item }}</van-tag
+          >
+          <div v-if="!this.teacher.commentList.length" class="student-appraise">
+            暂无评论
+          </div>
+          <div v-else>
+            <comment :list="this.teacher.commentList" />
+            <van-divider>已到底部</van-divider>
+          </div>
         </div>
       </div>
     </div>
@@ -78,10 +122,21 @@
 <script>
 import { Color, tagsColor } from '../../config/color';
 import { Api } from '@/api/index';
+import teacher from '@/components/about/teacher';
+import comment from '@/components/common/comment';
+import { List } from 'ant-design-vue';
+import { mapState, mapMutations } from 'vuex';
 export default {
-  data () {
+  components: {
+    comment
+  },
+  data() {
     return {
+      message: '',
       Color,
+      star: 5,
+      pageNum: 1,
+      pageSize: 50,
       teacher: {
         name: '',
         photo: '',
@@ -89,45 +144,92 @@ export default {
         desc: '',
         deeds: '',
         impression: '',
-        good_at: ''
+        good_at: '',
+        commentList: []
       }
-    }
+    };
   },
-  mounted () {
+  computed: {
+    ...mapState(['isLogin'])
+  },
+  mounted() {
     this.getTeacherDetail();
   },
   activated() {
     this.getTeacherDetail();
   },
   methods: {
-    getTeacherDetail () {
-      this.$axios({ method: 'post', url: Api.teacherDetail, data: { id: this.$route.query.teacherId } }).then((res) => {
-        if (res.data.resultCode === 0) {
-          this.teacher = res.data.data;
-          this.teacher.good_ats = this.teacher.good_at.split('-');
-          this.teacher.impressions = this.teacher.impression.split('-');
-          this.teacher.deed = this.teacher.deeds.split('-');
-        } else {
-          this.$toast('获取教师信息失败！');
+    ...mapMutations(['changeLoginDialogShow']),
+    getTeacherDetail() {
+      this.$axios({
+        method: 'post',
+        url: Api.teacherDetail,
+        data: {
+          id: this.$route.query.teacherId,
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
         }
-      }).catch(() => {
-
       })
+        .then(res => {
+          if (res.data.resultCode === 0) {
+            this.teacher = res.data.data;
+            this.teacher.good_ats = this.teacher.good_at.split('-');
+            this.teacher.impressions = this.teacher.impression.split('-');
+            this.teacher.deed = this.teacher.deeds.split('-');
+            this.teacher.commentList = res.data.commentList;
+          } else {
+            this.$toast('获取教师信息失败！');
+          }
+        })
+        .catch(() => {});
     },
     /* 获取随机颜色 */
-    getRandomColor () {
-      return tagsColor[Math.floor(Math.random() * tagsColor.length)]
+    getRandomColor() {
+      return tagsColor[Math.floor(Math.random() * tagsColor?.length)];
     },
-    back () {
+    back() {
       this.$router.back();
+    },
+    async addComment() {
+      if (!this.isLogin) {
+        this.changeLoginDialogShow(true);
+        this.$toast('发表评论前，请先登录');
+        return false;
+      }
+      if (this.message.length < 4) {
+        this.$toast('评论字数太少，请重新编辑！');
+        return false;
+      }
+      const { data } = await this.$axios({
+        method: 'post',
+        url: Api.teacherCommentAdd,
+        params: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          content: this.message,
+          parent_id: 0,
+          level: 0,
+          teacher_id: this.$route.query.teacherId,
+          star: this.star
+        }
+      });
+      if (data.resultCode === 0) {
+        this.$toast.success('评论发表成功，管理员审核通过之后方可显示');
+        this.message = '';
+      } else {
+        this.$toast.success(data.resultMessage);
+      }
     }
   }
-
-}
+};
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 @import url('../../assets/css/color.less');
+.teacher-detail {
+  margin-bottom: 50px;
+}
 .flex {
   display: -webkit-flex;
   display: flex;
@@ -254,5 +356,11 @@ export default {
   color: #999;
   font-size: 13px;
   line-height: 1.5;
+}
+.skill-m {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -40,7 +40,7 @@ export const mutations = {
   changeUser(state, user) {
     state.user = user;
   },
-  changeIsLoin(state, isLogin) {
+  changeIsLogin(state, isLogin) {
     state.isLogin = isLogin;
   },
   changeLoginDialogShow(state, show) {

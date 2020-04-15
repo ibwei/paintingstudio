@@ -6,14 +6,29 @@
         height="100"
         round
         style="position:relative;z-index:3"
-        :src="user.avatar ? user.avatar : ''"
+        :src="
+          user.avatar
+            ? user.avatar
+            : 'http://img.pinxianhs.com/20151121171107_zMZcy.jpeg'
+        "
       />
       <span>{{ user.name ? user.name : '未登录' }}</span>
       <div class="bg"></div>
     </div>
     <van-row>
       <van-list finished-text="没有更多了">
-        <van-cell v-for="item in list" :key="item.name" :title="item.name" />
+        <van-cell
+          v-for="item in list"
+          :key="item.name"
+          :icon="item.icon"
+          arrow-direction="down"
+          :is-link="true"
+          :url="item.url"
+        >
+          <template #title>
+            <span class="custom-title">{{ item.name }}</span>
+          </template>
+        </van-cell>
       </van-list>
     </van-row>
   </div>
@@ -27,16 +42,24 @@ export default {
     return {
       list: [
         {
-          name: '个人资料'
+          name: '个人资料',
+          icon: 'user-o',
+          url: '/me/info'
         },
         {
-          name: '我的课程'
+          name: '我的课程',
+          icon: 'bill-o',
+          url: '/me/course'
         },
         {
-          name: '我的预约'
+          name: '我的预约',
+          icon: 'calender-o',
+          url: '/me/book'
         },
         {
-          name: '我的评论'
+          name: '我的评论',
+          icon: 'chat-o',
+          url: '/me/comment'
         }
       ]
     };
