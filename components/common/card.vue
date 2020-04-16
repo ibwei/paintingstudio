@@ -1,9 +1,15 @@
 <template>
   <div>
-    <div v-for="(teacher) of cardList" :key="teacher.id" class="card-wrap">
-      <div class="card">
+    <div v-for="teacher of cardList" :key="teacher.id" class="card-wrap">
+      <div class="card" @click="goDetail(teacher.id)">
         <div class="leftImg">
-          <van-image round fit="cover" width="100%" height="100%" :src="teacher.photo" />
+          <van-image
+            round
+            fit="cover"
+            width="100%"
+            height="100%"
+            :src="teacher.photo"
+          />
         </div>
         <div class="content">
           <div class="title">{{ teacher.name }}</div>
@@ -21,7 +27,7 @@
             {{ teacher.rate }}
           </div>
         </div>
-        <div class="more" @click="goDetail(teacher.id)">
+        <div class="more">
           <van-icon name="arrow" />
         </div>
       </div>
@@ -35,25 +41,25 @@ export default {
   props: {
     cardList: {
       type: Array,
-      default () {
+      default() {
         return null;
       }
     }
   },
-  data () {
+  data() {
     return {
       Color
-    }
+    };
   },
   methods: {
-    goDetail (id) {
-      this.$router.push({ path: '/about/detail', query: { teacherId: id } })
+    goDetail(id) {
+      this.$router.push({ path: '/about/detail', query: { teacherId: id } });
     }
   }
-}
+};
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 @import url('../../assets/css/color.less');
 .flex {
   display: -webkit-flex;

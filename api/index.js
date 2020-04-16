@@ -28,7 +28,7 @@ export const Api = {
   // 网站点赞+1
   addPraise: baseUrl + '/praise/add',
   //用户登录统计
-  userLogin: baseUrl + '/statistics/login',
+  loginCount: baseUrl + '/statistics/login',
   //用户登出统计
   userLogout: baseUrl + '/statistics/logout',
   //画室环境列表
@@ -44,5 +44,11 @@ export const Api = {
   // 注册
   userRegister: baseUrl + '/user/register',
   // 添加教师评论
-  teacherCommentAdd: baseUrl + '/teacher/comment/add'
+  teacherCommentAdd: baseUrl + '/teacher/comment/add',
+  // 添加文章评论
+  articleCommentAdd: baseUrl + '/article/comment/add',
+  // 获取日程列表
+  scheduleList: baseUrl + '/schedule/list',
+  // 发起预定
+  bookShedule: baseUrl + '/bookschedule/add'
 };

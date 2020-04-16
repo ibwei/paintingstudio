@@ -13,6 +13,7 @@
             :loading="loading"
           >
             <news-data :news="news"></news-data>
+            <article-comment :list="commentList" />
           </van-skeleton>
         </div>
       </div>
@@ -23,69 +24,31 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import newsData from '../../../components/news/newsdata';
+import articleComment from '../../../components/common/articleComment';
 import banner from '../../../components/news/phone/banner';
 import { Api } from '@/api/index';
+import comment from '@/components/common/comment';
 export default {
   name: 'ArticleDetails',
   components: {
     newsData,
-    banner
+    banner,
+    articleComment
   },
   data() {
     return {
+      commentList: [],
       zan: false,
       loading: true,
       news: {},
+      pageSize: 100,
+      pageNum: 1,
       user: {
         id: 1,
         name: '程序员阿森',
         imgUrl: require('../../../assets/images/user/asen.jpg'),
         info: '最骚程序员'
-      }, // 当前文章得作者
-      recommended: [
-        {
-          id: 1,
-          title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间',
-          describe:
-            '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来',
-          imgUrl: require('../../../assets/images/art/art1.jpg'),
-          time: '2019-12-12',
-          userId: 1,
-          browse: 23
-        },
-        {
-          id: 2,
-          title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间',
-          describe:
-            '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来',
-          imgUrl: require('../../../assets/images/art/art1.jpg'),
-          time: '2019-12-12',
-          userId: 1,
-          browse: 23
-        },
-        {
-          id: 3,
-          title_info:
-            '评先刷hi是招生那这是一个副标题字数最好在20到50之间是一个副标题字数最好在20到50之间',
-          describe:
-            '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来',
-          imgUrl: require('../../../assets/images/art/art1.jpg'),
-          time: '2019-12-12',
-          userId: 1,
-          browse: 23
-        },
-        {
-          id: 4,
-          title_info: '评先刷hi是招生那这是一个副标题字数最好在20到50之间',
-          describe:
-            '两兄弟创建的品贤画室开业了，教学环境秀丽优美，师资力量强大，就等你来',
-          imgUrl: require('../../../assets/images/art/art1.jpg'),
-          time: '2019-12-12',
-          userId: 1,
-          browse: 23
-        }
-      ], // 文章相关推荐列表
-      comments: [] // 文章相关评论列表
+      } // 当前文章得作者
     };
   },
   computed: {
@@ -99,10 +62,15 @@ export default {
       this.$axios({
         method: 'post',
         url: Api.getArticleDetail,
-        data: { id: this.$route.query.news_id }
+        data: {
+          id: this.$route.query.news_id,
+          pageSize: this.pageSize,
+          pageNum: this.pageNum
+        }
       })
         .then(res => {
           this.news = res.data.data[0];
+          this.commentList = res.data.commentList;
           this.loading = false;
         })
         .catch(res => {
@@ -123,11 +91,16 @@ export default {
     this.$axios({
       method: 'post',
       url: Api.getArticleDetail,
-      data: { id: this.$route.query.news_id }
+      data: {
+        id: this.$route.query.news_id,
+        pageSize: this.pageSize,
+        pageNum: this.pageNum
+      }
     })
       .then(res => {
         this.news = res.data.data[0];
         this.loading = false;
+        this.commentList = res.data.commentList;
       })
       .catch(res => {
         this.$toast('网络异常');
@@ -137,7 +110,9 @@ export default {
     this.$axios({
       method: 'post',
       url: Api.articleAddRead,
-      data: { id: this.$route.query.news_id }
+      data: {
+        id: this.$route.query.news_id
+      }
     });
   },
   methods: {

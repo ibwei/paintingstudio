@@ -1,25 +1,74 @@
 <template>
   <div class="time-wrap">
     <div class="time-notice">
-      <span><b>上课时间</b> 上午：9:00——12:00  下午：14:00——17:00  晚上：18:00——21:00</span>
+      <span
+        ><b>上课时间</b> 上午：9:00——12:00 下午：14:00——17:00
+        晚上：18:00——21:00</span
+      >
       <span class="notice">提醒：预约上课需要提前一天预约</span>
     </div>
+    <van-divider>日程安排</van-divider>
     <van-steps :active="active" direction="vertical">
-      <van-step v-for="(item,index) of courseSchedual" :key="index">
+      <van-step v-for="(item, index) of courseSchedual" :key="index">
         <div class="date">
           <div class="day-name">{{ item.name }}</div>
-          <div class="day-detail" :class="{'active':index===active}">
+          <div class="day-detail" :class="{ active: index === active }">
             <div class="day">
               <div class="time">上午</div>
-              <div class="available">{{ getCourseStatus(item.course[0]) }}</div>
+              <div class="available">
+                <template
+                  v-if="getCourseStatus(item.course[0].status) === '预约'"
+                >
+                  <van-button
+                    type="primary"
+                    size="small"
+                    :disabled="isDisabled(index) || hasBook(index, 2)"
+                    @click="bookSchedule(item.course[0].id, index, 0)"
+                    >预约</van-button
+                  >
+                </template>
+                <template v-else>
+                  {{ getCourseStatus(item.course[0].status) }}
+                </template>
+              </div>
             </div>
             <div class="day">
               <div class="time">下午</div>
-              <div class="available">{{ getCourseStatus(item.course[1]) }}</div>
+              <div class="available">
+                <template
+                  v-if="getCourseStatus(item.course[1].status) === '预约'"
+                >
+                  <van-button
+                    type="primary"
+                    size="small"
+                    :disabled="isDisabled(index) || hasBook(index, 2)"
+                    @click="bookSchedule(item.course[1].id, index, 1)"
+                    >预约</van-button
+                  >
+                </template>
+                <template v-else>
+                  {{ getCourseStatus(item.course[1].status) }}
+                </template>
+              </div>
             </div>
             <div class="day">
               <div class="time">晚上</div>
-              <div class="available">{{ getCourseStatus(item.course[2]) }}</div>
+              <div class="available">
+                <template
+                  v-if="getCourseStatus(item.course[2].status) === '预约'"
+                >
+                  <van-button
+                    type="primary"
+                    size="small"
+                    :disabled="isDisabled(index) || hasBook(index, 2)"
+                    @click="bookSchedule(item.course[2].id, index, 2)"
+                    >预约</van-button
+                  >
+                </template>
+                <template v-else>
+                  {{ getCourseStatus(item.course[2].status) }}
+                </template>
+              </div>
             </div>
           </div>
         </div>
@@ -30,43 +79,138 @@
 
 <script>
 import { Color } from '../../../config/color';
+import { Api } from '@/api/index';
 export default {
-  data () {
+  data() {
     return {
       active: 1,
       Color,
       courseSchedual: [
         {
           name: '星期日',
-          course: [1, 1, 0]
-        }, {
+          course: [
+            { status: 0, id: 1 },
+            { status: 0, id: 1 },
+            { status: 0, id: 1 }
+          ]
+        },
+        {
           name: '星期一',
-          course: [0, 0, 0]
-        }, {
+          course: [
+            { status: 0, id: 1 },
+            { status: 0, id: 1 },
+            { status: 0, id: 1 }
+          ]
+        },
+        {
           name: '星期二',
-          course: [0, 1, 2]
-        }, {
+          course: [
+            { status: 0, id: 1 },
+            { status: 0, id: 1 },
+            { status: 0, id: 1 }
+          ]
+        },
+        {
           name: '星期三',
-          course: [1, 1, 2]
-        }, {
+          course: [
+            { status: 0, id: 1 },
+            { status: 0, id: 1 },
+            { status: 0, id: 1 }
+          ]
+        },
+        {
           name: '星期四',
-          course: [1, 1, 1]
-        }, {
+          course: [
+            { status: 0, id: 1 },
+            { status: 0, id: 1 },
+            { status: 0, id: 1 }
+          ]
+        },
+        {
           name: '星期五',
-          course: [1, 1, 1]
-        }, {
+          course: [
+            { status: 0, id: 1 },
+            { status: 0, id: 1 },
+            { status: 0, id: 1 }
+          ]
+        },
+        {
           name: '星期六',
-          course: [1, 1, 1]
-        }]
-    }
+          course: [
+            { status: 0, id: 1 },
+            { status: 0, id: 1 },
+            { status: 0, id: 1 }
+          ]
+        }
+      ],
+      alreadyBook: []
+    };
   },
-  created () {
+  created() {
     if (process.client) {
       this.getToday();
+      this.getScheduleList();
     }
   },
   methods: {
-    getCourseStatus (number) {
+    hasBook(day, time) {
+      return this.alreadyBook.includes(`${day}${time}`);
+    },
+    async bookSchedule(schedule_id, day, time) {
+      try {
+        const data = await this.$axios({
+          method: 'post',
+          url: Api.bookShedule,
+          params: {
+            token: localStorage.getItem('token')
+          },
+          data: {
+            schedule_id,
+            status: 0
+          }
+        });
+        if (data.resultCode === 1) {
+          this.$toast.fail(data.resultMessage);
+        } else {
+          this.$toast.success(
+            '你成功申请预约,等待管理员，审核结果将以邮件告知。'
+          );
+          this.alreadyBook.push(`${day}${time}`);
+        }
+      } catch {
+        this.$toast.fail('未知错误!');
+      }
+    },
+    isDisabled(index) {
+      if (index === 0) {
+        return false;
+      }
+      if (index < this.active) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    async getScheduleList() {
+      const { data } = await this.$axios({
+        method: 'post',
+        url: Api.scheduleList
+      });
+      const rawData = data.data;
+      const rawDataLength = rawData.length;
+      let i = 0;
+      for (let out = 0; out < this.courseSchedual.length; out++) {
+        let dayArray = [];
+        for (let inner = 0; inner < 3; inner++) {
+          dayArray.push({ id: rawData[i].id, status: rawData[i++].status });
+        }
+        this.courseSchedual.splice(out, 1, {
+          ...this.courseSchedual[out],
+          course: dayArray
+        });
+      }
+    },
+    getCourseStatus(number) {
       if (number === 1) {
         return '上课';
       } else if (number === 0) {
@@ -74,12 +218,12 @@ export default {
       }
       return '预约';
     },
-    getToday () {
+    getToday() {
       const date = new Date().getDay();
       this.active = date;
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">
@@ -90,26 +234,29 @@ export default {
   max-width: 100%;
   border: none;
 }
-.time-notice{
-  margin:20px;
+.time-notice {
+  margin: 20px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
   line-height: 20px;
 }
-.notice{
+.notice {
   margin: 15px 0;
-  color:#f00;
+  color: #f00;
 }
 .time,
 .available {
   box-sizing: border-box;
   width: 100%;
   margin-top: 0px;
+  height: 40px;
   display: flex;
   padding: 4px;
   flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
   border: 1px solid #dcdee2;
 }
 .time {

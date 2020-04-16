@@ -125,7 +125,7 @@ export default {
     loginStatistics() {
       this.$axios({
         method: 'post',
-        url: Api.userLogin,
+        url: Api.loginCount,
         timeout: 10000,
         data: {
           login_time: getDateTime(),

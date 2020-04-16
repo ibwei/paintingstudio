@@ -37,15 +37,6 @@
         </div>
       </div>
     </div>
-    <van-divider
-      :style="{
-        width: '100%',
-        color: '#555',
-        borderColor: '#e5e5e5',
-        padding: '0 16px'
-      }"
-      >到底啦</van-divider
-    >
   </div>
 </template>
 
