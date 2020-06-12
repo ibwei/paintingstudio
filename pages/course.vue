@@ -29,6 +29,18 @@ export default {
   components: {
     pcCourseList
   },
+  head() {
+    return {
+      title: '品贤画室 | 课程中心',
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: '课程中心,品贤画室,品贤课程'
+        }
+      ]
+    };
+  },
   data() {
     return {
       activeKey: 0,

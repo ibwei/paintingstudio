@@ -1,8 +1,8 @@
 {
-  "name": "cqjtu-website",
+  "name": "paintng-studio",
   "version": "1.0.0",
-  "description": "重庆交通大学服务大厅",
-  "author": "cqmimi",
+  "description": "品贤画室",
+  "author": "ibwei",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server ",
@@ -14,18 +14,13 @@
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@nuxtjs/axios": "^5.8.0",
     "ant-design-vue": "^1.1.10",
     "apexcharts": "^3.8.6",
     "axios": "^0.19.0",
-    "cross-env": "^5.2.0",
-    "import-lazy": "^4.0.0",
     "koa": "^2.6.2",
-    "less": "^3.10.3",
-    "less-loader": "^5.0.0",
     "nuxt": "^2.0.0",
-    "vant": "^2.2.14",
+    "vant": "^2.6.0",
     "vue-amap": "^0.5.10",
     "vue-apexcharts": "^1.5.0",
     "vue-native-share": "^1.0.2",
@@ -34,6 +29,7 @@
     "vuex": "^3.1.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/proxy": "^1.3.3",
@@ -43,10 +39,15 @@
     "babel-jest": "^24.1.0",
     "babel-plugin-import": "^1.13.0",
     "babel-preset-es2020": "^1.0.2",
+    "cross-env": "^5.2.0",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",
+    "import-lazy": "^4.0.0",
     "jest": "^24.1.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "nodemon": "^1.18.9",
+    "prettier": "2.0.5",
     "vue-jest": "^4.0.0-0"
   },
   "config": {

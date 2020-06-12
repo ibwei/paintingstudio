@@ -28,6 +28,7 @@
               size="30px"
               :color="heartColor"
               name="like"
+              style="margin-top:8px;"
               @click="changeHeartColor"
             />
             <van-icon
@@ -35,6 +36,7 @@
               size="30px"
               color="rgba(0,0,0,0.6)"
               name="contact"
+              style="margin-top:8px;"
               @click="openLoginDialog"
             />
           </div>
@@ -96,7 +98,12 @@
             name="like"
             @click="changeHeartColor"
           />
-          <van-icon v-else size="30px" name="user-circle-o" />
+          <van-icon
+            v-else
+            size="30px"
+            @click="openLoginDialog"
+            name="user-circle-o"
+          />
         </div>
       </div>
     </div>

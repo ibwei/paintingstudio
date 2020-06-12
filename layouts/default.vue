@@ -98,7 +98,9 @@ export default {
   mounted() {
     const paint = localStorage.getItem('paintingInfo');
     if (!paint || paint === 'undefined') {
-      window.location.replace(Domain);
+      if (!this.$route.path.startWith('/news')) {
+        window.location.replace(Domain);
+      }
     }
 
     window.addEventListener('resize', this.checkDevice);

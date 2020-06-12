@@ -55,7 +55,6 @@
     <bottom-footer :painting-info="paintingInfo"></bottom-footer>
   </div>
 </template>
-
 <script>
 import { mapMutations } from 'vuex';
 import carousel from '../components/works/carousel';
@@ -200,18 +199,6 @@ export default {
       'changeUser',
       'changeIsLogin'
     ])
-    /*   getCacheData () {
-        try {
-          this.teacherList = JSON.parse(localStorage.getItem('teacherList'));
-          this.carouselList = JSON.parse(localStorage.getItem('bannerList'));
-          this.studentWorksList = JSON.parse(localStorage.getItem('studentWorksList'));
-          this.articleList = JSON.parse(localStorage.getItem('articleList'));
-          this.environmentList = JSON.parse(localStorage.getItem('environmentList'));
-          this.paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'));
-        } catch (e) {
-          console.log('设置缓存出错！');
-        }
-      } */
   }
 };
 </script>

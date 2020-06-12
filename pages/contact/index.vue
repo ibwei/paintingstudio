@@ -1,14 +1,14 @@
 <template>
   <div class="contact">
     <!-- 头部图片信息 -->
-    <div v-scroll-reveal.scaleUp="{scale:0.15}" class="contact-img">
+    <div v-scroll-reveal.scaleUp="{ scale: 0.15 }" class="contact-img">
       <div class="bg-title">
         <!-- <h1>Hey，欢迎来到这里，请联系我们吧</h1>
         <h2>品贤画室于2019年创办于成都 ，我们朝气蓬勃，我们正青春。我们全年开课，随到随学，我们自由选择学习时间，欢迎来体验绘画课或者给我们留下宝贵的建议。</h2> -->
       </div>
     </div>
 
-    <div v-scroll-reveal.smooth="{easing:'ease-in'}" class="online">
+    <div v-scroll-reveal.smooth="{ easing: 'ease-in' }" class="online">
       <v-title :init-title="initTtile"></v-title>
       <!-- 表单内容 -->
       <van-cell-group class="form">
@@ -29,7 +29,11 @@
           required
           @blur="checkPhone('phone')"
         />
-        <van-field v-model="email" label="邮箱" placeholder="强烈建议您填写邮箱" />
+        <van-field
+          v-model="email"
+          label="邮箱"
+          placeholder="强烈建议您填写邮箱"
+        />
         <van-field
           v-model="content"
           rows="3"
@@ -44,24 +48,45 @@
           @blur="checkPhone('content')"
         />
       </van-cell-group>
-      <van-button class="submit" size="large" :loading="isloading" @click="submit">提交信息</van-button>
+      <van-button
+        class="submit"
+        size="large"
+        :loading="isloading"
+        @click="submit"
+        >提交信息</van-button
+      >
     </div>
-    <v-title v-scroll-reveal.smooth="{easing:'ease-in'}" :init-title="initMap"></v-title>
+    <v-title
+      v-scroll-reveal.smooth="{ easing: 'ease-in' }"
+      :init-title="initMap"
+    ></v-title>
     <!-- 插入地图 -->
     <g-map></g-map>
   </div>
 </template>
 
 <script>
-import vTitle from '../../components/common/vTitle'
-import gMap from '../../components/common/gMap'
-import { Api } from '../../api//index'
+import vTitle from '../../components/common/vTitle';
+import gMap from '../../components/common/gMap';
+import { Api } from '../../api//index';
 export default {
+  head() {
+    return {
+      title: '品贤画室 | 关于我们',
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: '关于品贤,品贤画室,成都品贤'
+        }
+      ]
+    };
+  },
   components: {
     vTitle,
     gMap
   },
-  data () {
+  data() {
     return {
       // 加载状态
       isloading: false,
@@ -94,13 +119,12 @@ export default {
     };
   },
   methods: {
-
-    checkPhone (type) {
+    checkPhone(type) {
       const typeTable = {
         phone: '电话',
         name: '姓名',
         content: '反馈内容'
-      }
+      };
       let reg;
       switch (type) {
         case 'phone':
@@ -123,8 +147,8 @@ export default {
      * submit 提交所有数据
      * @return void
      */
-    submit () {
-      this.isloading = true
+    submit() {
+      this.isloading = true;
       this.$axios({
         method: 'post',
         url: Api.feedbackAdd,
@@ -135,15 +159,19 @@ export default {
           wechat: this.phone,
           content: this.content
         }
-      }).then(() => {
-        this.isloading = false;
-        this.name = '';
-        this.phone = '';
-        this.content = '';
-        this.email = '';
-        this.$toast('反馈内容提交成功');
       })
-        .catch(() => this.$toast('填写数据有误，请重新填写'))
+        .then(() => {
+          this.isloading = false;
+          this.name = '';
+          this.phone = '';
+          this.content = '';
+          this.email = '';
+          this.$toast('反馈内容提交成功');
+        })
+        .catch(() => {
+          this.$toast('填写数据有误，请重新填写');
+          this.isloading = false;
+        });
     }
   }
 };

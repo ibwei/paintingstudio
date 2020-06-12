@@ -172,7 +172,9 @@ export default {
 .image-area {
   width: 270px;
   height: 140px;
+  margin: 0 auto;
   position: relative;
+  left: 12px;
 }
 .category-type {
   position: absolute;
@@ -193,16 +195,13 @@ export default {
   border-radius: 8px;
 }
 .course-name {
-  font-size: 16px;
-  color: #07111b;
+  font-size: 12px;
+  color: #f00;
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   transition: all 0.3s;
-  font-weight: bold;
+  font-weight: 400;
 }
 .text-area {
   margin-top: 0px;

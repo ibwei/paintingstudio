@@ -84,8 +84,8 @@ import { Api } from '@/api/index';
 export default {
   data() {
     return {
-      username: 'baiwei',
-      password: 'admin',
+      username: '',
+      password: '',
       email: '',
       phone: '',
       show: false

@@ -3,43 +3,49 @@ module.exports = {
   /*
    ** Headers of the page
    */
+
   head: {
+    script: [
+      {
+        src: 'https://hm.baidu.com/hm.js?014d0ab234e3e96783098cdfe89d3494',
+      },
+    ],
     title: '品贤画室 | For Art,For U',
     meta: [
       {
-        charset: 'utf-8'
+        charset: 'utf-8',
       },
       { name: 'renderer', content: 'webkit' },
       { name: 'referrer', content: 'no-referrer' },
       { name: 'force-renderer', content: 'webkit' },
       {
         name: 'keywords',
-        content: '品贤画室,绘画培训,品贤,成都品贤画室'
+        content: '品贤画室,绘画培训,品贤,成都品贤画室',
       },
       { name: 'format-detection', content: 'telephone=yes' },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        content: 'width=device-width, initial-scale=1',
       },
       {
         hid: 'description',
         name: 'description',
-        content: '我们是一家专注绘画兴趣培训的画室机构'
-      }
+        content: '我们是一家专注绘画兴趣培训的画室机构',
+      },
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico'
-      }
-    ]
+        href: '/favicon.ico',
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#43863b'
+    color: '#43863b',
   },
   /*
    ** Global CSS
@@ -50,30 +56,28 @@ module.exports = {
    */
   plugins: [
     {
-      src: '~plugins/apexcharts',
-      ssr: false
-    },
-    {
       src: '~plugins/scrollreveal.js',
-      ssr: false
+      ssr: false,
     },
     {
       src: '~plugins/vant',
-      ssr: true
+      ssr: false,
     },
     {
       src: '~plugins/antd',
-      ssr: true
+      ssr: false,
     },
     {
       src: '~plugins/vue-amap.js',
-      ssr: false
+      ssr: false,
     },
     {
       src: '~plugins/share.js',
-      ssr: false
+      ssr: false,
     },
-    '~/plugins/axios'
+    { src: '~plugins/baidu.js', ssr: false },
+    { src: '~plugins/google.js', ssr: false },
+    '~/plugins/axios',
   ],
   /*
    ** Nuxt.js dev-modules
@@ -87,14 +91,14 @@ module.exports = {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    proxy: true
+    proxy: true,
   },
   proxy: [
     // proxy配置
@@ -103,14 +107,14 @@ module.exports = {
       {
         target: 'http://127.0.0.1/api', // api请求路径
         pathRewrite: {
-          '^/api': '/'
-        } // 重定向请求路径，防止路由、api路径的冲突
-      }
-    ]
+          '^/api': '/',
+        }, // 重定向请求路径，防止路由、api路径的冲突
+      },
+    ],
   ],
   cssModules: {
     modules: true,
-    localIdentName: '[local]_[hash:base64:8]'
+    localIdentName: '[local]_[hash:base64:8]',
   },
   /*
    ** Build configuration
@@ -122,7 +126,7 @@ module.exports = {
     vendor: ['vue-apexchart'],
     extend(config, ctx) {
       const vueLoader = config.module.rules.find(
-        rule => rule.loader === 'vue-loader'
+        (rule) => rule.loader === 'vue-loader'
       );
       vueLoader.options.transformToRequire = {
         img: 'src',
@@ -132,8 +136,8 @@ module.exports = {
         'b-card': 'img-src',
         'b-card-img': 'img-src',
         'b-carousel-slide': 'img-src',
-        'b-embed': 'src'
+        'b-embed': 'src',
       };
-    }
-  }
+    },
+  },
 };

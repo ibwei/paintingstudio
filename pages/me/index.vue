@@ -23,7 +23,7 @@
           :icon="item.icon"
           arrow-direction="down"
           :is-link="true"
-          :url="item.url"
+          @click="navTo(item.url)"
         >
           <template #title>
             <span class="custom-title">{{ item.name }}</span>
@@ -37,6 +37,18 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 export default {
+  head() {
+    return {
+      title: '品贤画室 | 个人中心',
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: '品贤个人中心,品贤画室,品贤'
+        }
+      ]
+    };
+  },
   middleware: 'me',
   data() {
     return {
@@ -68,7 +80,9 @@ export default {
     ...mapState(['user', 'isLogin'])
   },
   methods: {
-    ...mapMutations(['changeLoginDialogShow'])
+    navTo(url) {
+      this.$router.push({ path: url });
+    }
   }
 };
 </script>

@@ -95,18 +95,11 @@ export default {
       course: ''
     };
   },
-  created() {
-    if (process.client) {
-      console.log('hahah');
-      console.log(this.categoryList);
-    }
-  },
   methods: {
     getRandomColor() {
       return this.tagColorList[Math.floor(Math.random() * 4)];
     },
     showCourse(courseName) {
-      console.log(courseName);
       this.course = courseName;
       this.show = true;
     },

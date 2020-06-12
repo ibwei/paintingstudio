@@ -57,9 +57,6 @@ export default {
     onCancel() {
       this.show = false;
     },
-    handleShare(e) {
-      console.log(e);
-    },
     showAction() {
       this.show = !this.show;
       this.config = {
@@ -69,14 +66,9 @@ export default {
         img_title: '图片标题',
         link: window.location.href,
         url: window.location.href,
-        success: () => {
-          console.log('success');
-        }, // 成功回调
-        cancel: () => {
-          console.log('cancel');
-        } // 取消回调
+        success: () => {}, // 成功回调
+        cancel: () => {} // 取消回调
       };
-      console.log(this.config);
     }
   }
 };
@@ -129,7 +121,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  flex:1;
+  flex: 1;
   color: #000;
   font-size: 16px;
 }

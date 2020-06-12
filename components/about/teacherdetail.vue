@@ -50,7 +50,14 @@
             :key="index"
             class="deed-item"
           >
-            <span style="{marginRight:'10px'}">{{ item }}</span>
+            <span
+              style="
+                 {
+                  marginright: '10px';
+                }
+              "
+              >{{ item }}</span
+            >
           </div>
         </div>
       </div>
@@ -87,7 +94,7 @@
             <van-rate v-model="star" allow-half />
           </template>
         </van-cell>
-        <van-button style="margin-top:10px" @click="addComment" size="small"
+        <van-button style="margin-top: 10px;" @click="addComment" size="small"
           >评分并评论</van-button
         >
       </div>
@@ -128,7 +135,7 @@ import { List } from 'ant-design-vue';
 import { mapState, mapMutations } from 'vuex';
 export default {
   components: {
-    comment
+    comment,
   },
   data() {
     return {
@@ -145,12 +152,12 @@ export default {
         deeds: '',
         impression: '',
         good_at: '',
-        commentList: []
-      }
+        commentList: [],
+      },
     };
   },
   computed: {
-    ...mapState(['isLogin'])
+    ...mapState(['isLogin']),
   },
   mounted() {
     this.getTeacherDetail();
@@ -167,10 +174,10 @@ export default {
         data: {
           id: this.$route.query.teacherId,
           pageNum: this.pageNum,
-          pageSize: this.pageSize
-        }
+          pageSize: this.pageSize,
+        },
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.resultCode === 0) {
             this.teacher = res.data.data;
             this.teacher.good_ats = this.teacher.good_at.split('-');
@@ -185,7 +192,7 @@ export default {
     },
     /* 获取随机颜色 */
     getRandomColor() {
-      return tagsColor[Math.floor(Math.random() * tagsColor?.length)];
+      return tagsColor[Math.floor(Math.random() * tagsColor.length)];
     },
     back() {
       this.$router.back();
@@ -204,15 +211,15 @@ export default {
         method: 'post',
         url: Api.teacherCommentAdd,
         params: {
-          token: localStorage.getItem('token')
+          token: localStorage.getItem('token'),
         },
         data: {
           content: this.message,
           parent_id: 0,
           level: 0,
           teacher_id: this.$route.query.teacherId,
-          star: this.star
-        }
+          star: this.star,
+        },
       });
       if (data.resultCode === 0) {
         this.$toast.success('评论发表成功，管理员审核通过之后方可显示');
@@ -220,8 +227,8 @@ export default {
       } else {
         this.$toast.success(data.resultMessage);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

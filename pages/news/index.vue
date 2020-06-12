@@ -17,6 +17,18 @@ import vlabel from '../../components/news/label';
 import newslist from '../../components/news/newslist';
 import { Api } from '@/api/index';
 export default {
+  head() {
+    return {
+      title: '品贤画室 | 画室动态',
+      meta: [
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: '品贤动态,品贤画室,品贤新闻'
+        }
+      ]
+    };
+  },
   components: {
     vlabel,
     newslist

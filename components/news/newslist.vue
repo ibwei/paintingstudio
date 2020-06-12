@@ -1,12 +1,7 @@
 <template>
   <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
     <div class="news-list">
-      <van-list
-        v-model="loading2"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad"
-      >
+      <van-list v-model="loading2" :finished="true">
         <template v-for="(item, index) in listNews">
           <van-skeleton
             :key="index"
@@ -16,7 +11,7 @@
             :loading="loading"
           >
             <template v-if="item.imgUrls.length === 1">
-              <div :key="index" class="word" @click="onclick(item)">
+              <div class="word" @click="onclick(item)">
                 <div class="content">
                   <div class="cont-wrap">
                     <div class="word-wrap">
@@ -27,63 +22,45 @@
                       <img :src="item.imgUrls[0]" width="100%" />
                     </div>
                   </div>
-                  <div :key="index" class="time">
-                    <span>浏览{{ item.read_count }}次</span>
-                    <span>评论{{ item.comment_count }}</span>
-                    <span>赞{{ item.praise_count }}</span>
-                    <span>发布时间：{{ item.created_at }}</span>
-                  </div>
-                  <van-divider />
                 </div>
               </div>
             </template>
             <template v-else-if="item.imgUrls.length === 2">
-              <div :key="index" class="word" @click="onclick(item)">
+              <div class="word" @click="onclick(item)">
                 <div class="content">
                   <div class="title-2">{{ item.title }}</div>
                   <div class="img-2">
                     <template v-for="(elem, val) of item.imgUrls">
-                      <template v-if="val < 2">
-                        <div :key="val" class="img">
-                          <img :src="elem" width="100%" />
-                        </div>
-                      </template>
+                      <div :key="val" class="img">
+                        <img :src="elem" width="100%" />
+                      </div>
                     </template>
                   </div>
-                  <div :key="index" class="time">
-                    <span>浏览{{ item.read_count }}次</span>
-                    <span>评论{{ item.comment_count }}</span>
-                    <span>赞{{ item.praise_count }}</span>
-                    <span>发布时间：{{ item.created_at }}</span>
-                  </div>
-                  <van-divider />
                 </div>
               </div>
             </template>
             <template v-else>
-              <div :key="index" class="word" @click="onclick(item)">
+              <div class="word" @click="onclick(item)">
                 <div class="content">
                   <div class="title-2">{{ item.title }}</div>
                   <div class="content-1" v-html="item.content"></div>
                   <div class="img-3">
                     <template v-for="(elem, val) of item.imgUrls">
-                      <template v-if="val < 3">
-                        <div :key="val" class="img">
-                          <img :src="elem" width="100%" />
-                        </div>
-                      </template>
+                      <div :key="val" class="img">
+                        <img :src="elem" width="100%" />
+                      </div>
                     </template>
                   </div>
-                  <div :key="index" class="time">
-                    <span>浏览{{ item.read_count }}次</span>
-                    <span>评论{{ item.comment_count }}</span>
-                    <span>赞{{ item.praise_count }}</span>
-                    <span>发布时间：{{ item.created_at }}</span>
-                  </div>
-                  <van-divider />
                 </div>
               </div>
             </template>
+            <div class="time">
+              <span>浏览{{ item.read_count }}次</span>
+              <span>评论{{ item.comment_count }}</span>
+              <span>赞{{ item.praise_count }}</span>
+              <span>发布时间：{{ item.created_at }}</span>
+            </div>
+            <van-divider />
           </van-skeleton>
         </template>
       </van-list>
@@ -110,7 +87,7 @@ export default {
       loading: true,
       isLoading: true,
       listNews: [],
-      finished: true
+      finished: false
     };
   },
   computed: {
@@ -149,23 +126,24 @@ export default {
         method: 'post',
         url: Api.getArticleListByType,
         data: { pageNum: 1, pageSize: 10, category }
-      }).then((res) => {
-        if (res.data.resultCode === 0) {
-          this.listNews = res.data.data[category].map((item, index) => {
-            const temp = item;
-            temp.imgUrls = item.thumbnail ? item.thumbnail.split(',') : [];
-            temp.tags = item.tags ? item.tags.split('-') : [];
-            temp.content = getSimpleText(temp.content).slice(0, 40) + '...';
-            temp.created_at = item.created_at.slice(0, 10);
-            return temp;
-          });
-          this.loading = false;
-        } else {
-          this.$toast('获取失败');
-          this.loading = false;
-        }
-        // eslint-disable-next-line handle-callback-err
       })
+        .then(res => {
+          if (res.data.resultCode === 0) {
+            this.listNews = res.data.data[category].map((item, index) => {
+              const temp = item;
+              temp.imgUrls = item.thumbnail ? item.thumbnail.split(',') : [];
+              temp.tags = item.tags ? item.tags.split('-') : [];
+              temp.content = getSimpleText(temp.content).slice(0, 40) + '...';
+              temp.created_at = item.created_at.slice(0, 10);
+              return temp;
+            });
+            this.loading = false;
+          } else {
+            this.$toast('获取失败');
+            this.loading = false;
+          }
+          // eslint-disable-next-line handle-callback-err
+        })
         .catch(() => {
           this.$toast('网络异常');
           this.loading = false;
@@ -176,19 +154,8 @@ export default {
       this.isLoading = false;
     },
     onLoad() {
-      // 异步更新数据
-      setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1);
-        }
-        // 加载状态结束
-        this.loading = false;
-
-        // 数据全部加载完成
-        if (this.list.length >= 40) {
-          this.finished = true;
-        }
-      }, 500);
+      // 加载状态结束
+      this.loading = false;
     }
   }
 };
