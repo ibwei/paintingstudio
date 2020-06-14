@@ -28,7 +28,7 @@
               size="30px"
               :color="heartColor"
               name="like"
-              style="margin-top:8px;"
+              style="margin-top: 8px;"
               @click="changeHeartColor"
             />
             <van-icon
@@ -36,7 +36,7 @@
               size="30px"
               color="rgba(0,0,0,0.6)"
               name="contact"
-              style="margin-top:8px;"
+              style="margin-top: 8px;"
               @click="openLoginDialog"
             />
           </div>
@@ -81,7 +81,7 @@
               <span
                 :class="{
                   icon: true,
-                  iconfont: true
+                  iconfont: true,
                 }"
                 @click="navToPage(nav)"
                 v-html="nav.icon"
@@ -97,13 +97,13 @@
             :finished="true"
             name="like"
             @click="changeHeartColor"
-          />
+          ></van-icon>
           <van-icon
             v-else
             size="30px"
             @click="openLoginDialog"
             name="user-circle-o"
-          />
+          ></van-icon>
         </div>
       </div>
     </div>
@@ -115,7 +115,7 @@
         height: '100%',
         marginTop: '45px',
         width: '40%',
-        zIndex: '9999999'
+        zIndex: '9999999',
       }"
     >
       <van-list :v-model="false" :finished="true">
@@ -153,28 +153,28 @@ export default {
         {
           path: '/',
           icon: 'wap-home-o',
-          name: '首页'
+          name: '首页',
         },
         {
           path: '/course',
           icon: 'label-o',
-          name: '热门课程'
+          name: '热门课程',
         },
         {
           path: '/news',
           icon: 'notes-o',
-          name: '画室动态'
+          name: '画室动态',
         },
         {
           path: '/contact',
           icon: 'phone-circle-o',
-          name: '联系我们'
+          name: '联系我们',
         },
         {
           path: '/me',
           icon: 'manager-o',
-          name: '个人中心'
-        }
+          name: '个人中心',
+        },
       ],
       loading: false,
       finished: true,
@@ -186,35 +186,35 @@ export default {
             type: 'link',
             text: '主页',
             path: '/',
-            icon: '&#xe672;'
+            icon: '&#xe672;',
           },
           {
             type: 'link',
             text: '热门课程',
             path: '/course',
             icon: '&#xe60d;',
-            subMenuOptions: []
+            subMenuOptions: [],
           },
           {
             type: 'link',
             text: '画室动态',
             path: '/news',
             icon: '&#xe60d;',
-            subMenuOptions: []
+            subMenuOptions: [],
           },
           {
             type: 'link',
             text: '联系我们',
             path: '/contact',
             icon: '&#xe616;',
-            subMenuOptions: []
-          }
-        ]
-      }
+            subMenuOptions: [],
+          },
+        ],
+      },
     };
   },
   computed: {
-    ...mapState(['isPhone', 'topbarShow', 'isLogin']) // 加载设备类型;
+    ...mapState(['isPhone', 'topbarShow', 'isLogin']), // 加载设备类型;
   },
   created() {
     if (process.client) {
@@ -258,10 +258,10 @@ export default {
         url: Api.addPraise,
         data: {
           praise_time: getDay(),
-          device: this.isPhone ? '手机' : '电脑'
-        }
+          device: this.isPhone ? '手机' : '电脑',
+        },
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.resultCode === 0) {
             localStorage.setItem('heartColor', '#cf2729');
             this.heartColor = '#cf2729';
@@ -313,8 +313,8 @@ export default {
     },
     showSticky() {
       this.$emit('menu-close');
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="less">

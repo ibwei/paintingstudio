@@ -61,11 +61,11 @@ module.exports = {
     },
     {
       src: '~plugins/vant',
-      ssr: false,
+      ssr: true,
     },
     {
       src: '~plugins/antd',
-      ssr: false,
+      ssr: true,
     },
     {
       src: '~plugins/vue-amap.js',
@@ -75,8 +75,8 @@ module.exports = {
       src: '~plugins/share.js',
       ssr: false,
     },
-    { src: '~plugins/baidu.js', ssr: false },
-    { src: '~plugins/google.js', ssr: false },
+    { src: '~plugins/baidu.js', ssr: true },
+    { src: '~plugins/google.js', ssr: true },
     '~/plugins/axios',
   ],
   /*
@@ -123,6 +123,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+    publicPath: 'http://img.pinxianhs.com',
     vendor: ['vue-apexchart'],
     extend(config, ctx) {
       const vueLoader = config.module.rules.find(
