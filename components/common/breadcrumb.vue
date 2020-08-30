@@ -28,7 +28,7 @@ export default {
         },
         {
           path: 'course',
-          name: '热门课程'
+          name: '招生简章'
         },
         {
           path: 'contace',
