@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!-- 顶部通知栏 -->
-    <div class="phone-notice">
+    <!--  <div class="phone-notice">
       <van-notice-bar
         :color="Color.colorbrand"
         :speed="50"
@@ -11,13 +11,13 @@
       >
         美团下单享受优惠！详情联系我们。
       </van-notice-bar>
-    </div>
+    </div> -->
 
     <!-- 轮播图 -->
     <carousel v-scroll-reveal.scaleUp="{ scale: 0.15 }" :list="carouselList" />
 
     <!-- 招生详情 -->
-    <recruitment v-scroll-reveal.scaleUp="{ scale: 0.15 }" />
+    <!-- <recruitment v-scroll-reveal.scaleUp="{ scale: 0.15 }" /> -->
 
     <!-- 介绍 -->
     <paintIntroduce v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
@@ -49,7 +49,7 @@
     <advantage v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部菜单栏 -->
-    <message-board v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    <!--     <message-board v-scroll-reveal.smooth="{ easing: 'ease-in' }" /> -->
 
     <!-- 底部footer -->
     <bottom-footer :painting-info="paintingInfo"></bottom-footer>
@@ -71,23 +71,21 @@ import { Color } from '../config/color';
 import { Api } from '../api/index';
 export default {
   head: {
-    title: '品贤画室 | For Art,For U'
+    title: '品贤画室 | For Art,For U',
   },
   components: {
     carousel,
     paintIntroduce,
-    recruitment,
     advantage,
-    MessageBoard,
     paintAffaris,
     paintingEnvironment,
     teachers,
     worksCarousel,
-    BottomFooter
+    BottomFooter,
   },
   data() {
     return {
-      Color
+      Color,
     };
   },
   /**
@@ -102,7 +100,7 @@ export default {
     if (process.server) {
       const paintingInfo = await $axios({
         method: 'post',
-        url: Api.getPaintingInfo
+        url: Api.getPaintingInfo,
       });
       // 获取前台轮播图
       const bannerList = await $axios.get(Api.courselBannerList);
@@ -110,18 +108,18 @@ export default {
       const studentWorksList = await $axios({
         method: 'get',
         url: Api.getStudentWorksList,
-        data: { start: 0, end: 30 }
+        data: { start: 0, end: 30 },
       });
       // 获取首页文章列表
       const articleList = await $axios({
         method: 'post',
         url: Api.getArticleList,
-        data: { pageSize: 6, pageNum: 1 }
+        data: { pageSize: 6, pageNum: 1 },
       });
       // 获取画室环境列表
       const environmentList = await $axios({
         method: 'get',
-        url: Api.environmentList
+        url: Api.environmentList,
       });
       // 获取教师列表
       const teacherList = await $axios({ method: 'get', url: Api.teacherList });
@@ -132,7 +130,7 @@ export default {
         articleList: articleList.data.data,
         studentWorksList: studentWorksList.data.data,
         environmentList: environmentList.data.data,
-        teacherList: teacherList.data.data
+        teacherList: teacherList.data.data,
       };
     }
     // 如果是在客户端刷新首页，则从缓存里读取数据。
@@ -153,7 +151,7 @@ export default {
         articleList,
         studentWorksList,
         environmentList,
-        teacherList
+        teacherList,
       };
     }
   },
@@ -197,9 +195,9 @@ export default {
       'changeTabbarShow',
       'changTopbarShow',
       'changeUser',
-      'changeIsLogin'
-    ])
-  }
+      'changeIsLogin',
+    ]),
+  },
 };
 </script>
 

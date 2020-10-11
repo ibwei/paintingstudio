@@ -14,7 +14,7 @@
         :safe-area-inset-bottom="true"
       >
         <van-tabbar-item icon="wap-home-o" to="/">品贤画室</van-tabbar-item>
-        <van-tabbar-item icon="hot-o" to="/course">课程介绍</van-tabbar-item>
+        <!--  <van-tabbar-item icon="hot-o" to="/course">课程介绍</van-tabbar-item> -->
         <van-tabbar-item icon="photo-o" to="/news">画室动态</van-tabbar-item>
         <van-tabbar-item icon="comment-circle-o" to="/contact"
           >联系我们</van-tabbar-item
@@ -60,7 +60,7 @@ export default {
     topMenu,
     sticky,
     loginRegister,
-    scrollTop
+    scrollTop,
   },
   data() {
     return {
@@ -68,7 +68,7 @@ export default {
       currentPath: '/',
       stickyShow: true,
       Color,
-      wechatQRCodeshow: false
+      wechatQRCodeshow: false,
     };
   },
   computed: {
@@ -77,13 +77,13 @@ export default {
       'isPhone',
       'tabbarShow',
       'paintingInfo',
-      'loginDialogShow'
-    ])
+      'loginDialogShow',
+    ]),
   },
   watch: {
     menuIndex(newV, oldV) {
       this.currentMenuIndex = newV;
-    }
+    },
   },
   created() {
     if (process.client) {
@@ -131,10 +131,10 @@ export default {
         timeout: 10000,
         data: {
           login_time: getDateTime(),
-          device: this.isPhone ? '手机' : '电脑'
-        }
+          device: this.isPhone ? '手机' : '电脑',
+        },
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.resultCode === 0) {
             localStorage.setItem('currentId', res.data.data);
           } else {
@@ -150,8 +150,8 @@ export default {
         timeout: 10000,
         data: {
           id: localStorage.getItem('currentId'),
-          logout_time: getDateTime()
-        }
+          logout_time: getDateTime(),
+        },
       });
     },
 
@@ -167,8 +167,8 @@ export default {
         return;
       }
       this.wechatQRCodeshow = !this.wechatQRCodeshow;
-    }
-  }
+    },
+  },
 };
 </script>
 

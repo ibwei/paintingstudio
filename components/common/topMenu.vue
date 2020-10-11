@@ -155,11 +155,11 @@ export default {
           icon: 'wap-home-o',
           name: '首页',
         },
-        {
+        /*   {
           path: '/course',
           icon: 'label-o',
-          name: '热门课程',
-        },
+          name: '热门课程' 
+        }, */
         {
           path: '/news',
           icon: 'notes-o',
@@ -188,13 +188,13 @@ export default {
             path: '/',
             icon: '&#xe672;',
           },
-          {
+          /*  {
             type: 'link',
             text: '热门课程',
             path: '/course',
             icon: '&#xe60d;',
             subMenuOptions: [],
-          },
+          }, */
           {
             type: 'link',
             text: '画室动态',
