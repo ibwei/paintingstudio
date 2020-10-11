@@ -13,12 +13,12 @@
         :border="true"
         placeholder="请编辑你的评论"
       />
-      <van-button style="margin-top:10px" @click="addComment" size="small"
-        >发表评论</van-button
-      >
+      <van-button style="margin-top:10px" size="small" @click="addComment">
+        发表评论
+      </van-button>
     </div>
     <template v-if="list.length">
-      <div style="padding:20px;" v-for="(item, index) of list" :key="index">
+      <div v-for="(item, index) of list" :key="index" style="padding:20px;">
         <van-divider />
         <div class="list-item">
           <div class="left">
@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import { Api } from '../../api/index';
 import { mapState, mapMutations } from 'vuex';
+import { Api } from '../../api/index';
 export default {
   props: {
     list: {

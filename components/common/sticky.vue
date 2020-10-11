@@ -5,16 +5,14 @@
         <span
           class="iconfont icon"
           :style="{ color: '#1aad19', fontSize: iconSize1 + 'px' }"
-          >&#xe632;</span
-        >
+        >&#xe632;</span>
       </div>
       <div v-show="!isUnfold" class="function-item">
         <a class="tel" :href="phoneUlr">
           <span
             class="icon"
             :style="{ color: '#cf2729', fontSize: iconSize1 + 'px' }"
-            >&#xe626;</span
-          >
+          >&#xe626;</span>
         </a>
       </div>
       <div v-show="!isUnfold && !isPhone" class="function-item">
@@ -22,8 +20,7 @@
           <span
             class="icon"
             :style="{ color: '#4889f7', fontSize: iconSize1 + 'px' }"
-            >&#xe657;</span
-          >
+          >&#xe657;</span>
         </a>
       </div>
       <div v-show="!isUnfold" class="function-item" @click="changeIsUnfold">

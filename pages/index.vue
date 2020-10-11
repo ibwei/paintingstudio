@@ -56,22 +56,20 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex';
-import carousel from '../components/works/carousel';
-import recruitment from '../components/works/recruitment';
-import advantage from '../components/works/advantage';
-import teachers from '../components/works/teachers';
-import paintIntroduce from '../components/index/paintIntroduce';
-import paintAffaris from '../components/index/paintAffaris';
-import worksCarousel from '../components/index/worksCarousel';
-import MessageBoard from '../components/common/messageBoard';
-import paintingEnvironment from '../components/index/paintingEnvironment';
-import BottomFooter from '../components/common/bottomFooter';
-import { Color } from '../config/color';
-import { Api } from '../api/index';
+import { mapMutations } from 'vuex'
+import carousel from '../components/works/carousel'
+import advantage from '../components/works/advantage'
+import teachers from '../components/works/teachers'
+import paintIntroduce from '../components/index/paintIntroduce'
+import paintAffaris from '../components/index/paintAffaris'
+import worksCarousel from '../components/index/worksCarousel'
+import paintingEnvironment from '../components/index/paintingEnvironment'
+import BottomFooter from '../components/common/bottomFooter'
+import { Color } from '../config/color'
+import { Api } from '../api/index'
 export default {
   head: {
-    title: '品贤画室 | For Art,For U',
+    title: '品贤画室 | For Art,For U'
   },
   components: {
     carousel,
@@ -81,12 +79,12 @@ export default {
     paintingEnvironment,
     teachers,
     worksCarousel,
-    BottomFooter,
+    BottomFooter
   },
   data() {
     return {
-      Color,
-    };
+      Color
+    }
   },
   /**
    * 获取服务端渲染数据
@@ -100,29 +98,29 @@ export default {
     if (process.server) {
       const paintingInfo = await $axios({
         method: 'post',
-        url: Api.getPaintingInfo,
-      });
+        url: Api.getPaintingInfo
+      })
       // 获取前台轮播图
-      const bannerList = await $axios.get(Api.courselBannerList);
+      const bannerList = await $axios.get(Api.courselBannerList)
       // 获取首页画室动态列表
       const studentWorksList = await $axios({
         method: 'get',
         url: Api.getStudentWorksList,
-        data: { start: 0, end: 30 },
-      });
+        data: { start: 0, end: 30 }
+      })
       // 获取首页文章列表
       const articleList = await $axios({
         method: 'post',
         url: Api.getArticleList,
-        data: { pageSize: 6, pageNum: 1 },
-      });
+        data: { pageSize: 6, pageNum: 1 }
+      })
       // 获取画室环境列表
       const environmentList = await $axios({
         method: 'get',
-        url: Api.environmentList,
-      });
+        url: Api.environmentList
+      })
       // 获取教师列表
-      const teacherList = await $axios({ method: 'get', url: Api.teacherList });
+      const teacherList = await $axios({ method: 'get', url: Api.teacherList })
 
       return {
         carouselList: bannerList.data.data,
@@ -130,64 +128,64 @@ export default {
         articleList: articleList.data.data,
         studentWorksList: studentWorksList.data.data,
         environmentList: environmentList.data.data,
-        teacherList: teacherList.data.data,
-      };
+        teacherList: teacherList.data.data
+      }
     }
     // 如果是在客户端刷新首页，则从缓存里读取数据。
     if (process.client) {
-      const teacherList = JSON.parse(localStorage.getItem('teacherList'));
-      const carouselList = JSON.parse(localStorage.getItem('bannerList'));
+      const teacherList = JSON.parse(localStorage.getItem('teacherList'))
+      const carouselList = JSON.parse(localStorage.getItem('bannerList'))
       const studentWorksList = JSON.parse(
         localStorage.getItem('studentWorksList')
-      );
-      const articleList = JSON.parse(localStorage.getItem('articleList'));
+      )
+      const articleList = JSON.parse(localStorage.getItem('articleList'))
       const environmentList = JSON.parse(
         localStorage.getItem('environmentList')
-      );
-      const paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'));
+      )
+      const paintingInfo = JSON.parse(localStorage.getItem('paintingInfo'))
       return {
         carouselList,
         paintingInfo,
         articleList,
         studentWorksList,
         environmentList,
-        teacherList,
-      };
+        teacherList
+      }
     }
   },
   created() {
     if (process.client) {
-      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo));
-      this.setPaintingInfo(this.paintingInfo);
-      const token = localStorage.getItem('token');
+      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo))
+      this.setPaintingInfo(this.paintingInfo)
+      const token = localStorage.getItem('token')
       if (token) {
-        const user = JSON.parse(localStorage.getItem('user'));
-        this.changeUser(user);
-        this.changeIsLogin(true);
+        const user = JSON.parse(localStorage.getItem('user'))
+        this.changeUser(user)
+        this.changeIsLogin(true)
       } else {
-        this.changeUser(null);
-        this.changeIsLogin(false);
+        this.changeUser(null)
+        this.changeIsLogin(false)
       }
     }
   },
   mounted() {
     // 不论是从哪里获取的数据，都再次存一遍。
     if (this.teacherList) {
-      localStorage.setItem('teacherList', JSON.stringify(this.teacherList));
-      localStorage.setItem('bannerList', JSON.stringify(this.carouselList));
+      localStorage.setItem('teacherList', JSON.stringify(this.teacherList))
+      localStorage.setItem('bannerList', JSON.stringify(this.carouselList))
       localStorage.setItem(
         'studentWorksList',
         JSON.stringify(this.studentWorksList)
-      );
-      localStorage.setItem('articleList', JSON.stringify(this.articleList));
+      )
+      localStorage.setItem('articleList', JSON.stringify(this.articleList))
       localStorage.setItem(
         'environmentList',
         JSON.stringify(this.environmentList)
-      );
-      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo));
+      )
+      localStorage.setItem('paintingInfo', JSON.stringify(this.paintingInfo))
     }
-    this.changeTabbarShow(true);
-    this.changTopbarShow(true);
+    this.changeTabbarShow(true)
+    this.changTopbarShow(true)
   },
   methods: {
     ...mapMutations([
@@ -195,10 +193,10 @@ export default {
       'changeTabbarShow',
       'changTopbarShow',
       'changeUser',
-      'changeIsLogin',
-    ]),
-  },
-};
+      'changeIsLogin'
+    ])
+  }
+}
 </script>
 
 <style lang="less" scoped>

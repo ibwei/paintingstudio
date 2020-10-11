@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import vTitle from '../../components/common/vTitle';
+import { mapState } from 'vuex'
+import vTitle from '../../components/common/vTitle'
 export default {
   components: {
     vTitle
@@ -44,7 +44,7 @@ export default {
     list: {
       type: Array,
       default() {
-        return [];
+        return []
       }
     }
   },
@@ -62,33 +62,33 @@ export default {
       index: 1,
       show: false,
       environmentList: []
-    };
+    }
   },
   created() {
     if (process.client) {
-      this.handleList();
+      this.handleList()
     }
   },
   methods: {
     handleList() {
-      this.environmentList = this.list.map(item => {
-        return item.url;
-      });
+      this.environmentList = this.list.map((item) => {
+        return item.url
+      })
     },
     onChange(index) {
-      this.index = index + 1;
+      this.index = index + 1
     },
     /* 打开图片预览 */
     showPreview(index) {
       if (!this.isPhone) {
-        window.open(this.environmentList[index]);
-        return;
+        window.open(this.environmentList[index])
+        return
       }
-      this.index = index + 1;
-      this.show = true;
+      this.index = index + 1
+      this.show = true
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

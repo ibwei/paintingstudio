@@ -18,15 +18,21 @@
       </div>
       <!-- 画室动态列表 -->
       <van-list :finished="true">
-        <div v-for="item of articleList" :key="item.id" @click="goDetail(item.id)">
+        <div
+          v-for="item of articleList"
+          :key="item.id"
+          @click="goDetail(item.id)"
+        >
           <div class="article">
             <div class="one">
               <div class="title-area">
                 <span class="title">{{ item.title }}</span>
                 <van-tag
-                  :style="{position:'relative',top:'-2px'}"
+                  :style="{ position: 'relative', top: '-2px' }"
                   :type="item.color"
-                >{{ item.category }}</van-tag>
+                >
+                  {{ item.category }}
+                </van-tag>
               </div>
               <div class="date">{{ item.date }}</div>
             </div>
@@ -37,15 +43,17 @@
         </div>
       </van-list>
       <div class="more">
-        <van-button plain type="danger" size="small" @click="goAffaris">查看更多</van-button>
+        <van-button plain type="danger" size="small" @click="goAffaris"
+          >查看更多</van-button
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import vTitle from '../common/vTitle';
-import { tagsColor } from '@/config/color';
+import vTitle from '../common/vTitle'
+import { tagsColor } from '@/config/color'
 import { getSimpleText } from '@/utils/handleText'
 export default {
   components: {
@@ -54,12 +62,12 @@ export default {
   props: {
     articleList: {
       type: Array,
-      default () {
+      default() {
         return []
       }
     }
   },
-  data () {
+  data() {
     return {
       tagsColor,
       leftImg: require('../../assets/images/index/2017330105615377.png'),
@@ -69,18 +77,25 @@ export default {
         mode: 'red',
         icon: '&#xe6d9;'
       }
-    };
+    }
   },
-  created () {
+  created() {
     if (process.client) {
       // 处理首页画室动态数据
       for (let i = 0; i < this.articleList.length; i++) {
-        this.articleList[i].tag = this.articleList[i].tags ? this.articleList[i].tags.split('-') : [];
-        const random = Math.floor(Math.random() * 4);
-        this.articleList[i].color = this.tagsColor[random];
-        this.articleList[i].desc = getSimpleText(this.articleList[i].content ? this.articleList[i].content : '无主题内容').slice(0, 40) + '...';
+        this.articleList[i].tag = this.articleList[i].tags
+          ? this.articleList[i].tags.split('-')
+          : []
+        const random = Math.floor(Math.random() * 4)
+        this.articleList[i].color = this.tagsColor[random]
+        this.articleList[i].desc =
+          getSimpleText(
+            this.articleList[i].content
+              ? this.articleList[i].content
+              : '无主题内容'
+          ).slice(0, 40) + '...'
 
-        this.articleList[i].date = this.articleList[i].created_at.slice(0, 11);
+        this.articleList[i].date = this.articleList[i].created_at.slice(0, 11)
       }
     }
   },
@@ -90,14 +105,17 @@ export default {
      * @params {null}
      * @return voic
      */
-    goAffaris () {
-      this.$router.push({ path: 'news' });
+    goAffaris() {
+      this.$router.push({ path: 'news' })
     },
-    goDetail (id) {
-      this.$router.push({ path: '/news/articleDetails', query: { news_id: id } })
+    goDetail(id) {
+      this.$router.push({
+        path: '/news/articleDetails',
+        query: { news_id: id }
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

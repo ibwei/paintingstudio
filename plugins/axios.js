@@ -1,5 +1,5 @@
 function axios({ $axios, redirect, store }) {
-  $axios.onResponse(res => {
+  $axios.onResponse((res) => {
     const { status, data } = res;
     const url = res.request.res ? res.request.res.responseUrl : '';
     if (status === 200 && data && typeof data === 'string') {
@@ -7,9 +7,9 @@ function axios({ $axios, redirect, store }) {
     }
   });
 
-  $axios.onRequest(request => {});
+  $axios.onRequest((request) => {});
 
-  $axios.onError(error => {
+  $axios.onError((error) => {
     const code = parseInt(error.response && error.response.status);
     if (code === 400) {
       redirect('/400');

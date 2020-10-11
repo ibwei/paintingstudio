@@ -16,8 +16,8 @@
               src="../../assets/images/logo/logo.jpg"
               width="100%"
               height="100%"
-              @click="navToHome"
               alt
+              @click="navToHome"
             />
           </div>
         </div>
@@ -63,13 +63,17 @@
     <div class="pc-nav">
       <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
-          <img src="../../assets/images/logo/logo.jpg" @click="navToHome" class="menuLogo" />
+          <img
+            src="../../assets/images/logo/logo.jpg"
+            class="menuLogo"
+            @click="navToHome"
+          />
           <nav class="pc-navs">
             <div
               v-for="(nav, index) of navbarOptions.menuOptions"
               :key="index"
-              @click="navToPage(nav)"
               class="nav-item"
+              @click="navToPage(nav)"
             >
               <span>{{ nav.text }}</span>
               <span
@@ -92,7 +96,12 @@
             name="like"
             @click="changeHeartColor"
           ></van-icon>
-          <van-icon v-else size="30px" @click="openLoginDialog" name="user-circle-o"></van-icon>
+          <van-icon
+            v-else
+            size="30px"
+            name="user-circle-o"
+            @click="openLoginDialog"
+          ></van-icon>
         </div>
       </div>
     </div>
@@ -114,7 +123,12 @@
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
+          <van-icon
+            size="20px"
+            color="rgba(0,0,0,0.8)"
+            :finished="true"
+            :name="item.icon"
+          />
         </van-cell>
       </van-list>
     </van-popup>
@@ -127,7 +141,7 @@ import { Api } from '@/api/index';
 import { getDay } from '@/utils/index';
 export default {
   props: {},
-  data () {
+  data() {
     return {
       Color,
       heartClass: 'animated pulse infinite delay-0.5s',
@@ -137,33 +151,28 @@ export default {
         {
           path: '/',
           icon: 'wap-home-o',
-          name: '首页',
+          name: '首页'
         },
         /*   {
           path: '/course',
           icon: 'label-o',
-<<<<<<< HEAD
-          name: '热门课程' 
+          name: '热门课程'
         }, */
-=======
-          name: '招生简章',
-        },
->>>>>>> ea2c4af43da9097bb9f5d7f5fa5a6557624a729b
         {
           path: '/news',
           icon: 'notes-o',
-          name: '画室动态',
+          name: '画室动态'
         },
         {
           path: '/contact',
           icon: 'phone-circle-o',
-          name: '联系我们',
+          name: '联系我们'
         },
         {
           path: '/me',
           icon: 'manager-o',
-          name: '个人中心',
-        },
+          name: '个人中心'
+        }
       ],
       loading: false,
       finished: true,
@@ -175,7 +184,7 @@ export default {
             type: 'link',
             text: '主页',
             path: '/',
-            icon: '&#xe672;',
+            icon: '&#xe672;'
           },
           /*  {
             type: 'link',
@@ -189,23 +198,23 @@ export default {
             text: '画室动态',
             path: '/news',
             icon: '&#xe60d;',
-            subMenuOptions: [],
+            subMenuOptions: []
           },
           {
             type: 'link',
             text: '联系我们',
             path: '/contact',
             icon: '&#xe616;',
-            subMenuOptions: [],
-          },
-        ],
-      },
+            subMenuOptions: []
+          }
+        ]
+      }
     };
   },
   computed: {
-    ...mapState(['isPhone', 'topbarShow', 'isLogin']), // 加载设备类型;
+    ...mapState(['isPhone', 'topbarShow', 'isLogin']) // 加载设备类型;
   },
-  created () {
+  created() {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
@@ -213,7 +222,7 @@ export default {
       if (this.heartColor === '#cf2729') {
         this.heartClass = '';
       }
-      //监听路由
+      // 监听路由
       const path = this.$route.path;
       this.changeTabbar(path);
     }
@@ -226,29 +235,29 @@ export default {
      * @param {listItem}
      * @return void
      */
-    navToPage (item) {
+    navToPage(item) {
       this.changeTabbar(item.path);
       this.isOpen = false;
       this.$router.push({ path: item.path });
     },
 
-    navToHome () {
+    navToHome() {
       this.$router.push({ path: '/' });
     },
 
-    openLoginDialog () {
+    openLoginDialog() {
       this.changeLoginDialogShow(true);
     },
 
     // 网站点赞
-    addPraise () {
+    addPraise() {
       this.$axios({
         method: 'post',
         url: Api.addPraise,
         data: {
           praise_time: getDay(),
-          device: this.isPhone ? '手机' : '电脑',
-        },
+          device: this.isPhone ? '手机' : '电脑'
+        }
       })
         .then((res) => {
           if (res.data.resultCode === 0) {
@@ -264,7 +273,7 @@ export default {
         });
     },
     // 监听路由,更改tabbar激活菜单
-    changeTabbar (path) {
+    changeTabbar(path) {
       let menuIndex;
       if (path === '/course') {
         menuIndex = 1;
@@ -277,18 +286,18 @@ export default {
       }
       this.changeMenuIndex(menuIndex);
     },
-    onLoad () {
+    onLoad() {
       // 异步更新数据
       // 加载状态结束
       this.loading = true;
       this.finished = true;
       // 数据全部加载完成
     },
-    onClickLeft () { },
-    onClickRight () {
+    onClickLeft() {},
+    onClickRight() {
       this.isOpen = !this.isOpen;
     },
-    changeHeartColor () {
+    changeHeartColor() {
       if (this.heartColor === '#cf2729') {
         this.$toast('谢谢你再次喜欢我!');
       } else {
@@ -297,13 +306,13 @@ export default {
       this.$refs.phoneHeart.className = '';
       this.$refs.pcHeart.className = '';
     },
-    hideSticky () {
+    hideSticky() {
       this.$emit('menu-open');
     },
-    showSticky () {
+    showSticky() {
       this.$emit('menu-close');
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped lang="less">

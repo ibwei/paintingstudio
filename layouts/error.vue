@@ -6,20 +6,19 @@
       description="页面不存在"
     />
     <van-empty v-else image="error" description="未知异常，请返回首页" />
-    <van-button style="margin-top:20px;" @click="navToHome">
+    <van-button style="margin-top: 20px;" @click="navToHome">
       返回首页
     </van-button>
   </div>
 </template>
 <script>
 export default {
-  props: ['error'],
   methods: {
     navToHome() {
-      this.$router.push('/');
+      this.$router.push('/')
     }
   }
-};
+}
 </script>
 <style lang="less" scoped>
 .error {

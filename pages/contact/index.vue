@@ -53,8 +53,9 @@
         size="large"
         :loading="isloading"
         @click="submit"
-        >提交信息</van-button
       >
+        提交信息
+      </van-button>
     </div>
     <v-title
       v-scroll-reveal.smooth="{ easing: 'ease-in' }"

@@ -1,10 +1,8 @@
 <template>
   <div class="time-wrap">
     <div class="time-notice">
-      <span
-        ><b>上课时间</b> 上午：9:00——12:00 下午：14:00——17:00
-        晚上：18:00——21:00</span
-      >
+      <span><b>上课时间</b> 上午：9:00——12:00 下午：14:00——17:00
+        晚上：18:00——21:00</span>
       <span class="notice">提醒：预约上课需要提前一天预约</span>
     </div>
     <van-divider>日程安排</van-divider>
@@ -24,8 +22,9 @@
                     size="small"
                     :disabled="isDisabled(index) || hasBook(index, 2)"
                     @click="bookSchedule(item.course[0].id, index, 0)"
-                    >预约</van-button
                   >
+                    预约
+                  </van-button>
                 </template>
                 <template v-else>
                   {{ getCourseStatus(item.course[0].status) }}
@@ -43,8 +42,9 @@
                     size="small"
                     :disabled="isDisabled(index) || hasBook(index, 2)"
                     @click="bookSchedule(item.course[1].id, index, 1)"
-                    >预约</van-button
                   >
+                    预约
+                  </van-button>
                 </template>
                 <template v-else>
                   {{ getCourseStatus(item.course[1].status) }}
@@ -62,8 +62,9 @@
                     size="small"
                     :disabled="isDisabled(index) || hasBook(index, 2)"
                     @click="bookSchedule(item.course[2].id, index, 2)"
-                    >预约</van-button
                   >
+                    预约
+                  </van-button>
                 </template>
                 <template v-else>
                   {{ getCourseStatus(item.course[2].status) }}
@@ -200,7 +201,7 @@ export default {
       const rawDataLength = rawData.length;
       let i = 0;
       for (let out = 0; out < this.courseSchedual.length; out++) {
-        let dayArray = [];
+        const dayArray = [];
         for (let inner = 0; inner < 3; inner++) {
           dayArray.push({ id: rawData[i].id, status: rawData[i++].status });
         }

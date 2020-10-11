@@ -9,8 +9,9 @@
             :key="index"
             color="#f2826a"
             plain
-            >{{ item }}</van-tag
           >
+            {{ item }}
+          </van-tag>
         </div>
         <div class="time">{{ news.updated_at }}</div>
       </div>
@@ -81,7 +82,7 @@ export default {
         url: Api.articleAddPraise,
         data: { id: this.news.id }
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.resultCode === 0) {
             this.zan = !this.zan;
             localStorage.setItem('article' + this.news.id, '1');
