@@ -29,7 +29,7 @@ export default {
   components: {
     pcCourseList
   },
-  head() {
+  head () {
     return {
       title: '品贤画室 | 课程中心',
       meta: [
@@ -41,7 +41,7 @@ export default {
       ]
     };
   },
-  data() {
+  data () {
     return {
       activeKey: 0,
       sidebarList: [
@@ -62,7 +62,7 @@ export default {
       }
     };
   },
-  activated() {
+  activated () {
     const key = this.$route.path;
     if (key === '/course') {
       this.activeKey = 0;

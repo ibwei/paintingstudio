@@ -13,12 +13,7 @@
         >
           <div class="img">
             <img :src="item.imgUrl" alt width="100%" class="pc_imgUrl" />
-            <img
-              :src="item.phone_imgUrl"
-              alt
-              heihgt="100%"
-              class="phone_imgUrl"
-            />
+            <img :src="item.phone_imgUrl" alt heihgt="100%" class="phone_imgUrl" />
           </div>
           <div class="cont">
             <div class="cont-title" v-html="item.title"></div>
@@ -61,10 +56,10 @@ export default {
     vTitle,
     tag
   },
-  data() {
+  data () {
     return {
       initTtile: {
-        cnTitle: '热门课程',
+        cnTitle: '招生简章',
         enTitle: 'Hot Course Availabel',
         mode: 'red',
         icon: '&#xe680;'
@@ -117,7 +112,7 @@ export default {
     };
   },
   methods: {
-    navToCourse(item) {
+    navToCourse (item) {
       this.$router.push({ path: 'course', params: item });
     }
   }

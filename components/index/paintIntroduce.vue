@@ -10,6 +10,9 @@
         <canvas-gallery height="300px"></canvas-gallery>
       </div>
       <div class="introduce-text">
+        <div style="margin:20px 0px 30px 0px">
+          <v-title :init-title="historyTitle"></v-title>
+        </div>
         <div class="phone-steps">
           <van-steps :active="active" :active-color="Color.colorbrand" direction="vertical">
             <van-step v-for="item of introduce" :key="item.index">{{ item.desc }}</van-step>
@@ -46,6 +49,12 @@ export default {
       initTtile: {
         cnTitle: '关于品贤画室',
         enTitle: 'About PinXian Painting Studio',
+        mode: 'red',
+        icon: '&#xe672;'
+      },
+      historyTitle: {
+        cnTitle: '发展历程',
+        enTitle: 'Development History',
         mode: 'black',
         icon: '&#xe672;'
       },
@@ -78,7 +87,7 @@ export default {
         }, {
           index: 4,
           title: '开设课程',
-          desc: '开设了素描、油画、国画、水彩、速写、彩铅等丰富内容。'
+          desc: '开设了素描、油画、国画、水彩、速写、彩铅、插画手绘基础等丰富内容。'
         }
       ]
     };
