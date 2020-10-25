@@ -44,7 +44,9 @@
         <div slot="right" class="right">
           <div class="menu">
             <transition name="fade">
-              <span v-show="!isOpen" class="icon iconfont" @click="hideSticky">&#xeb71;</span>
+              <span v-show="!isOpen" class="icon iconfont" @click="hideSticky"
+                >&#xeb71;</span
+              >
             </transition>
             <transition name="show">
               <van-icon
@@ -79,7 +81,7 @@
               <span
                 :class="{
                   icon: true,
-                  iconfont: true,
+                  iconfont: true
                 }"
                 @click="navToPage(nav)"
                 v-html="nav.icon"
@@ -113,7 +115,7 @@
         height: '100%',
         marginTop: '45px',
         width: '40%',
-        zIndex: '9999999',
+        zIndex: '9999999'
       }"
     >
       <van-list :v-model="false" :finished="true">
@@ -135,10 +137,10 @@
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex';
-import { Color } from '../../config/color';
-import { Api } from '@/api/index';
-import { getDay } from '@/utils/index';
+import { mapState, mapMutations } from 'vuex'
+import { Color } from '../../config/color'
+import { Api } from '@/api/index'
+import { getDay } from '@/utils/index'
 export default {
   props: {},
   data() {
@@ -153,11 +155,11 @@ export default {
           icon: 'wap-home-o',
           name: '首页'
         },
-        /*   {
+        {
           path: '/course',
           icon: 'label-o',
-          name: '热门课程'
-        }, */
+          name: '招生简章'
+        },
         {
           path: '/news',
           icon: 'notes-o',
@@ -186,13 +188,13 @@ export default {
             path: '/',
             icon: '&#xe672;'
           },
-          /*  {
+          {
             type: 'link',
             text: '招生简章',
             path: '/course',
             icon: '&#xe60d;',
-            subMenuOptions: [],
-          }, */
+            subMenuOptions: []
+          },
           {
             type: 'link',
             text: '画室动态',
@@ -209,7 +211,7 @@ export default {
           }
         ]
       }
-    };
+    }
   },
   computed: {
     ...mapState(['isPhone', 'topbarShow', 'isLogin']) // 加载设备类型;
@@ -218,13 +220,13 @@ export default {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
-        : 'rgba(0,0,0,0.4)';
+        : 'rgba(0,0,0,0.4)'
       if (this.heartColor === '#cf2729') {
-        this.heartClass = '';
+        this.heartClass = ''
       }
       // 监听路由
-      const path = this.$route.path;
-      this.changeTabbar(path);
+      const path = this.$route.path
+      this.changeTabbar(path)
     }
   },
 
@@ -236,17 +238,17 @@ export default {
      * @return void
      */
     navToPage(item) {
-      this.changeTabbar(item.path);
-      this.isOpen = false;
-      this.$router.push({ path: item.path });
+      this.changeTabbar(item.path)
+      this.isOpen = false
+      this.$router.push({ path: item.path })
     },
 
     navToHome() {
-      this.$router.push({ path: '/' });
+      this.$router.push({ path: '/' })
     },
 
     openLoginDialog() {
-      this.changeLoginDialogShow(true);
+      this.changeLoginDialogShow(true)
     },
 
     // 网站点赞
@@ -261,59 +263,59 @@ export default {
       })
         .then((res) => {
           if (res.data.resultCode === 0) {
-            localStorage.setItem('heartColor', '#cf2729');
-            this.heartColor = '#cf2729';
-            this.$toast('点赞成功，谢谢你喜欢我。');
+            localStorage.setItem('heartColor', '#cf2729')
+            this.heartColor = '#cf2729'
+            this.$toast('点赞成功，谢谢你喜欢我。')
           } else {
-            this.$toast('点赞失败，未知异常。');
+            this.$toast('点赞失败，未知异常。')
           }
         })
         .catch(() => {
-          this.$toast('点赞失败，未知异常。');
-        });
+          this.$toast('点赞失败，未知异常。')
+        })
     },
     // 监听路由,更改tabbar激活菜单
     changeTabbar(path) {
-      let menuIndex;
+      let menuIndex
       if (path === '/course') {
-        menuIndex = 1;
+        menuIndex = 1
       } else if (path === '/news') {
-        menuIndex = 2;
+        menuIndex = 2
       } else if (path === '/contact') {
-        menuIndex = 3;
+        menuIndex = 3
       } else {
-        menuIndex = 0;
+        menuIndex = 0
       }
-      this.changeMenuIndex(menuIndex);
+      this.changeMenuIndex(menuIndex)
     },
     onLoad() {
       // 异步更新数据
       // 加载状态结束
-      this.loading = true;
-      this.finished = true;
+      this.loading = true
+      this.finished = true
       // 数据全部加载完成
     },
     onClickLeft() {},
     onClickRight() {
-      this.isOpen = !this.isOpen;
+      this.isOpen = !this.isOpen
     },
     changeHeartColor() {
       if (this.heartColor === '#cf2729') {
-        this.$toast('谢谢你再次喜欢我!');
+        this.$toast('谢谢你再次喜欢我!')
       } else {
-        this.addPraise();
+        this.addPraise()
       }
-      this.$refs.phoneHeart.className = '';
-      this.$refs.pcHeart.className = '';
+      this.$refs.phoneHeart.className = ''
+      this.$refs.pcHeart.className = ''
     },
     hideSticky() {
-      this.$emit('menu-open');
+      this.$emit('menu-open')
     },
     showSticky() {
-      this.$emit('menu-close');
+      this.$emit('menu-close')
     }
   }
-};
+}
 </script>
 <style scoped lang="less">
 @import url('../../assets/css/color.less');

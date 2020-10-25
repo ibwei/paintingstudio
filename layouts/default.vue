@@ -14,7 +14,7 @@
         :safe-area-inset-bottom="true"
       >
         <van-tabbar-item icon="wap-home-o" to="/">品贤画室</van-tabbar-item>
-        <!--  <van-tabbar-item icon="hot-o" to="/course">课程介绍</van-tabbar-item> -->
+        <van-tabbar-item icon="hot-o" to="/course">招生简介</van-tabbar-item>
         <van-tabbar-item icon="photo-o" to="/news">画室动态</van-tabbar-item>
         <van-tabbar-item icon="comment-circle-o" to="/contact">
           联系我们

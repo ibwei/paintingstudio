@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!-- 顶部通知栏 -->
-    <!--  <div class="phone-notice">
+    <div class="phone-notice">
       <van-notice-bar
         :color="Color.colorbrand"
         :speed="50"
@@ -11,7 +11,7 @@
       >
         美团下单享受优惠！详情联系我们。
       </van-notice-bar>
-    </div> -->
+    </div>
 
     <!-- 轮播图 -->
     <carousel v-scroll-reveal.scaleUp="{ scale: 0.15 }" :list="carouselList" />

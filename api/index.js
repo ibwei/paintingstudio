@@ -1,7 +1,7 @@
 const baseUrl =
   process.env.NODE_ENV === 'production'
     ? 'http://www.paintingapi.pinxianhs.com/api'
-    : 'http://www.paintingapi.pinxianhs.com/api';
+    : 'http://www.paintingapi.pinxianhs.com/api'
 export const Api = {
   // 获取画室信息
   getPaintingInfo: baseUrl + '/paintingStudio/info',
@@ -50,5 +50,7 @@ export const Api = {
   // 获取日程列表
   scheduleList: baseUrl + '/schedule/list',
   // 发起预定
-  bookShedule: baseUrl + '/bookschedule/add'
-};
+  bookShedule: baseUrl + '/bookschedule/add',
+  // 获取招生简介
+  getAnnouncement: baseUrl + '/announcement/list'
+}

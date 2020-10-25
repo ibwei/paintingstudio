@@ -3,9 +3,11 @@
   <div class="bread">
     <span class="notice">您当前位置：</span>
     <div class="address">
-      <template v-for="(item,index) of breadListName">
-        <template v-if="index < length-1">
-          <router-link :key="index" :to="breadListPath[index]">{{ item }}</router-link>
+      <template v-for="(item, index) of breadListName">
+        <template v-if="index < length - 1">
+          <router-link :key="index" :to="breadListPath[index]">{{
+            item
+          }}</router-link>
         </template>
         <template v-else>
           <a :key="index">{{ item }}</a>
@@ -17,7 +19,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       // 配置方法 path: 组件名称   name: 中文名称
       length: 0,
@@ -45,39 +47,39 @@ export default {
       ],
       breadListName: [],
       breadListPath: []
-    };
+    }
   },
 
-  mounted () {
-    this.routerLoading();
+  mounted() {
+    this.routerLoading()
   },
 
   methods: {
     /**
      * 获取当前路由，转换成对应的中文字段，获得每个具体面包屑地址对应的路由
      *  返回当前路由对应的面包屑地址和每个地址对应的路由
-    */
-    routerLoading () {
-      this.readLoadName = this.$route.path.split('/');
-      this.readLoadName.splice(0, 1);
-      let item;
-      let i;
-      let str = '';
+     */
+    routerLoading() {
+      this.readLoadName = this.$route.path.split('/')
+      this.readLoadName.splice(0, 1)
+      let item
+      let i
+      let str = ''
       for (item of this.readLoadName) {
         i = this.breadListIm.findIndex(function (value) {
-          return value.path === item;
-        });
+          return value.path === item
+        })
         if (i === 'undefined') {
         } else {
-          str += '/' + this.breadListIm[i].path;
-          this.breadListName.push(this.breadListIm[i].name);
-          this.breadListPath.push(str);
+          str += '/' + this.breadListIm[i].path
+          this.breadListName.push(this.breadListIm[i].name)
+          this.breadListPath.push(str)
         }
       }
-      this.length = this.breadListPath.length;
+      this.length = this.breadListPath.length
     }
   }
-};
+}
 </script>
 <style lang="less" scoped>
 .bread {
