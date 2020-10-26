@@ -52,5 +52,7 @@ export const Api = {
   // 发起预定
   bookShedule: baseUrl + '/bookschedule/add',
   // 获取招生简介
-  getAnnouncement: baseUrl + '/announcement/list'
+  getAnnouncement: baseUrl + '/announcement/list',
+  // 获取文章
+  getArticle: baseUrl + '/getArticle'
 }

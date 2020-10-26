@@ -46,11 +46,11 @@ export default {
       activeKey: 0,
       sidebarList: [
         {
-          name: '课程列表',
+          name: '招生简介',
           url: '/course'
         },
         {
-          name: '上课时间',
+          name: '作品成果',
           url: '/course/time'
         }
       ],

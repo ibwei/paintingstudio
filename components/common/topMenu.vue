@@ -73,6 +73,7 @@
           <nav class="pc-navs">
             <div
               v-for="(nav, index) of navbarOptions.menuOptions"
+              v-if="isCheck(index)"
               :key="index"
               class="nav-item"
               @click="navToPage(nav)"
@@ -121,6 +122,7 @@
       <van-list :v-model="false" :finished="true">
         <van-cell
           v-for="(item, index) in list"
+          v-if="isCheck(index)"
           :key="index"
           :title="item.name"
           @click="navToPage(item)"
@@ -214,7 +216,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isPhone', 'topbarShow', 'isLogin']) // 加载设备类型;
+    ...mapState(['isPhone', 'topbarShow', 'isLogin', 'paintingInfo']) // 加载设备类型;
   },
   created() {
     if (process.client) {
@@ -231,6 +233,15 @@ export default {
   },
 
   methods: {
+    isCheck(index) {
+      if (!this.paintingInfo.hasOwnProperty('status')) {
+        return true
+      }
+      return (
+        this.paintingInfo.status === 0 ||
+        (this.paintingInfo.status === 1 && index !== 1)
+      )
+    },
     ...mapMutations(['changeMenuIndex', 'changeLoginDialogShow']),
     /**
      * @method 导航到具体页面

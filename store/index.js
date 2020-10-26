@@ -9,44 +9,46 @@ export const state = () => ({
   // 顶部菜单是否显示
   topbarShow: true,
   // 画室详细信息
-  paintingInfo: null,
+  paintingInfo: {
+    status: 1
+  },
   // 当前文章分类名
   articleCategory: '',
   user: null,
   isLogin: false,
   loginDialogShow: false,
   loginDialogType: 'login'
-});
+})
 
 export const mutations = {
   changeIsPhone(state, isPhone) {
-    state.isPhone = isPhone;
+    state.isPhone = isPhone
   },
   changeMenuIndex(state, menuIndex) {
-    state.menuIndex = menuIndex;
+    state.menuIndex = menuIndex
   },
   changeTabbarShow(state, show) {
-    state.tabbarShow = show;
+    state.tabbarShow = show
   },
   changTopbarShow(state, show) {
-    state.topbarShow = show;
+    state.topbarShow = show
   },
   setPaintingInfo(state, paintingInfo) {
-    state.paintingInfo = paintingInfo;
+    state.paintingInfo = paintingInfo
   },
   setArticleCategory(state, category) {
-    state.articleCategory = category;
+    state.articleCategory = category
   },
   changeUser(state, user) {
-    state.user = user;
+    state.user = user
   },
   changeIsLogin(state, isLogin) {
-    state.isLogin = isLogin;
+    state.isLogin = isLogin
   },
   changeLoginDialogShow(state, show) {
-    state.loginDialogShow = show;
+    state.loginDialogShow = show
   },
   changeLoginDialogType(state, type) {
-    state.loginDialogType = type;
+    state.loginDialogType = type
   }
-};
+}

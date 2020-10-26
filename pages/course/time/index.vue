@@ -1,8 +1,10 @@
 <template>
   <div class="time-wrap">
+    <div v-html="zpcg" class="html"></div>
     <div class="time-notice">
-      <span><b>上课时间</b> 上午：9:00——12:00 下午：14:00——17:00
-        晚上：18:00——21:00</span>
+      <span>
+        <b>上课时间</b> 上午：9:00——12:00 下午：14:00——17:00晚上：18:00——21:00
+      </span>
       <span class="notice">提醒：预约上课需要提前一天预约</span>
     </div>
     <van-divider>日程安排</van-divider>
@@ -79,11 +81,12 @@
 </template>
 
 <script>
-import { Color } from '../../../config/color';
-import { Api } from '@/api/index';
+import { Color } from '../../../config/color'
+import { Api } from '@/api/index'
 export default {
   data() {
     return {
+      zpcg: '',
       active: 1,
       Color,
       courseSchedual: [
@@ -145,19 +148,31 @@ export default {
         }
       ],
       alreadyBook: []
-    };
+    }
   },
   created() {
     if (process.client) {
-      this.getToday();
-      this.getScheduleList();
+      this.getResult()
+      this.getToday()
+      this.getScheduleList()
     }
   },
   methods: {
-    hasBook(day, time) {
-      return this.alreadyBook.includes(`${day}${time}`);
+    async getResult() {
+      console.log('ahahah')
+      const res = await this.$axios({
+        method: 'post',
+        url: Api.getArticle,
+        data: {
+          id: 2
+        }
+      })
+      this.zpcg = res.data.data[0].content
     },
-    async bookSchedule(schedule_id, day, time) {
+    hasBook(day, time) {
+      return this.alreadyBook.includes(`${day}${time}`)
+    },
+    async bookSchedule(scheduleId, day, time) {
       try {
         const data = await this.$axios({
           method: 'post',
@@ -166,68 +181,70 @@ export default {
             token: localStorage.getItem('token')
           },
           data: {
-            schedule_id,
+            scheduleId,
             status: 0
           }
-        });
+        })
         if (data.resultCode === 1) {
-          this.$toast.fail(data.resultMessage);
+          this.$toast.fail(data.resultMessage)
         } else {
           this.$toast.success(
             '你成功申请预约,等待管理员，审核结果将以邮件告知。'
-          );
-          this.alreadyBook.push(`${day}${time}`);
+          )
+          this.alreadyBook.push(`${day}${time}`)
         }
       } catch {
-        this.$toast.fail('未知错误!');
+        this.$toast.fail('未知错误!')
       }
     },
     isDisabled(index) {
       if (index === 0) {
-        return false;
+        return false
       }
       if (index < this.active) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     },
     async getScheduleList() {
       const { data } = await this.$axios({
         method: 'post',
         url: Api.scheduleList
-      });
-      const rawData = data.data;
-      const rawDataLength = rawData.length;
-      let i = 0;
+      })
+      const rawData = data.data
+      let i = 0
       for (let out = 0; out < this.courseSchedual.length; out++) {
-        const dayArray = [];
+        const dayArray = []
         for (let inner = 0; inner < 3; inner++) {
-          dayArray.push({ id: rawData[i].id, status: rawData[i++].status });
+          dayArray.push({ id: rawData[i].id, status: rawData[i++].status })
         }
         this.courseSchedual.splice(out, 1, {
           ...this.courseSchedual[out],
           course: dayArray
-        });
+        })
       }
     },
     getCourseStatus(number) {
       if (number === 1) {
-        return '上课';
+        return '上课'
       } else if (number === 0) {
-        return '放假';
+        return '放假'
       }
-      return '预约';
+      return '预约'
     },
     getToday() {
-      const date = new Date().getDay();
-      this.active = date;
+      const date = new Date().getDay()
+      this.active = date
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">
+.html {
+  padding: 10px 10px;
+}
 .time-wrap {
   box-sizing: border-box;
   width: 100%;

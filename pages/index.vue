@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!-- 顶部通知栏 -->
-    <div class="phone-notice">
+    <div v-if="!paintingInfo.status" class="phone-notice">
       <van-notice-bar
         :color="Color.colorbrand"
         :speed="50"
@@ -49,7 +49,10 @@
     <advantage v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部菜单栏 -->
-    <!--     <message-board v-scroll-reveal.smooth="{ easing: 'ease-in' }" /> -->
+    <message-board
+      v-if="!paintingInfo.status"
+      v-scroll-reveal.smooth="{ easing: 'ease-in' }"
+    />
 
     <!-- 底部footer -->
     <bottom-footer :painting-info="paintingInfo"></bottom-footer>
@@ -67,11 +70,13 @@ import paintingEnvironment from '../components/index/paintingEnvironment'
 import BottomFooter from '../components/common/bottomFooter'
 import { Color } from '../config/color'
 import { Api } from '../api/index'
+import MessageBoard from '@/components/common/messageBoard'
 export default {
   head: {
     title: '品贤画室 | For Art,For U'
   },
   components: {
+    MessageBoard,
     carousel,
     paintIntroduce,
     advantage,
