@@ -73,7 +73,6 @@
           <nav class="pc-navs">
             <div
               v-for="(nav, index) of navbarOptions.menuOptions"
-              v-if="isCheck(index)"
               :key="index"
               class="nav-item"
               @click="navToPage(nav)"
@@ -192,13 +191,6 @@ export default {
           },
           {
             type: 'link',
-            text: '招生简章',
-            path: '/course',
-            icon: '&#xe60d;',
-            subMenuOptions: []
-          },
-          {
-            type: 'link',
             text: '画室动态',
             path: '/news',
             icon: '&#xe60d;',
@@ -216,7 +208,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isPhone', 'topbarShow', 'isLogin', 'paintingInfo']) // 加载设备类型;
+    ...mapState(['isPhone', 'topbarShow', 'isLogin', 'paintingInfo'])
   },
   created() {
     if (process.client) {

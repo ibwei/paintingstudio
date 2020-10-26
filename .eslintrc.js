@@ -12,6 +12,7 @@ module.exports = {
   rules: {
     'nuxt/no-cjs-in-config': 'off',
     'vue/no-use-v-if-with-v-for': 'off',
+    'vue/no-v-html': 'off',
     semi: 0,
     'space-before-function-paren': 0,
     'no-console': 'off',
