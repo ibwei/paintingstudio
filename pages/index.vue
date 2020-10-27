@@ -49,10 +49,9 @@
     <advantage v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
 
     <!-- 底部菜单栏 -->
-    <message-board
-      v-if="!paintingInfo.status"
-      v-scroll-reveal.smooth="{ easing: 'ease-in' }"
-    />
+    <div v-if="!paintingInfo.status">
+      <message-board v-scroll-reveal.smooth="{ easing: 'ease-in' }" />
+    </div>
 
     <!-- 底部footer -->
     <bottom-footer :painting-info="paintingInfo"></bottom-footer>

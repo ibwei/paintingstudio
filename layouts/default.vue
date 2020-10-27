@@ -14,9 +14,7 @@
         :safe-area-inset-bottom="true"
       >
         <van-tabbar-item icon="wap-home-o" to="/">品贤画室</van-tabbar-item>
-        <van-tabbar-item v-if="!paint.status" icon="hot-o" to="/course"
-          >招生简介</van-tabbar-item
-        >
+        <van-tabbar-item v-if="!paintingInfo.status" icon="hot-o" to="/course">招生简介</van-tabbar-item>
         <van-tabbar-item icon="photo-o" to="/news">画室动态</van-tabbar-item>
         <van-tabbar-item icon="comment-circle-o" to="/contact">
           联系我们
@@ -70,9 +68,6 @@ export default {
       currentPath: '/',
       stickyShow: true,
       Color,
-      paint: {
-        status: 1
-      },
       wechatQRCodeshow: false
     }
   },
@@ -94,15 +89,7 @@ export default {
     if (process.client) {
       this.currentPath = this.$route.path
       this.checkDevice()
-      const paint = localStorage.getItem('paintingInfo')
-      if (paint && paint !== 'undefined') {
-        this.paint = JSON.parse(paint)
-        this.setPaintingInfo(JSON.parse(paint))
-      } else {
-        this.paint = {
-          status: 1
-        }
-      }
+      this.paint = this.paintingInfo
     }
   },
   mounted() {

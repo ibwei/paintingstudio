@@ -44,9 +44,7 @@
         <div slot="right" class="right">
           <div class="menu">
             <transition name="fade">
-              <span v-show="!isOpen" class="icon iconfont" @click="hideSticky"
-                >&#xeb71;</span
-              >
+              <span v-show="!isOpen" class="icon iconfont" @click="hideSticky">&#xeb71;</span>
             </transition>
             <transition name="show">
               <van-icon
@@ -120,7 +118,7 @@
     >
       <van-list :v-model="false" :finished="true">
         <van-cell
-          v-for="(item, index) in list"
+          v-for="(item, index) of list"
           v-if="isCheck(index)"
           :key="index"
           :title="item.name"

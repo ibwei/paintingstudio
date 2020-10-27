@@ -116,6 +116,8 @@ module.exports = {
     modules: true,
     localIdentName: '[local]_[hash:base64:8]'
   },
+
+  devtools: true,
   /*
    ** Build configuration
    */
@@ -126,9 +128,19 @@ module.exports = {
     publicPath: 'http://img.pinxianhs.com',
     vendor: ['vue-apexchart'],
     extend(config, ctx) {
+      console.log(ctx)
+      console.log('------')
+      console.log(config)
+
+      if (ctx.isClient) {
+        config.devtool = 'eval-source-map'
+      }
+
+      console.log(config)
+
       const vueLoader = config.module.rules.find(
-        rule => rule.loader === 'vue-loader'
-      );
+        (rule) => rule.loader === 'vue-loader'
+      )
       vueLoader.options.transformToRequire = {
         img: 'src',
         image: 'xlink:href',
@@ -138,7 +150,7 @@ module.exports = {
         'b-card-img': 'img-src',
         'b-carousel-slide': 'img-src',
         'b-embed': 'src'
-      };
+      }
     }
   }
-};
+}
