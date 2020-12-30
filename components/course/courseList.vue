@@ -81,9 +81,9 @@ export default {
       default: 'basic'
     },
     categoryList: {
-      type: Object,
+      type: Array,
       default() {
-        return null;
+        return {};
       }
     }
   },
