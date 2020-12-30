@@ -1,16 +1,23 @@
 import { mapState } from 'vuex';
 <template>
-  <div class="iframe" :style="{height:isPhone?height:'700px'}">
+  <div class="iframe" :style="{ height: isPhone ? height : '700px' }">
     <div v-if="!isLoad" class="play" @click="load3D">
       <van-icon size="40px" name="play-circle-o" />
       <span>For Art, For You</span>
     </div>
-    <iframe v-else :src="GalleryUrl" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+    <iframe
+      v-else
+      :src="GalleryUrl"
+      width="100%"
+      height="100%"
+      frameborder="0"
+      scrolling="no"
+    ></iframe>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 import { GalleryUrl } from '@/config/index'
 export default {
   props: {
@@ -19,25 +26,25 @@ export default {
       default: '300px'
     }
   },
-  computed: {
-    ...mapState(['isPhone'])
-  },
-  data () {
+  data() {
     return {
       isLoad: false,
       GalleryUrl
     }
   },
-  mounted () {
-    const isLoad3d = localStorage.getItem('isLoad3d');
+  computed: {
+    ...mapState(['isPhone'])
+  },
+  mounted() {
+    const isLoad3d = localStorage.getItem('isLoad3d')
     if (isLoad3d === 'true') {
-      this.isLoad = true;
+      this.isLoad = true
     }
   },
   methods: {
-    load3D () {
-      this.isLoad = true;
-      localStorage.setItem('isLoad3d', 'true');
+    load3D() {
+      this.isLoad = true
+      localStorage.setItem('isLoad3d', 'true')
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="course">
-    <course-list :category-list="categoryList" listType="memo"></course-list>
+    <course-list :category-list="categoryList" list-type="memo"></course-list>
   </div>
 </template>
 

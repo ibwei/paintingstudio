@@ -21,8 +21,7 @@
                   v-for="(tag, index) of course.tags.split('-')"
                   :key="index + Math.random()"
                   class="tag"
-                  >{{ tag }}</span
-                >
+                >{{ tag }}</span>
               </div>
             </div>
             <div class="text-area">
@@ -99,7 +98,7 @@ export default {
         method: 'get',
         url: Api.courseList
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.resultCode === 0) {
             this.categoryList = res.data.data;
           } else {

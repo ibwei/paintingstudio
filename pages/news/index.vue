@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-import vlabel from '../../components/news/label';
-import newslist from '../../components/news/newslist';
-import { Api } from '@/api/index';
+import { mapState, mapMutations } from 'vuex'
+import vlabel from '../../components/news/label'
+import newslist from '../../components/news/newslist'
+import { Api } from '@/api/index'
 export default {
   head() {
     return {
@@ -27,7 +27,7 @@ export default {
           content: '品贤动态,品贤画室,品贤新闻'
         }
       ]
-    };
+    }
   },
   components: {
     vlabel,
@@ -41,7 +41,7 @@ export default {
     const categoryList = await $axios({
       method: 'get',
       url: Api.getArticleType
-    });
+    })
     // 根据第一个分类名获取文章列表
     const articleList = await $axios({
       method: 'post',
@@ -51,24 +51,24 @@ export default {
         pageSize: 10,
         category: categoryList.data.data[0].category
       }
-    });
+    })
     return {
       categoryList: categoryList.data.data,
       articleList: articleList.data.data[categoryList.data.data[0].category]
-    };
+    }
   },
   mounted() {
-    this.changeTabbarShow(true);
-    this.changTopbarShow(true);
+    this.changeTabbarShow(true)
+    this.changTopbarShow(true)
   },
   activated() {
-    this.changeTabbarShow(true);
-    this.changTopbarShow(true);
+    this.changeTabbarShow(true)
+    this.changTopbarShow(true)
   },
   methods: {
     ...mapMutations(['changeTabbarShow', 'changTopbarShow'])
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

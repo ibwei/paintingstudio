@@ -127,7 +127,7 @@ export default {
         url: Api.getArticleListByType,
         data: { pageNum: 1, pageSize: 10, category }
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.resultCode === 0) {
             this.listNews = res.data.data[category].map((item, index) => {
               const temp = item;

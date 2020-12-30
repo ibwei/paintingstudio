@@ -10,12 +10,18 @@
         <canvas-gallery height="300px"></canvas-gallery>
       </div>
       <div class="introduce-text">
-        <div style="margin:20px 0px 30px 0px">
+        <div style="margin: 20px 0px 30px 0px;">
           <v-title :init-title="historyTitle"></v-title>
         </div>
         <div class="phone-steps">
-          <van-steps :active="active" :active-color="Color.colorbrand" direction="vertical">
-            <van-step v-for="item of introduce" :key="item.index">{{ item.desc }}</van-step>
+          <van-steps
+            :active="active"
+            :active-color="Color.colorbrand"
+            direction="vertical"
+          >
+            <van-step v-for="item of introduce" :key="item.index">{{
+              item.desc
+            }}</van-step>
           </van-steps>
         </div>
         <div class="steps">
@@ -35,15 +41,15 @@
 </template>
 
 <script>
-import vTitle from '../common/vTitle';
-import { Color } from '../../config/color';
+import vTitle from '../common/vTitle'
+import { Color } from '../../config/color'
 import canvasGallery from '@/components/common/canvasGallery'
 export default {
   components: {
     vTitle,
     canvasGallery
   },
-  data () {
+  data() {
     return {
       Color,
       initTtile: {
@@ -84,13 +90,15 @@ export default {
           index: 3,
           title: '专业师资',
           desc: '老师都是科班出身教学经验丰富,一对一教学，上课时间灵活。'
-        }, {
+        },
+        {
           index: 4,
           title: '开设课程',
-          desc: '开设了素描、油画、国画、水彩、速写、彩铅、插画手绘基础等丰富内容。'
+          desc:
+            '开设了素描、油画、国画、水彩、速写、彩铅、插画手绘基础等丰富内容。'
         }
       ]
-    };
+    }
   },
   computed: {},
   methods: {
@@ -99,11 +107,11 @@ export default {
      * @params {index} 校务对应id
      * @return void
      */
-    goDetail (index) {
-      this.$router.push({ path: `detail?id=${index}` });
+    goDetail(index) {
+      this.$router.push({ path: `detail?id=${index}` })
     }
   }
-};
+}
 </script>
 <style lang="less" scoped>
 @import url('../../assets/css/color');

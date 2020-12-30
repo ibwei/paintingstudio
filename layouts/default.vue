@@ -3,7 +3,7 @@
     <login-register v-show="loginDialogShow"></login-register>
     <top-menu @menu-open="hideSticky" @menu-close="showSticky"></top-menu>
     <!-- <Affix/> -->
-    <nuxt class="nuxt-content" keepAlive />
+    <nuxt class="nuxt-content" keep-alive />
     <!-- 底部标题栏 -->
     <div v-show="tabbarShow || !isPhone" class="tabbar-menu">
       <van-tabbar
@@ -14,11 +14,11 @@
         :safe-area-inset-bottom="true"
       >
         <van-tabbar-item icon="wap-home-o" to="/">品贤画室</van-tabbar-item>
-        <van-tabbar-item icon="hot-o" to="/course">招生简章</van-tabbar-item>
+        <van-tabbar-item v-if="!paintingInfo.status" icon="hot-o" to="/course">招生简介</van-tabbar-item>
         <van-tabbar-item icon="photo-o" to="/news">画室动态</van-tabbar-item>
-        <van-tabbar-item icon="comment-circle-o" to="/contact"
-          >联系我们</van-tabbar-item
-        >
+        <van-tabbar-item icon="comment-circle-o" to="/contact">
+          联系我们
+        </van-tabbar-item>
       </van-tabbar>
     </div>
     <!-- 右侧悬浮快捷入口 -->
@@ -45,15 +45,15 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-import { Color } from '../config/color';
-import topMenu from '../components/common/topMenu';
-import sticky from '../components/common/sticky';
-import scrollTop from '../components/common/scrollTop';
-import { isPhone, getDateTime } from '../utils/index';
-import { Api } from '@/api/index';
-import { Domain } from '../config';
-import loginRegister from '../components/common/loginDialog';
+import { mapState, mapMutations } from 'vuex'
+import { Color } from '../config/color'
+import topMenu from '../components/common/topMenu'
+import sticky from '../components/common/sticky'
+import scrollTop from '../components/common/scrollTop'
+import { isPhone, getDateTime } from '../utils/index'
+import { Domain } from '../config'
+import loginRegister from '../components/common/loginDialog'
+import { Api } from '@/api/index'
 export default {
   name: 'Default',
   components: {
@@ -69,7 +69,7 @@ export default {
       stickyShow: true,
       Color,
       wechatQRCodeshow: false
-    };
+    }
   },
   computed: {
     ...mapState([
@@ -82,33 +82,30 @@ export default {
   },
   watch: {
     menuIndex(newV, oldV) {
-      this.currentMenuIndex = newV;
+      this.currentMenuIndex = newV
     }
   },
   created() {
     if (process.client) {
-      this.currentPath = this.$route.path;
-      this.checkDevice();
-      const paint = localStorage.getItem('paintingInfo');
-      if (paint && paint !== 'undefined') {
-        this.setPaintingInfo(JSON.parse(paint));
-      }
+      this.currentPath = this.$route.path
+      this.checkDevice()
+      this.paint = this.paintingInfo
     }
   },
   mounted() {
-    const paint = localStorage.getItem('paintingInfo');
+    const paint = localStorage.getItem('paintingInfo')
     if (!paint || paint === 'undefined') {
       if (!this.$route.path.startWith('/news')) {
-        window.location.replace(Domain);
+        window.location.replace(Domain)
       }
     }
 
-    window.addEventListener('resize', this.checkDevice);
-    window.addEventListener('unload', this.logoutStatistics);
-    this.loginStatistics();
+    window.addEventListener('resize', this.checkDevice)
+    window.addEventListener('unload', this.logoutStatistics)
+    this.loginStatistics()
   },
   destroyed() {
-    window.removeEventListener('resize', this.checkDevice);
+    window.removeEventListener('resize', this.checkDevice)
   },
   methods: {
     // 利用vuex的辅助函数把changeIsPhone代理到当前组件,
@@ -119,8 +116,8 @@ export default {
     checkDevice() {
       // 在客户端才能获取到dom,才能判断是否是移动设备
       if (process.client) {
-        const result = isPhone();
-        this.changeIsPhone(result); // 将结果写入到vuex仓库里
+        const result = isPhone()
+        this.changeIsPhone(result) // 将结果写入到vuex仓库里
       }
     },
     // 入口统计
@@ -134,13 +131,13 @@ export default {
           device: this.isPhone ? '手机' : '电脑'
         }
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.resultCode === 0) {
-            localStorage.setItem('currentId', res.data.data);
+            localStorage.setItem('currentId', res.data.data)
           } else {
           }
         })
-        .catch(() => {});
+        .catch(() => {})
     },
 
     async logoutStatistics() {
@@ -152,24 +149,24 @@ export default {
           id: localStorage.getItem('currentId'),
           logout_time: getDateTime()
         }
-      });
+      })
     },
 
     hideSticky() {
-      this.stickyShow = false;
+      this.stickyShow = false
     },
     showSticky() {
-      this.stickyShow = true;
+      this.stickyShow = true
     },
     showQRCode() {
       if (this.wechatQRCodeshow === true) {
-        this.wechatQRCodeshow = false;
-        return;
+        this.wechatQRCodeshow = false
+        return
       }
-      this.wechatQRCodeshow = !this.wechatQRCodeshow;
+      this.wechatQRCodeshow = !this.wechatQRCodeshow
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">

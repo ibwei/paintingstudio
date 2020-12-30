@@ -56,8 +56,7 @@
                   marginright: '10px';
                 }
               "
-              >{{ item }}</span
-            >
+            >{{ item }}</span>
           </div>
         </div>
       </div>
@@ -94,9 +93,9 @@
             <van-rate v-model="star" allow-half />
           </template>
         </van-cell>
-        <van-button style="margin-top: 10px;" @click="addComment" size="small"
-          >评分并评论</van-button
-        >
+        <van-button style="margin-top: 10px;" size="small" @click="addComment">
+          评分并评论
+        </van-button>
       </div>
       <div class="appraise">
         <div class="appraise-title">
@@ -111,8 +110,9 @@
             v-for="(item, index) of teacher.impressions"
             :key="index"
             plain
-            >{{ item }}</van-tag
           >
+            {{ item }}
+          </van-tag>
           <div v-if="!this.teacher.commentList.length" class="student-appraise">
             暂无评论
           </div>
@@ -127,15 +127,15 @@
 </template>
 
 <script>
+import { List } from 'ant-design-vue';
+import { mapState, mapMutations } from 'vuex';
 import { Color, tagsColor } from '../../config/color';
 import { Api } from '@/api/index';
 import teacher from '@/components/about/teacher';
 import comment from '@/components/common/comment';
-import { List } from 'ant-design-vue';
-import { mapState, mapMutations } from 'vuex';
 export default {
   components: {
-    comment,
+    comment
   },
   data() {
     return {
@@ -152,12 +152,12 @@ export default {
         deeds: '',
         impression: '',
         good_at: '',
-        commentList: [],
-      },
+        commentList: []
+      }
     };
   },
   computed: {
-    ...mapState(['isLogin']),
+    ...mapState(['isLogin'])
   },
   mounted() {
     this.getTeacherDetail();
@@ -174,8 +174,8 @@ export default {
         data: {
           id: this.$route.query.teacherId,
           pageNum: this.pageNum,
-          pageSize: this.pageSize,
-        },
+          pageSize: this.pageSize
+        }
       })
         .then((res) => {
           if (res.data.resultCode === 0) {
@@ -211,15 +211,15 @@ export default {
         method: 'post',
         url: Api.teacherCommentAdd,
         params: {
-          token: localStorage.getItem('token'),
+          token: localStorage.getItem('token')
         },
         data: {
           content: this.message,
           parent_id: 0,
           level: 0,
           teacher_id: this.$route.query.teacherId,
-          star: this.star,
-        },
+          star: this.star
+        }
       });
       if (data.resultCode === 0) {
         this.$toast.success('评论发表成功，管理员审核通过之后方可显示');
@@ -227,8 +227,8 @@ export default {
       } else {
         this.$toast.success(data.resultMessage);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -16,8 +16,8 @@
               src="../../assets/images/logo/logo.jpg"
               width="100%"
               height="100%"
-              @click="navToHome"
               alt
+              @click="navToHome"
             />
           </div>
         </div>
@@ -63,19 +63,23 @@
     <div class="pc-nav">
       <div id="new-nav" class="pc-nav-bar">
         <div class="nav-left">
-          <img src="../../assets/images/logo/logo.jpg" @click="navToHome" class="menuLogo" />
+          <img
+            src="../../assets/images/logo/logo.jpg"
+            class="menuLogo"
+            @click="navToHome"
+          />
           <nav class="pc-navs">
             <div
               v-for="(nav, index) of navbarOptions.menuOptions"
               :key="index"
-              @click="navToPage(nav)"
               class="nav-item"
+              @click="navToPage(nav)"
             >
               <span>{{ nav.text }}</span>
               <span
                 :class="{
                   icon: true,
-                  iconfont: true,
+                  iconfont: true
                 }"
                 @click="navToPage(nav)"
                 v-html="nav.icon"
@@ -92,7 +96,12 @@
             name="like"
             @click="changeHeartColor"
           ></van-icon>
-          <van-icon v-else size="30px" @click="openLoginDialog" name="user-circle-o"></van-icon>
+          <van-icon
+            v-else
+            size="30px"
+            name="user-circle-o"
+            @click="openLoginDialog"
+          ></van-icon>
         </div>
       </div>
     </div>
@@ -104,30 +113,36 @@
         height: '100%',
         marginTop: '45px',
         width: '40%',
-        zIndex: '9999999',
+        zIndex: '9999999'
       }"
     >
       <van-list :v-model="false" :finished="true">
         <van-cell
-          v-for="(item, index) in list"
+          v-for="(item, index) of list"
+          v-if="isCheck(index)"
           :key="index"
           :title="item.name"
           @click="navToPage(item)"
         >
-          <van-icon size="20px" color="rgba(0,0,0,0.8)" :finished="true" :name="item.icon" />
+          <van-icon
+            size="20px"
+            color="rgba(0,0,0,0.8)"
+            :finished="true"
+            :name="item.icon"
+          />
         </van-cell>
       </van-list>
     </van-popup>
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex';
-import { Color } from '../../config/color';
-import { Api } from '@/api/index';
-import { getDay } from '@/utils/index';
+import { mapState, mapMutations } from 'vuex'
+import { Color } from '../../config/color'
+import { Api } from '@/api/index'
+import { getDay } from '@/utils/index'
 export default {
   props: {},
-  data () {
+  data() {
     return {
       Color,
       heartClass: 'animated pulse infinite delay-0.5s',
@@ -137,28 +152,28 @@ export default {
         {
           path: '/',
           icon: 'wap-home-o',
-          name: '首页',
+          name: '首页'
         },
         {
           path: '/course',
           icon: 'label-o',
-          name: '招生简章',
+          name: '招生简章'
         },
         {
           path: '/news',
           icon: 'notes-o',
-          name: '画室动态',
+          name: '画室动态'
         },
         {
           path: '/contact',
           icon: 'phone-circle-o',
-          name: '联系我们',
+          name: '联系我们'
         },
         {
           path: '/me',
           icon: 'manager-o',
-          name: '个人中心',
-        },
+          name: '个人中心'
+        }
       ],
       loading: false,
       finished: true,
@@ -170,136 +185,138 @@ export default {
             type: 'link',
             text: '主页',
             path: '/',
-            icon: '&#xe672;',
-          },
-          {
-            type: 'link',
-            text: '招生简章',
-            path: '/course',
-            icon: '&#xe60d;',
-            subMenuOptions: [],
+            icon: '&#xe672;'
           },
           {
             type: 'link',
             text: '画室动态',
             path: '/news',
             icon: '&#xe60d;',
-            subMenuOptions: [],
+            subMenuOptions: []
           },
           {
             type: 'link',
             text: '联系我们',
             path: '/contact',
             icon: '&#xe616;',
-            subMenuOptions: [],
-          },
-        ],
-      },
-    };
+            subMenuOptions: []
+          }
+        ]
+      }
+    }
   },
   computed: {
-    ...mapState(['isPhone', 'topbarShow', 'isLogin']), // 加载设备类型;
+    ...mapState(['isPhone', 'topbarShow', 'isLogin', 'paintingInfo'])
   },
-  created () {
+  created() {
     if (process.client) {
       this.heartColor = localStorage.getItem('heartColor')
         ? localStorage.getItem('heartColor')
-        : 'rgba(0,0,0,0.4)';
+        : 'rgba(0,0,0,0.4)'
       if (this.heartColor === '#cf2729') {
-        this.heartClass = '';
+        this.heartClass = ''
       }
-      //监听路由
-      const path = this.$route.path;
-      this.changeTabbar(path);
+      // 监听路由
+      const path = this.$route.path
+      this.changeTabbar(path)
     }
   },
 
   methods: {
+    isCheck(index) {
+      if (!this.paintingInfo.hasOwnProperty('status')) {
+        return true
+      }
+      return (
+        this.paintingInfo.status === 0 ||
+        (this.paintingInfo.status === 1 && index !== 1)
+      )
+    },
     ...mapMutations(['changeMenuIndex', 'changeLoginDialogShow']),
     /**
      * @method 导航到具体页面
      * @param {listItem}
      * @return void
      */
-    navToPage (item) {
-      this.changeTabbar(item.path);
-      this.isOpen = false;
-      this.$router.push({ path: item.path });
+    navToPage(item) {
+      this.changeTabbar(item.path)
+      this.isOpen = false
+      this.$router.push({ path: item.path })
     },
 
-    navToHome () {
-      this.$router.push({ path: '/' });
+    navToHome() {
+      this.$router.push({ path: '/' })
     },
 
-    openLoginDialog () {
-      this.changeLoginDialogShow(true);
+    openLoginDialog() {
+      this.changeLoginDialogShow(true)
     },
 
     // 网站点赞
-    addPraise () {
+    addPraise() {
       this.$axios({
         method: 'post',
         url: Api.addPraise,
         data: {
           praise_time: getDay(),
-          device: this.isPhone ? '手机' : '电脑',
-        },
+          device: this.isPhone ? '手机' : '电脑'
+        }
       })
         .then((res) => {
           if (res.data.resultCode === 0) {
-            localStorage.setItem('heartColor', '#cf2729');
-            this.heartColor = '#cf2729';
-            this.$toast('点赞成功，谢谢你喜欢我。');
+            localStorage.setItem('heartColor', '#cf2729')
+            this.heartColor = '#cf2729'
+            this.$toast('点赞成功，谢谢你喜欢我。')
           } else {
-            this.$toast('点赞失败，未知异常。');
+            this.$toast('点赞失败，未知异常。')
           }
         })
         .catch(() => {
-          this.$toast('点赞失败，未知异常。');
-        });
+          this.$toast('点赞失败，未知异常。')
+        })
     },
     // 监听路由,更改tabbar激活菜单
-    changeTabbar (path) {
-      let menuIndex;
+    changeTabbar(path) {
+      let menuIndex
       if (path === '/course') {
-        menuIndex = 1;
+        menuIndex = 1
       } else if (path === '/news') {
-        menuIndex = 2;
+        menuIndex = 2
       } else if (path === '/contact') {
-        menuIndex = 3;
+        menuIndex = 3
       } else {
-        menuIndex = 0;
+        menuIndex = 0
       }
-      this.changeMenuIndex(menuIndex);
+      this.changeMenuIndex(menuIndex)
     },
-    onLoad () {
+    onLoad() {
       // 异步更新数据
       // 加载状态结束
-      this.loading = true;
-      this.finished = true;
+      this.loading = true
+      this.finished = true
       // 数据全部加载完成
     },
-    onClickLeft () { },
-    onClickRight () {
-      this.isOpen = !this.isOpen;
+    onClickLeft() {},
+    onClickRight() {
+      this.isOpen = !this.isOpen
     },
-    changeHeartColor () {
+    changeHeartColor() {
       if (this.heartColor === '#cf2729') {
-        this.$toast('谢谢你再次喜欢我!');
+        this.$toast('谢谢你再次喜欢我!')
       } else {
-        this.addPraise();
+        this.addPraise()
       }
-      this.$refs.phoneHeart.className = '';
-      this.$refs.pcHeart.className = '';
+      this.$refs.phoneHeart.className = ''
+      this.$refs.pcHeart.className = ''
     },
-    hideSticky () {
-      this.$emit('menu-open');
+    hideSticky() {
+      this.$emit('menu-open')
     },
-    showSticky () {
-      this.$emit('menu-close');
-    },
-  },
-};
+    showSticky() {
+      this.$emit('menu-close')
+    }
+  }
+}
 </script>
 <style scoped lang="less">
 @import url('../../assets/css/color.less');

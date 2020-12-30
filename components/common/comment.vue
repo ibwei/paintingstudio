@@ -29,11 +29,11 @@ export default {
     list: {
       type: Array,
       default() {
-        return [];
+        return []
       }
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

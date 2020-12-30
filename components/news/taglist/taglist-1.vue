@@ -5,7 +5,9 @@
       :key="index"
       :color="item.color"
       :plain="item.plain"
-    >{{ item.info }}</van-tag>
+    >
+      {{ item.info }}
+    </van-tag>
   </div>
 </template>
 

@@ -18,7 +18,7 @@
         @click="closeLoginDialog"
       />
       <van-divider />
-      <van-form @submit="onSubmit" style="margin-top:20px;">
+      <van-form style="margin-top:20px;" @submit="onSubmit">
         <van-field
           v-model="username"
           name="用户名"
@@ -28,9 +28,9 @@
           :rules="[{ required: true, message: '请填写用户名' }]"
         />
         <van-field
+          v-if="loginDialogType === 'register'"
           v-model="phone"
           name="电话"
-          v-if="loginDialogType === 'register'"
           required
           label="电话号码"
           placeholder="请输入电话号码"
@@ -67,8 +67,8 @@
             block
             hairline
             type="default"
-            @click="switchOrClose"
             native-type="button"
+            @click="switchOrClose"
           >
             {{ loginDialogType === 'login' ? '去注册' : '去登陆' }}
           </van-button>

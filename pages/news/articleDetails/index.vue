@@ -68,12 +68,12 @@ export default {
           pageNum: this.pageNum
         }
       })
-        .then(res => {
+        .then((res) => {
           this.news = res.data.data[0];
           this.commentList = res.data.commentList;
           this.loading = false;
         })
-        .catch(res => {
+        .catch((res) => {
           this.$toast('网络异常');
           this.loading = true;
         });
@@ -97,12 +97,12 @@ export default {
         pageNum: this.pageNum
       }
     })
-      .then(res => {
+      .then((res) => {
         this.news = res.data.data[0];
         this.loading = false;
         this.commentList = res.data.commentList;
       })
-      .catch(res => {
+      .catch((res) => {
         this.$toast('网络异常');
         this.loading = true;
       });

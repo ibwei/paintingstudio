@@ -18,7 +18,7 @@ export default {
       zoom: 14, // 缩放比例
       label: {
         content: '品贤画室',
-        offset: [20, 2],
+        offset: [20, 2]
       },
       center: [105.927043, 29.369582],
       lng: 0,

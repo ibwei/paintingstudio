@@ -2,7 +2,7 @@
   <div class="course-wrap">
     <div class="content">
       <div class="nav">
-        <van-sidebar v-model="activeKey" style="width:100%;">
+        <van-sidebar v-model="activeKey" style="width: 100%;">
           <van-sidebar-item
             v-for="(item, index) of sidebarList"
             :key="index"
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import pcCourseList from '@/components/course/pcCourseList';
+import pcCourseList from '@/components/course/pcCourseList'
 export default {
   components: {
     pcCourseList
   },
-  head () {
+  head() {
     return {
       title: '品贤画室 | 课程中心',
       meta: [
@@ -39,18 +39,18 @@ export default {
           content: '课程中心,品贤画室,品贤课程'
         }
       ]
-    };
+    }
   },
-  data () {
+  data() {
     return {
       activeKey: 0,
       sidebarList: [
         {
-          name: '课程列表',
+          name: '招生简介',
           url: '/course'
         },
         {
-          name: '上课时间',
+          name: '作品成果',
           url: '/course/time'
         }
       ],
@@ -60,17 +60,17 @@ export default {
         mode: 'black',
         icon: '&#xe672;'
       }
-    };
+    }
   },
-  activated () {
-    const key = this.$route.path;
+  activated() {
+    const key = this.$route.path
     if (key === '/course') {
-      this.activeKey = 0;
+      this.activeKey = 0
     } else {
-      this.activeKey = 1;
+      this.activeKey = 1
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

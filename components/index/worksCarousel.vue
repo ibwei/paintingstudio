@@ -15,7 +15,10 @@
       <!-- 手机端 -->
       <div class="student-works-phone">
         <van-swipe :autoplay="5000" @change="onChange">
-          <van-swipe-item v-for="(item, index) of studentWorksList" :key="index">
+          <van-swipe-item
+            v-for="(item, index) of studentWorksList"
+            :key="index"
+          >
             <van-image
               :src="item.url"
               class="carouselImg"
@@ -27,11 +30,9 @@
               </template>
             </van-image>
           </van-swipe-item>
-          <div
-            v-show="showImages"
-            slot="indicator"
-            class="custom-indicator"
-          >{{ currentIndex }}/ {{ studentWorksList.length }}</div>
+          <div v-show="showImages" slot="indicator" class="custom-indicator">
+            {{ currentIndex }}/ {{ studentWorksList.length }}
+          </div>
         </van-swipe>
       </div>
     </div>
@@ -48,8 +49,8 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
-import vTitle from '../../components/common/vTitle';
+import { mapState } from 'vuex'
+import vTitle from '../../components/common/vTitle'
 export default {
   components: {
     vTitle
@@ -57,12 +58,12 @@ export default {
   props: {
     studentWorksList: {
       type: Array,
-      default () {
+      default() {
         return []
       }
     }
   },
-  data () {
+  data() {
     return {
       // 学生作品标题
       initTtile: {
@@ -79,41 +80,41 @@ export default {
       pcImgUrl: require('../../assets/images/index/a42.png'),
       /** 手机端 */
       showImages: false
-    };
+    }
   },
   computed: {
     ...mapState(['isPhone']),
     /** 图片数量 */
     /** 图片地址数组 */
-    imgUrls () {
-      const arr = [];
+    imgUrls() {
+      const arr = []
       this.studentWorksList.forEach((item) => {
-        arr.push(item.url);
-      });
-      return arr;
+        arr.push(item.url)
+      })
+      return arr
     }
   },
   methods: {
     /**
      * @method 滑动图片改变时
      */
-    onChange (index) {
-      this.currentIndex = index + 1;
+    onChange(index) {
+      this.currentIndex = index + 1
     },
-    onLoad () {
-      this.showImages = true;
+    onLoad() {
+      this.showImages = true
     },
     /* 打开图片预览 */
-    showPreview (index) {
+    showPreview(index) {
       if (!this.isPhone) {
-        window.open(this.imgUrls[index]);
-        return;
+        window.open(this.imgUrls[index])
+        return
       }
-      this.currentIndex = index + 1;
-      this.show = true;
+      this.currentIndex = index + 1
+      this.show = true
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

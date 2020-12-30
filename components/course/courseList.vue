@@ -21,11 +21,9 @@
               <div class="course-name">{{ course.name }}</div>
               <div class="course-time">
                 <van-icon name="clock-o" size="14px" />
-                <span
-                  >有效期:{{
-                    course.validTime ? course.validTime : '长期有效'
-                  }}</span
-                >
+                <span>有效期:{{
+                  course.validTime ? course.validTime : '长期有效'
+                }}</span>
               </div>
               <div class="course-teacher">
                 <van-icon name="balance-pay" size="14px" />
@@ -42,8 +40,9 @@
                 style="margin-left:2px"
                 :type="getRandomColor()"
                 round
-                >{{ tag }}</van-tag
               >
+                {{ tag }}
+              </van-tag>
             </div>
 
             <div class="b-right">
