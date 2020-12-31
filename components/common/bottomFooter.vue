@@ -2,16 +2,21 @@
   <div class="footer-wrap">
     <div class="contact">
       <div class="c-one">
+        <div class="address">成都：{{ paintingInfo.address }}</div>
         <div class="phone">
-          <van-icon size="20px" name="phone-circle-o" />
-          <a class="tel" :href="phoneUrl">{{ paintingInfo.phone }}</a>
+          <a class="tel" :href="phoneUrl"
+            >电话(微信)：{{ paintingInfo.phone }}</a
+          >
         </div>
         <div class="address">
-          <van-icon size="20px" name="location-o" />{{ paintingInfo.address }}
+          西安:雁塔区小寨街道含光南路与丁白路交叉口 <br />美苑楼尚17楼1732
+        </div>
+        <div class="phone">
+          <a class="tel" :href="phoneUrl">电话(微信):17316670635</a>
         </div>
       </div>
       <div class="c-two">
-        <div class="copyright">COPYRIGHT © 2019</div>
+        <div class="copyright">COPYRIGHT © 2021</div>
         <div class="owner">版权所有：{{ paintingInfo.name }}</div>
       </div>
     </div>
@@ -26,24 +31,24 @@ export default {
       default() {
         return {
           address: '重庆·沙坪坝区·大学城'
-        };
+        }
       }
     }
   },
   data() {
     return {
       phoneUrl: ''
-    };
+    }
   },
   computed: {},
   created() {
     if (process.client) {
-      this.phoneUrl = `tel:${this.paintingInfo.phone}`;
+      this.phoneUrl = `tel:${this.paintingInfo.phone}`
     }
   },
   mounted() {},
   methods: {}
-};
+}
 </script>
 <style scoped lang="less">
 @import url('../../assets/css/color.less');
@@ -75,7 +80,7 @@ export default {
   align-items: center;
   background: @color-bg-base;
   width: 100%;
-  padding: 40px 0;
+  padding: 20px 0;
   line-height: 2;
 }
 .c-one,
@@ -91,6 +96,7 @@ export default {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 .tel {
   text-decoration: underline;

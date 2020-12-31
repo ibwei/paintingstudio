@@ -128,16 +128,9 @@ module.exports = {
     publicPath: 'http://img.pinxianhs.com',
     vendor: ['vue-apexchart'],
     extend(config, ctx) {
-      console.log(ctx)
-      console.log('------')
-      console.log(config)
-
       if (ctx.isClient) {
         config.devtool = 'eval-source-map'
       }
-
-      console.log(config)
-
       const vueLoader = config.module.rules.find(
         (rule) => rule.loader === 'vue-loader'
       )
